@@ -1,0 +1,137 @@
+MAIN BODY
+Slider name: Weight 0 to 1; Display name: Weight 0 to 1; Small default value: 0; BigDefaultValue: 100; inverted: false
+Slider name: Chubby; Display name: Hugh; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: Lean; Display name: Hideo; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: Muscle; Display name: Hassan; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: SOSlike; Display name: Hector; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: FemmeT; Display name: Hayden Upper; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: FemmeB; Display name: Hayden Lower; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: FemmeBooba; Display name: Hayden Chest; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: FemmeBoobaBig; Display name: Hayden Boobs; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: SamuelLike; Display name: Hank; Small default value: 0; BigDefaultValue: 0; inverted: false
+
+PECS
+Slider name: PecsClavicle; Display name: Clavicle; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsSize; Display name: Size; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsMass; Display name: Mass; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsMinor; Display name: Pectoralis Minor; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsLower; Display name: Lower Pecs; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsSaggy; Display name: Gravity; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsWidth; Display name: Width; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsFlatten; Display name: Flatten; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsPosV; Display name: Position (V); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsPosH; Display name: Position (H); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsSide; Display name: Width (Lower); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsPush; Display name: Width (Upper); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsLowerSide; Display name: Width (Lower Side); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsDecrease; Display name: Shrink Side; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PecsCrease; Display name: Underside Crease; Small default value: 0; BigDefaultValue: 0; inverted: false
+
+NIPPLE
+Slider name: NipsAreola; Display name: Areola Size; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: NipsTips; Display name: Shrink Tips; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: NipsLength; Display name: Length; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: NipsRound; Display name: Round; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: NipsAngle; Display name: Angle; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: NipsPuffy; Display name: Puffy; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: NipsLower; Display name: Lower; Small default value: 0; BigDefaultValue: 0; inverted: false
+
+BUTTOCKS
+Slider name: ButtBooty; Display name: Size; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: BubbleButt; Display name: Bubble Butt; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtRoundy; Display name: Round; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtSaggy; Display name: Gravity; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtCleft; Display name: Buttcrack; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtTailbone; Display name: Tailbone; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtUpper; Display name: Upper Butt; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtScrapeUpper; Display name: Upper Butt (Scrape); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtSide; Display name: Side Butt; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtCenterPush; Display name: Push Butt; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtCurve; Display name: Push Butt Curve; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtLower; Display name: Pull Butt Downwards; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtDimpleDeepen; Display name: Deepen Dimple; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtDimpleFatten; Display name: Flatten Dimple; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ButtTighten; Display name: Tighten Butt; Small default value: 0; BigDefaultValue: 0; inverted: false
+
+STATURE
+Slider name: TorsoShoulderInc; Display name: Increase Shoulder; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoShoulderDec; Display name: Decrease Shoulder; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoSterHeight; Display name: Sternum Height; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoSterDepth; Display name: Sternum Depth; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoSterWidth; Display name: Sternum Width; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoBackSize; Display name: Back Size; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoBackSlope; Display name: Back Slope; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoBackShape; Display name: Back Shape; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoBackCenter; Display name: Back (Mid); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoBackSerratusMid; Display name: Serratus; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoBackObliques; Display name: Obliques; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoBackDefinition; Display name: Back Muscle; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoMass; Display name: Mass; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoMassSmooth; Display name: Mass (Smoothen); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: BodyMass; Display name: Overall Mass; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoWidth; Display name: Width; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoLower; Display name: Enlarge Waist; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoWaistSize; Display name: Shrink Waist; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoWaistHeight; Display name: Waist Height; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoHipLarge; Display name: Enlarge Hips (side); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoHip; Display name: Shrink Hips; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoHipSmooth; Display name: Smoothen Hips; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoFlatAbs; Display name: Flatten Abs; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoRibsDefinition; Display name: Ribs Definition; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoVLine; Display name: V Line; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: BellyButtonPush; Display name: Push Belly Button; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoBelly; Display name: Belly; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoBellyChub; Display name: Beer Gut; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoBellyLHandles; Display name: LoveHandles; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: BellyPot; Display name: Pot Belly; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: BellySmooth; Display name: Smooth Belly; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: BellyRounder; Display name: Rounder Belly (Soft); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: SSBBW butt growth; Display name: Butt Growth; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: SSBBW2 boobs growth; Display name: Chest Growth; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: TorsoSpine; Display name: Push Spine; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: PregnancyBelly; Display name: Belly Pregnancy; Small default value: 0; BigDefaultValue: 0; inverted: false
+
+ARMS AND SHOULDERS
+Slider name: ArmsTraps; Display name: Crease Traps; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsTrapsMeat; Display name: Traps Mass; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsTrapsPush; Display name: Traps Edges; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsTrapsValleys; Display name: Traps Valleys; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsClavicleCurve; Display name: Clavicles; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsShoulders; Display name: Enlarge Shoulders; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsDelts; Display name: Delts; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsDeltsBack; Display name: Delts (Back); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsDeltsUpper; Display name: Delts (Upper); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsDeltsLower; Display name: Delts (Lower); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsDeltsShape; Display name: Delts (Round); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsBiceps; Display name: Biceps; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsBicepsBack; Display name: Biceps (Back); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsSide; Display name: Biceps (Side); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsBrachio; Display name: Elbow Pits; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: ArmsFore; Display name: Forearms Size; Small default value: 0; BigDefaultValue: 0; inverted: false
+
+THIGHS AND LEGS
+Slider name: LegsSize; Display name: Legs Size; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsThigh; Display name: Thigh; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsThighSmoothCurve; Display name: Curve Upper Thigh; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsThighUpperSide; Display name: Thigh (Upper); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsThighInnerSide; Display name: Thigh (Inner); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsThighIn; Display name: Thigh (Inner Lower); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsVastusMReduction; Display name: Reduce Vastus Medialis; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsThinner; Display name: Thin; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsChubby; Display name: Chubby; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsGlutes; Display name: Glutes; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsFemurUpper; Display name: Femur (Upper); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsFemurLower; Display name: Femur (Lower); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsFemurSide; Display name: Femur (Side); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsFemurBack; Display name: Femur (Back); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsKneePit; Display name: KneePit; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsKneeInner; Display name: Knee (Inner); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsKneeOuter; Display name: Knee (Outer); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsCalfSize; Display name: Calves Size; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsCalfWidth; Display name: Calves Width; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsCalfUpper; Display name: Calves (Upper); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsCalfLower; Display name: Calves (Lower); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsCalfSideIn; Display name: Calves (Inner); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsCalfOut; Display name: Calves (Outer); Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsCalfFlatten; Display name: Flatten Calves; Small default value: 0; BigDefaultValue: 0; inverted: false
+Slider name: LegsShinCrease; Display name: Crease Shin; Small default value: 0; BigDefaultValue: 0; inverted: false

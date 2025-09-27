@@ -1,0 +1,170 @@
+{
+    "- Zeroed Sliders -": {
+        "0": {
+            "clothed": "an exceptionally slim, boyish frame where fabric hangs unimpeded, creating clean vertical lines that whisper of androgynous elegance.",
+            "naked": "a starkly minimalist physique with completely flat chest, taut skin over visible ribs, and virtually no distinction between waist and narrow hips."
+        },
+        "50": {
+            "clothed": "a willowy silhouette with garments draping like silk over her slender frame, settling in gentle planes that catch light without revealing curves.",
+            "naked": "a delicately balanced frame with nearly flat chest and whisper-soft natural contours creating subtle, flowing lines from shoulders to slim thighs."
+        },
+        "100": {
+            "clothed": "a lithe, athletic figure with fabric flowing like water over taut planes, suggesting sinuous strength beneath rather than softness.",
+            "naked": "a sleek, firm physique with minimal chest, clean lines, and subtle muscular definition creating a tapestry of light and shadow."
+        }
+    },
+    "CBBE Vanilla": {
+        "0": {
+            "clothed": "a lean, athletic silhouette where fabric drapes smoothly across a minimal chest and narrow hips, creating clean lines that emphasize her slender frame and taut physique.",
+            "naked": "a taut, streamlined physique with small, firm breasts, minimally defined waist, and sleek thighs that create an elegant, athletic harmony of subtle curves and clean lines."
+        },
+        "50": {
+            "clothed": "a balanced silhouette where fabric gently hugs modest curves, creating subtle tension across her small chest while flowing gracefully over the slight inward curve of her waist.",
+            "naked": "a moderately defined figure with small, perky breasts, a gentle waist taper, and subtly rounded hips that flow into lean thighs, creating harmonious natural proportions."
+        },
+        "100": {
+            "clothed": "a sturdy, feminine silhouette where fabric stretches across her modest chest and curves over more substantial hips, highlighting the natural proportions of her stronger frame.",
+            "naked": "a robust feminine form with medium, rounded breasts, a defined waist transitioning to fuller hips, and sturdy thighs that convey both softness and underlying strength."
+        }
+    },
+    "CBBE SevenBase": {
+        "0": {
+            "clothed": "a subtly enhanced silhouette where fabric drapes with gentle tension across her modest chest and flows over slightly widened hips, hinting at feminine curves beneath.",
+            "naked": "a delicately proportioned figure with pert, softly rounded breasts balanced by subtly widened hips, creating an elegant feminine profile with gentle curves."
+        },
+        "50": {
+            "clothed": "a pronounced hourglass form where fabric embraces full breasts and stretches appreciatively across generous hips, accentuating the narrowed waist between these curved territories.",
+            "naked": "a voluptuous silhouette with full, rounded breasts that balance harmoniously with wide, curved hips, creating dramatic valleys and peaks flowing into a proportioned waist."
+        },
+        "100": {
+            "clothed": "a dramatically curvaceous silhouette where fabric strains across generous breasts and clings revealingly to expansive hips, emphasizing an exaggerated hourglass with every movement.",
+            "naked": "an impressively endowed figure with large, commanding breasts and substantially wide hips, creating a striking hourglass silhouette with bold curves and deep contours."
+        }
+    },
+    "CBBE Oppai": {
+        "0": {
+            "clothed": "a dramatic silhouette where fabric stretches across full, rounded breasts pressed closely together, while clothing clings tightly to exceptionally wide hips and a generous backside.",
+            "naked": "full, rounded breasts with natural gravitational hang and medium-small areolas sitting atop a dramatically curvaceous lower body, with impressively wide hips and substantial buttocks."
+        },
+        "50": {
+            "clothed": "a striking contrast of volumes where fabric strains to contain substantial breasts pressed into deep cleavage, while below, clothing hugs impressively wide hips and a substantial rear.",
+            "naked": "heavy, full breasts with pronounced cleavage and medium areolas hanging with natural weight, complemented by dramatically curved hips and a substantial backside."
+        },
+        "100": {
+            "clothed": "an extraordinary silhouette where fabric struggles across heavy, rounded breasts pressed into deep cleavage, while garments stretch dramatically over exceptionally wide hips.",
+            "naked": "weighty, rounded breasts with pronounced downward hang, deep cleavage, and larger areolas commanding attention above impossibly wide hips and an expansive backside."
+        }
+    },
+    "CBBE Curvy": {
+        "0": {
+            "clothed": "a balanced figure with modest chest and surprisingly broad shoulders, where fabric stretches slightly across the hips and follows the gentle curve of a medium-sized backside.",
+            "naked": "small breasts with medium-sized, slightly downward-pointing nipples balanced against broader shoulders and moderately wide hips, complemented by a medium-sized bottom with a pronounced cleft."
+        },
+        "50": {
+            "clothed": "a noticeably feminine silhouette with medium breasts creating defined cleavage, fabric following the curve from a slightly wider waist to prominently rounded hips and full, shapely buttocks.",
+            "naked": "medium-sized breasts with natural hang and defined cleavage, balanced by forward-jutting hips and round, full buttocks with a deep cleft, all supported by smoothly contoured legs."
+        },
+        "100": {
+            "clothed": "a dramatically curvy figure where fabric strains across large, heavy breasts and clings revealingly to prominently curved hips and very full, rounded buttocks.",
+            "naked": "large, heavy breasts with pronounced cleavage and medium nipples, flowing into a defined waistline that accentuates prominently forward hips and exceptionally full, apple-shaped buttocks with a deep cleft."
+        }
+    },
+    "CBBE Slim": {
+        "0": {
+            "clothed": "a lean, athletic silhouette with surprisingly broad shoulders and slender arms, where fabric drapes loosely over a small chest and skims across narrow hips and trim thighs.",
+            "naked": "a svelte, toned physique with small, perky breasts and medium nipples pointing slightly downward, flowing into a flat stomach and modest buttocks with a pronounced cleft."
+        },
+        "50": {
+            "clothed": "an athletic frame with broader shoulders balancing small, firm breasts, where fabric follows the subtle inward curve at her waist before skimming over lean thighs.",
+            "naked": "a balanced, athletic form with small-to-medium breasts and centered nipples, tapering to a taut waistline above modestly rounded buttocks with a defined cleft."
+        },
+        "100": {
+            "clothed": "a fit, streamlined silhouette where fabric contours gently over modest breasts and a flat midriff, highlighting the subtle forward curve of hips and lean, toned legs.",
+            "naked": "a lithe, toned physique with small-to-medium breasts showing minimal sag, complemented by a flat stomach and moderately rounded buttocks with a pronounced central valley."
+        }
+    },
+    "CBBE Chubby": {
+        "0": {
+            "clothed": "a softly feminine silhouette where fabric drapes with gentle tension over modest breasts and a plushly rounded belly, hugging comfortably around fuller buttocks and softly padded thighs.",
+            "naked": "a plushly feminine form with modest breasts featuring medium, downward-pointing nipples, a softly rounded belly, and generously cushioned buttocks, all wrapped in a yielding layer of softness."
+        },
+        "50": {
+            "clothed": "a plumply curved figure where fabric stretches across medium, narrow-set breasts and contours a rounded belly, while hugging noticeably full, apple-shaped buttocks and softly abundant thighs.",
+            "naked": "a generously curved form with medium breasts and downward-angled nipples resting above a rounded, yielding belly, flowing into plush, apple-shaped buttocks and thighs with inviting softness."
+        },
+        "100": {
+            "clothed": "a voluptuously abundant figure where fabric strains across fuller breasts and molds around a prominently rounded belly, stretching tautly over exceptionally plush, apple-shaped buttocks and soft limbs.",
+            "naked": "a luxuriously plump physique with larger, narrow-set breasts and defined, downward-pointing nipples crowning a prominently rounded belly and exceptionally soft, apple-shaped buttocks."
+        }
+    },
+    "CBBE Athletic": {
+        "0": {
+            "clothed": "a lean, powerful silhouette with exceptionally broad shoulders and small, high breasts, where fabric reveals the taut definition of her abdomen and skims over compact, firm buttocks.",
+            "naked": "a sculpted physique with small, perky breasts and medium nipples, showcasing strikingly defined abdominal muscles, broad shoulders, and compact, firm buttocks shaped by evident muscle tone."
+        },
+        "50": {
+            "clothed": "an impressively toned silhouette where fabric highlights broad shoulders and contours small, perky breasts, while revealing the firm planes of her abdomen and athletically compact thighs.",
+            "naked": "a harmoniously muscular form with small-to-medium perky breasts, clearly defined abdominal muscles, powerful shoulders, and firm buttocks shaped by athletic conditioning."
+        },
+        "100": {
+            "clothed": "a powerfully athletic build where fabric stretches across impressively broad shoulders and medium-sized breasts, revealing extraordinary abdominal definition and muscular limbs.",
+            "naked": "an exceptionally conditioned physique with medium, perky breasts and pronounced abdominal muscles that ripple beneath taut skin, complemented by muscular arms and athletically firm buttocks."
+        }
+    },
+    "CBBE Fetish": {
+        "0": {
+            "clothed": "modest, perky breasts with pronounced cleavage against narrow shoulders. Clothing reveals a toned midsection and athletic definition, with slightly rounded buttocks and trim thighs.",
+            "naked": "perky breasts with dramatically large areolae and defined nipples pointing upward. Her toned abdomen displays clear muscle definition, while slim limbs and a subtly curved backside complete her athletic form."
+        },
+        "50": {
+            "clothed": "medium-sized breasts creating deep cleavage against a narrow frame. Fabric stretches over well-defined muscles, with subtly rounded hips and buttocks contrasting her slender limbs.",
+            "naked": "medium breasts sitting high on her chest, adorned with exceptionally large areolae and pronounced nipples. Intensely defined abdominal and leg muscles create striking contours, while rounded buttocks add a soft balance."
+        },
+        "100": {
+            "clothed": "full, uplifted breasts forming dramatic cleavage above extremely narrow shoulders. Garments accentuate remarkably defined muscles throughout her athletic frame, with fabric pulled taut over rounded buttocks.",
+            "naked": "full breasts that seem to defy gravity, topped with expansive areolae and dramatically defined nipples pointing skyward. Chiseled muscles ripple beneath smooth skin, while rounded buttocks complete her sculpted physique."
+        }
+    },
+    "CBBE Fetish v2": {
+        "0": {
+            "clothed": "modest, perky breasts with pronounced cleavage against narrow shoulders. Her athletic frame reveals defined leg muscles and slightly rounded buttocks with a taut waistline.",
+            "naked": "small, uplifted breasts adorned with dramatically large areolae and pronounced, upturned nipples. Her athletic physique features defined muscles along her legs and moderately toned abdomen."
+        },
+        "50": {
+            "clothed": "modest, perky breasts against prominently defined collar bones. Her athletic build showcases exceptionally sculpted leg muscles with subtle curves to her rounded buttocks and a soft lower belly.",
+            "naked": "perky breasts with impossibly large areolae and pronounced nipples pointing skyward. Her body displays striking muscle definition across her legs and abdomen, with a softly rounded lower belly adding feminine contrast."
+        },
+        "100": {
+            "clothed": "medium-sized breasts with fabric straining across extraordinarily defined muscles. Pronounced clavicles frame her chest, while her sculpted legs create dramatic contours beneath clothing.",
+            "naked": "medium breasts crowned with impossibly expansive areolae and pronounced upward-pointing nipples. Her physique showcases extraordinary muscle definition throughout, with sculpted abs contrasting with her soft lower belly."
+        }
+    },
+    "CBBE Petite": {
+        "0": {
+            "clothed": "a delicate frame with tiny breasts against surprisingly wide shoulders. Fabric hangs loosely over her concave belly and visibly ribbed torso, while thin legs maintain a distinct gap between them.",
+            "naked": "minuscule, high-set breasts positioned close together above a prominently ribbed torso. Her concave belly and defined sternum create a delicate silhouette, complemented by slim legs with a noticeable thigh gap."
+        },
+        "50": {
+            "clothed": "a slender silhouette with small, perky breasts and proportionally wide shoulders. Garments skim over her visible ribcage and flat stomach, outlining slim legs with smooth, graceful contours.",
+            "naked": "small, perky breasts with medium-sized nipples adorning her narrow chest. Her ribcage creates subtle ridges beneath taut skin, flowing into a flat belly and sleek legs with a slight gap between them."
+        },
+        "100": {
+            "clothed": "small, high-set breasts and a lean frame with broad shoulders. Her attire defines a slender waistline and modestly shaped buttocks, with fabric smoothly draping over her slim, elegant legs.",
+            "naked": "small but shapely breasts positioned high on her chest, with medium nipples pointing slightly downward. Her slender torso with subtle ribbing transitions into modest buttocks and smooth, streamlined legs."
+        }
+    },
+    "CBBE Strong": {
+        "0": {
+            "clothed": "broad shoulders and a powerful frame beneath fitted garments. Her small breasts contrast with her athletic build, while her muscular buttocks and toned thighs create a distinctly strong silhouette.",
+            "naked": "modest breasts centered high on her broad chest. Her powerful shoulders frame a well-defined torso, flowing into muscular buttocks with a pronounced cleft and athletic thighs revealing substantial muscle tone."
+        },
+        "50": {
+            "clothed": "wide shoulders and a sturdy frame with fabric hugging her medium-sized breasts. Her clothing accentuates muscular contours throughout, with particular definition across her firm buttocks and powerful legs.",
+            "naked": "medium breasts with noticeable nipples resting against her muscular chest. Her imposing shoulders lead to a well-defined torso with visible abdominals, while her sculpted buttocks feature impressive muscle tone and subtle dimpling."
+        },
+        "100": {
+            "clothed": "a commanding physique with broad shoulders and medium breasts. Fabric strains against her exceptionally developed chest muscles, while her garments outline powerfully built buttocks and impressively muscled thighs.",
+            "naked": "medium breasts resting on extraordinarily defined pectoral muscles. Her athletic frame showcases impressive abdominal definition, flowing into powerfully muscled buttocks with pronounced dimples and a deep cleft."
+        }
+    }
+}

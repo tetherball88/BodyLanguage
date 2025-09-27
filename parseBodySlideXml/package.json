@@ -1,0 +1,12 @@
+{
+    "name": "slider-builder",
+    "version": "1.0.0",
+    "description": "Reads XML + OSP files and generates slider text output",
+    "main": "build-sliders.js",
+    "scripts": {
+        "start": "node build-sliders.js"
+    },
+    "dependencies": {
+        "fast-xml-parser": "^4.5.0"
+    }
+}

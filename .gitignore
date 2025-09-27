@@ -1,0 +1,8 @@
+.vscode
+.github/*
+!.github/workflows/*
+meta.ini
+SkyrimSE.code-workspace
+skyrimse.ppj
+.editorconfig
+parseBodySlideXml/node_modules/*

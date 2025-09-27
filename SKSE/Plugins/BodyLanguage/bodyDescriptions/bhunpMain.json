@@ -1,0 +1,226 @@
+{
+    "-Zeroed Sliders-": {
+        "0": {
+            "clothed": "a balanced silhouette with an ample chest and narrow waist. Fabric drapes elegantly over broad shoulders and full buttocks, while accentuating long, slender legs.",
+            "naked": "full, rounded breasts with widely spaced nipples atop a narrow waist. Broad shoulders complement a rounded posterior, with substantial arms balancing long, slender legs and flat abdomen."
+        },
+        "50": {
+            "clothed": "a harmonious figure with a generous bust and slender waistline. Clothing outlines broad shoulders and full, rounded buttocks while highlighting substantial arms and elongated legs.",
+            "naked": "prominent breasts with widely positioned nipples and a trim waistline. The broad shoulders and substantial arms balance against a full, rounded bottom and long, lithe legs."
+        },
+        "100": {
+            "clothed": "a statuesque frame with an ample bosom and slender midsection. Fabric stretches across broad shoulders and hugs full buttocks, while flowing over substantial arms and long legs.",
+            "naked": "voluptuous breasts with widely set nipples contrasting with a narrow waist. Broad shoulders and defined arms complement a full, rounded posterior and elongated, slender legs."
+        }
+    },
+    "BHUNP - 7B Original": {
+        "0": {
+            "clothed": "a statuesque frame with commanding broad shoulders and powerful proportions. Athletic curves create a strong silhouette, with fabric highlighting firm breasts and muscular thighs.",
+            "naked": "a powerful yet feminine silhouette with firm, prominent breasts and defined areolae. Broad shoulders taper to a defined waist, complemented by strong thighs and a sculpted posterior."
+        },
+        "50": {
+            "clothed": "a commanding presence with broad shoulders and substantial curves. Fabric stretches enticingly across full breasts and hugs powerful thighs, creating a bold, feminine silhouette.",
+            "naked": "a striking balance of strength and femininity with full, prominent breasts topped by defined nipples. Broad shoulders frame a proportionate waist, flowing into substantial thighs and a shapely rear."
+        },
+        "100": {
+            "clothed": "an imposing feminine silhouette with dramatic curves. Clothing strains to contain generous breasts, while accentuating broad shoulders, a defined waist, and powerful, substantial thighs.",
+            "naked": "a breathtaking display of feminine power with full, heavy breasts and prominent nipples. Broad shoulders and a defined waist enhance the impact of substantial thighs and a generous, rounded bottom."
+        }
+    },
+    "BHUNP - 7B Bombshell": {
+        "0": {
+            "clothed": "a statuesque silhouette with powerful proportions yet distinctly feminine curves. Clothing accentuates broad shoulders, substantial bust, and reveals shapely calves with elegantly defined knees.",
+            "naked": "a commanding feminine physique with firm, substantial breasts and defined nipples. Broad shoulders taper to a proportionate waist, flowing into strong thighs and notably sculpted calves with slender knees."
+        },
+        "50": {
+            "clothed": "a breathtaking silhouette with dramatic feminine power. Fabric strains across substantial breasts, hugs a defined waist, and highlights impressive thighs and elegantly shaped calves.",
+            "naked": "an imposing yet sensual figure with full, prominent breasts and defined areolae. Strong shoulders frame a proportioned waist, leading to substantial thighs and expertly contoured calves with refined knees."
+        },
+        "100": {
+            "clothed": "an extraordinary feminine form with bold, commanding curves. Clothing struggles to contain generous breasts, while emphasizing a powerful frame with shapely thighs and exquisitely defined calves.",
+            "naked": "a spectacular display of feminine power with heavy, full breasts and prominent nipples. Broad shoulders complement a defined waist, substantial thighs, and impressively sculpted calves with elegant knees."
+        }
+    },
+    "BHUNP - UNP": {
+        "0": {
+            "clothed": "a balanced feminine silhouette with modest curves beneath elegantly draping fabric. Her attire suggests a naturally athletic form, flowing with fluid grace as material skims over her proportionate figure.",
+            "naked": "a harmonious frame with medium breasts complementing her slender waist. Her smooth skin stretches over subtle muscle definition, with proportionate hips creating gentle curves that flow into toned thighs."
+        },
+        "50": {
+            "clothed": "a sleek silhouette where fabric follows her natural contours. Her attire hugs a defined waist before flowing over balanced hips, while her chest creates an appealing profile beneath form-fitting garments.",
+            "naked": "medium breasts that sit naturally above a streamlined waist. Her body exhibits a pleasing balance between softness and subtle tone, with proportionate hips and a shapely bottom completing her feminine form."
+        },
+        "100": {
+            "clothed": "a figure that creates clean lines beneath her clothing. Fabric embraces her medium curves while highlighting the proportionate relationship between her chest, defined waist, and balanced hips.",
+            "naked": "perky medium breasts that complement her slender waist and well-shaped hips. Her skin glows with vitality over subtle muscle definition, while her nipples crown breasts that sit with natural poise."
+        }
+    },
+    "BHUNP - UNPB": {
+        "0": {
+            "clothed": "a striking silhouette where fabric strains noticeably across her generous chest while tapering to follow her trim waistline. Her attire reveals the dramatic contrast between her full bust and otherwise athletic frame.",
+            "naked": "full, prominent breasts that command attention above her streamlined waist. Her nipples crown generous curves that remain perfectly balanced by her proportionate hips and toned thighs, creating a harmonious yet eye-catching figure."
+        },
+        "50": {
+            "clothed": "a captivating profile where material stretches tautly across her ample bosom before following the sleek contours of her waist. Her garments highlight the voluptuous nature of her chest while skimming her otherwise athletic proportions.",
+            "naked": "bold, substantial breasts that sit proudly on her frame, drawing the eye with their fullness. Her pronounced chest curves flow into a defined waistline, complemented by proportionate hips and smooth skin that gleams over subtle muscle definition."
+        },
+        "100": {
+            "clothed": "an attention-grabbing silhouette dominated by her substantial chest, where fabric struggles to contain her curves before flowing over a trim waist. Her clothing reveals the dramatic volume of her bust while hugging her otherwise athletic form.",
+            "naked": "impressive, voluptuous breasts that project boldly from her torso, crowned by prominent nipples. Her chest's generous proportions create a dramatic contrast with her defined waist and balanced hips, maintaining harmony despite her eye-catching fullness."
+        }
+    },
+    "BHUNP - UNPB Oppai v3.2": {
+        "0": {
+            "clothed": "a dramatically top-heavy silhouette where fabric strains desperately across her enormous bust, creating tension lines that reveal the extraordinary volume beneath. Her clothing clings to a surprisingly trim waist, emphasizing her extreme proportions.",
+            "naked": "impossibly voluminous breasts that dominate her figure, their heavy fullness contrasting sharply with her narrower waist. Her nipples crown these dramatic curves that command attention and sway noticeably with even the slightest movement."
+        },
+        "50": {
+            "clothed": "an awe-inspiring profile dominated by her massively generous chest, where fabric stretches to its limits before tapering dramatically to her waist. Her garments struggle visibly to contain the impressive volume of her bust.",
+            "naked": "extraordinarily full breasts that command immediate attention, their substantial weight creating a mesmerizing profile. Her prominent nipples crown these impressive curves that project boldly from her torso while maintaining balance with her hips."
+        },
+        "100": {
+            "clothed": "a figure defined by her colossal bust that tests the structural integrity of any garment. Fabric strains dramatically across her enormously full chest before cinching in to follow the contours of her proportionate waist and hips.",
+            "naked": "monumental breasts that overwhelm her frame with their extraordinary size and fullness. Their substantial weight creates a breathtaking silhouette, with prominent nipples crowning these massive curves that dramatically overshadow her otherwise balanced proportions."
+        }
+    },
+    "BHUNP - UNPC": {
+        "0": {
+            "clothed": "a balanced silhouette with subtle curves that create gentle contours beneath her attire. Her garments flow smoothly over a modestly enhanced bust and hips while maintaining the harmonious proportions of her slender frame.",
+            "naked": "slightly enhanced breasts that complement her defined waistline and gently curved hips. Her body maintains the balanced aesthetic of an athletic frame while offering just a touch more feminine softness across her smoothly flowing silhouette."
+        },
+        "50": {
+            "clothed": "a pleasing figure where fabric drapes with gentle emphasis over her subtly enhanced curves. Her attire reveals a modest chest and softly rounded hips connected by a defined waist, maintaining harmonious proportions with a slight feminine emphasis.",
+            "naked": "moderately full breasts that sit naturally above her slender waistline. Her skin glides over subtle transitions between her slightly enhanced chest, trim middle, and softly curved hips, preserving a balanced aesthetic with just a hint more femininity."
+        },
+        "100": {
+            "clothed": "a feminine silhouette where fabric follows her subtly enhanced curves with flattering ease. Her garments accommodate a modestly fuller bosom and gently rounded hips while defining her narrow waist, elevating her balanced proportions with subtle femininity.",
+            "naked": "fuller breasts with responsive nipples that enhance her upper body without overwhelming it. Her figure features a well-defined waist that transitions into moderately rounded hips, maintaining harmonious proportions while offering slightly more curve than a purely athletic form."
+        }
+    },
+    "BHUNP - Top Model": {
+        "0": {
+            "clothed": "a slender, catwalk-ready silhouette where fabrics skim effortlessly over subtle curves. Her narrow waist and long limbs give garments an elegant, flowing quality.",
+            "naked": "an elegant, lithe form with small, perky breasts and delicate curves. Her narrow waist flares subtly to slim hips, with taut skin highlighting graceful contours."
+        },
+        "50": {
+            "clothed": "a balanced silhouette where fabrics drape naturally across her chest and hips. Clothing hugs her defined waistline, suggesting perfect equilibrium between slenderness and softness.",
+            "naked": "harmonious proportions with firm, medium breasts that sit high on her chest. Her waist cinches inward before expanding to smooth, rounded hips, creating a graceful profile."
+        },
+        "100": {
+            "clothed": "a statuesque figure where fabrics stretch enticingly across full curves. Clothing clings to her rounded breasts and accentuated hips, contrasting with her narrow waist.",
+            "naked": "a captivating blend of elegance and voluptuousness. Her full, firm breasts command attention above her dramatically narrow waist and pronounced hips, creating flowing lines."
+        }
+    },
+    "BHUNP - Aruru6Duck": {
+        "0": {
+            "clothed": "an impossibly exaggerated hourglass silhouette where fabrics strain dramatically across enormous breasts and bubble-like bottom, cinching to an unbelievably tiny waist that defies physics.",
+            "naked": "cartoonishly extreme proportions with massive, gravity-defying breasts contrasting against a wasp-thin waist before flaring to an improbably round, shelf-like bottom and thick thighs."
+        },
+        "50": {
+            "clothed": "a surreal hourglass shape where clothing stretches to its limits across voluminous breasts and rounded bottom, while the middle appears impossibly cinched, creating dramatic curves visible from any angle.",
+            "naked": "a body of impossible contrasts - enormous, firm breasts that seem to float above an incredibly narrow waist, which then expands dramatically to bulbous hips and a spherical, perky bottom."
+        },
+        "100": {
+            "clothed": "proportions that seem drawn rather than real, with fabrics struggling desperately to contain colossal breasts and balloon-like bottom, separated by a waist so tiny it seems to disappear when viewed from certain angles.",
+            "naked": "a form that defies anatomical possibility - gigantic, round breasts hovering above a waist so narrow it could be encircled by hands, before exploding outward to spectacularly round hips and bubble-shaped buttocks."
+        }
+    },
+    "BHUNP - UNP Vanilla Orc Gains - Modern Edition Ver. 1.4": {
+        "0": {
+            "clothed": "a balanced figure with surprisingly full breasts that create prominent curves beneath her garments. Her proportionate waist and hips create classic lines, while fabric drapes smoothly over her legs and softly rounded bottom.",
+            "naked": "plush, prominent breasts topped with well-defined nipples. Her balanced frame features a proportionate waistline flowing into moderate hips, complemented by smoothly contoured thighs and calves that suggest underlying strength."
+        },
+        "50": {
+            "clothed": "remarkably full breasts that strain against fabric, balanced by increasingly powerful legs. Her clothing reveals a distinctive silhouette - broader back, moderate waist, and developing musculature in her thighs and calves that hints at formidable strength.",
+            "naked": "impressively full, rounded breasts with prominent nipples set wide apart. Her striking physique features a broadening back, substantial waist, and notably developed thighs and calves with emerging muscle definition that commands attention."
+        },
+        "100": {
+            "clothed": "remarkably full breasts that contrast dramatically with her extraordinarily muscular lower body. Fabric stretches impossibly across colossal thighs and powerfully sculpted calves, while her narrowed hips and broad back create an imposing, dominating presence.",
+            "naked": "remarkably heavy breasts with widely spaced nipples crowning a powerful frame. Her body exhibits extreme contrasts - narrowed hips between her full chest and impossibly muscular thighs, with dramatically defined calves that ripple with raw, sculpted power."
+        }
+    },
+    "D*sney Mommy NG": {
+        "0": {
+            "clothed": "a trim waistline that accentuates full, perky breasts and remarkably ample bottom. Fabric clings to strong shoulders and shapely legs, with clothing hugging the subtle curve of her soft belly.",
+            "naked": "a surprisingly modest waist contrasting with generous, uplifted breasts and an impressively round posterior. Strong shoulders frame her upper body while her thighs appear substantial and powerful with a hint of muscle definition."
+        },
+        "50": {
+            "clothed": "a dramatic hourglass silhouette with prominent, closely pushed-together breasts straining against fabric. Her clothing emphasizes a relatively small waist above extraordinarily generous hips and powerful thighs, with softness visible at her midsection.",
+            "naked": "voluptuous breasts pressed tightly together above a moderately narrow waist that flares dramatically to exceptionally full buttocks. Her substantial thighs and calves showcase subtle muscle tone beneath soft curves, with her abdomen showing a pleasing softness."
+        },
+        "100": {
+            "clothed": "an extreme hourglass figure with enormous breasts pressed tightly together, creating dramatic cleavage against straining fabric. Her moderately full waist transitions to astonishingly ample hips and buttocks, with powerful thighs stretching any garment.",
+            "naked": "dramatically large breasts positioned very close together above a softly padded waist. Her lower body features colossal, perfectly rounded buttocks and exceptionally thick thighs with a noticeable gap between them, all balanced by broad shoulders and substantial arms."
+        }
+    },
+    "Excessively Curvy - BHUNP": {
+        "0": {
+            "clothed": "a shapely figure with a dramatic contrast between broad shoulders and a narrowed waist. Fabric strains to contain moderately large, perky breasts and a surprisingly full bottom. Soft thighs press against clothing, while the smooth belly shows a gentle curve beneath fitted garments.",
+            "naked": "moderately full breasts sit high and perky on a broad-shouldered frame, adorned with wide-set nipples and puffy areolae. A narrow waist flares dramatically to a shapely bottom and soft, full thighs. The belly shows a gentle roundness, particularly along the lower abdomen, complemented by muscular legs."
+        },
+        "50": {
+            "clothed": "an hourglass silhouette with substantial curves. Clothing hugs large, uplifted breasts and stretches across broad shoulders. The moderately defined waist gives way to an impressively rounded bottom. Garments strain against plush thighs and softly rounded arms, while the belly creates a gentle fullness beneath fabrics.",
+            "naked": "large, perky breasts crowned with wide-set, puffy areolae command attention on a broad-shouldered frame. The waist, though still defined, gives way to a plump lower belly. The bottom is remarkably full and round, balanced by thick, substantial thighs. Soft arms and muscular legs complete this abundantly curvy physique."
+        },
+        "100": {
+            "clothed": "an abundantly voluptuous figure with dramatic proportions. Garments strain across exceptionally large breasts and broad shoulders. The substantial waist leads to an extraordinarily full bottom that causes fabric to stretch tightly. Clothing clings to thick thighs and plush arms, while the rounded belly creates a soft, full profile.",
+            "naked": "dramatically large breasts maintain surprising perkiness despite their volume, adorned with wide-set, puffy areolae. A substantial waist flows into a notably plump belly with a pronounced lower curve. The bottom is extraordinarily full and round, complemented by exceptionally thick thighs. Plush arms and muscular legs complete this richly curved form."
+        }
+    },
+    "s4rMs' - Gaia": {
+        "0": {
+            "clothed": "a slender frame with surprisingly full hips beneath fitted garments. Modest chest meets defined waistline, while athletic legs and toned arms complete her balanced silhouette.",
+            "naked": "toned legs and visible abdominals complementing modest breasts with perky, upward-pointing nipples. Generous hips and rounded buttocks create pleasing curves despite her otherwise athletic build."
+        },
+        "50": {
+            "clothed": "broad shoulders and a commanding chest creating tension in her tops. Her moderate waist flows into an impressively round backside that shapes her garments dramatically, suggesting powerful athleticism beneath.",
+            "naked": "powerful shoulders framing prominent breasts with exceptionally large nipples. Deeply defined abdominals lead to a moderate waist before flaring to an extraordinarily full, shapely backside that begs to be touched."
+        },
+        "100": {
+            "clothed": "imposingly broad shoulders tapering to a dramatically narrow waist. Her substantial chest strains against fabric while her subtly curved lower abdomen and extraordinarily rounded backside create a commanding profile.",
+            "naked": "massively broad shoulders and muscular arms framing prominent breasts with large, downward-pointing nipples. Her chiseled abdomen shows a gentle lower belly curve above a tiny waist, crowned by a colossal, perfectly rounded backside."
+        }
+    },
+    "Nordic Oppai - BHUNP - Nude": {
+        "0": {
+            "clothed": "a slender athletic frame with modest chest curves beneath fabric. Smooth shoulders frame a trim waistline, while clothing drapes cleanly over her flat stomach and subtly contoured legs.",
+            "naked": "modest breasts on a frame with smooth, broad shoulders. A slim waistline curves into narrow hips, with a flat stomach, slender thighs, and small, widely-spaced nipples."
+        },
+        "50": {
+            "clothed": "an impressive chest straining against fabric, balanced by broad shoulders and a narrow waistline. Clothing hugs generous curves that flow into full thighs and a prominently rounded posterior.",
+            "naked": "voluptuous breasts with medium areolae and distinctly erect nipples. Broad shoulders taper to a slim waist before flaring to fuller hips and plush, rounded buttocks complementing thick thighs."
+        },
+        "100": {
+            "clothed": "an overwhelmingly generous bosom straining against any garment. Fabric clings to her slim waist before stretching across dramatically rounded hips and an astonishingly plump, apple-shaped posterior.",
+            "naked": "massive gravity-defying breasts with large areolae and prominently erect nipples. A surprisingly slim waist contrasts with extraordinarily plump, perfectly rounded buttocks and substantial thighs."
+        }
+    },
+    "Sswaye's EX Girlfriend": {
+        "0": {
+            "clothed": "medium breasts that gently sag against fabric, a slender ribcage with visible definition, and narrow hips contrasting with a round, dimpled backside that gives clothing subtle lift.",
+            "naked": "moderately sized breasts that hang with natural heaviness, perky nipples standing attentively, a prominently ribbed torso with defined abdomen, and narrow hips above a round bottom with enticing dimples."
+        },
+        "50": {
+            "clothed": "medium breasts that press against fabric with a subtle downward curve, a defined ribcage, toned midsection, and narrow hips above a round, softly bouncing backside.",
+            "naked": "breasts that sway with captivating weight, perky nipples drawing attention, a sculpted torso with visible ribs, and sleek hips complemented by a round, dimpled bottom with gentle give."
+        },
+        "100": {
+            "clothed": "fuller breasts that strain fabric with their generous weight, a distinctly defined ribcage, sculpted abdomen, and narrow hips leading to a round, playfully bouncy backside.",
+            "naked": "broader medium breasts hanging with delicious heaviness, perky nipples crowning their curves, a pronounced ribcage with chiseled abdomen, and slender hips above a round bottom with teasing jiggle."
+        }
+    },
+    "Tasty Temptress - BHUNP Preset (Nude)": {
+        "0": {
+            "clothed": "a slender figure with a dramatically cinched waist, modest curves pressing against fabric, and shapely thighs that complement her firm, rounded bottom.",
+            "naked": "a delicately proportioned form with modestly sized breasts that gently slope outward, an impossibly narrow waistline, and a surprisingly full, tactile backside."
+        },
+        "50": {
+            "clothed": "a striking hourglass silhouette with an impossibly tiny waist, abundant curves that strain enticingly against clothing, and substantial thighs leading to a prominently rounded derrière.",
+            "naked": "generous, weighty breasts that sway hypnotically with movement, contrasting dramatically with her incredibly narrow waist and voluptuous bottom that curves outward with squeezable fullness."
+        },
+        "100": {
+            "clothed": "an extreme hourglass figure with an impossibly tiny waist, dramatically heavy breasts that stretch fabric to its limits, and a spectacularly full, bouncy bottom that demands attention.",
+            "naked": "extraordinarily full breasts with tantalizing weight and sway, creating breathtaking contrast against her impossibly tiny waist and exceptionally rounded, plush bottom that begs to be caressed."
+        }
+    }
+}
