@@ -1,5 +1,6 @@
 .vscode
 .github/*
+!.github/workflows/
 !.github/workflows/*
 meta.ini
 SkyrimSE.code-workspace

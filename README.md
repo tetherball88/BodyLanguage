@@ -24,6 +24,15 @@
   - Naked (when they're living their best life) 🌟
   - Male Genital (when TNG is in play) 🔞
 
+## Integration with SkyrimNet 🤖
+
+The body descriptions will appear in SkyrimNet prompts in the following scenarios:
+- 📝 Whenever an NPC's bio is requested
+- 💬 During dialogues for:
+  - The main speaking NPC
+  - The target NPC (who's being talked about)
+- ⚠️ Currently does not appear for nearby NPCs (planned for future enhancement)
+
 ## Community Contributions 🤝
 
 This mod thrives on community participation! While I provide default descriptions for popular presets, I encourage you to:
