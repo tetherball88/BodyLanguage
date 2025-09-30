@@ -2,6 +2,8 @@
 
 This guide explains how to generate consistent **clothed/naked body descriptions** from BHUNP BodySlide presets using the prompt.
 
+See [BHUNP Body Presets](./BHUNP_descriptions.md) for a list of currently supported presets.
+
 ---
 
 ## ✅ Preferred/Tested Model

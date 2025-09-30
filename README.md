@@ -34,11 +34,36 @@ The body descriptions will appear in SkyrimNet prompts in the following scenario
 - ⚠️ Currently does not appear for nearby NPCs (planned for future enhancement)
 
 ## Community Contributions 🤝
+This mod thrives on community participation! 
 
-This mod thrives on community participation! While I provide default descriptions for popular presets, I encourage you to:
-- Generate descriptions for your favorite body presets
+### Body descriptions
+While I provide descriptions for default presets, I encourage you to:
+- Generate descriptions for your favorite body presets and save them in json file
+- Put this file into folder `SKSE\Plugins\BodyLanguage\bodyDescriptions`
+- Load your game and you should have this descriptions in LLM prompts
 - Share your generated descriptions with others
-- Mix and match different preset descriptions to find your perfect combo
+
+### TNG descriptions
+While I provide descriptions for default TNG addons, I encourage you to:
+- If you use TNG addons create your json file, like:
+```json
+{
+    "__metaInfo": {
+        "typeName": "JFormMap"
+    },
+    "__formData|{name of addon plugin fule}|{form of armor addon}": "your addon description"
+}
+```
+- Addon description should fit in sentence like this: `Balgruf's cock is average with a {your addon description} appearance."'`
+- Example of TNG's default addons: [SKSE\Plugins\BodyLanguage\tngDescriptions\default.json](SKSE\Plugins\BodyLanguage\tngDescriptions\default.json)
+- Put your newly created json file near `default.json`
+- Load your game and you should have this descriptions in LLM prompts
+- Share your generated descriptions with others
+
+Check out our current collection of preset descriptions:
+- [BHUNP Body Presets](./docs/BHUNP_descriptions.md)
+- [CBBE 3BA Body Presets](./docs/CBBE_3BA_descriptions.md)
+- [HIMBO Body Presets](./docs/HIMBO_descriptions.md)
 
 The process is simple - just follow our guides below to create descriptions that match your specific BodySlide presets!
 

@@ -10,9 +10,6 @@ Function RegisterDecorators() global
     SkyrimNetApi.RegisterDecorator("ttbl_get_body_desc", "TTBL_Decorators", "GetBodyDescription")
 EndFunction
 
-; Gets information about all ongoing OStim scenes
-; @param npc The NPC requesting scene information
-; @returns JSON string containing details about all active sex scenes
 string Function GetBodyDescription(Actor npc) global
     string description
     string clothed = TTBL_JData.GetClothedBodyDesc(GetPresetName(npc), GetWeightKey(npc))
@@ -36,8 +33,6 @@ string Function GetWeightKey(Actor npc) global
     else
         weightKey = "50"
     endif
-
-    MiscUtil.PrintConsole("GetWeightKey:"+npc.GetDisplayName()+":"+weight+":"+weightKey)
 
     return weightKey
 EndFunction
