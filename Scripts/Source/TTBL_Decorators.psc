@@ -7,7 +7,6 @@ scriptname TTBL_Decorators
 ; Registers all template decorators with the SkyrimNet API
 ; These decorators provide dynamic data for use in LLM templates
 Function RegisterDecorators() global
-    MiscUtil.PrintConsole("RegisterDecorators")
     SkyrimNetApi.RegisterDecorator("ttbl_get_body_desc", "TTBL_Decorators", "GetBodyDescription")
 EndFunction
 
@@ -42,13 +41,11 @@ string Function GetWeightKey(Actor npc) global
 EndFunction
 
 string Function GetTngInfo(actor npc) global
-    MiscUtil.PrintConsole("GetTngInfo:"+TTBL_JData.HasTng()+":"+IsTngRevealing(npc))
     if(!TTBL_JData.HasTng() || !IsTngRevealing(npc))
         return ""
     endif
 	
     Armor addon = TNG_PapyrusUtil.GetActorAddon(npc)
-    MiscUtil.PrintConsole("GetTngInfo:Addon:"+addon)
     if(addon == none)
         return ""
     endif
@@ -70,7 +67,6 @@ string Function GetTngInfo(actor npc) global
 
     string addonDesc = TTBL_JData.GetTngDescription(addon)
 
-    MiscUtil.PrintConsole("GetTngInfo:"+size+":"+addon)
     string res = "cock is "+sizeDesc
     if(addonDesc)
         res += " with a " + addonDesc + " appearance."

@@ -102,7 +102,6 @@ string Function GetBodyDesc(string presetName, string weight, string type) globa
     int jPreset = JMap_getObj(JInitialData, presetName)
     int jWeight = JMap_getObj(jPreset, weight)
     string desc = JMap_getStr(jWeight, type)
-    MiscUtil.PrintConsole("GetBodyDesc:"+presetName+":"+weight+":"+type+":"+desc)
     return desc
 EndFunction
 
