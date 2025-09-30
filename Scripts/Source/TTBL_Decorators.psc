@@ -26,7 +26,7 @@ string Function GetPresetName(Actor npc) global
 EndFunction
 
 string Function GetWeightKey(Actor npc) global
-    float weight = npc.GetWeight()
+    float weight = npc.GetActorBase().GetWeight()
     string weightKey
 
     if(weight <= 33)
@@ -36,6 +36,8 @@ string Function GetWeightKey(Actor npc) global
     else
         weightKey = "50"
     endif
+
+    MiscUtil.PrintConsole("GetWeightKey:"+npc.GetDisplayName()+":"+weight+":"+weightKey)
 
     return weightKey
 EndFunction
