@@ -55,7 +55,7 @@ While I provide descriptions for default TNG addons, I encourage you to:
 }
 ```
 - Addon description should fit in sentence like this: `Balgruf's cock is average with a {your addon description} appearance."'`
-- Example of TNG's default addons: [SKSE\Plugins\BodyLanguage\tngDescriptions\default.json](SKSE\Plugins\BodyLanguage\tngDescriptions\default.json)
+- Example of TNG's default addons: [SKSE\Plugins\BodyLanguage\tngDescriptions\default.json](./SKSE/Plugins/BodyLanguage/tngDescriptions/default.json)
 - Put your newly created json file near `default.json`
 - Load your game and you should have this descriptions in LLM prompts
 - Share your generated descriptions with others
@@ -97,5 +97,6 @@ Want to create descriptions for your own body presets? Our handy Node.js utility
    ```
    node build-sliders.js
    ```
+
 
 Once you've generated your descriptions, consider sharing them with the community! Together, we can create a rich library of body descriptions for everyone to enjoy! 🌟
