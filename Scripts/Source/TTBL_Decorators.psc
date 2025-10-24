@@ -14,7 +14,7 @@ string Function GetBodyDescription(Actor npc) global
     string description
     string clothed = TTBL_JData.GetClothedBodyDesc(GetPresetName(npc), GetWeightKey(npc))
     string naked = TTBL_JData.GetNakedBodyDesc(GetPresetName(npc), GetWeightKey(npc))
-    return "{\"isNaked\": "+isNaked(npc)+",\"clothed\": \"" + clothed + "\", \"naked\": \"" + naked + "\", \"tngDesc\": \""+GetTngInfo(npc)+"\"}"
+    return "{\"isnaked\": "+isNaked(npc)+",\"clothed\": \"" + clothed + "\", \"naked\": \"" + naked + "\", \"tngdesc\": \""+GetTngInfo(npc)+"\"}"
 EndFunction
 
 string Function GetPresetName(Actor npc) global
