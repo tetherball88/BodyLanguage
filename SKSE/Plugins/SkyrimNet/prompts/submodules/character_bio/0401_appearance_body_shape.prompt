@@ -1,21 +1,23 @@
 {% if not isTimePaused %}
     {% set desc = ttbl_get_body_desc(actorUUID) %}
     {% set npcName = decnpc(actorUUID).name %}
-    {% if desc.isnaked %}
+    {% if desc %}
+        {% if desc.isnaked %}
 {{ "### Body shape(naked)" }}
 {{npcName}} is naked.
-        {% if desc.naked != "" %}
+            {% if desc.naked != "" %}
 {{npcName}}'s figure reveals {{desc.naked}}
-        {% endif %}
-        {% if desc.tngdesc != "" %}
+            {% endif %}
+            {% if desc.tngdesc != "" %}
 {{npcName}}'s {{desc.tngdesc}}
+            {% endif %}
         {% endif %}
-    {% endif %}
-    {% if not desc.isnaked %}
+        {% if not desc.isnaked %}
 {{ "### Body shape(clothed)" }}
 {{npcName}} is clothed.
-        {% if desc.clothed != "" %}
+             {% if desc.clothed != "" %}
 {{npcName}}'s silhouette features {{desc.clothed}}
+             {% endif %}
         {% endif %}
     {% endif %}
 {% endif %}
