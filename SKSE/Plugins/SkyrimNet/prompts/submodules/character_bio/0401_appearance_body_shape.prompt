@@ -1,4 +1,4 @@
-{% if not isTimePaused %}
+{% if not isTimePaused and (render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target") %}
     {% set desc = ttbl_get_body_desc(actorUUID) %}
     {% set npcName = decnpc(actorUUID).name %}
     {% if desc %}
