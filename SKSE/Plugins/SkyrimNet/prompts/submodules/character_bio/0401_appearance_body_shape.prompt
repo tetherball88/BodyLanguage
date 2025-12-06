@@ -1,23 +1,101 @@
-{% if not isTimePaused and (render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target") %}
-    {% set desc = ttbl_get_body_desc(actorUUID) %}
-    {% set npcName = decnpc(actorUUID).name %}
-    {% if desc %}
-        {% if desc.isnaked %}
-{{ "### Body shape(naked)" }}
-{{npcName}} is naked.
-            {% if desc.naked != "" %}
-{{npcName}}'s figure reveals {{desc.naked}}
-            {% endif %}
-            {% if desc.tngdesc != "" %}
-{{npcName}}'s {{desc.tngdesc}}
-            {% endif %}
-        {% endif %}
-        {% if not desc.isnaked %}
-{{ "### Body shape(clothed)" }}
-{{npcName}} is clothed.
-             {% if desc.clothed != "" %}
-{{npcName}}'s silhouette features {{desc.clothed}}
-             {% endif %}
+{% set npcData = decnpc(actorUUID) %}
+{% set isCbbe = is_plugin_loaded("CBBE.esp") %}
+{% set isBhunp = is_plugin_loaded("BHUNP3BBB.esp") %}
+{% set isHimbo = is_plugin_loaded("HIMBO.esp") %}
+{% if isCbbe %}
+    {% set femaleBodyDescriptionsPath = "./SkyrimNet/jsonData/cbbeMain.json" %}
+{% endif %}
+{% if isBhunp %}
+    {% set femaleBodyDescriptionsPath = "./SkyrimNet/jsonData/bhunpMain.json" %}
+{% endif %}
+{% if isHimbo %}
+    {% set maleBodyDescriptionsPath = "./SkyrimNet/jsonData/himboMain.json" %}
+{% endif %}
+
+{% if npcData.isFemale %}
+    {% set bodyDescriptionsPath = femaleBodyDescriptionsPath %}
+{% else %}
+    {% set bodyDescriptionsPath = maleBodyDescriptionsPath %}
+{% endif %}
+
+{% set weight = npcData.weight %}
+{% if weight <= 33 %}
+    {% set weightKey = "0" %}
+{% else if weight >= 66 %}
+    {% set weightKey = "100" %}
+{% else %}
+    {% set weightKey = "50" %}
+{% endif %}
+
+{% set isClothed = has_key(get_worn_equipment(actorUUID), "torso") %}
+{% if isClothed %}
+    {% set clothingKey = "clothed" %}
+{% else %}
+    {% set clothingKey = "naked" %}
+{% endif %}
+
+{% set obodyPreset = papyrus_util("GetStringValue", null, "obody_" + to_string(npcData.formId) + "_preset") %}
+{% set bodyDescription = read_json(bodyDescriptionsPath, obodyPreset + "." + weightKey + "." + clothingKey) %}
+
+{% set hasTng = false %}
+{% if not npcData.isFemale or actor_has_keyword(actorUUID, "TNG_Gentlewoman") %}
+    {% set hasTng = true %}
+{% endif %}
+{% if actor_has_keyword(actorUUID, "TNG_Ignored") or actor_has_keyword(actorUUID, "TNG_Excluded") %}
+    {% set hasTng = false %}
+{% endif %}
+
+{% if hasTng %}
+    {% set tngAddon = "regular" %}
+    {% if actor_has_keyword(actorUUID, "TNG_GenitalC") %}
+        {% set tngAddon = "circumcised" %}
+    {% else if actor_has_keyword(actorUUID, "TNG_GenitalM") %}
+        {% set tngAddon = "muscular" %}
+    {% else if actor_has_keyword(actorUUID, "TNG_GenitalR") %}
+        {% set tngAddon = "regular" %}
+    {% else %}
+        {% set defaultTngAddon = read_json("./SkyrimNet/jsonData/tngDefaultRaceAddons.json", lower(npcData.race)) %}
+        {% if defaultTngAddon %}
+            {% set tngAddon = defaultTngAddon %}
         {% endif %}
     {% endif %}
+
+    {% set tngSize = "average" %}
+    {% if actor_has_keyword(actorUUID, "TNG_XS") %}
+        {% set tngSize = "extra_small" %}
+    {% else if actor_has_keyword(actorUUID, "TNG_S") %}
+        {% set tngSize = "small" %}
+    {% else if actor_has_keyword(actorUUID, "TNG_M") %}
+        {% set tngSize = "average" %}
+    {% else if actor_has_keyword(actorUUID, "TNG_L") %}
+        {% set tngSize = "large" %}
+    {% else if actor_has_keyword(actorUUID, "TNG_XL") %}
+        {% set tngSize = "enormous" %}
+    {% else %}
+        {% set defaultTngSize = read_json("./SkyrimNet/jsonData/tngDefaultRaceSizes.json", lower(npcData.race)) %}
+        {% if defaultTngSize %}
+            {% set tngSize = defaultTngSize %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+
+{% if (render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target") %}
+    {% set npcName = npcData.name %}
+        {% if not isClothed %}
+            {{ "### Body shape(naked)" }}
+            {{npcName}} is naked.
+            {% if bodyDescription %}
+                {{npcName}}'s figure reveals {{bodyDescription}}
+            {% endif %}
+            {% if hasTng %}
+                {{npcName}}'s cock is {{tngSize}} with a {{tngAddon}} appearance.
+            {% endif %}
+        {% endif %}
+        {% if isClothed %}
+            {{ "### Body shape(clothed)" }}
+            {{npcName}} is clothed.
+            {% if bodyDescription %}
+                {{npcName}}'s silhouette features {{bodyDescription}}
+            {% endif %}
+        {% endif %}
 {% endif %}
