@@ -1,0 +1,202 @@
+{
+  "combined_description": {
+    "clothed": "She has {overall_frame} {breasts_size} {breasts_shape} {butt_size} {butt_shape} {legs_size} {legs_shape} {body_composition}",
+    "naked": "She has {overall_frame} {breasts_size} {breasts_shape} {butt_size} {butt_shape} {legs_size} {legs_shape} {body_composition}"
+  },
+  "overall_frame": {
+    "slim_narrow": {
+      "clothed": "her lean, willowy frame where fabric hangs in clean vertical lines,",
+      "naked": "a delicate, streamlined physique with minimal curves and graceful proportions,"
+    },
+    "regular": {
+      "clothed": "her balanced silhouette with modest, harmonious proportions,",
+      "naked": "a naturally proportioned form with gentle curves throughout,"
+    },
+    "big": {
+      "clothed": "her substantial, generously curved frame,",
+      "naked": "a boldly voluptuous figure with pronounced fullness in every contour,"
+    },
+    "large": {
+      "clothed": "her impressively abundant physique,",
+      "naked": "a dramatically curvaceous body with heavy, commanding presence,"
+    },
+    "hourglass": {
+      "clothed": "her dramatically cinched waist between pronounced upper and lower curves,",
+      "naked": "striking valleys separating full territories above and below her narrow middle,"
+    },
+    "bulky": {
+      "clothed": "her broad-shouldered, powerfully built frame,",
+      "naked": "a sturdy, commanding physique with substantial mass and strong proportions,"
+    }
+  },
+  "breasts_size": {
+    "flat": {
+      "clothed": "an almost boyish chest where fabric falls straight from shoulders,",
+      "naked": "a completely flat chest with taut skin stretched smoothly across her ribcage,"
+    },
+    "small": {
+      "clothed": "modest breasts creating gentle swells beneath fabric,",
+      "naked": "pert breasts sitting high with subtle, feminine curves,"
+    },
+    "medium": {
+      "clothed": "rounded breasts forming balanced cleavage under clothing,",
+      "naked": "full breasts with harmonious proportions and natural weight,"
+    },
+    "large": {
+      "clothed": "generous breasts straining noticeably against fabric,",
+      "naked": "substantial breasts with commanding weight and deep cleavage,"
+    },
+    "huge": {
+      "clothed": "heavy breasts stretching garments taut with impressive volume,",
+      "naked": "weighty breasts dominating her upper frame with pronounced mass,"
+    },
+    "enormous": {
+      "clothed": "extraordinarily heavy breasts threatening to spill from every seam,",
+      "naked": "impossibly abundant breasts that defy proportion with their extraordinary mass,"
+    }
+  },
+  "breasts_shape": {
+    "full_round": {
+      "clothed": "creating smooth, spherical contours,",
+      "naked": "perfectly rounded with symmetrical fullness from all angles,"
+    },
+    "perky": {
+      "clothed": "sitting high and defying gravity,",
+      "naked": "uplifted and pointing skyward with youthful firmness,"
+    },
+    "saggy": {
+      "clothed": "settling lower with visible droop,",
+      "naked": "hanging with gravitational sway and pronounced downward hang,"
+    },
+    "teardrop": {
+      "clothed": "fuller at bottom with sloping tops,",
+      "naked": "teardrop-shaped with more volume in lower portions,"
+    },
+    "wide_set": {
+      "clothed": "spread far apart across her chest,",
+      "naked": "positioned widely apart with significant separation,"
+    },
+    "close_set": {
+      "clothed": "pressed together forming deep cleavage,",
+      "naked": "nestled close with minimal gap between them,"
+    },
+    "pressed": {
+      "clothed": "appearing compressed and flattened,",
+      "naked": "compressed together with reduced forward projection,"
+    }
+  },
+  "butt_size": {
+    "small": {
+      "clothed": "a compact, trim backside barely filling fabric,",
+      "naked": "tight, compact buttocks with minimal projection,"
+    },
+    "medium": {
+      "clothed": "a moderately curved rear filling garments pleasantly,",
+      "naked": "rounded buttocks with gentle, balanced curves,"
+    },
+    "large": {
+      "clothed": "a generous, shapely backside stretching clothing appreciatively,",
+      "naked": "full buttocks creating pronounced curves and substantial presence,"
+    },
+    "huge": {
+      "clothed": "an exceptionally plush rear straining fabric taut,",
+      "naked": "abundantly full buttocks with impressive mass and heavy, yielding flesh,"
+    }
+  },
+  "butt_shape": {
+    "flat": {
+      "clothed": "with minimal contour and angular transitions,",
+      "naked": "flat planes with little curvature or projection,"
+    },
+    "regular": {
+      "clothed": "following gentle, understated curves,",
+      "naked": "smooth, moderately rounded cheeks,"
+    },
+    "round": {
+      "clothed": "hugging pronounced spherical curves,",
+      "naked": "beautifully rounded like perfect spheres,"
+    },
+    "extremely_round": {
+      "clothed": "stretched over impossibly spherical globes,",
+      "naked": "jutting dramatically outward like twin melons,"
+    },
+    "apple_shaped": {
+      "clothed": "molded to high-set, plump curves,",
+      "naked": "apple-round cheeks sitting high with abundant fullness,"
+    },
+    "dimpled": {
+      "clothed": "with subtle indentations visible through fabric,",
+      "naked": "featuring enticing dimples on each cheek,"
+    },
+    "deep_cleft": {
+      "clothed": "with pronounced central valley visible,",
+      "naked": "separated by a deep, pronounced cleft,"
+    }
+  },
+  "legs_size": {
+    "thin": {
+      "clothed": "slender legs with loose fabric and visible gaps,",
+      "naked": "slim, graceful legs with a pronounced thigh gap,"
+    },
+    "regular": {
+      "clothed": "proportioned legs that fill garments smoothly,",
+      "naked": "balanced legs tapering gracefully from hip to ankle,"
+    },
+    "big": {
+      "clothed": "substantially thick thighs stretching fabric,",
+      "naked": "thick, powerful thighs with abundant softness,"
+    },
+    "huge": {
+      "clothed": "massively plush legs straining clothing throughout,",
+      "naked": "enormously thick thighs pressing together with heavy flesh,"
+    }
+  },
+  "legs_shape": {
+    "regular": {
+      "clothed": "following smooth, natural contours,",
+      "naked": "with balanced shape and gentle curves,"
+    },
+    "toned_athletic": {
+      "clothed": "revealing defined muscle contours,",
+      "naked": "sculpted with visible athletic definition,"
+    },
+    "soft_plush": {
+      "clothed": "yielding softly beneath fabric,",
+      "naked": "wrapped in inviting, cushioned softness,"
+    },
+    "gap": {
+      "clothed": "maintaining obvious separation,",
+      "naked": "with distinct gap preventing contact,"
+    },
+    "touching": {
+      "clothed": "pressed together throughout,",
+      "naked": "pressing together from hip to knee,"
+    }
+  },
+  "body_composition": {
+    "lean": {
+      "clothed": "with fabric draping over taut planes and visible definition,",
+      "naked": "taut skin stretched over firm muscles with minimal softness,"
+    },
+    "regular": {
+      "clothed": "where garments settle comfortably over smooth contours,",
+      "naked": "balanced firmness and yielding softness throughout."
+    },
+    "soft": {
+      "clothed": "with clothing molding to plush, yielding surfaces,",
+      "naked": "wrapped in a generous layer of inviting, cushioned softness."
+    },
+    "chubby": {
+      "clothed": "fabric stretching over abundantly plush curves and rounded softness,",
+      "naked": "generously padded with luxurious, yielding flesh creating gentle folds."
+    },
+    "athletic": {
+      "clothed": "garments revealing powerful muscle definition beneath fabric,",
+      "naked": "impressively sculpted musculature rippling beneath smooth skin."
+    },
+    "muscular": {
+      "clothed": "clothing straining against pronounced, hardened muscle mass,",
+      "naked": "extraordinarily defined muscles creating dramatic contours and valleys."
+    }
+  }
+}

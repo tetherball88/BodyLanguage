@@ -7,7 +7,6 @@
 ## Requirements 📋
 
 - [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin)
-- [JContainers](https://www.nexusmods.com/skyrimspecialedition/mods/16495)
 - [OBody NG](https://www.nexusmods.com/skyrimspecialedition/mods/77016) (I used version 4.3.7)
 - [The New Gentleman (Optional)](https://www.nexusmods.com/skyrimspecialedition/mods/104215) (I used version 4.2.3)
 
@@ -37,11 +36,8 @@ The body descriptions will appear in SkyrimNet prompts in the following scenario
 This mod thrives on community participation! 
 
 ### Body descriptions
-While I provide descriptions for default presets, I encourage you to:
-- Generate descriptions for your favorite body presets and save them in json file
-- Put this file into folder `SKSE\Plugins\BodyLanguage\bodyDescriptions`
-- Load your game and you should have this descriptions in LLM prompts
-- Share your generated descriptions with others
+
+[How to add more presets?](./docs/BodyDescriptionSystem.md)
 
 ### TNG descriptions
 While I provide descriptions for default TNG addons, I encourage you to:
@@ -54,9 +50,9 @@ While I provide descriptions for default TNG addons, I encourage you to:
     "__formData|{name of addon plugin fule}|{form of armor addon}": "your addon description"
 }
 ```
-- Addon description should fit in sentence like this: `Balgruf's cock is average with a {your addon description} appearance."'`
-- Example of TNG's default addons: [SKSE\Plugins\BodyLanguage\tngDescriptions\default.json](./SKSE/Plugins/BodyLanguage/tngDescriptions/default.json)
-- Put your newly created json file near `default.json`
+- Addon description should fit in sentence like this: `{{npcName}}'s exposed penis is {{size description}}. It has a {{tngAddon}}`
+- Add more addon descriptions here: [SKSE\Plugins\SkyrimNet\jsonData\tngAddons.json](.\SKSE\Plugins\SkyrimNet\jsonData\tngAddons.json)
+- Use addon's NAME as key
 - Load your game and you should have this descriptions in LLM prompts
 - Share your generated descriptions with others
 
@@ -70,6 +66,7 @@ The process is simple - just follow our guides below to create descriptions that
 ## Documentation 📖
 
 The `docs` folder contains detailed guides for using prompts with BodySlide preset files:
+- [New preferred method for body descriptions!](.\docs\BodyDescriptionSystem.md)
 - [BHUNP prompt guide](./docs/BHUNP%20prompt%20guide.md)
 - [CBBE 3BA prompt guide](./docs/CBBE%203BA%20prompt%20guide.md)
 - [HIMBO prompt guide](./docs/HIMBO%20prompt%20guide.md)
