@@ -3,6 +3,7 @@
 {% set isBhunp = is_plugin_loaded("BHUNP3BBB.esp") %} 
 {% set isHimbo = is_plugin_loaded("HIMBO.esp") %}
 {% set race = lower(decnpc(actorUUID).race) %}
+{% set npcName = npcData.name %}
 
 {% set hasTng = false %}
 {% if not npcData.isFemale or actor_has_keyword(actorUUID, "TNG_Gentlewoman") %}
@@ -52,8 +53,11 @@
     {% set addons = papyrus_util("GetStringList", null, "TTLB_TNG_MaleAddons") %}
 {% endif %}
 
-{% set bodyDescription = read_json(bodyDescriptionsPath, obodyPreset + "." + weightKey + "." + clothingKey) %}
-{% if not bodyDescription %}
+{% if bodyDescriptionsPath and obodyPreset %}
+    {% set bodyDescription = read_json(bodyDescriptionsPath, obodyPreset + "." + weightKey + "." + clothingKey) %}
+{% endif %}
+
+{% if not bodyDescription and obodyPreset %}
     {% if npcData.isFemale %}
         {% set parts = read_json("./SkyrimNet/jsonData/femaleBodyPartDescriptions.json") %}
         {% set femalePresets = read_json("./SkyrimNet/jsonData/cbbe/cbbeAdditional.json") %}
@@ -120,13 +124,20 @@
         {% endif %}
     {% endfor %}
     {% set tngAddon = read_json("./SkyrimNet/jsonData/tngAddons.json", tngAddonKey) %}
+    {% if not tngAddon %}
+        {% set tngAddon = "well-balanced shaft of typical proportions with moderate veining and a naturally tapered head." %}
+    {% endif %}
 {% endif %}
 
-{% if (render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target") %}
-    {% set npcName = npcData.name %}
+{% if not isClothed %}
+    {{ "### Body shape(naked)" }}
+    {{npcName}} is naked.
+{% else %}
+    {{ "### Body shape(clothed)" }}
+    {{npcName}} is clothed.
+{% endif %}
+{% if render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target" %}
     {% if not isClothed %}
-        {{ "### Body shape(naked)" }}
-        {{npcName}} is naked.
         {% if bodyDescription %}
             {{npcName}}'s figure reveals {{bodyDescription}}
         {% endif %}
@@ -144,14 +155,8 @@
             {% endif %}
         {% endif %}
     {% else %}
-        {{ "### Body shape(clothed)" }}
-        {{npcName}} is clothed.
         {% if bodyDescription %}
             {{npcName}}'s silhouette features {{bodyDescription}}
         {% endif %}
-    {% endif %}
-{% else %}
-    {% if not isClothed %}
-        {{npcName}} is fully naked.
     {% endif %}
 {% endif %}
