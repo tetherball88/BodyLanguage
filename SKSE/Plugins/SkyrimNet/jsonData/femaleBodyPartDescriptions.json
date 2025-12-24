@@ -18,11 +18,11 @@
     },
     "large": {
       "clothed": "her impressively abundant physique,",
-      "naked": "a dramatically curvaceous body with heavy, commanding presence,"
+      "naked": "an expansive, abundantly curved body with heavy, imposing presence,"
     },
     "hourglass": {
       "clothed": "her dramatically cinched waist between pronounced upper and lower curves,",
-      "naked": "striking valleys separating full territories above and below her narrow middle,"
+      "naked": "a classic hourglass silhouette with dramatic bust and hips separated by a tightly cinched waist,"
     },
     "bulky": {
       "clothed": "her broad-shouldered, powerfully built frame,",
@@ -52,7 +52,7 @@
     },
     "enormous": {
       "clothed": "extraordinarily heavy breasts threatening to spill from every seam,",
-      "naked": "impossibly abundant breasts that defy proportion with their extraordinary mass,"
+      "naked": "extraordinarily massive breasts dominating her frame with extreme weight and overwhelming fullness,"
     }
   },
   "breasts_shape": {
@@ -62,11 +62,11 @@
     },
     "perky": {
       "clothed": "sitting high and defying gravity,",
-      "naked": "uplifted and pointing skyward with youthful firmness,"
+      "naked": "uplifted with youthful firmness and forward projection,"
     },
     "saggy": {
       "clothed": "settling lower with visible droop,",
-      "naked": "hanging with gravitational sway and pronounced downward hang,"
+      "naked": "hanging low with natural weight and elongated shape,"
     },
     "teardrop": {
       "clothed": "fuller at bottom with sloping tops,",
@@ -82,7 +82,7 @@
     },
     "pressed": {
       "clothed": "appearing compressed and flattened,",
-      "naked": "compressed together with reduced forward projection,"
+      "naked": "flattened against her chest with reduced projection and spread outward,"
     }
   },
   "butt_size": {
@@ -114,11 +114,11 @@
     },
     "round": {
       "clothed": "hugging pronounced spherical curves,",
-      "naked": "beautifully rounded like perfect spheres,"
+      "naked": "beautifully rounded with full, spherical shape,"
     },
     "extremely_round": {
       "clothed": "stretched over impossibly spherical globes,",
-      "naked": "jutting dramatically outward like twin melons,"
+      "naked": "jutting dramatically outward with exaggerated spherical curves and extreme projection,"
     },
     "apple_shaped": {
       "clothed": "molded to high-set, plump curves,",
@@ -162,11 +162,11 @@
     },
     "soft_plush": {
       "clothed": "yielding softly beneath fabric,",
-      "naked": "wrapped in inviting, cushioned softness,"
+      "naked": "covered in smooth, plush softness with no visible muscle definition,"
     },
     "gap": {
       "clothed": "maintaining obvious separation,",
-      "naked": "with distinct gap preventing contact,"
+      "naked": "with a distinct thigh gap and visible space between slender inner thighs,"
     },
     "touching": {
       "clothed": "pressed together throughout,",
@@ -188,7 +188,7 @@
     },
     "chubby": {
       "clothed": "fabric stretching over abundantly plush curves and rounded softness,",
-      "naked": "generously padded with luxurious, yielding flesh creating gentle folds."
+      "naked": "generously padded with abundant flesh creating soft rolls and a rounded belly."
     },
     "athletic": {
       "clothed": "garments revealing powerful muscle definition beneath fabric,",

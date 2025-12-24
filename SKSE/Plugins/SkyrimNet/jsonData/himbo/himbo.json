@@ -1,0 +1,610 @@
+{
+    "HIMBO Chonky": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "flat",
+                "shoulders_build": "regular",
+                "arms": "regular",
+                "back": "narrow",
+                "butt": "small_flat",
+                "legs": "thin_bony",
+                "body_composition": "regular"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "big",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "soft",
+                "back": "soft",
+                "butt": "large_round",
+                "legs": "regular_soft",
+                "body_composition": "stocky"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "large",
+                "chest_build": "soft",
+                "shoulders_build": "broad",
+                "arms": "fat",
+                "back": "soft",
+                "butt": "fat_soft",
+                "legs": "fat_soft",
+                "body_composition": "chubby"
+            }
+        }
+    },
+    "HIMBO Daddy": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "regular",
+                "butt": "medium_round",
+                "legs": "thin_lean",
+                "body_composition": "regular"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "big",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "toned",
+                "butt": "medium_round",
+                "legs": "regular_toned",
+                "body_composition": "stocky"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "large",
+                "chest_build": "heavy",
+                "shoulders_build": "broad",
+                "arms": "muscular",
+                "back": "massive",
+                "butt": "medium_round",
+                "legs": "big_thick",
+                "body_composition": "muscular"
+            }
+        }
+    },
+    "HIMBO Default": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "flat",
+                "shoulders_build": "regular",
+                "arms": "regular",
+                "back": "narrow",
+                "butt": "small_flat",
+                "legs": "thin_bony",
+                "body_composition": "regular"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "lean",
+                "shoulders_build": "regular",
+                "arms": "regular",
+                "back": "regular",
+                "butt": "medium_flat",
+                "legs": "regular_toned",
+                "body_composition": "regular"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "lean",
+                "shoulders_build": "regular",
+                "arms": "regular",
+                "back": "regular",
+                "butt": "medium_flat",
+                "legs": "regular_toned",
+                "body_composition": "regular"
+            }
+        }
+    },
+    "HIMBO Five": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "athletic",
+                "chest_build": "muscular",
+                "shoulders_build": "broad",
+                "arms": "muscular",
+                "back": "muscular",
+                "butt": "medium_round",
+                "legs": "thin_lean",
+                "body_composition": "athletic"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "athletic",
+                "chest_build": "muscular",
+                "shoulders_build": "massive",
+                "arms": "muscular",
+                "back": "muscular",
+                "butt": "large_muscular",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "athletic",
+                "chest_build": "muscular",
+                "shoulders_build": "massive",
+                "arms": "massive",
+                "back": "muscular",
+                "butt": "large_muscular",
+                "legs": "big_muscular",
+                "body_composition": "muscular"
+            }
+        }
+    },
+    "HIMBO Hassan": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "toned",
+                "butt": "medium_flat",
+                "legs": "thin_lean",
+                "body_composition": "athletic"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "muscular",
+                "back": "muscular",
+                "butt": "medium_round",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "massive",
+                "back": "muscular",
+                "butt": "large_muscular",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        }
+    },
+    "HIMBO Hideo": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "flat",
+                "shoulders_build": "regular",
+                "arms": "regular",
+                "back": "narrow",
+                "butt": "small_flat",
+                "legs": "thin_bony",
+                "body_composition": "regular"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "lean",
+                "shoulders_build": "regular",
+                "arms": "toned",
+                "back": "regular",
+                "butt": "medium_flat",
+                "legs": "regular_toned",
+                "body_composition": "regular"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "lean",
+                "shoulders_build": "regular",
+                "arms": "muscular",
+                "back": "regular",
+                "butt": "medium_flat",
+                "legs": "regular_toned",
+                "body_composition": "regular"
+            }
+        }
+    },
+    "HIMBO Hugh": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "regular",
+                "butt": "medium_round",
+                "legs": "thin_lean",
+                "body_composition": "regular"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "big",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "toned",
+                "butt": "medium_round",
+                "legs": "regular_toned",
+                "body_composition": "stocky"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "large",
+                "chest_build": "heavy",
+                "shoulders_build": "broad",
+                "arms": "muscular",
+                "back": "massive",
+                "butt": "medium_round",
+                "legs": "big_thick",
+                "body_composition": "muscular"
+            }
+        }
+    },
+    "HIMBO Jack": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "regular",
+                "butt": "medium_flat",
+                "legs": "thin_lean",
+                "body_composition": "regular"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "big",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "soft",
+                "butt": "medium_flat",
+                "legs": "regular_toned",
+                "body_composition": "stocky"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "large",
+                "chest_build": "heavy",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "soft",
+                "butt": "medium_flat",
+                "legs": "big_thick",
+                "body_composition": "chubby"
+            }
+        }
+    },
+    "HIMBO Joseb": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "toned",
+                "butt": "medium_flat",
+                "legs": "thin_lean",
+                "body_composition": "athletic"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "muscular",
+                "back": "muscular",
+                "butt": "medium_round",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "massive",
+                "back": "muscular",
+                "butt": "medium_round",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        }
+    },
+    "HIMBO Mike": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "flat",
+                "shoulders_build": "regular",
+                "arms": "regular",
+                "back": "narrow",
+                "butt": "small_flat",
+                "legs": "thin_bony",
+                "body_composition": "regular"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "lean",
+                "shoulders_build": "regular",
+                "arms": "regular",
+                "back": "regular",
+                "butt": "medium_flat",
+                "legs": "regular_toned",
+                "body_composition": "regular"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "lean",
+                "shoulders_build": "regular",
+                "arms": "regular",
+                "back": "regular",
+                "butt": "medium_flat",
+                "legs": "regular_toned",
+                "body_composition": "regular"
+            }
+        }
+    },
+    "HIMBO Sebastian": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "toned",
+                "butt": "medium_flat",
+                "legs": "thin_lean",
+                "body_composition": "athletic"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "muscular",
+                "back": "muscular",
+                "butt": "medium_round",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "massive",
+                "back": "muscular",
+                "butt": "large_muscular",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        }
+    },
+    "HIMBO Simple": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "toned",
+                "butt": "medium_flat",
+                "legs": "thin_lean",
+                "body_composition": "athletic"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "muscular",
+                "back": "muscular",
+                "butt": "medium_round",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "massive",
+                "back": "muscular",
+                "butt": "large_muscular",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        }
+    },
+    "HIMBO Sultry": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "toned",
+                "butt": "medium_flat",
+                "legs": "thin_lean",
+                "body_composition": "athletic"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "muscular",
+                "back": "muscular",
+                "butt": "medium_round",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "massive",
+                "back": "muscular",
+                "butt": "large_muscular",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        }
+    },
+    "HIMBO Urbon": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "athletic",
+                "chest_build": "muscular",
+                "shoulders_build": "broad",
+                "arms": "muscular",
+                "back": "muscular",
+                "butt": "medium_round",
+                "legs": "thin_lean",
+                "body_composition": "athletic"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "athletic",
+                "chest_build": "muscular",
+                "shoulders_build": "massive",
+                "arms": "muscular",
+                "back": "muscular",
+                "butt": "large_muscular",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "athletic",
+                "chest_build": "muscular",
+                "shoulders_build": "massive",
+                "arms": "massive",
+                "back": "muscular",
+                "butt": "large_muscular",
+                "legs": "big_muscular",
+                "body_composition": "muscular"
+            }
+        }
+    },
+    "HIMBO Vanilla": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "toned",
+                "back": "toned",
+                "butt": "medium_flat",
+                "legs": "thin_lean",
+                "body_composition": "athletic"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "muscular",
+                "back": "muscular",
+                "butt": "medium_round",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "defined",
+                "shoulders_build": "broad",
+                "arms": "massive",
+                "back": "muscular",
+                "butt": "medium_round",
+                "legs": "big_muscular",
+                "body_composition": "athletic"
+            }
+        }
+    },
+    "HIMBO Zero for OBody": {
+        "0": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "flat",
+                "shoulders_build": "regular",
+                "arms": "regular",
+                "back": "narrow",
+                "butt": "small_flat",
+                "legs": "thin_bony",
+                "body_composition": "regular"
+            }
+        },
+        "50": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "lean",
+                "shoulders_build": "regular",
+                "arms": "toned",
+                "back": "regular",
+                "butt": "medium_flat",
+                "legs": "regular_toned",
+                "body_composition": "regular"
+            }
+        },
+        "100": {
+            "bodyParts": {
+                "overall_frame": "regular",
+                "chest_build": "lean",
+                "shoulders_build": "regular",
+                "arms": "muscular",
+                "back": "regular",
+                "butt": "medium_flat",
+                "legs": "regular_toned",
+                "body_composition": "regular"
+            }
+        }
+    }
+}

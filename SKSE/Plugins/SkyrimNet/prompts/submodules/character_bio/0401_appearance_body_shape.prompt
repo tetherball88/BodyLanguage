@@ -81,6 +81,29 @@
             {% set body_composition = at(at(at(parts, "body_composition"), partKey), clothingKey) %}
             {% set bodyDescription = overall_frame + " " + breasts_size + " " + breasts_shape + " " + butt_size + " " + butt_shape + " " + legs_size + " " + legs_shape + " " + body_composition %}
         {% endif %}
+    {% else %}
+        {% set parts = read_json("./SkyrimNet/jsonData/maleBodyPartDescriptions.json") %}
+        {% set malePresets = read_json("./SkyrimNet/jsonData/himbo/himbo.json") %}
+        {% set presetData = at(at(at(malePresets, obodyPreset), weightKey), "bodyParts") %}
+        {% if presetData %}
+            {% set partKey = at(presetData, "overall_frame") %}
+            {% set overall_frame = at(at(at(parts, "overall_frame"), partKey), clothingKey) %}
+            {% set partKey = at(presetData, "chest_build") %}
+            {% set chest_build = at(at(at(parts, "chest_build"), partKey), clothingKey) %}
+            {% set partKey = at(presetData, "shoulders_build") %}
+            {% set shoulders_build = at(at(at(parts, "shoulders_build"), partKey), clothingKey) %}
+            {% set partKey = at(presetData, "arms") %}
+            {% set arms = at(at(at(parts, "arms"), partKey), clothingKey) %}
+            {% set partKey = at(presetData, "back") %}
+            {% set back = at(at(at(parts, "back"), partKey), clothingKey) %}
+            {% set partKey = at(presetData, "butt") %}
+            {% set butt = at(at(at(parts, "butt"), partKey), clothingKey) %}
+            {% set partKey = at(presetData, "legs") %}
+            {% set legs = at(at(at(parts, "legs"), partKey), clothingKey) %}
+            {% set partKey = at(presetData, "body_composition") %}
+            {% set body_composition = at(at(at(parts, "body_composition"), partKey), clothingKey) %}
+            {% set bodyDescription = overall_frame + " " + chest_build + " " + shoulders_build + " " + arms + " " + back + " " + butt + " " + legs + " " + body_composition %}
+        {% endif %}
     {% endif %}
 {% endif %}
 

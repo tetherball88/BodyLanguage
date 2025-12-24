@@ -1,0 +1,270 @@
+{
+  "combined_description": {
+    "clothed": "He has {overall_frame} {chest_build} {shoulders_build} {arms} {back} {butt} {legs} {body_composition}",
+    "naked": "He displays {overall_frame} {chest_build} {shoulders_build} {arms} {back} {butt} {legs} {body_composition}"
+  },
+  "overall_frame": {
+    "slim_narrow": {
+      "clothed": "a lean frame where fabric hangs loose,",
+      "naked": "a slender, wiry physique,"
+    },
+    "regular": {
+      "clothed": "a balanced build,",
+      "naked": "a naturally proportioned form,"
+    },
+    "big": {
+      "clothed": "a substantial, broad frame,",
+      "naked": "a large frame with natural heft,"
+    },
+    "large": {
+      "clothed": "a massive physique,",
+      "naked": "a heavyweight build with dominant presence,"
+    },
+    "athletic": {
+      "clothed": "a V-tapered silhouette,",
+      "naked": "an athletic build tapering from wide shoulders to narrow hips,"
+    },
+    "bulky": {
+      "clothed": "a thick, powerful frame,",
+      "naked": "a densely packed physique,"
+    }
+  },
+  "chest_build": {
+    "flat": {
+      "clothed": "flat chest,",
+      "naked": "undeveloped chest,"
+    },
+    "lean": {
+      "clothed": "modest chest,",
+      "naked": "lean pectorals with visible ribcage,"
+    },
+    "defined": {
+      "clothed": "well-shaped chest,",
+      "naked": "defined pectorals with clean separation,"
+    },
+    "muscular": {
+      "clothed": "broad chest straining fabric,",
+      "naked": "thick pectorals with pronounced mass,"
+    },
+    "massive": {
+      "clothed": "heavily muscled chest,",
+      "naked": "enormous pectorals dominating his torso,"
+    },
+    "barrel": {
+      "clothed": "deep, rounded chest,",
+      "naked": "barrel chest with forward projection,"
+    },
+    "soft": {
+      "clothed": "rounded, soft chest,",
+      "naked": "soft pectorals with gentle sag,"
+    },
+    "heavy": {
+      "clothed": "thick chest with substantial fat,",
+      "naked": "fleshy chest with pendulous pectorals,"
+    }
+  },
+  "shoulders_build": {
+    "narrow": {
+      "clothed": "narrow shoulders,",
+      "naked": "slim shoulders,"
+    },
+    "regular": {
+      "clothed": "average shoulders,",
+      "naked": "proportioned shoulders,"
+    },
+    "broad": {
+      "clothed": "wide shoulders,",
+      "naked": "broad shoulders with strong taper,"
+    },
+    "massive": {
+      "clothed": "huge shoulders straining seams,",
+      "naked": "capped deltoids with dramatic width,"
+    },
+    "rounded": {
+      "clothed": "thick, rounded shoulders,",
+      "naked": "bowling-ball deltoids,"
+    }
+  },
+  "arms": {
+    "thin": {
+      "clothed": "thin arms,",
+      "naked": "slender arms with bony elbows,"
+    },
+    "lean": {
+      "clothed": "lean arms,",
+      "naked": "wiry arms with visible veins,"
+    },
+    "regular": {
+      "clothed": "average arms,",
+      "naked": "proportioned arms,"
+    },
+    "toned": {
+      "clothed": "toned arms,",
+      "naked": "defined arms with athletic biceps,"
+    },
+    "muscular": {
+      "clothed": "muscular arms stretching sleeves,",
+      "naked": "powerful arms with horseshoe triceps,"
+    },
+    "massive": {
+      "clothed": "enormous arms,",
+      "naked": "bulging biceps with corded forearms,"
+    },
+    "soft": {
+      "clothed": "soft arms,",
+      "naked": "untoned arms with soft flesh,"
+    },
+    "fat": {
+      "clothed": "heavy arms,",
+      "naked": "flabby arms with sagging triceps,"
+    }
+  },
+  "back": {
+    "narrow": {
+      "clothed": "narrow back,",
+      "naked": "slim back with visible spine,"
+    },
+    "lean": {
+      "clothed": "lean back,",
+      "naked": "defined back with visible shoulder blades,"
+    },
+    "regular": {
+      "clothed": "average back,",
+      "naked": "balanced back with moderate lats,"
+    },
+    "toned": {
+      "clothed": "toned back,",
+      "naked": "defined back with visible lat taper,"
+    },
+    "muscular": {
+      "clothed": "muscular back,",
+      "naked": "thick lats with deep spinal erectors,"
+    },
+    "massive": {
+      "clothed": "enormously wide back,",
+      "naked": "cobra-lat spread with Christmas tree definition,"
+    },
+    "soft": {
+      "clothed": "soft back,",
+      "naked": "undefined back with smooth contours,"
+    },
+    "fat": {
+      "clothed": "wide, fleshy back,",
+      "naked": "fat back with thick rolls,"
+    }
+  },
+  "butt": {
+    "small_flat": {
+      "clothed": "flat backside,",
+      "naked": "minimal buttocks with no projection,"
+    },
+    "small_round": {
+      "clothed": "small but rounded rear,",
+      "naked": "compact buttocks with modest roundness,"
+    },
+    "medium_flat": {
+      "clothed": "boxy rear,",
+      "naked": "squared buttocks with minimal curve,"
+    },
+    "medium_round": {
+      "clothed": "rounded rear,",
+      "naked": "balanced buttocks with masculine curves,"
+    },
+    "large_muscular": {
+      "clothed": "muscular backside,",
+      "naked": "powerful glutes with defined muscle,"
+    },
+    "large_round": {
+      "clothed": "prominent rear,",
+      "naked": "full buttocks with impressive curves,"
+    },
+    "huge_muscular": {
+      "clothed": "exceptionally built rear,",
+      "naked": "striated glutes with commanding size,"
+    },
+    "huge_round": {
+      "clothed": "enormous rear,",
+      "naked": "huge buttocks with dramatic projection,"
+    },
+    "fat_soft": {
+      "clothed": "wide, soft ass,",
+      "naked": "jiggly buttocks with dimpled flesh,"
+    },
+    "fat_round": {
+      "clothed": "big, fat ass,",
+      "naked": "heavy buttocks with wobbling flesh,"
+    }
+  },
+  "legs": {
+    "thin_bony": {
+      "clothed": "slender legs,",
+      "naked": "lanky legs with bony knees,"
+    },
+    "thin_lean": {
+      "clothed": "thin legs,",
+      "naked": "wiry legs with sleek definition,"
+    },
+    "regular_soft": {
+      "clothed": "proportioned legs,",
+      "naked": "balanced legs with soft contours,"
+    },
+    "regular_toned": {
+      "clothed": "athletic legs,",
+      "naked": "toned legs with visible definition,"
+    },
+    "big_muscular": {
+      "clothed": "thick thighs,",
+      "naked": "powerful thighs with muscle separation,"
+    },
+    "big_thick": {
+      "clothed": "densely packed legs,",
+      "naked": "thick legs with solid mass,"
+    },
+    "huge_muscular": {
+      "clothed": "massively developed legs,",
+      "naked": "striated quads with vascular calves,"
+    },
+    "huge_thick": {
+      "clothed": "tree-trunk legs,",
+      "naked": "massive legs with immense girth,"
+    },
+    "fat_soft": {
+      "clothed": "heavy legs,",
+      "naked": "fat thighs rubbing together,"
+    },
+    "fat_thick": {
+      "clothed": "thick, heavy legs,",
+      "naked": "enormous thighs with deep cellulite,"
+    }
+  },
+  "body_composition": {
+    "lean": {
+      "clothed": "with taut definition throughout.",
+      "naked": "with minimal body fat and sharp definition."
+    },
+    "regular": {
+      "clothed": "with average conditioning.",
+      "naked": "with natural fat distribution."
+    },
+    "stocky": {
+      "clothed": "with solid, compact bulk.",
+      "naked": "with muscle beneath a layer of fat."
+    },
+    "athletic": {
+      "clothed": "with well-conditioned muscle.",
+      "naked": "with balanced, sculpted development."
+    },
+    "muscular": {
+      "clothed": "with pronounced hardness.",
+      "naked": "with dramatic contours and deep separations."
+    },
+    "chubby": {
+      "clothed": "with plump, rounded softness.",
+      "naked": "with a rounded belly and soft contours."
+    },
+    "fat": {
+      "clothed": "with heavy, fleshy bulk.",
+      "naked": "with pronounced belly overhang and thick folds."
+    }
+  }
+}
