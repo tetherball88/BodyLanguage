@@ -1,3 +1,7 @@
+{% set isFullDescription = false %}
+{% if render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target" %}
+    {% set isFullDescription = true %}
+{% endif %}
 {% if not decnpc(actorUUID).isVirtual %}
     {% set npcData = decnpc(actorUUID) %}
     {% set isCbbe = is_plugin_loaded("CBBE.esp") %}
@@ -81,6 +85,7 @@
                 {% set partKey = at(presetData, "body_composition") %}
                 {% set body_composition = at(at(at(parts, "body_composition"), partKey), clothingKey) %}
                 {% set bodyDescription = overall_frame + " " + breasts_size + " " + breasts_shape + " " + butt_size + " " + butt_shape + " " + legs_size + " " + legs_shape + " " + body_composition %}
+                {% set shortBodyDescription = overall_frame + " " + breasts_size + " " + butt_size + " " + body_composition %}
             {% endif %}
         {% else %}
             {% set parts = read_json("./SkyrimNet/jsonData/maleBodyPartDescriptions.json") %}
@@ -104,6 +109,7 @@
                 {% set partKey = at(presetData, "body_composition") %}
                 {% set body_composition = at(at(at(parts, "body_composition"), partKey), clothingKey) %}
                 {% set bodyDescription = overall_frame + " " + chest_build + " " + shoulders_build + " " + arms + " " + back + " " + butt + " " + legs + " " + body_composition %}
+                {% set shortBodyDescription = overall_frame + " " + chest_build + " " + body_composition %}
             {% endif %}
         {% endif %}
     {% endif %}
@@ -153,35 +159,30 @@
         {% endif %}
     {% endif %}
 
-    {% if not isClothed %}
-        {{ "### Body shape(naked)" }}
-        {{npcName}} is naked.
-    {% else %}
-        {{ "### Body shape(clothed)" }}
-        {{npcName}} is clothed.
+    {% if isFullDescription %}
+        {{ "### Body shape" }}        
     {% endif %}
-    {% if render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target" %}
-        {% if not isClothed %}
-            {% if bodyDescription %}
-                {{npcName}}'s figure reveals {{bodyDescription}}
+    {{npcName}} is {{clothingKey}}.
+    {% if isFullDescription %}
+        {% if bodyDescription %}
+            {{npcName}}'s figure reveals {{bodyDescription}}
+        {% endif %}
+        {% if not isClothed and hasTng %}
+            {% if tngSize == "XS" %}
+                {{npcName}}'s exposed penis is quite small - short and thin, barely filling a hand. It has a {{tngAddon}}
+            {% else if tngSize == "S" %}
+                {{npcName}}'s exposed penis is noticeably small, short in length with modest girth. It has a {{tngAddon}}
+            {% else if tngSize == "M" %}
+                {{npcName}}'s exposed penis is average-sized and well-proportioned, perfectly adequate. It has a {{tngAddon}}
+            {% else if tngSize == "L" %}
+                {{npcName}}'s exposed penis is impressively large - the substantial length and girth immediately draw attention. It has a {{tngAddon}}
+            {% else if tngSize == "XL" %}
+                {{npcName}}'s exposed penis is extraordinarily massive - its sheer size is striking and unforgettable. It has a {{tngAddon}}
             {% endif %}
-            {% if hasTng %}
-                {% if tngSize == "XS" %}
-                    {{npcName}}'s exposed penis is quite small - short and thin, barely filling a hand. It has a {{tngAddon}}
-                {% else if tngSize == "S" %}
-                    {{npcName}}'s exposed penis is noticeably small, short in length with modest girth. It has a {{tngAddon}}
-                {% else if tngSize == "M" %}
-                    {{npcName}}'s exposed penis is average-sized and well-proportioned, perfectly adequate. It has a {{tngAddon}}
-                {% else if tngSize == "L" %}
-                    {{npcName}}'s exposed penis is impressively large - the substantial length and girth immediately draw attention. It has a {{tngAddon}}
-                {% else if tngSize == "XL" %}
-                    {{npcName}}'s exposed penis is extraordinarily massive - its sheer size is striking and unforgettable. It has a {{tngAddon}}
-                {% endif %}
-            {% endif %}
-        {% else %}
-            {% if bodyDescription %}
-                {{npcName}}'s silhouette features {{bodyDescription}}
-            {% endif %}
+        {% endif %}
+    {% else %}
+        {% if shortBodyDescription %}
+            {{npcName}}'s figure reveals {{shortBodyDescription}}
         {% endif %}
     {% endif %}
 {% endif %}
