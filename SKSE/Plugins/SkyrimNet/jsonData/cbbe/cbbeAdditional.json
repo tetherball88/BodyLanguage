@@ -37,6 +37,882 @@
         }
     }
   },
+	"3BA Destroyer": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "toned_athletic",
+        "body_composition": "athletic"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "huge",
+        "breasts_shape": "full_round",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "toned_athletic",
+        "body_composition": "muscular"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "bulky",
+        "breasts_size": "enormous",
+        "breasts_shape": "pressed",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "muscular"
+      }
+    }
+  },
+  "3BA Judda Rectangle Shape": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "slim_narrow",
+        "breasts_size": "small",
+        "breasts_shape": "wide_set",
+        "butt_size": "small",
+        "butt_shape": "flat",
+        "legs_size": "thin",
+        "legs_shape": "regular",
+        "body_composition": "lean"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "wide_set",
+        "butt_size": "medium",
+        "butt_shape": "regular",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "wide_set",
+        "butt_size": "medium",
+        "butt_shape": "regular",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    }
+  },
+  "3BA MILF": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "large",
+        "breasts_shape": "teardrop",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "soft_plush",
+        "body_composition": "soft"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "huge",
+        "breasts_shape": "saggy",
+        "butt_size": "large",
+        "butt_shape": "apple_shaped",
+        "legs_size": "big",
+        "legs_shape": "soft_plush",
+        "body_composition": "chubby"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "enormous",
+        "breasts_shape": "saggy",
+        "butt_size": "huge",
+        "butt_shape": "apple_shaped",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "chubby"
+      }
+    }
+  },
+  "3BA Nubile": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "slim_narrow",
+        "breasts_size": "medium",
+        "breasts_shape": "perky",
+        "butt_size": "small",
+        "butt_shape": "regular",
+        "legs_size": "thin",
+        "legs_shape": "gap",
+        "body_composition": "lean"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "perky",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    }
+  },
+  "7BOPPAI Rosa": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "huge",
+        "breasts_shape": "perky",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "big",
+        "legs_shape": "soft_plush",
+        "body_composition": "soft"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "enormous",
+        "breasts_shape": "full_round",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "soft"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "enormous",
+        "breasts_shape": "full_round",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "chubby"
+      }
+    }
+  },
+  "BONOBODY SE": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "slim_narrow",
+        "breasts_size": "small",
+        "breasts_shape": "wide_set",
+        "butt_size": "small",
+        "butt_shape": "flat",
+        "legs_size": "thin",
+        "legs_shape": "regular",
+        "body_composition": "lean"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "small",
+        "breasts_shape": "wide_set",
+        "butt_size": "small",
+        "butt_shape": "regular",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "medium",
+        "breasts_shape": "wide_set",
+        "butt_size": "medium",
+        "butt_shape": "regular",
+        "legs_size": "big",
+        "legs_shape": "soft_plush",
+        "body_composition": "soft"
+      }
+    }
+  },
+  "Cicero Preset": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "slim_narrow",
+        "breasts_size": "flat",
+        "breasts_shape": "close_set",
+        "butt_size": "small",
+        "butt_shape": "flat",
+        "legs_size": "thin",
+        "legs_shape": "regular",
+        "body_composition": "lean"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "flat",
+        "breasts_shape": "close_set",
+        "butt_size": "small",
+        "butt_shape": "regular",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "small",
+        "breasts_shape": "perky",
+        "butt_size": "medium",
+        "butt_shape": "regular",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    }
+  },
+  "CT77SE": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "full_round",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "toned_athletic",
+        "body_composition": "athletic"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "toned_athletic",
+        "body_composition": "athletic"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "toned_athletic",
+        "body_composition": "muscular"
+      }
+    }
+  },
+  "CurvyBreton": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "teardrop",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "soft_plush",
+        "body_composition": "soft"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "huge",
+        "breasts_shape": "full_round",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "soft"
+      }
+    }
+  },
+  "CurvyBretonNaturalPushup": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "perky",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "large",
+        "breasts_shape": "pressed",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "soft_plush",
+        "body_composition": "soft"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "huge",
+        "breasts_shape": "pressed",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "soft"
+      }
+    }
+  },
+  "Demonic Body": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "perky",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "toned_athletic",
+        "body_composition": "athletic"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "toned_athletic",
+        "body_composition": "muscular"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "huge",
+        "breasts_shape": "pressed",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "muscular"
+      }
+    }
+  },
+  "Divine's Chosen Body": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "slim_narrow",
+        "breasts_size": "medium",
+        "breasts_shape": "perky",
+        "butt_size": "small",
+        "butt_shape": "regular",
+        "legs_size": "thin",
+        "legs_shape": "gap",
+        "body_composition": "lean"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "large",
+        "breasts_shape": "teardrop",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "huge",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "soft_plush",
+        "body_composition": "soft"
+      }
+    }
+  },
+  "Ethan - Copy": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "slim_narrow",
+        "breasts_size": "flat",
+        "breasts_shape": "wide_set",
+        "butt_size": "small",
+        "butt_shape": "flat",
+        "legs_size": "thin",
+        "legs_shape": "regular",
+        "body_composition": "lean"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "slim_narrow",
+        "breasts_size": "small",
+        "breasts_shape": "perky",
+        "butt_size": "small",
+        "butt_shape": "regular",
+        "legs_size": "thin",
+        "legs_shape": "regular",
+        "body_composition": "lean"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "perky",
+        "butt_size": "medium",
+        "butt_shape": "regular",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    }
+  },
+  "Good GAWD": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "huge",
+        "breasts_shape": "full_round",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "soft"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "enormous",
+        "breasts_shape": "pressed",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "chubby"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "bulky",
+        "breasts_size": "enormous",
+        "breasts_shape": "pressed",
+        "butt_size": "huge",
+        "butt_shape": "deep_cleft",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "chubby"
+      }
+    }
+  },
+  "Menace": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "teardrop",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "soft_plush",
+        "body_composition": "soft"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "huge",
+        "breasts_shape": "full_round",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "soft"
+      }
+    }
+  },
+  "Metis": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "slim_narrow",
+        "breasts_size": "small",
+        "breasts_shape": "perky",
+        "butt_size": "small",
+        "butt_shape": "regular",
+        "legs_size": "thin",
+        "legs_shape": "gap",
+        "body_composition": "lean"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "perky",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    }
+  },
+  "NideVeil": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "soft_plush",
+        "body_composition": "soft"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "huge",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "apple_shaped",
+        "legs_size": "big",
+        "legs_shape": "soft_plush",
+        "body_composition": "chubby"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "huge",
+        "breasts_shape": "saggy",
+        "butt_size": "huge",
+        "butt_shape": "apple_shaped",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "chubby"
+      }
+    }
+  },
+  "Sonderbains Waifu Bodyslide Kaisel": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "perky",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "soft_plush",
+        "body_composition": "soft"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "huge",
+        "breasts_shape": "full_round",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "soft"
+      }
+    }
+  },
+  "Twilight Princess Preset 3BA": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "slim_narrow",
+        "breasts_size": "small",
+        "breasts_shape": "perky",
+        "butt_size": "small",
+        "butt_shape": "regular",
+        "legs_size": "thin",
+        "legs_shape": "gap",
+        "body_composition": "lean"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "perky",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    }
+  },
+  "Valmari": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "teardrop",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "toned_athletic",
+        "body_composition": "athletic"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "toned_athletic",
+        "body_composition": "muscular"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "huge",
+        "breasts_shape": "full_round",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "muscular"
+      }
+    }
+  },
+  "Wench Body 2.0": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "huge",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "soft_plush",
+        "body_composition": "soft"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "enormous",
+        "breasts_shape": "pressed",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "chubby"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "bulky",
+        "breasts_size": "enormous",
+        "breasts_shape": "pressed",
+        "butt_size": "huge",
+        "butt_shape": "apple_shaped",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "chubby"
+      }
+    }
+  },
+  "Yae Miko": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "slim_narrow",
+        "breasts_size": "small",
+        "breasts_shape": "perky",
+        "butt_size": "small",
+        "butt_shape": "regular",
+        "legs_size": "thin",
+        "legs_shape": "gap",
+        "body_composition": "lean"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "slim_narrow",
+        "breasts_size": "medium",
+        "breasts_shape": "perky",
+        "butt_size": "small",
+        "butt_shape": "regular",
+        "legs_size": "thin",
+        "legs_shape": "gap",
+        "body_composition": "lean"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "full_round",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    }
+  },
+  "Yvanni": {
+    "0": {
+      "bodyParts": {
+        "overall_frame": "regular",
+        "breasts_size": "medium",
+        "breasts_shape": "perky",
+        "butt_size": "medium",
+        "butt_shape": "round",
+        "legs_size": "regular",
+        "legs_shape": "regular",
+        "body_composition": "regular"
+      }
+    },
+    "50": {
+      "bodyParts": {
+        "overall_frame": "hourglass",
+        "breasts_size": "large",
+        "breasts_shape": "full_round",
+        "butt_size": "large",
+        "butt_shape": "round",
+        "legs_size": "big",
+        "legs_shape": "soft_plush",
+        "body_composition": "soft"
+      }
+    },
+    "100": {
+      "bodyParts": {
+        "overall_frame": "large",
+        "breasts_size": "huge",
+        "breasts_shape": "full_round",
+        "butt_size": "huge",
+        "butt_shape": "extremely_round",
+        "legs_size": "huge",
+        "legs_shape": "touching",
+        "body_composition": "soft"
+      }
+    }
+  },
+  
+  
   "Busty Babe - Nude": {
     "0": {
         "bodyParts": {
