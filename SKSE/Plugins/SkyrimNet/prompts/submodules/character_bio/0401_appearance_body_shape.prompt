@@ -1,8 +1,6 @@
-{% set isFullDescription = false %}
-{% if render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target" %}
-    {% set isFullDescription = true %}
-{% endif %}
-{% if not decnpc(actorUUID).isVirtual %}
+{% set isFullDescription = render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target" %}
+{% set shouldRender = isFullDescription or render_mode == "short_inline" %}
+{% if not decnpc(actorUUID).isVirtual and shouldRender %}
     {% set npcData = decnpc(actorUUID) %}
     {% set isCbbe = is_plugin_loaded("CBBE.esp") %}
     {% set isBhunp = is_plugin_loaded("BHUNP3BBB.esp") %} 
