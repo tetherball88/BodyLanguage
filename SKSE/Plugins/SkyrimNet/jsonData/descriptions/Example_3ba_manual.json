@@ -1,0 +1,14 @@
+{
+    "meta": "THIS IS AN EXAMPLE FILE TO SHOW HOW TO OVERRIDE AUTO-CALCULATED PRESET KEYWORDS.",
+    "(GO-THICC GIRL)": {
+        "big": {
+            "meta": "breasts_volume:impossible;physique_condition:chubby;butt_hips:huge;frame:average;legs:thick;waist:soft"
+        },
+        "medium": {
+            "meta": "breasts_volume:impossible;physique_condition:chubby;butt_hips:huge;frame:average;legs:average;waist:standard"
+        },
+        "small": {
+            "meta": "breasts_volume:huge;physique_condition:soft;butt_hips:huge;frame:slim;legs:average;waist:standard"
+        }
+    }
+}

@@ -1,0 +1,1055 @@
+{
+    "Weight 0 to 1": {
+        "group": "Main Body",
+        "displayName": "Weight 0 to 1",
+        "referenceName": "HIMBO - Body HPWeight 0 to 1",
+        "smallDefault": 0.0,
+        "bigDefault": 100.0,
+        "sliderName": "HIMBO - Body HPWeight 0 to 1",
+        "impact": 2417.5513
+    },
+    "Chubby": {
+        "group": "Main Body",
+        "displayName": "Hugh",
+        "referenceName": "HIMBO - Body HPChubby",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPChubby",
+        "impact": 16823.815
+    },
+    "Lean": {
+        "group": "Main Body",
+        "displayName": "Hideo",
+        "referenceName": "HIMBO - Body HPLean",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLean",
+        "impact": 12480.7612
+    },
+    "Muscle": {
+        "group": "Main Body",
+        "displayName": "Hassan",
+        "referenceName": "HIMBO - Body HPMuscle",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPMuscle",
+        "impact": 6464.4089
+    },
+    "SOSlike": {
+        "group": "Main Body",
+        "displayName": "Hector",
+        "referenceName": "HIMBO - Body HPSOSlike",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPSOSlike",
+        "impact": 10158.5175
+    },
+    "FemmeT": {
+        "group": "Main Body",
+        "displayName": "Hayden Upper",
+        "referenceName": "HIMBO - Body HPFemmeT",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPFemmeT",
+        "impact": 3963.7428
+    },
+    "FemmeB": {
+        "group": "Main Body",
+        "displayName": "Hayden Lower",
+        "referenceName": "HIMBO - Body HPFemmeB",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPFemmeB",
+        "impact": 7253.0362
+    },
+    "FemmeBooba": {
+        "group": "Main Body",
+        "displayName": "Hayden Chest",
+        "referenceName": "HIMBO - Body HPFemmeBooba",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPFemmeBooba",
+        "impact": 3225.6781
+    },
+    "FemmeBoobaBig": {
+        "group": "Main Body",
+        "displayName": "Hayden Boobs",
+        "referenceName": "HIMBO - Body HPFemmeBoobaBig",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPFemmeBoobaBig",
+        "impact": 1027.4525
+    },
+    "SamuelLike": {
+        "group": "Main Body",
+        "displayName": "Hank",
+        "referenceName": "HIMBO - Body HPSamuelLike",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPSamuelLike",
+        "impact": 50871.4009
+    },
+    "PecsClavicle": {
+        "group": "Pecs",
+        "displayName": "Clavicle",
+        "referenceName": "HIMBO - Body HPPecsClavicle",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsClavicle",
+        "impact": 121.9694
+    },
+    "PecsSize": {
+        "group": "Pecs",
+        "displayName": "Size",
+        "referenceName": "HIMBO - Body HPPecsSize",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsSize",
+        "impact": 1243.5234
+    },
+    "PecsMass": {
+        "group": "Pecs",
+        "displayName": "Mass",
+        "referenceName": "HIMBO - Body HPPecsMass",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsMass",
+        "impact": 893.117
+    },
+    "PecsMinor": {
+        "group": "Pecs",
+        "displayName": "Pectoralis Minor",
+        "referenceName": "HIMBO - Body HPPecsMinor",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsMinor",
+        "impact": 804.5998
+    },
+    "PecsLower": {
+        "group": "Pecs",
+        "displayName": "Lower Pecs",
+        "referenceName": "HIMBO - Body HPPecsLower",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsLower",
+        "impact": 632.1108
+    },
+    "PecsSaggy": {
+        "group": "Pecs",
+        "displayName": "Gravity",
+        "referenceName": "HIMBO - Body HPPecsSaggy",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsSaggy",
+        "impact": 776.0718
+    },
+    "PecsWidth": {
+        "group": "Pecs",
+        "displayName": "Width",
+        "referenceName": "HIMBO - Body HPPecsWidth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsWidth",
+        "impact": 657.8592
+    },
+    "PecsFlatten": {
+        "group": "Pecs",
+        "displayName": "Flatten",
+        "referenceName": "HIMBO - Body HPPecsFlatten",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsFlatten",
+        "impact": 326.1136
+    },
+    "PecsPosV": {
+        "group": "Pecs",
+        "displayName": "Position (V)",
+        "referenceName": "HIMBO - Body HPPecsPosV",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsPosV",
+        "impact": 1442.8655
+    },
+    "PecsPosH": {
+        "group": "Pecs",
+        "displayName": "Position (H)",
+        "referenceName": "HIMBO - Body HPPecsPosH",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsPosH",
+        "impact": 1685.3597
+    },
+    "PecsSide": {
+        "group": "Pecs",
+        "displayName": "Width (Lower)",
+        "referenceName": "HIMBO - Body HPPecsSide",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsSide",
+        "impact": 347.7854
+    },
+    "PecsPush": {
+        "group": "Pecs",
+        "displayName": "Width (Upper)",
+        "referenceName": "HIMBO - Body HPPecsPush",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsPush",
+        "impact": 597.5654
+    },
+    "PecsLowerSide": {
+        "group": "Pecs",
+        "displayName": "Width (Lower Side)",
+        "referenceName": "HIMBO - Body HPPecsLowerSide",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsLowerSide",
+        "impact": 848.5262
+    },
+    "PecsDecrease": {
+        "group": "Pecs",
+        "displayName": "Shrink Side",
+        "referenceName": "HIMBO - Body HPPecsDecrease",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsDecrease",
+        "impact": 284.906
+    },
+    "PecsCrease": {
+        "group": "Pecs",
+        "displayName": "Underside Crease",
+        "referenceName": "HIMBO - Body HPPecsCrease",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPecsCrease",
+        "impact": 51.1989
+    },
+    "ButtBooty": {
+        "group": "Buttocks",
+        "displayName": "Size",
+        "referenceName": "HIMBO - Body HPButtBooty",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtBooty",
+        "impact": 998.9527
+    },
+    "BubbleButt": {
+        "group": "Buttocks",
+        "displayName": "Bubble Butt",
+        "referenceName": "HIMBO - Body HPBubbleButt",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPBubbleButt",
+        "impact": 950.4638
+    },
+    "ButtRoundy": {
+        "group": "Buttocks",
+        "displayName": "Round",
+        "referenceName": "HIMBO - Body HPButtRoundy",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtRoundy",
+        "impact": 405.6241
+    },
+    "ButtSaggy": {
+        "group": "Buttocks",
+        "displayName": "Gravity",
+        "referenceName": "HIMBO - Body HPButtSaggy",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtSaggy",
+        "impact": 608.0592
+    },
+    "ButtCleft": {
+        "group": "Buttocks",
+        "displayName": "Buttcrack",
+        "referenceName": "HIMBO - Body HPButtCleft",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtCleft",
+        "impact": 772.6876
+    },
+    "ButtTailbone": {
+        "group": "Buttocks",
+        "displayName": "Tailbone",
+        "referenceName": "HIMBO - Body HPButtTailbone",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtTailbone",
+        "impact": 128.6198
+    },
+    "ButtUpper": {
+        "group": "Buttocks",
+        "displayName": "Upper Butt",
+        "referenceName": "HIMBO - Body HPButtUpper",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtUpper",
+        "impact": 194.541
+    },
+    "ButtScrapeUpper": {
+        "group": "Buttocks",
+        "displayName": "Upper Butt (Scrape)",
+        "referenceName": "HIMBO - Body HPButtScrapeUpper",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtScrapeUpper",
+        "impact": 145.2596
+    },
+    "ButtSide": {
+        "group": "Buttocks",
+        "displayName": "Side Butt",
+        "referenceName": "HIMBO - Body HPButtSide",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtSide",
+        "impact": 387.7202
+    },
+    "ButtCenterPush": {
+        "group": "Buttocks",
+        "displayName": "Push Butt",
+        "referenceName": "HIMBO - Body HPButtCenterPush",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtCenterPush",
+        "impact": 264.2025
+    },
+    "ButtCurve": {
+        "group": "Buttocks",
+        "displayName": "Push Butt Curve",
+        "referenceName": "HIMBO - Body HPButtCurve",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtCurve",
+        "impact": 503.464
+    },
+    "ButtLower": {
+        "group": "Buttocks",
+        "displayName": "Pull Butt Downwards",
+        "referenceName": "HIMBO - Body HPButtLower",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtLower",
+        "impact": 265.4899
+    },
+    "ButtDimpleDeepen": {
+        "group": "Buttocks",
+        "displayName": "Deepen Dimple",
+        "referenceName": "HIMBO - Body HPButtDimpleDeepen",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtDimpleDeepen",
+        "impact": 112.1724
+    },
+    "ButtDimpleFatten": {
+        "group": "Buttocks",
+        "displayName": "Flatten Dimple",
+        "referenceName": "HIMBO - Body HPButtDimpleFatten",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtDimpleFatten",
+        "impact": 38.0843
+    },
+    "ButtTighten": {
+        "group": "Buttocks",
+        "displayName": "Tighten Butt",
+        "referenceName": "HIMBO - Body HPButtTighten",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPButtTighten",
+        "impact": 226.8946
+    },
+    "TorsoShoulderInc": {
+        "group": "Stature",
+        "displayName": "Increase Shoulder",
+        "referenceName": "HIMBO - Body HPTorsoShoulderInc",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoShoulderInc",
+        "impact": 6324.5126
+    },
+    "TorsoShoulderDec": {
+        "group": "Stature",
+        "displayName": "Decrease Shoulder",
+        "referenceName": "HIMBO - Body HPTorsoShoulderDec",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoShoulderDec",
+        "impact": 4095.9599
+    },
+    "TorsoSterHeight": {
+        "group": "Stature",
+        "displayName": "Sternum Height",
+        "referenceName": "HIMBO - Body HPTorsoSterHeight",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoSterHeight",
+        "impact": 592.3648
+    },
+    "TorsoSterDepth": {
+        "group": "Stature",
+        "displayName": "Sternum Depth",
+        "referenceName": "HIMBO - Body HPTorsoSterDepth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoSterDepth",
+        "impact": 32.1724
+    },
+    "TorsoSterWidth": {
+        "group": "Stature",
+        "displayName": "Sternum Width",
+        "referenceName": "HIMBO - Body HPTorsoSterWidth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoSterWidth",
+        "impact": 42.3789
+    },
+    "TorsoBackSize": {
+        "group": "Stature",
+        "displayName": "Back Size",
+        "referenceName": "HIMBO - Body HPTorsoBackSize",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoBackSize",
+        "impact": 288.4651
+    },
+    "TorsoBackSlope": {
+        "group": "Stature",
+        "displayName": "Back Slope",
+        "referenceName": "HIMBO - Body HPTorsoBackSlope",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoBackSlope",
+        "impact": 328.0585
+    },
+    "TorsoBackShape": {
+        "group": "Stature",
+        "displayName": "Back Shape",
+        "referenceName": "HIMBO - Body HPTorsoBackShape",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoBackShape",
+        "impact": 1914.6995
+    },
+    "TorsoBackCenter": {
+        "group": "Stature",
+        "displayName": "Back (Mid)",
+        "referenceName": "HIMBO - Body HPTorsoBackCenter",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoBackCenter",
+        "impact": 152.3752
+    },
+    "TorsoBackSerratusMid": {
+        "group": "Stature",
+        "displayName": "Serratus",
+        "referenceName": "HIMBO - Body HPTorsoBackSerratusMid",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoBackSerratusMid",
+        "impact": 146.5522
+    },
+    "TorsoBackObliques": {
+        "group": "Stature",
+        "displayName": "Obliques",
+        "referenceName": "HIMBO - Body HPTorsoBackObliques",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoBackObliques",
+        "impact": 158.1651
+    },
+    "TorsoBackDefinition": {
+        "group": "Stature",
+        "displayName": "Back Muscle",
+        "referenceName": "HIMBO - Body HPTorsoBackDefinition",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoBackDefinition",
+        "impact": 323.0696
+    },
+    "TorsoMass": {
+        "group": "Stature",
+        "displayName": "Mass",
+        "referenceName": "HIMBO - Body HPTorsoMass",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoMass",
+        "impact": 2649.476
+    },
+    "TorsoMassSmooth": {
+        "group": "Stature",
+        "displayName": "Mass (Smoothen)",
+        "referenceName": "HIMBO - Body HPTorsoMassSmooth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoMassSmooth",
+        "impact": 84.4172
+    },
+    "BodyMass": {
+        "group": "Stature",
+        "displayName": "Overall Mass",
+        "referenceName": "HIMBO - Body HPBodyMass",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPBodyMass",
+        "impact": 52927.9794
+    },
+    "TorsoWidth": {
+        "group": "Stature",
+        "displayName": "Width",
+        "referenceName": "HIMBO - Body HPTorsoWidth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoWidth",
+        "impact": 1929.859
+    },
+    "TorsoLower": {
+        "group": "Stature",
+        "displayName": "Enlarge Waist",
+        "referenceName": "HIMBO - Body HPTorsoLower",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoLower",
+        "impact": 4650.0164
+    },
+    "TorsoWaistSize": {
+        "group": "Stature",
+        "displayName": "Shrink Waist",
+        "referenceName": "HIMBO - Body HPTorsoWaistSize",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoWaistSize",
+        "impact": 3471.9107
+    },
+    "TorsoWaistHeight": {
+        "group": "Stature",
+        "displayName": "Waist Height",
+        "referenceName": "HIMBO - Body HPTorsoWaistHeight",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoWaistHeight",
+        "impact": 4646.9751
+    },
+    "TorsoHipLarge": {
+        "group": "Stature",
+        "displayName": "Enlarge Hips (side)",
+        "referenceName": "HIMBO - Body HPTorsoHipLarge",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoHipLarge",
+        "impact": 3328.9479
+    },
+    "TorsoHip": {
+        "group": "Stature",
+        "displayName": "Shrink Hips",
+        "referenceName": "HIMBO - Body HPTorsoHip",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoHip",
+        "impact": 2536.2671
+    },
+    "TorsoHipSmooth": {
+        "group": "Stature",
+        "displayName": "Smoothen Hips",
+        "referenceName": "HIMBO - Body HPTorsoHipSmooth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoHipSmooth",
+        "impact": 1719.3079
+    },
+    "TorsoFlatAbs": {
+        "group": "Stature",
+        "displayName": "Flatten Abs",
+        "referenceName": "HIMBO - Body HPTorsoFlatAbs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoFlatAbs",
+        "impact": 362.5777
+    },
+    "TorsoRibsDefinition": {
+        "group": "Stature",
+        "displayName": "Ribs Definition",
+        "referenceName": "HIMBO - Body HPTorsoRibsDefinition",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoRibsDefinition",
+        "impact": 471.4199
+    },
+    "TorsoVLine": {
+        "group": "Stature",
+        "displayName": "V Line",
+        "referenceName": "HIMBO - Body HPTorsoVLine",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoVLine",
+        "impact": 181.4131
+    },
+    "BellyButtonPush": {
+        "group": "Stature",
+        "displayName": "Push Belly Button",
+        "referenceName": "HIMBO - Body HPBellyButtonPush",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPBellyButtonPush",
+        "impact": 199.8693
+    },
+    "TorsoBelly": {
+        "group": "Stature",
+        "displayName": "Belly",
+        "referenceName": "HIMBO - Body HPTorsoBelly",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoBelly",
+        "impact": 5457.8366
+    },
+    "TorsoBellyChub": {
+        "group": "Stature",
+        "displayName": "Beer Gut",
+        "referenceName": "HIMBO - Body HPTorsoBellyChub",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoBellyChub",
+        "impact": 4429.4367
+    },
+    "TorsoBellyLHandles": {
+        "group": "Stature",
+        "displayName": "LoveHandles",
+        "referenceName": "HIMBO - Body HPTorsoBellyLHandles",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoBellyLHandles",
+        "impact": 1337.4252
+    },
+    "BellyPot": {
+        "group": "Stature",
+        "displayName": "Pot Belly",
+        "referenceName": "HIMBO - Body HPBellyPot",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPBellyPot",
+        "impact": 6117.5246
+    },
+    "BellySmooth": {
+        "group": "Stature",
+        "displayName": "Smooth Belly",
+        "referenceName": "HIMBO - Body HPBellySmooth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPBellySmooth",
+        "impact": 1116.8616
+    },
+    "BellyRounder": {
+        "group": "Stature",
+        "displayName": "Rounder Belly (Soft)",
+        "referenceName": "HIMBO - Body HPBellyRounder",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPBellyRounder",
+        "impact": 2305.3374
+    },
+    "SSBBW butt growth": {
+        "group": "Stature",
+        "displayName": "Butt Growth",
+        "referenceName": "HIMBO - Body HPSSBBW butt growth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPSSBBW butt growth",
+        "impact": 2615.6447
+    },
+    "SSBBW2 boobs growth": {
+        "group": "Stature",
+        "displayName": "Chest Growth",
+        "referenceName": "HIMBO - Body HPSSBBW2 boobs growth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPSSBBW2 boobs growth",
+        "impact": 1669.2457
+    },
+    "TorsoSpine": {
+        "group": "Stature",
+        "displayName": "Push Spine",
+        "referenceName": "HIMBO - Body HPTorsoSpine",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPTorsoSpine",
+        "impact": 84.5722
+    },
+    "PregnancyBelly": {
+        "group": "Stature",
+        "displayName": "Belly Pregnancy",
+        "referenceName": "HIMBO - Body HPPregnancyBelly",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPPregnancyBelly",
+        "impact": 8256.9286
+    },
+    "ArmsTraps": {
+        "group": "Arms and Shoulders",
+        "displayName": "Crease Traps",
+        "referenceName": "HIMBO - Body HPArmsTraps",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsTraps",
+        "impact": 121.2072
+    },
+    "ArmsTrapsMeat": {
+        "group": "Arms and Shoulders",
+        "displayName": "Traps Mass",
+        "referenceName": "HIMBO - Body HPArmsTrapsMeat",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsTrapsMeat",
+        "impact": 97.0153
+    },
+    "ArmsTrapsPush": {
+        "group": "Arms and Shoulders",
+        "displayName": "Traps Edges",
+        "referenceName": "HIMBO - Body HPArmsTrapsPush",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsTrapsPush",
+        "impact": 54.7806
+    },
+    "ArmsTrapsValleys": {
+        "group": "Arms and Shoulders",
+        "displayName": "Traps Valleys",
+        "referenceName": "HIMBO - Body HPArmsTrapsValleys",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsTrapsValleys",
+        "impact": 148.957
+    },
+    "ArmsClavicleCurve": {
+        "group": "Arms and Shoulders",
+        "displayName": "Clavicles",
+        "referenceName": "HIMBO - Body HPArmsClavicleCurve",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsClavicleCurve",
+        "impact": 129.8933
+    },
+    "ArmsShoulders": {
+        "group": "Arms and Shoulders",
+        "displayName": "Enlarge Shoulders",
+        "referenceName": "HIMBO - Body HPArmsShoulders",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsShoulders",
+        "impact": 1059.7029
+    },
+    "ArmsDelts": {
+        "group": "Arms and Shoulders",
+        "displayName": "Delts",
+        "referenceName": "HIMBO - Body HPArmsDelts",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsDelts",
+        "impact": 543.1551
+    },
+    "ArmsDeltsBack": {
+        "group": "Arms and Shoulders",
+        "displayName": "Delts (Back)",
+        "referenceName": "HIMBO - Body HPArmsDeltsBack",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsDeltsBack",
+        "impact": 513.3369
+    },
+    "ArmsDeltsUpper": {
+        "group": "Arms and Shoulders",
+        "displayName": "Delts (Upper)",
+        "referenceName": "HIMBO - Body HPArmsDeltsUpper",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsDeltsUpper",
+        "impact": 167.033
+    },
+    "ArmsDeltsLower": {
+        "group": "Arms and Shoulders",
+        "displayName": "Delts (Lower)",
+        "referenceName": "HIMBO - Body HPArmsDeltsLower",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsDeltsLower",
+        "impact": 258.1325
+    },
+    "ArmsDeltsShape": {
+        "group": "Arms and Shoulders",
+        "displayName": "Delts (Round)",
+        "referenceName": "HIMBO - Body HPArmsDeltsShape",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsDeltsShape",
+        "impact": 650.0076
+    },
+    "ArmsBiceps": {
+        "group": "Arms and Shoulders",
+        "displayName": "Biceps",
+        "referenceName": "HIMBO - Body HPArmsBiceps",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsBiceps",
+        "impact": 584.7303
+    },
+    "ArmsBicepsBack": {
+        "group": "Arms and Shoulders",
+        "displayName": "Biceps (Back)",
+        "referenceName": "HIMBO - Body HPArmsBicepsBack",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsBicepsBack",
+        "impact": 213.5933
+    },
+    "ArmsSide": {
+        "group": "Arms and Shoulders",
+        "displayName": "Biceps (Side)",
+        "referenceName": "HIMBO - Body HPArmsSide",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsSide",
+        "impact": 438.2884
+    },
+    "ArmsBrachio": {
+        "group": "Arms and Shoulders",
+        "displayName": "Elbow Pits",
+        "referenceName": "HIMBO - Body HPArmsBrachio",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsBrachio",
+        "impact": 206.008
+    },
+    "ArmsFore": {
+        "group": "Arms and Shoulders",
+        "displayName": "Forearms Size",
+        "referenceName": "HIMBO - Body HPArmsFore",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPArmsFore",
+        "impact": 357.2948
+    },
+    "LegsSize": {
+        "group": "Thighs and Legs",
+        "displayName": "Legs Size",
+        "referenceName": "HIMBO - Body HPLegsSize",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsSize",
+        "impact": 3710.7491
+    },
+    "LegsThigh": {
+        "group": "Thighs and Legs",
+        "displayName": "Thigh",
+        "referenceName": "HIMBO - Body HPLegsThigh",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsThigh",
+        "impact": 3310.4312
+    },
+    "LegsThighSmoothCurve": {
+        "group": "Thighs and Legs",
+        "displayName": "Curve Upper Thigh",
+        "referenceName": "HIMBO - Body HPLegsThighSmoothCurve",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsThighSmoothCurve",
+        "impact": 397.7964
+    },
+    "LegsThighUpperSide": {
+        "group": "Thighs and Legs",
+        "displayName": "Thigh (Upper)",
+        "referenceName": "HIMBO - Body HPLegsThighUpperSide",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsThighUpperSide",
+        "impact": 3297.9366
+    },
+    "LegsThighInnerSide": {
+        "group": "Thighs and Legs",
+        "displayName": "Thigh (Inner)",
+        "referenceName": "HIMBO - Body HPLegsThighInnerSide",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsThighInnerSide",
+        "impact": 689.689
+    },
+    "LegsThighIn": {
+        "group": "Thighs and Legs",
+        "displayName": "Thigh (Inner Lower)",
+        "referenceName": "HIMBO - Body HPLegsThighIn",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsThighIn",
+        "impact": 341.0289
+    },
+    "LegsVastusMReduction": {
+        "group": "Thighs and Legs",
+        "displayName": "Reduce Vastus Medialis",
+        "referenceName": "HIMBO - Body HPLegsVastusMReduction",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsVastusMReduction",
+        "impact": 144.9996
+    },
+    "LegsThinner": {
+        "group": "Thighs and Legs",
+        "displayName": "Thin",
+        "referenceName": "HIMBO - Body HPLegsThinner",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsThinner",
+        "impact": 3093.9923
+    },
+    "LegsChubby": {
+        "group": "Thighs and Legs",
+        "displayName": "Chubby",
+        "referenceName": "HIMBO - Body HPLegsChubby",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsChubby",
+        "impact": 3914.7534
+    },
+    "LegsGlutes": {
+        "group": "Thighs and Legs",
+        "displayName": "Glutes",
+        "referenceName": "HIMBO - Body HPLegsGlutes",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsGlutes",
+        "impact": 693.0242
+    },
+    "LegsFemurUpper": {
+        "group": "Thighs and Legs",
+        "displayName": "Femur (Upper)",
+        "referenceName": "HIMBO - Body HPLegsFemurUpper",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsFemurUpper",
+        "impact": 345.1169
+    },
+    "LegsFemurLower": {
+        "group": "Thighs and Legs",
+        "displayName": "Femur (Lower)",
+        "referenceName": "HIMBO - Body HPLegsFemurLower",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsFemurLower",
+        "impact": 487.604
+    },
+    "LegsFemurSide": {
+        "group": "Thighs and Legs",
+        "displayName": "Femur (Side)",
+        "referenceName": "HIMBO - Body HPLegsFemurSide",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsFemurSide",
+        "impact": 635.0992
+    },
+    "LegsFemurBack": {
+        "group": "Thighs and Legs",
+        "displayName": "Femur (Back)",
+        "referenceName": "HIMBO - Body HPLegsFemurBack",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsFemurBack",
+        "impact": 587.2652
+    },
+    "LegsKneePit": {
+        "group": "Thighs and Legs",
+        "displayName": "KneePit",
+        "referenceName": "HIMBO - Body HPLegsKneePit",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsKneePit",
+        "impact": 282.0111
+    },
+    "LegsKneeInner": {
+        "group": "Thighs and Legs",
+        "displayName": "Knee (Inner)",
+        "referenceName": "HIMBO - Body HPLegsKneeInner",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsKneeInner",
+        "impact": 204.2509
+    },
+    "LegsKneeOuter": {
+        "group": "Thighs and Legs",
+        "displayName": "Knee (Outer)",
+        "referenceName": "HIMBO - Body HPLegsKneeOuter",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsKneeOuter",
+        "impact": 142.7209
+    },
+    "LegsCalfSize": {
+        "group": "Thighs and Legs",
+        "displayName": "Calves Size",
+        "referenceName": "HIMBO - Body HPLegsCalfSize",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsCalfSize",
+        "impact": 123.1754
+    },
+    "LegsCalfWidth": {
+        "group": "Thighs and Legs",
+        "displayName": "Calves Width",
+        "referenceName": "HIMBO - Body HPLegsCalfWidth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsCalfWidth",
+        "impact": 203.1588
+    },
+    "LegsCalfUpper": {
+        "group": "Thighs and Legs",
+        "displayName": "Calves (Upper)",
+        "referenceName": "HIMBO - Body HPLegsCalfUpper",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsCalfUpper",
+        "impact": 345.7953
+    },
+    "LegsCalfLower": {
+        "group": "Thighs and Legs",
+        "displayName": "Calves (Lower)",
+        "referenceName": "HIMBO - Body HPLegsCalfLower",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsCalfLower",
+        "impact": 180.8878
+    },
+    "LegsCalfSideIn": {
+        "group": "Thighs and Legs",
+        "displayName": "Calves (Inner)",
+        "referenceName": "HIMBO - Body HPLegsCalfSideIn",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsCalfSideIn",
+        "impact": 188.4936
+    },
+    "LegsCalfOut": {
+        "group": "Thighs and Legs",
+        "displayName": "Calves (Outer)",
+        "referenceName": "HIMBO - Body HPLegsCalfOut",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsCalfOut",
+        "impact": 262.9351
+    },
+    "LegsCalfFlatten": {
+        "group": "Thighs and Legs",
+        "displayName": "Flatten Calves",
+        "referenceName": "HIMBO - Body HPLegsCalfFlatten",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsCalfFlatten",
+        "impact": 308.8723
+    },
+    "LegsShinCrease": {
+        "group": "Thighs and Legs",
+        "displayName": "Crease Shin",
+        "referenceName": "HIMBO - Body HPLegsShinCrease",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "HIMBO - Body HPLegsShinCrease",
+        "impact": 99.6231
+    }
+}

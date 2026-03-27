@@ -1,0 +1,168 @@
+{
+    "breasts_volume": {
+        "flat": {
+            "clothed": "a chest that offers nothing to the fabric — flat and featureless beneath whatever she wears",
+            "naked": "a flat, nearly boyish chest with barely any breast tissue, skin smooth and taut across her sternum"
+        },
+        "small": {
+            "clothed": "a modest chest — fabric lies almost flat, only a subtle suggestion of bust visible",
+            "naked": "small, firm breasts sitting high on her chest, slight in volume with a clean, understated shape"
+        },
+        "average": {
+            "clothed": "a naturally full bust — curves present but undemanding, shaping the fabric without overwhelming it",
+            "naked": "naturally full breasts of balanced size, soft and evenly shaped with a gentle natural weight"
+        },
+        "large": {
+            "clothed": "a large, prominent bust — fabric pulled noticeably across her chest, her curves impossible to conceal",
+            "naked": "large, heavy breasts with a natural downward pull and generous volume, their weight settling against her torso"
+        },
+        "huge": {
+            "clothed": "an exceptionally heavy bust dominating her silhouette — fabric strains across her chest no matter the garment",
+            "naked": "huge, voluminous breasts hanging with considerable weight, skin stretched taut across their surface"
+        },
+        "impossible": {
+            "clothed": "a staggering bust that defeats concealment — clothing buckles and distorts around her chest entirely",
+            "naked": "overwhelmingly large breasts of surreal volume, their mass slow-moving and heavy against her torso"
+        }
+    },
+    "waist": {
+        "tiny": {
+            "clothed": "a dramatically cinched waist — the sharp inward pull visible even through heavy fabric",
+            "naked": "incredibly narrow, pulling in tight between her ribs and hips"
+        },
+        "slim": {
+            "clothed": "a slim, cleanly tapered midsection — fabric falls smoothly inward at her waist",
+            "naked": "lean and gently curved, narrowing cleanly between her ribs and hips"
+        },
+        "standard": {
+            "clothed": "a midsection that neither pinches nor strains — proportionate and unexaggerated",
+            "naked": "softly curved and proportionate, sitting naturally between her ribs and hips"
+        },
+        "soft": {
+            "clothed": "a softly rounded midsection — fabric settles without drama around a waist carrying a little extra fullness",
+            "naked": "gently rounded, carrying a soft layer of flesh with little underlying definition"
+        },
+        "thick": {
+            "clothed": "a thick, full midsection — fabric drawn wide and flat, no inward taper to her silhouette",
+            "naked": "wide and heavy, thickly padded with flesh and offering no meaningful inward taper"
+        }
+    },
+    "frame": {
+        "small": {
+            "clothed": "a small, fine-boned figure — narrow shoulders and delicate proportions impossible to disguise",
+            "naked": "a petite, delicate bone structure with narrow shoulders and fine-boned limbs"
+        },
+        "slim": {
+            "clothed": "a slim, willowy silhouette — fabric hanging loosely from her light frame",
+            "naked": "a lithe, slender frame with fine-boned shoulders and limbs carrying almost no excess mass"
+        },
+        "average": {
+            "clothed": "an unremarkable, balanced silhouette — nothing about her frame draws the eye or strains the fabric",
+            "naked": "a naturally proportioned build, neither narrow nor wide, with an unexaggerated physical frame"
+        },
+        "broad": {
+            "clothed": "a broad, substantial silhouette — wide shoulders visibly filling whatever she wears",
+            "naked": "broad, squared shoulders and a wide ribcage that speaks openly of physical presence"
+        },
+        "massive": {
+            "clothed": "a massive, imposing silhouette — her sheer scale distorting the drape of any clothing",
+            "naked": "an immense, heavy frame with a deep barrel-like ribcage and thick, dominating bone structure"
+        }
+    },
+    "butt_hips": {
+        "flat": {
+            "clothed": "narrow, straight hips — no flare, no curve, fabric hanging flat from her waist downward",
+            "naked": "a narrow pelvis with almost no outward flare, the posterior flat and nearly absent"
+        },
+        "small": {
+            "clothed": "lightly curved hips — a modest flare barely suggested beneath the fabric",
+            "naked": "a lean lower body with a gentle hip flare and a small, lightly rounded posterior"
+        },
+        "average": {
+            "clothed": "womanly, gently curved hips — fabric easing outward in a natural feminine flare",
+            "naked": "well-rounded hips with a natural feminine flare and a full, evenly shaped posterior"
+        },
+        "large": {
+            "clothed": "wide, generous hips pushing noticeably against the fabric — the heavy curve of her rear reshaping any garment",
+            "naked": "broad, fleshy hips sweeping outward in a dramatic flare, and a large, heavy posterior with deep soft curves"
+        },
+        "huge": {
+            "clothed": "immense, sweeping hips dominating her lower silhouette — fabric stretched wide and pulled taut around her rear",
+            "naked": "immense hips of almost exaggerated width and a massive, heavy posterior — flesh soft and abundant, slow-moving with its own weight"
+        }
+    },
+    "legs": {
+        "thin": {
+            "clothed": "thin, slender legs — fabric hanging loosely with little shape to fill it",
+            "naked": "very lean thighs with minimal flesh, skin drawn taut with the faint outline of muscle beneath"
+        },
+        "lean": {
+            "clothed": "lean, lightly shaped legs — fabric following a slim, clean line suggesting tone without bulk",
+            "naked": "slender, gently toned thighs with a clean athletic line — muscle present but not prominent"
+        },
+        "average": {
+            "clothed": "well-proportioned legs — fabric draping naturally, suggesting a healthy, balanced lower body",
+            "naked": "naturally shaped thighs with a healthy feminine fullness — soft without being heavy, the curve gentle and unexaggerated"
+        },
+        "thick": {
+            "clothed": "thick, full thighs pressing visibly against the fabric — material pulled snug around legs of considerable volume",
+            "naked": "heavy, generously padded thighs pressing together softly — flesh abundant and yielding, carrying real weight"
+        },
+        "colossal": {
+            "clothed": "legs of overwhelming proportions — fabric straining around thighs of almost unbelievable scale",
+            "naked": "immense thighs of staggering scale — dense with soft, heavy flesh, pressing together under their own mass"
+        }
+    },
+    "physique_condition": {
+        "plump": {
+            "clothed": "plump and softly rounded",
+            "naked": "plump and softly rounded"
+        },
+        "chubby": {
+            "clothed": "soft and generously fleshed",
+            "naked": "soft and generously fleshed"
+        },
+        "obese": {
+            "clothed": "heavy and abundantly soft",
+            "naked": "heavy and abundantly soft"
+        },
+        "soft": {
+            "clothed": "soft and untrained",
+            "naked": "soft and untrained"
+        },
+        "lean": {
+            "clothed": "quietly toned and capable",
+            "naked": "quietly toned and capable"
+        },
+        "athletic": {
+            "clothed": "visibly athletic and well-conditioned",
+            "naked": "visibly athletic and well-conditioned"
+        },
+        "muscular": {
+            "clothed": "powerfully muscular and sharply defined",
+            "naked": "powerfully muscular and sharply defined"
+        }
+    },
+    "belly": {
+        "flat": {
+            "clothed": "a flat stomach — fabric lying flush against a midsection with no forward curve",
+            "naked": "lean and flat, skin smooth and taut with little excess flesh"
+        },
+        "soft": {
+            "clothed": "a softly rounded belly — fabric easing forward just slightly, hinting at gentle fullness beneath",
+            "naked": "gently rounded, carrying a natural feminine softness with a light forward curve"
+        },
+        "chubby": {
+            "clothed": "a noticeably rounded belly — fabric pulled forward, the fullness pressing visibly through",
+            "naked": "rounded and soft, carrying a visible layer of fat in a full, relaxed forward curve"
+        },
+        "large": {
+            "clothed": "a large, prominently rounded stomach — fabric stretched outward, unable to conceal the considerable mass",
+            "naked": "large and softly hanging, flesh carrying real weight with a significant forward protrusion"
+        },
+        "huge": {
+            "clothed": "an immense, heavily projecting stomach — fabric forced outward, its mass redefining any garment's drape",
+            "naked": "immense and pendulous, hanging forward with its own momentum and dominating her midsection"
+        }
+    }
+}

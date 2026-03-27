@@ -1,0 +1,72 @@
+{
+    "goals": {
+        "stature_frame": {
+            "sliders": ["SamuelLike:0.2", "SOSlike:0.4", "Lean:-0.3", "Chubby:0.2", "BodyMass:0.4", "TorsoBackSlope", "TorsoBackShape", "TorsoBackSize", "TorsoMass", "PecsSize", "PecsMass", "PecsLower"],
+            "ranges": {
+                "slight": [-999999, -2500],
+                "compact": [-2500, 0],
+                "average": [0, 5000],
+                "heavy": [5000, 7108],
+                "massive": [7108, 99999999]
+            }
+        },
+        "arms": {
+            "sliders": ["SamuelLike:0.02", "FemmeT:-0.6", "SOSlike:0.2", "Muscle:0.12", "Lean:-0.2", "BodyMass:0.04", "ArmsBiceps", "ArmsBicepsBack", "ArmsSide", "ArmsBrachio", "ArmsFore"],
+            "ranges": {
+                "thin": [-999999, -500],
+                "athletic": [-500, 1000],
+                "brawny": [1000, 1500],
+                "colossal": [1500, 999999]
+            }
+        },
+        "shoulder_breadth": {
+            "sliders": ["FemmeT:-1", "Muscle:0.3", "Lean:-0.25", "TorsoShoulderInc", "TorsoShoulderDec:-1", "ArmsShoulders", "ArmsDelts", "ArmsDeltsBack", "ArmsDeltsUpper", "ArmsDeltsLower", "ArmsDeltsShape"],
+            "ranges": {
+                "narrow": [-999999, -2500],
+                "average": [-2500, 2500],
+                "broad": [2500, 6000],
+                "expansive": [6000, 999999]
+            }
+        },
+        "midsection": {
+            "sliders": ["SamuelLike:0.33", "SOSlike:0.25", "BodyMass:0.27","PregnancyBelly:0.3", "TorsoWidth", "TorsoLower", "TorsoWaistSize:-1", "TorsoRibsDefinition:-1", "TorsoBelly", "TorsoBellyChub", "TorsoBellyLHandles", "BellyPot", "BellyRounder"],
+            "ranges": {
+                "ripped": [-9999999,500],
+                "tapered": [500, 2000],
+                "straight": [2000, 6000],
+                "thick": [6000, 9000],
+                "potbellied": [9000, 9999999]
+            }
+        },
+        "glutes": {
+            "sliders": ["SamuelLike:0.03", "FemmeB:0.5", "ButtBooty", "ButtRoundy", "BubbleButt", "LegsGlutes"],
+            "ranges": {
+                "flat": [-999999,-1500],
+                "firm": [-1500, 1000],
+                "large": [1000, 3000],
+                "huge": [3000,999999999]
+            }
+        },
+        "legs": {
+            "sliders": ["SOSlike:0.25", "Muscle:0.38", "Lean:-0.18", "BodyMass:0.25", "LegsSize", "LegsThigh", "LegsThinner:-1", "LegsChubby", "LegsFemurUpper", "LegsFemurLower", "LegsFemurSide", "LegsFemurBack", "LegsCalfSize", "LegsCalfWidth", "LegsCalfUpper", "LegsCalfLower", "LegsCalfSideIn", "LegsCalfOut", "LegsCalfFlatten:-1"],
+            "ranges": {
+                "spindly": [-999999,-1500],
+                "athletic": [-1500, 3000],
+                "pillars": [3000, 5000],
+                "immense": [8000,999999]
+            }
+        },
+        "physique_condition": {
+            "sliders": ["SamuelLike:-0.1", "FemmeBoobaBig:-1", "FemmeB:-0.2", "FemmeBooba:-1", "SOSlike:0.6", "Muscle", "Chubby:-1", "PecsSaggy:-1", "ButtSaggy:-0.5", "ArmsTraps:-1", "ArmsTrapsMeat", "ArmsTrapsValleys", "TorsoMass", "LegsChubby:-1", "LegsFemurUpper", "LegsFemurLower", "LegsFemurSide", "LegsFemurBack", "ButtRoundy", "PecsSize", "PecsMass", "PecsLower", "SSBBW butt growth:-1", "SSBBW2 boobs growth:-1", "TorsoBellyChub:-1", "TorsoBellyLHandles:-1", "BellyRounder:-1", "TorsoBackDefinition", "TorsoVLine"],
+            "ranges": {
+                "obese": [-99999999999, -10000],
+                "heavy": [-10000, -5000],
+                "soft": [-5000, -1500],
+                "solid": [-1500,1500],
+                "athletic": [1500, 5000],
+                "muscular": [5000, 7000],
+                "shredded": [7000, 999999999]
+            }
+        }
+    }
+}

@@ -1,0 +1,148 @@
+{
+    "stature_frame": {
+        "slight": {
+            "clothed": "a slight, narrow build that fabric hangs loosely from, offering little to fill the silhouette",
+            "naked": "a narrow ribcage, shallow chest depth, and thin clavicles — built for agility rather than power"
+        },
+        "compact": {
+            "clothed": "a compact, dense stature where clothing sits close, hinting at solid structure beneath",
+            "naked": "a well-knit frame with dense, close-set bones and a surprisingly solid core for his size"
+        },
+        "average": {
+            "clothed": "a standard masculine frame that fills clothing evenly without excess or absence",
+            "naked": "a proportionate masculine skeleton — natural torso depth, unremarkable in scale but symmetrical and functional"
+        },
+        "heavy": {
+            "clothed": "a heavy, barrel-chested build that pulls fabric taut across the chest and back",
+            "naked": "a thick, deep ribcage with a broad back and heavy bone structure — built to carry weight"
+        },
+        "massive": {
+            "clothed": "an immense, hulking presence where even loose clothing struggles to contain his upper body",
+            "naked": "an enormous skeletal frame with extraordinary girth — wide, deep, and built on a scale that dwarfs most men"
+        }
+    },
+    "arms": {
+        "thin": {
+            "clothed": "arms that leave sleeves largely unfilled, fabric draping loosely around slender limbs",
+            "naked": "wiry, sinewy arms with visible tendons beneath thin skin — functional but lacking mass"
+        },
+        "athletic": {
+            "clothed": "arms that fill their sleeves with lean, capable muscle — not bulging, but clearly present",
+            "naked": "well-defined biceps and firm forearms with visible muscle separation, carrying little excess flesh"
+        },
+        "brawny": {
+            "clothed": "thick, powerful arms pressing noticeably against fabric, sleeves stretched taut around heavy muscle",
+            "naked": "massive, dense biceps and thick, corded forearms — muscle bunching visibly with even small movements"
+        },
+        "colossal": {
+            "clothed": "arms of extraordinary size that strain against any covering, their girth impossible to conceal",
+            "naked": "immense, over-developed arms where the bicep peaks dramatically and the forearm carries thick ropes of muscle"
+        }
+    },
+    "shoulder_breadth": {
+        "narrow": {
+            "clothed": "shoulders that leave clothing looking slightly oversized, fabric slipping inward rather than pushed out",
+            "naked": "slight, narrow shoulders with little lateral breadth — deltoids underdeveloped, clavicles close-set"
+        },
+        "average": {
+            "clothed": "shoulders that sit squarely within clothing, filling the seams without straining them",
+            "naked": "naturally squared shoulders of typical width — deltoids rounded but not imposing, the frame balanced"
+        },
+        "broad": {
+            "clothed": "broad shoulders pulling fabric outward across the upper back, creating a commanding silhouette",
+            "naked": "wide, powerful shoulders where the deltoids flare visibly, creating a pronounced V-taper to the waist"
+        },
+        "expansive": {
+            "clothed": "an extraordinary shoulder width dominating any silhouette — fabric stretched across the upper back in a sweeping span",
+            "naked": "an almost architectural span of shoulder — the deltoids massively developed, the clavicles wide, the upper frame overwhelming in its breadth"
+        }
+    },
+    "midsection": {
+        "ripped": {
+            "clothed": "a narrow, tightly drawn waist the fabric clings to, the flat stomach pressing cleanly against the cloth",
+            "naked": "a shredded midsection with clearly segmented abdominals, deep oblique cuts, and almost no subcutaneous fat"
+        },
+        "tapered": {
+            "clothed": "a cleanly tapered waist giving his silhouette a natural V-shape, cloth lying flat against a trim stomach",
+            "naked": "a lean, athletic waist with visible obliques and a flat stomach — lightly defined but not dramatically cut"
+        },
+        "straight": {
+            "clothed": "a solid, straight midsection giving clothing a blocky, even hang without taper or protrusion",
+            "naked": "a natural, blocky masculine waist — flat but unrefined, carrying a thin, even layer of flesh over the abdominal wall"
+        },
+        "thick": {
+            "clothed": "a thick, powerful core pushing outward against fabric across the entire midsection",
+            "naked": "a wide, heavy waist dense with muscle and a solid layer of flesh — built for labor rather than aesthetics"
+        },
+        "potbellied": {
+            "clothed": "a rounded belly pressing noticeably against fabric, the midsection straining the cloth outward",
+            "naked": "a distended, soft stomach protruding forward with a rounded hang — the abdominal wall buried beneath a thick, yielding layer of fat"
+        }
+    },
+    "glutes": {
+        "flat": {
+            "clothed": "a flat rear leaving the back of clothing loose, adding nothing to the lower silhouette",
+            "naked": "lean, almost absent glutes — thin and flat, offering little projection from the lower back"
+        },
+        "firm": {
+            "clothed": "a solid, well-shaped rear filling the back of clothing naturally, fabric resting snugly over developed muscle",
+            "naked": "firm, dense gluteal muscles with good projection and definition — built from heavy use rather than vanity"
+        },
+        "large": {
+            "clothed": "a heavy, powerful rear filling and stretching the back of any covering, the shape impossible to disguise",
+            "naked": "large, thickly muscled glutes with substantial mass and projection — heavily developed and imposing"
+        },
+        "huge": {
+            "clothed": "a massively wide rear straining fabric at the seat and hips, creating an unavoidable presence",
+            "naked": "enormous, fleshy glutes with a wide, heavy spread — more fat than muscle, soft and overflowing in scale"
+        }
+    },
+    "legs": {
+        "spindly": {
+            "clothed": "legs that leave trouser fabric loose and shapeless, offering little structure beneath the cloth",
+            "naked": "bony, narrow thighs with thin, underdeveloped quads and calves lacking any substantial muscle mass"
+        },
+        "athletic": {
+            "clothed": "lean, capable legs filling their covering evenly — not dramatic, but clearly functional",
+            "naked": "toned quadriceps with clean muscle separation, firm hamstrings, and defined calves — built for endurance and speed"
+        },
+        "pillars": {
+            "clothed": "thick, powerful legs pressing against their covering at the thigh, fabric stretched across dense muscle",
+            "naked": "massive, heavy thighs packed with muscle pressing together at the inner surface — calves equally thick and deeply developed"
+        },
+        "immense": {
+            "clothed": "legs of extraordinary size straining any covering to its limit, the mass of the thighs impossible to conceal",
+            "naked": "truly enormous thighs — over-developed to a staggering scale, the muscle striated and heavy, calves like solid stone beneath the skin"
+        }
+    },
+    "physique_condition": {
+        "shredded": {
+            "clothed": "hard and defined even beneath clothing, sharp muscle edges pressing through fabric",
+            "naked": "extremely low body fat revealing every striation and vein — muscle separated and visible even at rest"
+        },
+        "muscular": {
+            "clothed": "powerfully built in a way clothing cannot fully contain — muscle pressing against fabric at the chest, arms, and thighs",
+            "naked": "hard, well-developed muscle across every major group with low body fat — imposing in mass and clearly the product of intense conditioning"
+        },
+        "athletic": {
+            "clothed": "fit and capable beneath his clothing — the silhouette trim and functional without being extreme",
+            "naked": "lean muscle with a natural, healthy layer of flesh — toned without being dramatic, the body of someone who uses it rather than trains it"
+        },
+        "solid": {
+            "clothed": "thick and sturdy beneath his clothing — not fat, not lean, but heavy and immovable in presence",
+            "naked": "powerful muscle buried under a solid, even layer of fat — dense and heavy, strength present but hidden beneath a blunt exterior"
+        },
+        "soft": {
+            "clothed": "a soft, heavy silhouette where clothing hangs without tension, the body offering little muscle definition",
+            "naked": "little visible muscle tone, the body carrying a uniform soft layer of flesh that smooths over any underlying structure"
+        },
+        "heavy": {
+            "clothed": "a bulky, fleshy build that clothing strains to accommodate, the silhouette broad and rounded",
+            "naked": "thick, uneven layers of soft fat across the torso and limbs — heavy and largely unconditioned"
+        },
+        "obese": {
+            "clothed": "an extremely heavy build pressing outward against fabric in every direction, the silhouette dominated by soft mass",
+            "naked": "heavy, overhanging folds of soft flesh across the abdomen, chest, and upper arms — carrying an extraordinary amount of fat with no visible muscle conditioning"
+        }
+    }
+}

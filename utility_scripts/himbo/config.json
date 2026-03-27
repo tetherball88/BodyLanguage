@@ -1,0 +1,12 @@
+{
+    "nifPath": "SOS HP.nif",
+    "osdPath": "SOS HP.osd",
+    "ospPath": "HIMBO Ref.osp",
+    "categoriesPath": "HIMBO Categories.xml",
+    "OFFSETS_FROM_SCANNER": [304362, 341672, 366220, 368844, 421335],
+    "TARGET_COUNT": 14597,
+    "osdKeyPrefix": "HIMBO - Body HP",
+    "ospReferenceSet": "HIMBO Ref - Vanilla Nude High Poly",
+    "blacklistGroups": ["Texture Fix", "Nipple"],
+    "blacklistSliders": []    
+}

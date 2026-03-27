@@ -1,0 +1,67 @@
+{
+    "goals": {
+        "breasts_volume": {
+            "sliders": ["Aruru6Duck High:0.45", "Aruru6Duck Low:0.4", "Top Model High:0.2","Top Model Low:-0.45","UNPC High:-0.15", "UNPC Low:-0.5", "UNPB Oppai v3.2 High:0.23", "UNPB Low:-0.49", "UNP High:-0.45", "UNP Low:-0.47", "7B Low:-0.06", "7B High:0.06", "7B Bombshell Low:-0.12", "7B Bombshell High:0.11", "Breasts", "BreastsSmall", "BreastsSH", "BreastsSSH", "BreastsFantasy", "DoubleMelon", "BreastPerkiness:-1", "BreastFlatness:-1", "BreastsPressed:-1", "BreastDiameter"],
+            "ranges": {
+                "flat": [-999999, -1500],
+                "small": [-1500, 6000],
+                "average": [6000, 13000],
+                "large": [13000, 16000],
+                "huge": [16000, 20000],
+                "impossible": [20000, 99999999999]
+            }
+        },
+        "waist": {
+            "sliders": ["UNPB Low:0.036", "UNP Low:0.02", "7B Low:-0.02", "7B High:-0.02", "RibsMore", "Waist", "WideWaistLine", "ChubbyWaist", "HipUpperWidth"],
+            "ranges": {
+                "tiny": [-999999, 100],
+                "slim": [100, 400],
+                "standard": [400, 1000],
+                "soft": [1000, 1400],
+                "thick": [1400, 9999999999]
+            }
+        },
+        "frame": {
+            "sliders": ["Top Model High:-0.2", "Top Model Low:-0.13", "UNPC Low:-0.15", "UNPB Low:-0.14", "UNP Low:-0.14", "ChestDepth", "ChestWidth", "BigTorso", "Back", "ShoulderWidth"],
+            "ranges": {
+                "small": [-9999999,0],
+                "slim": [0, 3000],
+                "average": [3000, 12000],
+                "broad": [12000, 18000],
+                "massive": [18000,9999999]
+            }
+        },
+        "butt_hips": {
+            "sliders": ["Aruru6Duck High:0.18", "Aruru6Duck Low:0.18", "Top Model High:-0.05", "Top Model Low:-0.29","UNPB Low:-0.01", "UNP Low:-0.24", "ButtShape2", "Butt", "ButtSmall", "BigButt", "ChubbyButt", "AppleCheeks", "RoundAss", "LegSpread", "Hips", "HipNarrow:-1", "MuscleButt"],
+            "ranges": {
+                "flat": [-999999,-3000],
+                "small": [-3000,1000],
+                "average": [-1000,5000],
+                "large": [5000,7000],
+                "huge": [7000,999999999]
+            }
+        },
+        "legs": {
+            "sliders": ["Aruru6Duck High:0.22", "Aruru6Duck Low:0.2", "Top Model High:-0.12", "Top Model Low:-0.09", "UNPB Low:-0.094", "UNP Low:-0.09", "LegsThin:-1", "SlimThighs:-1", "Thighs", "ThighOuter", "ThighThicker", "ThighInnerThicker", "ThighFBThicker", "ChubbyLegs", "Legs", "CalfSize", "CalfSmooth:-1", "Soleus", "MuscleLegs", "MusclePecs", "Sartorius", "RectusFemoris", "VastusLateralis", "Hamstrings"],
+            "ranges": {
+                "thin": [-999999,-2000],
+                "lean": [-2000,0],
+                "average": [0,4000],
+                "thick": [4000,7000],
+                "collosal": [7000,999999]
+            }
+        },
+        "physique_condition": {
+            "sliders": ["Belly:-1", "BigBelly:-0.2", "PregnancyBelly:-0.05", "BotePregnancy:-0.1", "BellyObesity:-0.2", "BellyPressed", "BellyCenterProtrude:-0.2", "BellyUnder:-1", "BellyFatLower:-1", "BellyFatUpper:-1", "BellyObesity:-1", "BellyDefine", "RectusAbdominis", "MuscleArms", "Biceps", "Triceps", "Deltoid", "Brachioradialis", "Flexor", "ExtensorDigitorum", "TricepsLateral", "MuscleButt", "MuscleLegs", "Sartorius", "RectusFemoris", "VastusLateralis", "VastusMedialis", "Hamstrings", "BicepsFemoris"],
+            "ranges": {
+                "obese": [-999999999,-1000],
+                "chubby": [-1000,-500],
+                "plump": [-500,0],
+                "soft": [0,500],
+                "lean": [500,1200],
+                "athletic": [1200,1900],
+                "muscular": [1900,999999]
+            }
+        }
+    }
+}

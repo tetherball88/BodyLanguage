@@ -1,0 +1,144 @@
+<SliderCategories>
+	<Category name="Texture Fix" defaultHidden="false">
+		<Slider name="Belly Button Match" displayname="Navel Height" />
+		<Slider name="ChestUV" displayname="Legacy Pecs" />
+	</Category>
+	<Category name="Main Body" defaultHidden="false">
+		<Slider name="Weight 0 to 1" displayname="Weight 0 to 1" />
+		<Slider name="Chubby" displayname="Hugh" />
+		<Slider name="Lean" displayname="Hideo" />
+		<Slider name="Muscle" displayname="Hassan" />
+		<Slider name="SOSlike" displayname="Hector" />
+		<Slider name="FemmeT" displayname="Hayden Upper" />
+		<Slider name="FemmeB" displayname="Hayden Lower" />
+		<Slider name="FemmeBooba" displayname="Hayden Chest" />
+		<Slider name="FemmeBoobaBig" displayname="Hayden Boobs" />
+		<Slider name="SamuelLike" displayname="Hank" />
+	</Category>
+	<Category name="Pecs" defaultHidden="false">
+		<Slider name="PecsClavicle" displayname="Clavicle" />
+		<Slider name="PecsSize" displayname="Size" />
+		<Slider name="PecsMass" displayname="Mass" />
+		<Slider name="PecsMinor" displayname="Pectoralis Minor" />
+		<Slider name="PecsLower" displayname="Lower Pecs" />
+		<Slider name="PecsSaggy" displayname="Gravity" />
+		<Slider name="PecsWidth" displayname="Width" />
+		<Slider name="PecsFlatten" displayname="Flatten" />
+		<Slider name="PecsPosV" displayname="Position (V)" />
+		<Slider name="PecsPosH" displayname="Position (H)" />
+		<Slider name="PecsSide" displayname="Width (Lower)" />
+		<Slider name="PecsPush" displayname="Width (Upper)" />
+		<Slider name="PecsLowerSide" displayname="Width (Lower Side)" />
+		<Slider name="PecsDecrease" displayname="Shrink Side" />
+		<Slider name="PecsCrease" displayname="Underside Crease" />
+	</Category>
+	<Category name="Nipple" defaultHidden="false">
+		<Slider name="NipsAreola" displayname="Areola Size" />
+		<Slider name="NipsTips" displayname="Shrink Tips" />
+		<Slider name="NipsLength" displayname="Length" />
+		<Slider name="NipsRound" displayname="Round" />
+		<Slider name="NipsAngle" displayname="Angle" />
+		<Slider name="NipsPuffy" displayname="Puffy" />
+		<Slider name="NipsLower" displayname="Lower" />
+	</Category>
+	<Category name="Buttocks" defaultHidden="false">
+		<Slider name="ButtBooty" displayname="Size" />		
+		<Slider name="BubbleButt" displayname="Bubble Butt" />
+		<Slider name="ButtRoundy" displayname="Round" />
+		<Slider name="ButtSaggy" displayname="Gravity" />
+		<Slider name="ButtCleft" displayname="Buttcrack" />
+		<Slider name="ButtTailbone" displayname="Tailbone" />
+		<Slider name="ButtUpper" displayname="Upper Butt" />
+		<Slider name="ButtScrapeUpper" displayname="Upper Butt (Scrape)" />
+		<Slider name="ButtSide" displayname="Side Butt" />
+		<Slider name="ButtCenterPush" displayname="Push Butt" />
+		<Slider name="ButtCurve" displayname="Push Butt Curve" />
+		<Slider name="ButtLower" displayname="Pull Butt Downwards" />
+		<Slider name="ButtDimpleDeepen" displayname="Deepen Dimple" />
+		<Slider name="ButtDimpleFatten" displayname="Flatten Dimple" />
+		<Slider name="ButtTighten" displayname="Tighten Butt" />
+	</Category>
+	<Category name="Stature" defaultHidden="false">
+		<Slider name="TorsoShoulderInc" displayname="Increase Shoulder" />
+		<Slider name="TorsoShoulderDec" displayname="Decrease Shoulder" />
+		<Slider name="TorsoSterHeight" displayname="Sternum Height" />
+		<Slider name="TorsoSterDepth" displayname="Sternum Depth" />
+		<Slider name="TorsoSterWidth" displayname="Sternum Width" />
+		<Slider name="TorsoBackSize" displayname="Back Size" />
+		<Slider name="TorsoBackSlope" displayname="Back Slope" />
+		<Slider name="TorsoBackShape" displayname="Back Shape" />
+		<Slider name="TorsoBackCenter" displayname="Back (Mid)" />
+		<Slider name="TorsoBackSerratusMid" displayname="Serratus" />
+		<Slider name="TorsoBackObliques" displayname="Obliques" />
+		<Slider name="TorsoBackDefinition" displayname="Back Muscle" />
+		<Slider name="TorsoMass" displayname="Mass" />
+		<Slider name="TorsoMassSmooth" displayname="Mass (Smoothen)" />
+		<Slider name="BodyMass" displayname="Overall Mass" />
+		<Slider name="TorsoWidth" displayname="Width" />
+		<Slider name="TorsoLower" displayname="Enlarge Waist" />
+		<Slider name="TorsoWaistSize" displayname="Shrink Waist" />
+		<Slider name="TorsoWaistHeight" displayname="Waist Height" />
+		<Slider name="TorsoHipLarge" displayname="Enlarge Hips (side)" />
+		<Slider name="TorsoHip" displayname="Shrink Hips" />
+		<Slider name="TorsoHipSmooth" displayname="Smoothen Hips" />
+		<Slider name="TorsoFlatAbs" displayname="Flatten Abs" />
+		<Slider name="TorsoRibsDefinition" displayname="Ribs Definition" />
+		<Slider name="TorsoVLine" displayname="V Line" />
+		<Slider name="BellyButtonPush" displayname="Push Belly Button" />
+		<Slider name="TorsoBelly" displayname="Belly" />
+		<Slider name="TorsoBellyChub" displayname="Beer Gut" />
+		<Slider name="TorsoBellyLHandles" displayname="LoveHandles" />
+		<Slider name="BellyPot" displayname="Pot Belly" />
+		<Slider name="BellySmooth" displayname="Smooth Belly" />
+		<Slider name="BellyRounder" displayname="Rounder Belly (Soft)" />
+		<Slider name="SSBBW butt growth" displayname="Butt Growth" />
+		<Slider name="SSBBW2 boobs growth" displayname="Chest Growth" />
+		<Slider name="TorsoSpine" displayname="Push Spine" />
+		<Slider name="PregnancyBelly" displayname="Belly Pregnancy" />
+	</Category>	
+	<Category name="Arms and Shoulders" defaultHidden="False">
+		<Slider name="ArmsTraps" displayname="Crease Traps" />
+		<Slider name="ArmsTrapsMeat" displayname="Traps Mass" />
+		<Slider name="ArmsTrapsPush" displayname="Traps Edges" />
+		<Slider name="ArmsTrapsValleys" displayname="Traps Valleys" />
+		<Slider name="ArmsClavicleCurve" displayname="Clavicles" />
+		<Slider name="ArmsShoulders" displayname="Enlarge Shoulders" />
+		<Slider name="ArmsDelts" displayname="Delts" />
+		<Slider name="ArmsDeltsBack" displayname="Delts (Back)" />
+		<Slider name="ArmsDeltsUpper" displayname="Delts (Upper)" />
+		<Slider name="ArmsDeltsLower" displayname="Delts (Lower)" />
+		<Slider name="ArmsDeltsShape" displayname="Delts (Round)" />
+		<Slider name="ArmsBiceps" displayname="Biceps" />
+		<Slider name="ArmsBicepsBack" displayname="Biceps (Back)" />
+		<Slider name="ArmsSide" displayname="Biceps (Side)" />
+		<Slider name="ArmsBrachio" displayname="Elbow Pits" />
+		<Slider name="ArmsFore" displayname="Forearms Size" />
+	</Category>
+	<Category name="Thighs and Legs" defaultHidden="false">
+		<Slider name="LegsSize" displayname="Legs Size" />
+		<Slider name="LegsThigh" displayname="Thigh" />
+		<Slider name="LegsThighSmoothCurve" displayname="Curve Upper Thigh" />
+		<Slider name="LegsThighUpperSide" displayname="Thigh (Upper)" />
+		<Slider name="LegsThighInnerSide" displayname="Thigh (Inner)" />
+		<Slider name="LegsThighIn" displayname="Thigh (Inner Lower)" />
+		<Slider name="LegsVastusMReduction" displayname="Reduce Vastus Medialis" />
+		<Slider name="LegsThinner" displayname="Thin" />
+		<Slider name="LegsChubby" displayname="Chubby" />
+		<Slider name="LegsGlutes" displayname="Glutes" />
+		<Slider name="LegsFemurUpper" displayname="Femur (Upper)" />
+		<Slider name="LegsFemurLower" displayname="Femur (Lower)" />
+		<Slider name="LegsFemurSide" displayname="Femur (Side)" />
+		<Slider name="LegsFemurBack" displayname="Femur (Back)" />
+		<Slider name="LegsKneePit" displayname="KneePit" />
+		<Slider name="LegsKneeInner" displayname="Knee (Inner)" />
+		<Slider name="LegsKneeOuter" displayname="Knee (Outer)" />
+		<Slider name="LegsCalfSize" displayname="Calves Size" />
+		<Slider name="LegsCalfWidth" displayname="Calves Width" />
+		<Slider name="LegsCalfUpper" displayname="Calves (Upper)" />
+		<Slider name="LegsCalfLower" displayname="Calves (Lower)" />
+		<Slider name="LegsCalfSideIn" displayname="Calves (Inner)" />
+		<Slider name="LegsCalfOut" displayname="Calves (Outer)" />
+		<Slider name="LegsCalfFlatten" displayname="Flatten Calves" />
+		<Slider name="LegsShinCrease" displayname="Crease Shin" />
+	</Category>
+</SliderCategories>

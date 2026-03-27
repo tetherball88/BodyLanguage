@@ -1,0 +1,13 @@
+{
+    "osdPath": "BHUNP 3BBB Advanced Ver 4.osd",
+    "ospPath": "BHUNP 3BBB Advanced.osp",
+    "categoriesPath": "BHUNP3BBB Categories.xml",
+    "OFFSETS_FROM_SCANNER": [481058, 957506, 1013185, 1316790],
+    "TARGET_COUNT": 19035,
+    "osdKeyPrefix": "BaseShape",
+    "ospReferenceSet": "BHUNP 3BBB Advanced Ver 4",
+    "blacklistGroups": ["Nipples", "Vagina"],
+    "blacklistSliders": [
+        
+    ]    
+}

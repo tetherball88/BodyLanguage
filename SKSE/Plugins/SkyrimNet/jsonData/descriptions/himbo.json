@@ -1,0 +1,244 @@
+{
+    "HIMBO Chonky": {
+        "big": {
+            "meta": "arms:brawny(1349);physique_condition:obese(-10080);glutes:huge(3064);shoulder_breadth:broad(5038);midsection:potbellied(11449);legs:immense(11399);stature_frame:massive(11410)"
+        },
+        "medium": {
+            "meta": "arms:thin(-515);physique_condition:heavy(-6736);glutes:large(1532);shoulder_breadth:average(1571);midsection:straight(5725);legs:pillars(4761);stature_frame:average(4287)"
+        },
+        "small": {
+            "meta": "arms:thin(-2380);physique_condition:soft(-3392);glutes:firm(0);shoulder_breadth:average(-1897);midsection:ripped(0);legs:spindly(-1878);stature_frame:slight(-2836)"
+        }
+    },
+    "HIMBO Daddy": {
+        "big": {
+            "meta": "arms:athletic(942);physique_condition:obese(-17500);glutes:firm(599);shoulder_breadth:average(530);midsection:thick(8206);legs:spindly(7626);stature_frame:massive(8593)"
+        },
+        "medium": {
+            "meta": "arms:athletic(471);physique_condition:obese(-12140);glutes:firm(599);shoulder_breadth:average(379);midsection:thick(6978);legs:spindly(5770);stature_frame:heavy(6308)"
+        },
+        "small": {
+            "meta": "arms:athletic(0);physique_condition:heavy(-6780);glutes:firm(599);shoulder_breadth:average(228);midsection:straight(5750);legs:pillars(3915);stature_frame:average(4022)"
+        }
+    },
+    "HIMBO Daddy (Clothes)": {
+        "big": {
+            "meta": "arms:athletic(942);physique_condition:obese(-17875);glutes:firm(599);shoulder_breadth:average(530);midsection:thick(8206);legs:spindly(7626);stature_frame:massive(8217)"
+        },
+        "medium": {
+            "meta": "arms:athletic(471);physique_condition:obese(-12327);glutes:firm(599);shoulder_breadth:average(379);midsection:thick(6978);legs:spindly(5770);stature_frame:heavy(6120)"
+        },
+        "small": {
+            "meta": "arms:athletic(0);physique_condition:heavy(-6780);glutes:firm(599);shoulder_breadth:average(228);midsection:straight(5750);legs:pillars(3915);stature_frame:average(4022)"
+        }
+    },
+    "HIMBO Default": {
+        "big": {
+            "meta": "arms:athletic(942);physique_condition:athletic(2649);glutes:firm(0);shoulder_breadth:average(530);midsection:straight(4650);legs:pillars(3711);stature_frame:average(2649)"
+        },
+        "medium": {
+            "meta": "arms:athletic(471);physique_condition:solid(1325);glutes:firm(0);shoulder_breadth:average(265);midsection:straight(2325);legs:athletic(1855);stature_frame:average(1325)"
+        },
+        "small": {
+            "meta": "arms:athletic(0);physique_condition:solid(0);glutes:firm(0);shoulder_breadth:average(0);midsection:ripped(0);legs:athletic(0);stature_frame:average(0)"
+        }
+    },
+    "HIMBO Five": {
+        "big": {
+            "meta": "arms:colossal(1795);physique_condition:solid(1480);glutes:firm(384);shoulder_breadth:expansive(7578);midsection:straight(4727);legs:immense(9524);stature_frame:average(3324)"
+        },
+        "medium": {
+            "meta": "arms:athletic(926);physique_condition:athletic(3187);glutes:firm(384);shoulder_breadth:broad(4452);midsection:straight(2402);legs:spindly(6414);stature_frame:average(2654)"
+        },
+        "small": {
+            "meta": "arms:athletic(57);physique_condition:athletic(4893);glutes:firm(384);shoulder_breadth:average(1327);midsection:ripped(77);legs:pillars(3303);stature_frame:average(1983)"
+        }
+    },
+    "HIMBO Hassan": {
+        "big": {
+            "meta": "arms:colossal(1995);physique_condition:shredded(8132);glutes:firm(599);shoulder_breadth:broad(2583);midsection:straight(4356);legs:immense(9809);stature_frame:average(4564)"
+        },
+        "medium": {
+            "meta": "arms:brawny(1492);physique_condition:muscular(5947);glutes:firm(599);shoulder_breadth:average(1970);midsection:straight(2729);legs:spindly(7333);stature_frame:average(2967)"
+        },
+        "small": {
+            "meta": "arms:athletic(988);physique_condition:athletic(3762);glutes:firm(599);shoulder_breadth:average(1358);midsection:tapered(1102);legs:pillars(4857);stature_frame:average(1369)"
+        }
+    },
+    "HIMBO Hideo": {
+        "big": {
+            "meta": "arms:athletic(388);physique_condition:solid(-34);glutes:firm(166);shoulder_breadth:average(-344);midsection:straight(5020);legs:athletic(401);stature_frame:average(395)"
+        },
+        "medium": {
+            "meta": "arms:thin(-692);physique_condition:solid(249);glutes:firm(83);shoulder_breadth:average(-829);midsection:straight(3063);legs:athletic(-597);stature_frame:compact(-913)"
+        },
+        "small": {
+            "meta": "arms:thin(-1772);physique_condition:solid(531);glutes:firm(0);shoulder_breadth:average(-1315);midsection:tapered(1105);legs:spindly(-1595);stature_frame:compact(-2221)"
+        }
+    },
+    "HIMBO Hideo (Clothes)": {
+        "big": {
+            "meta": "arms:athletic(388);physique_condition:solid(-633);glutes:firm(166);shoulder_breadth:average(-344);midsection:straight(5020);legs:athletic(401);stature_frame:compact(-203)"
+        },
+        "medium": {
+            "meta": "arms:thin(-692);physique_condition:solid(-269);glutes:firm(83);shoulder_breadth:average(-829);midsection:straight(3063);legs:athletic(-597);stature_frame:compact(-1431)"
+        },
+        "small": {
+            "meta": "arms:thin(-1772);physique_condition:solid(94);glutes:firm(0);shoulder_breadth:average(-1315);midsection:tapered(1105);legs:spindly(-1595);stature_frame:slight(-2658)"
+        }
+    },
+    "HIMBO Hugh": {
+        "big": {
+            "meta": "arms:athletic(942);physique_condition:obese(-14043);glutes:firm(0);shoulder_breadth:average(1049);midsection:straight(4650);legs:pillars(3711);stature_frame:heavy(6014)"
+        },
+        "medium": {
+            "meta": "arms:athletic(933);physique_condition:obese(-12119);glutes:firm(0);shoulder_breadth:average(909);midsection:straight(2325);legs:athletic(1855);stature_frame:average(4033)"
+        },
+        "small": {
+            "meta": "arms:athletic(924);physique_condition:obese(-10196);glutes:firm(0);shoulder_breadth:average(769);midsection:ripped(0);legs:athletic(0);stature_frame:average(2053)"
+        }
+    },
+    "HIMBO Jack": {
+        "big": {
+            "meta": "arms:athletic(942);physique_condition:obese(-17632);glutes:firm(599);shoulder_breadth:average(530);midsection:thick(8206);legs:spindly(7626);stature_frame:massive(8593)"
+        },
+        "medium": {
+            "meta": "arms:athletic(-326);physique_condition:heavy(-9175);glutes:firm(300);shoulder_breadth:average(-697);midsection:straight(4103);legs:pillars(3157);stature_frame:average(3178)"
+        },
+        "small": {
+            "meta": "arms:thin(-1593);physique_condition:solid(-718);glutes:firm(0);shoulder_breadth:average(-1924);midsection:ripped(0);legs:athletic(-1311);stature_frame:compact(-2236)"
+        }
+    },
+    "HIMBO Jack (Clothes)": {
+        "big": {
+            "meta": "arms:athletic(942);physique_condition:obese(-18007);glutes:firm(599);shoulder_breadth:average(530);midsection:thick(8206);legs:spindly(7626);stature_frame:massive(8217)"
+        },
+        "medium": {
+            "meta": "arms:athletic(-326);physique_condition:heavy(-9362);glutes:firm(300);shoulder_breadth:average(-697);midsection:straight(4103);legs:pillars(3157);stature_frame:average(2991)"
+        },
+        "small": {
+            "meta": "arms:thin(-1593);physique_condition:solid(-718);glutes:firm(0);shoulder_breadth:average(-1924);midsection:ripped(0);legs:athletic(-1311);stature_frame:compact(-2236)"
+        }
+    },
+    "HIMBO Joseb": {
+        "big": {
+            "meta": "arms:brawny(1136);physique_condition:solid(-1159);glutes:large(1617);shoulder_breadth:average(1886);midsection:straight(5369);legs:pillars(4422);stature_frame:average(4568)"
+        },
+        "medium": {
+            "meta": "arms:athletic(699);physique_condition:solid(12);glutes:large(1037);shoulder_breadth:average(1023);midsection:straight(3042);legs:athletic(2117);stature_frame:average(2916)"
+        },
+        "small": {
+            "meta": "arms:athletic(262);physique_condition:solid(1182);glutes:firm(458);shoulder_breadth:average(159);midsection:tapered(715);legs:athletic(-188);stature_frame:average(1264)"
+        }
+    },
+    "HIMBO Mike": {
+        "big": {
+            "meta": "arms:athletic(-455);physique_condition:muscular(5028);glutes:firm(0);shoulder_breadth:average(-91);midsection:straight(4579);legs:pillars(3005);stature_frame:average(3664)"
+        },
+        "medium": {
+            "meta": "arms:athletic(-361);physique_condition:athletic(3259);glutes:firm(0);shoulder_breadth:average(-212);midsection:straight(2675);legs:athletic(688);stature_frame:average(1728)"
+        },
+        "small": {
+            "meta": "arms:athletic(-266);physique_condition:solid(1490);glutes:firm(0);shoulder_breadth:average(-333);midsection:tapered(772);legs:spindly(-1628);stature_frame:compact(-208)"
+        }
+    },
+    "HIMBO Mike (Clothes)": {
+        "big": {
+            "meta": "arms:athletic(-455);physique_condition:athletic(4344);glutes:firm(0);shoulder_breadth:average(-91);midsection:straight(4579);legs:pillars(3005);stature_frame:average(2980)"
+        },
+        "medium": {
+            "meta": "arms:athletic(-361);physique_condition:athletic(2762);glutes:firm(0);shoulder_breadth:average(-212);midsection:straight(2675);legs:athletic(688);stature_frame:average(1231)"
+        },
+        "small": {
+            "meta": "arms:athletic(-266);physique_condition:solid(1179);glutes:firm(0);shoulder_breadth:average(-333);midsection:tapered(772);legs:spindly(-1628);stature_frame:compact(-519)"
+        }
+    },
+    "HIMBO Sebastian": {
+        "big": {
+            "meta": "arms:colossal(1718);physique_condition:shredded(7506);glutes:firm(749);shoulder_breadth:broad(3012);midsection:straight(3851);legs:immense(8349);stature_frame:average(4564)"
+        },
+        "medium": {
+            "meta": "arms:athletic(-331);physique_condition:athletic(2057);glutes:firm(375);shoulder_breadth:average(558);midsection:tapered(1926);legs:pillars(3236);stature_frame:average(864)"
+        },
+        "small": {
+            "meta": "arms:thin(-2380);physique_condition:soft(-3392);glutes:firm(0);shoulder_breadth:average(-1897);midsection:ripped(0);legs:spindly(-1878);stature_frame:slight(-2836)"
+        }
+    },
+    "HIMBO Simple": {
+        "big": {
+            "meta": "arms:colossal(1718);physique_condition:shredded(8749);glutes:firm(749);shoulder_breadth:broad(3012);midsection:straight(3851);legs:immense(8349);stature_frame:heavy(5808)"
+        },
+        "medium": {
+            "meta": "arms:athletic(-331);physique_condition:athletic(2679);glutes:firm(375);shoulder_breadth:average(558);midsection:tapered(1926);legs:pillars(3236);stature_frame:average(1486)"
+        },
+        "small": {
+            "meta": "arms:thin(-2380);physique_condition:soft(-3392);glutes:firm(0);shoulder_breadth:average(-1897);midsection:ripped(0);legs:spindly(-1878);stature_frame:slight(-2836)"
+        }
+    },
+    "HIMBO Simple (Clothes)": {
+        "big": {
+            "meta": "arms:colossal(1718);physique_condition:shredded(7506);glutes:firm(749);shoulder_breadth:broad(3012);midsection:straight(3851);legs:immense(8349);stature_frame:average(4564)"
+        },
+        "medium": {
+            "meta": "arms:athletic(-331);physique_condition:athletic(2057);glutes:firm(375);shoulder_breadth:average(558);midsection:tapered(1926);legs:pillars(3236);stature_frame:average(864)"
+        },
+        "small": {
+            "meta": "arms:thin(-2380);physique_condition:soft(-3392);glutes:firm(0);shoulder_breadth:average(-1897);midsection:ripped(0);legs:spindly(-1878);stature_frame:slight(-2836)"
+        }
+    },
+    "HIMBO Sultry": {
+        "big": {
+            "meta": "arms:colossal(1743);physique_condition:solid(1444);glutes:firm(769);shoulder_breadth:broad(3823);midsection:straight(4727);legs:immense(11080);stature_frame:average(4515)"
+        },
+        "medium": {
+            "meta": "arms:colossal(1743);physique_condition:solid(1444);glutes:firm(769);shoulder_breadth:broad(3823);midsection:straight(4727);legs:immense(11080);stature_frame:average(4515)"
+        },
+        "small": {
+            "meta": "arms:colossal(1743);physique_condition:solid(1444);glutes:firm(769);shoulder_breadth:broad(3823);midsection:straight(4727);legs:immense(11080);stature_frame:average(4515)"
+        }
+    },
+    "HIMBO Sultry (Clothes)": {
+        "big": {
+            "meta": "arms:colossal(1743);physique_condition:solid(1444);glutes:firm(769);shoulder_breadth:broad(3823);midsection:straight(4727);legs:immense(11080);stature_frame:average(4515)"
+        },
+        "medium": {
+            "meta": "arms:colossal(1743);physique_condition:solid(1444);glutes:firm(769);shoulder_breadth:broad(3823);midsection:straight(4727);legs:immense(11080);stature_frame:average(4515)"
+        },
+        "small": {
+            "meta": "arms:colossal(1743);physique_condition:solid(1444);glutes:firm(769);shoulder_breadth:broad(3823);midsection:straight(4727);legs:immense(11080);stature_frame:average(4515)"
+        }
+    },
+    "HIMBO Urbon": {
+        "big": {
+            "meta": "arms:colossal(1795);physique_condition:solid(1480);glutes:firm(384);shoulder_breadth:expansive(7578);midsection:straight(2366);legs:immense(9524);stature_frame:average(3324)"
+        },
+        "medium": {
+            "meta": "arms:athletic(926);physique_condition:athletic(3187);glutes:firm(384);shoulder_breadth:broad(4452);midsection:tapered(1222);legs:spindly(6414);stature_frame:average(2654)"
+        },
+        "small": {
+            "meta": "arms:athletic(57);physique_condition:athletic(4893);glutes:firm(384);shoulder_breadth:average(1327);midsection:ripped(77);legs:pillars(3303);stature_frame:average(1983)"
+        }
+    },
+    "HIMBO Vanilla": {
+        "big": {
+            "meta": "arms:colossal(2078);physique_condition:athletic(3142);glutes:firm(0);shoulder_breadth:average(2463);midsection:potbellied(9168);legs:spindly(5742);stature_frame:heavy(5514)"
+        },
+        "medium": {
+            "meta": "arms:brawny(1039);physique_condition:athletic(1571);glutes:firm(0);shoulder_breadth:average(1232);midsection:straight(4584);legs:athletic(2871);stature_frame:average(2757)"
+        },
+        "small": {
+            "meta": "arms:athletic(0);physique_condition:solid(0);glutes:firm(0);shoulder_breadth:average(0);midsection:ripped(0);legs:athletic(0);stature_frame:average(0)"
+        }
+    },
+    "HIMBO Zero for OBody": {
+        "big": {
+            "meta": "arms:athletic(0);physique_condition:solid(0);glutes:firm(0);shoulder_breadth:average(0);midsection:ripped(0);legs:athletic(0);stature_frame:average(0)"
+        },
+        "medium": {
+            "meta": "arms:athletic(0);physique_condition:solid(0);glutes:firm(0);shoulder_breadth:average(0);midsection:ripped(0);legs:athletic(0);stature_frame:average(0)"
+        },
+        "small": {
+            "meta": "arms:athletic(0);physique_condition:solid(0);glutes:firm(0);shoulder_breadth:average(0);midsection:ripped(0);legs:athletic(0);stature_frame:average(0)"
+        }
+    }
+}

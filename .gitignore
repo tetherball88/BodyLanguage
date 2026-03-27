@@ -11,3 +11,4 @@ parseBodySlideXml/node_modules/*
 .claude/settings.local.json
 tag-push.bat
 validateBodyParts.js
+/SKSE_Source/build

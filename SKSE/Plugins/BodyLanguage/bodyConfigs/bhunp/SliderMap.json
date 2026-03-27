@@ -1,0 +1,1325 @@
+{
+    "Breasts": {
+        "group": "Breasts",
+        "displayName": "Size",
+        "referenceName": "BaseShapeBreasts",
+        "smallDefault": 100.0,
+        "bigDefault": 100.0,
+        "sliderName": "BaseShapeBreasts",
+        "impact": 6317.5816
+    },
+    "BreastsSmall": {
+        "group": "Breasts",
+        "displayName": "Smaller",
+        "referenceName": "BaseShapeBreastsSmall",
+        "smallDefault": 100.0,
+        "bigDefault": 100.0,
+        "sliderName": "BaseShapeBreastsSmall",
+        "impact": 7285.302
+    },
+    "BreastsSH": {
+        "group": "Breasts",
+        "displayName": "Silly Huge",
+        "referenceName": "BaseShapeBreastsSH",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastsSH",
+        "impact": 8070.0727
+    },
+    "BreastsSSH": {
+        "group": "Breasts",
+        "displayName": "New Silly Huge",
+        "referenceName": "BaseShapeBreastsSSH",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastsSSH",
+        "impact": 13011.4814
+    },
+    "BreastsFantasy": {
+        "group": "Breasts",
+        "displayName": "Fantasy",
+        "referenceName": "BaseShapeBreastsFantasy",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastsFantasy",
+        "impact": 4852.7629
+    },
+    "DoubleMelon": {
+        "group": "Breasts",
+        "displayName": "Melons",
+        "referenceName": "BaseShapeDoubleMelon",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeDoubleMelon",
+        "impact": 3724.1653
+    },
+    "BreastCenter": {
+        "group": "Breasts",
+        "displayName": "Center",
+        "referenceName": "BaseShapeBreastCenter",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastCenter",
+        "impact": 387.2632
+    },
+    "BreastCenterBig": {
+        "group": "Breasts",
+        "displayName": "Center Big",
+        "referenceName": "BaseShapeBreastCenterBig",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastCenterBig",
+        "impact": 50.3353
+    },
+    "Top Slope": {
+        "group": "Breasts",
+        "displayName": "Top Slope",
+        "referenceName": "BaseShapeTop Slope",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeTop Slope",
+        "impact": 364.2008
+    },
+    "BreastCleavage": {
+        "group": "Breasts",
+        "displayName": "Cleavage",
+        "referenceName": "BaseShapeBreastCleavage",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastCleavage",
+        "impact": 3160.4526
+    },
+    "BreastConverge": {
+        "group": "Breasts",
+        "displayName": "Cleavage 2",
+        "referenceName": "BaseShapeBreastConverge",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastConverge",
+        "impact": 6736.7675
+    },
+    "BreastFlatness": {
+        "group": "Breasts",
+        "displayName": "More Flatness",
+        "referenceName": "BaseShapeBreastFlatness",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastFlatness",
+        "impact": 9259.9263
+    },
+    "BreastsGone": {
+        "group": "Breasts",
+        "displayName": "Gone",
+        "referenceName": "BaseShapeBreastsGone",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastsGone",
+        "impact": 10750.3579
+    },
+    "BreastGravity": {
+        "group": "Breasts",
+        "displayName": "Gravity",
+        "referenceName": "BaseShapeBreastGravity",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastGravity",
+        "impact": 7157.0546
+    },
+    "PushUp": {
+        "group": "Breasts",
+        "displayName": "Push Up",
+        "referenceName": "BaseShapePushUp",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapePushUp",
+        "impact": 7158.4487
+    },
+    "BreastHeight": {
+        "group": "Breasts",
+        "displayName": "Height",
+        "referenceName": "BaseShapeBreastHeight",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastHeight",
+        "impact": 9560.2067
+    },
+    "BreastPerkiness": {
+        "group": "Breasts",
+        "displayName": "Perkiness",
+        "referenceName": "BaseShapeBreastPerkiness",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastPerkiness",
+        "impact": 2176.7107
+    },
+    "BreastWidth": {
+        "group": "Breasts",
+        "displayName": "Width",
+        "referenceName": "BaseShapeBreastWidth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastWidth",
+        "impact": 3743.5458
+    },
+    "BreastsPressed": {
+        "group": "Breasts",
+        "displayName": "Pressed",
+        "referenceName": "BaseShapeBreastsPressed",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastsPressed",
+        "impact": 4403.5374
+    },
+    "BreastSideShape": {
+        "group": "Breasts",
+        "displayName": "Side Shape",
+        "referenceName": "BaseShapeBreastSideShape",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastSideShape",
+        "impact": 193.557
+    },
+    "BreastUnderDepth": {
+        "group": "Breasts",
+        "displayName": "Under Depth",
+        "referenceName": "BaseShapeBreastUnderDepth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastUnderDepth",
+        "impact": 128.2247
+    },
+    "BreastSaggy": {
+        "group": "Breasts",
+        "displayName": "Saggy",
+        "referenceName": "BaseShapeBreastSaggy",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastSaggy",
+        "impact": 18357.1941
+    },
+    "BreastsSpread": {
+        "group": "Breasts",
+        "displayName": "Spread",
+        "referenceName": "BaseShapeBreastsSpread",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastsSpread",
+        "impact": 7448.5087
+    },
+    "BreastDiameter": {
+        "group": "Breasts",
+        "displayName": "Diameter",
+        "referenceName": "BaseShapeBreastDiameter",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBreastDiameter",
+        "impact": 2124.0554
+    },
+    "NeckSmooth": {
+        "group": "Torso",
+        "displayName": "Neck Smooth",
+        "referenceName": "BaseShapeNeckSmooth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeNeckSmooth",
+        "impact": 12.4074
+    },
+    "ChestDepth": {
+        "group": "Torso",
+        "displayName": "Chest Depth",
+        "referenceName": "BaseShapeChestDepth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeChestDepth",
+        "impact": 7706.3273
+    },
+    "ChestWidth": {
+        "group": "Torso",
+        "displayName": "Chest Width",
+        "referenceName": "BaseShapeChestWidth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeChestWidth",
+        "impact": 1739.6714
+    },
+    "RibsProminance": {
+        "group": "Torso",
+        "displayName": "Ribs",
+        "referenceName": "BaseShapeRibsProminance",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeRibsProminance",
+        "impact": 64.0247
+    },
+    "RibsMore": {
+        "group": "Torso",
+        "displayName": "Ribs More",
+        "referenceName": "BaseShapeRibsMore",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeRibsMore",
+        "impact": 146.9986
+    },
+    "SternumDepth": {
+        "group": "Torso",
+        "displayName": "Sternum Depth",
+        "referenceName": "BaseShapeSternumDepth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeSternumDepth",
+        "impact": 278.3874
+    },
+    "SternumHeight": {
+        "group": "Torso",
+        "displayName": "Sternum Height",
+        "referenceName": "BaseShapeSternumHeight",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeSternumHeight",
+        "impact": 1451.1805
+    },
+    "BigTorso": {
+        "group": "Torso",
+        "displayName": "Size",
+        "referenceName": "BaseShapeBigTorso",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBigTorso",
+        "impact": 6967.703
+    },
+    "Waist": {
+        "group": "Torso",
+        "displayName": "Waist Size",
+        "referenceName": "BaseShapeWaist",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeWaist",
+        "impact": 746.2769
+    },
+    "WaistHeight": {
+        "group": "Torso",
+        "displayName": "Waist Height",
+        "referenceName": "BaseShapeWaistHeight",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeWaistHeight",
+        "impact": 3596.8495
+    },
+    "WideWaistLine": {
+        "group": "Torso",
+        "displayName": "Waist Line",
+        "referenceName": "BaseShapeWideWaistLine",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeWideWaistLine",
+        "impact": 427.6939
+    },
+    "ChubbyWaist": {
+        "group": "Torso",
+        "displayName": "Chubby Waist",
+        "referenceName": "BaseShapeChubbyWaist",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeChubbyWaist",
+        "impact": 2207.5871
+    },
+    "Back": {
+        "group": "Torso",
+        "displayName": "Back Size",
+        "referenceName": "BaseShapeBack",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBack",
+        "impact": 1721.126
+    },
+    "BackArch": {
+        "group": "Torso",
+        "displayName": "Back Arch",
+        "referenceName": "BaseShapeBackArch",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBackArch",
+        "impact": 675.6871
+    },
+    "BackWing": {
+        "group": "Torso",
+        "displayName": "Back Wing",
+        "referenceName": "BaseShapeBackWing",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBackWing",
+        "impact": 53.3519
+    },
+    "BackValley": {
+        "group": "Torso",
+        "displayName": "Back Valley",
+        "referenceName": "BaseShapeBackValley",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBackValley",
+        "impact": 23.4487
+    },
+    "ButtShape2": {
+        "group": "Butt",
+        "displayName": "Shape Lower",
+        "referenceName": "BaseShapeButtShape2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeButtShape2",
+        "impact": 3236.0896
+    },
+    "ButtCrack": {
+        "group": "Butt",
+        "displayName": "Crack",
+        "referenceName": "BaseShapeButtCrack",
+        "smallDefault": 100.0,
+        "bigDefault": 100.0,
+        "sliderName": "BaseShapeButtCrack",
+        "impact": 128.6061
+    },
+    "Butt": {
+        "group": "Butt",
+        "displayName": "Size",
+        "referenceName": "BaseShapeButt",
+        "smallDefault": 100.0,
+        "bigDefault": 100.0,
+        "sliderName": "BaseShapeButt",
+        "impact": 2008.722
+    },
+    "ButtSmall": {
+        "group": "Butt",
+        "displayName": "Smaller",
+        "referenceName": "BaseShapeButtSmall",
+        "smallDefault": 100.0,
+        "bigDefault": 100.0,
+        "sliderName": "BaseShapeButtSmall",
+        "impact": 2988.5044
+    },
+    "BigButt": {
+        "group": "Butt",
+        "displayName": "Big",
+        "referenceName": "BaseShapeBigButt",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBigButt",
+        "impact": 1609.6142
+    },
+    "ChubbyButt": {
+        "group": "Butt",
+        "displayName": "Chubby",
+        "referenceName": "BaseShapeChubbyButt",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeChubbyButt",
+        "impact": 2018.3049
+    },
+    "AppleCheeks": {
+        "group": "Butt",
+        "displayName": "Apple",
+        "referenceName": "BaseShapeAppleCheeks",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeAppleCheeks",
+        "impact": 2520.5718
+    },
+    "RoundAss": {
+        "group": "Butt",
+        "displayName": "Round",
+        "referenceName": "BaseShapeRoundAss",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeRoundAss",
+        "impact": 519.5302
+    },
+    "CrotchBack": {
+        "group": "Butt",
+        "displayName": "Move Crotch",
+        "referenceName": "BaseShapeCrotchBack",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeCrotchBack",
+        "impact": 2022.4113
+    },
+    "Groin": {
+        "group": "Butt",
+        "displayName": "Groin",
+        "referenceName": "BaseShapeGroin",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeGroin",
+        "impact": 316.049
+    },
+    "ButtSaggy": {
+        "group": "Butt",
+        "displayName": "Saggy",
+        "referenceName": "BaseShapeButtSaggy",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeButtSaggy",
+        "impact": 992.3598
+    },
+    "ButtDimples": {
+        "group": "Butt",
+        "displayName": "Dimples",
+        "referenceName": "BaseShapeButtDimples",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeButtDimples",
+        "impact": 12.9661
+    },
+    "ButtUnderFold": {
+        "group": "Butt",
+        "displayName": "UnderFold",
+        "referenceName": "BaseShapeButtUnderFold",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeButtUnderFold",
+        "impact": 18.2938
+    },
+    "ButtConverge": {
+        "group": "Butt",
+        "displayName": "Converge",
+        "referenceName": "BaseShapeButtConverge",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeButtConverge",
+        "impact": 1300.7276
+    },
+    "AnusSpread": {
+        "group": "Butt",
+        "displayName": "Anus Spread",
+        "referenceName": "BaseShapeAnusSpread",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeAnusSpread",
+        "impact": 45.7357
+    },
+    "AnusSize": {
+        "group": "Butt",
+        "displayName": "Anus Size",
+        "referenceName": "BaseShapeAnusSize",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeAnusSize",
+        "impact": 176.8948
+    },
+    "AnalPositionlow": {
+        "group": "Butt",
+        "displayName": "Anus Reposition",
+        "referenceName": "BaseShapeAnalPositionlow",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeAnalPositionlow",
+        "impact": 200.3617
+    },
+    "LegsThin": {
+        "group": "Legs and Feet",
+        "displayName": "Thin",
+        "referenceName": "BaseShapeLegsThin",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeLegsThin",
+        "impact": 1724.3001
+    },
+    "SlimThighs": {
+        "group": "Legs and Feet",
+        "displayName": "Slim",
+        "referenceName": "BaseShapeSlimThighs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeSlimThighs",
+        "impact": 2394.768
+    },
+    "Thighs": {
+        "group": "Legs and Feet",
+        "displayName": "Thighs",
+        "referenceName": "BaseShapeThighs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeThighs",
+        "impact": 2752.3962
+    },
+    "ThighApart": {
+        "group": "Legs and Feet",
+        "displayName": "Thighs Apart",
+        "referenceName": "BaseShapeThighApart",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeThighApart",
+        "impact": 1224.3723
+    },
+    "ThighOuter": {
+        "group": "Legs and Feet",
+        "displayName": "Thighs Outer",
+        "referenceName": "BaseShapeThighOuter",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeThighOuter",
+        "impact": 297.9432
+    },
+    "ThighThicker": {
+        "group": "Legs and Feet",
+        "displayName": "Thighs Thick",
+        "referenceName": "BaseShapeThighThicker",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeThighThicker",
+        "impact": 1688.815
+    },
+    "ThighInnerThicker": {
+        "group": "Legs and Feet",
+        "displayName": "Thighs Inner",
+        "referenceName": "BaseShapeThighInnerThicker",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeThighInnerThicker",
+        "impact": 527.5991
+    },
+    "ThighFBThicker": {
+        "group": "Legs and Feet",
+        "displayName": "Thighs FrontBack",
+        "referenceName": "BaseShapeThighFBThicker",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeThighFBThicker",
+        "impact": 752.6049
+    },
+    "ChubbyLegs": {
+        "group": "Legs and Feet",
+        "displayName": "Chubby",
+        "referenceName": "BaseShapeChubbyLegs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeChubbyLegs",
+        "impact": 5909.4129
+    },
+    "Legs": {
+        "group": "Legs and Feet",
+        "displayName": "Size",
+        "referenceName": "BaseShapeLegs",
+        "smallDefault": 100.0,
+        "bigDefault": 100.0,
+        "sliderName": "BaseShapeLegs",
+        "impact": 1922.7894
+    },
+    "LegSpread": {
+        "group": "Legs and Feet",
+        "displayName": "Legs Spread",
+        "referenceName": "BaseShapeLegSpread",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeLegSpread",
+        "impact": 3228.5578
+    },
+    "CrotchGap": {
+        "group": "Legs and Feet",
+        "displayName": "Crotch Gap",
+        "referenceName": "BaseShapeCrotchGap",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeCrotchGap",
+        "impact": 293.2754
+    },
+    "KneeHeight": {
+        "group": "Legs and Feet",
+        "displayName": "Knee Height",
+        "referenceName": "BaseShapeKneeHeight",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeKneeHeight",
+        "impact": 6737.1134
+    },
+    "KneeShape": {
+        "group": "Legs and Feet",
+        "displayName": "Knee Shape",
+        "referenceName": "BaseShapeKneeShape",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeKneeShape",
+        "impact": 416.5488
+    },
+    "KneeSlim": {
+        "group": "Legs and Feet",
+        "displayName": "Knee Slim",
+        "referenceName": "BaseShapeKneeSlim",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeKneeSlim",
+        "impact": 98.8323
+    },
+    "CalfSize": {
+        "group": "Legs and Feet",
+        "displayName": "Calf Size",
+        "referenceName": "BaseShapeCalfSize",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeCalfSize",
+        "impact": 343.0591
+    },
+    "CalfSmooth": {
+        "group": "Legs and Feet",
+        "displayName": "Calf Smooth",
+        "referenceName": "BaseShapeCalfSmooth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeCalfSmooth",
+        "impact": 288.3661
+    },
+    "Soleus": {
+        "group": "Legs and Feet",
+        "displayName": "Calf Soleus",
+        "referenceName": "BaseShapeSoleus",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeSoleus",
+        "impact": 95.7259
+    },
+    "HipBone": {
+        "group": "Hips",
+        "displayName": "Hip Bone",
+        "referenceName": "BaseShapeHipBone",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeHipBone",
+        "impact": 359.6783
+    },
+    "Hips": {
+        "group": "Hips",
+        "displayName": "Size",
+        "referenceName": "BaseShapeHips",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeHips",
+        "impact": 1304.9937
+    },
+    "HipForward": {
+        "group": "Hips",
+        "displayName": "Forward",
+        "referenceName": "BaseShapeHipForward",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeHipForward",
+        "impact": 15960.1822
+    },
+    "HipUpperWidth": {
+        "group": "Hips",
+        "displayName": "Upper Width",
+        "referenceName": "BaseShapeHipUpperWidth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeHipUpperWidth",
+        "impact": 931.3384
+    },
+    "HipCarved": {
+        "group": "Hips",
+        "displayName": "Carved",
+        "referenceName": "BaseShapeHipCarved",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeHipCarved",
+        "impact": 106.3644
+    },
+    "HipNarrow": {
+        "group": "Hips",
+        "displayName": "Narrow",
+        "referenceName": "BaseShapeHipNarrow",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeHipNarrow",
+        "impact": 420.1008
+    },
+    "Arms": {
+        "group": "Arms",
+        "displayName": "Size",
+        "referenceName": "BaseShapeArms",
+        "smallDefault": 100.0,
+        "bigDefault": 100.0,
+        "sliderName": "BaseShapeArms",
+        "impact": 752.399
+    },
+    "ForearmSize": {
+        "group": "Arms",
+        "displayName": "Forearm Size",
+        "referenceName": "BaseShapeForearmSize",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeForearmSize",
+        "impact": 290.4706
+    },
+    "ChubbyArms": {
+        "group": "Arms",
+        "displayName": "Chubby",
+        "referenceName": "BaseShapeChubbyArms",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeChubbyArms",
+        "impact": 1142.9707
+    },
+    "ArmpitShape": {
+        "group": "Arms",
+        "displayName": "Armpit",
+        "referenceName": "BaseShapeArmpitShape",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeArmpitShape",
+        "impact": 222.1239
+    },
+    "ShoulderSmooth": {
+        "group": "Arms",
+        "displayName": "Shoulder Smooth",
+        "referenceName": "BaseShapeShoulderSmooth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeShoulderSmooth",
+        "impact": 127.6702
+    },
+    "ShoulderWidth": {
+        "group": "Arms",
+        "displayName": "Shoulder Width",
+        "referenceName": "BaseShapeShoulderWidth",
+        "smallDefault": 100.0,
+        "bigDefault": 100.0,
+        "sliderName": "BaseShapeShoulderWidth",
+        "impact": 3011.8641
+    },
+    "ShoulderTweak": {
+        "group": "Arms",
+        "displayName": "Shoulder Tweak",
+        "referenceName": "BaseShapeShoulderTweak",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeShoulderTweak",
+        "impact": 19.722
+    },
+    "Clavicle": {
+        "group": "Arms",
+        "displayName": "Clavicles",
+        "referenceName": "BaseShapeClavicle",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeClavicle",
+        "impact": 20.2304
+    },
+    "ClaviclesSize": {
+        "group": "Arms",
+        "displayName": "Clavicles Size",
+        "referenceName": "BaseShapeClaviclesSize",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeClaviclesSize",
+        "impact": 40.9887
+    },
+    "ClaviclesFront": {
+        "group": "Arms",
+        "displayName": "Clavicles Front",
+        "referenceName": "BaseShapeClaviclesFront",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeClaviclesFront",
+        "impact": 64.4
+    },
+    "ClaviclesAngle": {
+        "group": "Arms",
+        "displayName": "Clavicles Rotate",
+        "referenceName": "BaseShapeClaviclesAngle",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeClaviclesAngle",
+        "impact": 61.5573
+    },
+    "Belly": {
+        "group": "Belly",
+        "displayName": "Size",
+        "referenceName": "BaseShapeBelly",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBelly",
+        "impact": 227.4754
+    },
+    "BigBelly": {
+        "group": "Belly",
+        "displayName": "Big",
+        "referenceName": "BaseShapeBigBelly",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBigBelly",
+        "impact": 1627.2681
+    },
+    "PregnancyBelly": {
+        "group": "Belly",
+        "displayName": "Pregnant",
+        "referenceName": "BaseShapePregnancyBelly",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapePregnancyBelly",
+        "impact": 7252.8698
+    },
+    "BotePregnancy": {
+        "group": "Belly",
+        "displayName": "Pregnant Small",
+        "referenceName": "BaseShapeBotePregnancy",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBotePregnancy",
+        "impact": 1674.0627
+    },
+    "TummyTuck": {
+        "group": "Belly",
+        "displayName": "Tuck",
+        "referenceName": "BaseShapeTummyTuck",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeTummyTuck",
+        "impact": 265.176
+    },
+    "BellyUnder": {
+        "group": "Belly",
+        "displayName": "Lower",
+        "referenceName": "BaseShapeBellyUnder",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyUnder",
+        "impact": 47.5321
+    },
+    "NavelEven": {
+        "group": "Belly",
+        "displayName": "Belly Button",
+        "referenceName": "BaseShapeNavelEven",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeNavelEven",
+        "impact": 11.8655
+    },
+    "BellyFatLower": {
+        "group": "Belly",
+        "displayName": "FatLower",
+        "referenceName": "BaseShapeBellyFatLower",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyFatLower",
+        "impact": 908.9916
+    },
+    "BellyFatUpper": {
+        "group": "Belly",
+        "displayName": "FatUpper",
+        "referenceName": "BaseShapeBellyFatUpper",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyFatUpper",
+        "impact": 333.8008
+    },
+    "BellyObesity": {
+        "group": "Belly",
+        "displayName": "Obese",
+        "referenceName": "BaseShapeBellyObesity",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyObesity",
+        "impact": 3230.6484
+    },
+    "BellyPressed": {
+        "group": "Belly",
+        "displayName": "Dent",
+        "referenceName": "BaseShapeBellyPressed",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyPressed",
+        "impact": 85.7907
+    },
+    "BellyLowerSwell1": {
+        "group": "Belly",
+        "displayName": "Bulge 1",
+        "referenceName": "BaseShapeBellyLowerSwell1",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyLowerSwell1",
+        "impact": 33.9182
+    },
+    "BellyLowerSwell2": {
+        "group": "Belly",
+        "displayName": "Bulge 2",
+        "referenceName": "BaseShapeBellyLowerSwell2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyLowerSwell2",
+        "impact": 120.5787
+    },
+    "BellyLowerSwell3": {
+        "group": "Belly",
+        "displayName": "Bulge 3",
+        "referenceName": "BaseShapeBellyLowerSwell3",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyLowerSwell3",
+        "impact": 226.8568
+    },
+    "BellyCenterProtrude": {
+        "group": "Belly",
+        "displayName": "BulgeBig",
+        "referenceName": "BaseShapeBellyCenterProtrude",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyCenterProtrude",
+        "impact": 1099.6718
+    },
+    "BellyCenterUpperProtrude": {
+        "group": "Belly",
+        "displayName": "BulgeUpper",
+        "referenceName": "BaseShapeBellyCenterUpperProtrude",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyCenterUpperProtrude",
+        "impact": 113.7603
+    },
+    "BellyBalls": {
+        "group": "Belly",
+        "displayName": "BulgeBalls",
+        "referenceName": "BaseShapeBellyBalls",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyBalls",
+        "impact": 56.1355
+    },
+    "MuscleAbs": {
+        "group": "Muscle Definition",
+        "displayName": "Abs",
+        "referenceName": "BaseShapeMuscleAbs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeMuscleAbs",
+        "impact": 206.9665
+    },
+    "BellyDefine": {
+        "group": "Muscle Definition",
+        "displayName": "Abs Define",
+        "referenceName": "BaseShapeBellyDefine",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBellyDefine",
+        "impact": 282.089
+    },
+    "RectusOuterDetail": {
+        "group": "Muscle Definition",
+        "displayName": "Abs OuterDetail",
+        "referenceName": "BaseShapeRectusOuterDetail",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeRectusOuterDetail",
+        "impact": 166.1994
+    },
+    "RectusAbdominis": {
+        "group": "Muscle Definition",
+        "displayName": "Abs Abdominis",
+        "referenceName": "BaseShapeRectusAbdominis",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeRectusAbdominis",
+        "impact": 223.8895
+    },
+    "MuscleArms": {
+        "group": "Muscle Definition",
+        "displayName": "Arms",
+        "referenceName": "BaseShapeMuscleArms",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeMuscleArms",
+        "impact": 456.546
+    },
+    "Biceps": {
+        "group": "Muscle Definition",
+        "displayName": "Arms Biceps",
+        "referenceName": "BaseShapeBiceps",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBiceps",
+        "impact": 152.7329
+    },
+    "Triceps": {
+        "group": "Muscle Definition",
+        "displayName": "Arms Triceps",
+        "referenceName": "BaseShapeTriceps",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeTriceps",
+        "impact": 98.8438
+    },
+    "Deltoid": {
+        "group": "Muscle Definition",
+        "displayName": "Arms Deltoid",
+        "referenceName": "BaseShapeDeltoid",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeDeltoid",
+        "impact": 201.2853
+    },
+    "Brachioradialis": {
+        "group": "Muscle Definition",
+        "displayName": "Arms Brachioradialis",
+        "referenceName": "BaseShapeBrachioradialis",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBrachioradialis",
+        "impact": 47.1203
+    },
+    "Flexor": {
+        "group": "Muscle Definition",
+        "displayName": "Arms Flexor",
+        "referenceName": "BaseShapeFlexor",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeFlexor",
+        "impact": 43.3479
+    },
+    "ExtensorDigitorum": {
+        "group": "Muscle Definition",
+        "displayName": "Arms ExtensorDigitorum",
+        "referenceName": "BaseShapeExtensorDigitorum",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeExtensorDigitorum",
+        "impact": 30.6258
+    },
+    "TricepsLateral": {
+        "group": "Muscle Definition",
+        "displayName": "Arms TricepsLateral",
+        "referenceName": "BaseShapeTricepsLateral",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeTricepsLateral",
+        "impact": 59.2626
+    },
+    "MuscleButt": {
+        "group": "Muscle Definition",
+        "displayName": "Butt",
+        "referenceName": "BaseShapeMuscleButt",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeMuscleButt",
+        "impact": 216.5382
+    },
+    "MuscleLegs": {
+        "group": "Muscle Definition",
+        "displayName": "Legs",
+        "referenceName": "BaseShapeMuscleLegs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeMuscleLegs",
+        "impact": 1541.3779
+    },
+    "MusclePecs": {
+        "group": "Muscle Definition",
+        "displayName": "Pecs",
+        "referenceName": "BaseShapeMusclePecs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeMusclePecs",
+        "impact": 296.8689
+    },
+    "Sartorius": {
+        "group": "Muscle Definition",
+        "displayName": "Thigh Sartorius",
+        "referenceName": "BaseShapeSartorius",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeSartorius",
+        "impact": 457.2729
+    },
+    "RectusFemoris": {
+        "group": "Muscle Definition",
+        "displayName": "Thigh RectusFemoris",
+        "referenceName": "BaseShapeRectusFemoris",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeRectusFemoris",
+        "impact": 281.9305
+    },
+    "VastusLateralis": {
+        "group": "Muscle Definition",
+        "displayName": "Thigh VastusLateralis",
+        "referenceName": "BaseShapeVastusLateralis",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeVastusLateralis",
+        "impact": 536.5563
+    },
+    "VastusMedialis": {
+        "group": "Muscle Definition",
+        "displayName": "Thigh VastusMedialis",
+        "referenceName": "BaseShapeVastusMedialis",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeVastusMedialis",
+        "impact": 321.938
+    },
+    "Hamstrings": {
+        "group": "Muscle Definition",
+        "displayName": "Thigh Hamstrings",
+        "referenceName": "BaseShapeHamstrings",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeHamstrings",
+        "impact": 494.1822
+    },
+    "BicepsFemoris": {
+        "group": "Muscle Definition",
+        "displayName": "Thigh BicepsFemoris",
+        "referenceName": "BaseShapeBicepsFemoris",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBicepsFemoris",
+        "impact": 671.8292
+    },
+    "BackTrapezius": {
+        "group": "Muscle Definition",
+        "displayName": "Back Trapezius",
+        "referenceName": "BaseShapeBackTrapezius",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeBackTrapezius",
+        "impact": 65.7024
+    },
+    "7B Low": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShape7B Low",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShape7B Low",
+        "impact": 17368.7975
+    },
+    "7B High": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShape7B High",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShape7B High",
+        "impact": 15665.0723
+    },
+    "7B Bombshell Low": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShape7B Bombshell Low",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShape7B Bombshell Low",
+        "impact": 17917.0145
+    },
+    "7B Bombshell High": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShape7B Bombshell High",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShape7B Bombshell High",
+        "impact": 16641.0392
+    },
+    "UNP Low": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeUNP Low",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeUNP Low",
+        "impact": 21020.1075
+    },
+    "UNP High": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeUNP High",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeUNP High",
+        "impact": 14080.2525
+    },
+    "UNPB Low": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeUNPB Low",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeUNPB Low",
+        "impact": 20465.82
+    },
+    "UNPB High": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeUNPB High",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeUNPB High",
+        "impact": 14119.2499
+    },
+    "UNPB Oppai v3.2 Low": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeUNPB Oppai v3.2 Low",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeUNPB Oppai v3.2 Low",
+        "impact": 13653.6924
+    },
+    "UNPB Oppai v3.2 High": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeUNPB Oppai v3.2 High",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeUNPB Oppai v3.2 High",
+        "impact": 14784.273
+    },
+    "UNPC Low": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeUNPC Low",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeUNPC Low",
+        "impact": 20058.8242
+    },
+    "UNPC High": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeUNPC High",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeUNPC High",
+        "impact": 14547.4045
+    },
+    "Top Model Low": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeTop Model Low",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeTop Model Low",
+        "impact": 22915.1334
+    },
+    "Top Model High": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeTop Model High",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeTop Model High",
+        "impact": 16024.9006
+    },
+    "Aruru6Duck Low": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeAruru6Duck Low",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeAruru6Duck Low",
+        "impact": 20251.4679
+    },
+    "Aruru6Duck High": {
+        "group": "BHUNP 3BBB",
+        "displayName": null,
+        "referenceName": "BaseShapeAruru6Duck High",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "BaseShapeAruru6Duck High",
+        "impact": 30370.7328
+    }
+}

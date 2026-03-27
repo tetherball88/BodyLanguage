@@ -1,0 +1,67 @@
+{
+    "goals": {
+        "breasts_volume": {
+            "sliders": ["VanillaSSELo:-0.28", "VanillaSSEHi:0.27", "OldBaseShape:0.95", "7B Upper:0.89", "Breasts", "BreastsSmall:-1", "BreastsSmall2:-1", "BreastsNewSH", "BreastsFantasy", "DoubleMelon", "BreastFlatness2:-1", "BreastFlatness:-1", "BreastsGone:-1", "BreastsPressed_v2:-1", "BreastWidth", "MusclePecs"],
+            "ranges": {
+                "flat": [-999999, -4750],
+                "small": [-4750, -1000],
+                "average": [-1000, 5775],
+                "large": [5775, 15000],
+                "huge": [15000, 25000],
+                "impossible": [25000, 99999999999]
+            }
+        },
+        "waist": {
+            "sliders": ["VanillaSSEHi:0.024", "RibsProminance:-1", "RibsMore_v2", "Waist", "WideWaistLine", "ChubbyWaist", "HipUpperWidth"],
+            "ranges": {
+                "tiny": [-999999, 100],
+                "slim": [100, 400],
+                "standard": [400, 1000],
+                "soft": [1000, 1400],
+                "thick": [1400, 9999999999]
+            }
+        },
+        "frame": {
+            "sliders": ["VanillaSSELo:0.612", "VanillaSSEHi:0.689", "ChestDepth", "ChestWidth", "BigTorso", "Back", "BackArch", "ShoulderSmooth:-1", "ShoulderWidth:-1", "MuscleAbs", "MuscleBack_v2"],
+            "ranges": {
+                "small": [-9999999,0],
+                "slim": [0, 1500],
+                "average": [1500, 10000],
+                "broad": [10000, 18000],
+                "massive": [18000,9999999]
+            }
+        },
+        "butt_hips": {
+            "sliders": ["VanillaSSELo:-0.028", "7B Lower:0.11", "Butt", "ButtSmall:-1", "BigButt", "ChubbyButt", "AppleCheeks", "RoundAss", "ButtPressed_v2:-1", "ButtNarrow_v2:-1", "LegSpread_v2", "MuscleButt", "HipBone", "Hips", "HipNarrow_v2:-1"],
+            "ranges": {
+                "flat": [-999999,-3000],
+                "small": [-3000,-1000],
+                "average": [-1000,1000],
+                "large": [1000,3000],
+                "huge": [3000,999999999]
+            }
+        },
+        "legs": {
+            "sliders": ["VanillaSSELo:-0.08", "VanillaSSEHi:0.017", "OldBaseShape:-0.05", "7B Lower:0.25", "7BLeg_v2", "LegsThin:-1", "SlimThighs:-1", "Thighs", "ChubbyLegs", "ThighOutsideThicc_v2", "ThighInsideThicc_v2", "ThighFBThicc_v2", "CalfSize", "CalfSmooth:-1", "CalfFBThicc_v2", "MuscleLegs"],
+            "ranges": {
+                "thin": [-999999,-2000],
+                "lean": [-2000,0],
+                "average": [0,2000],
+                "thick": [2000,4000],
+                "collosal": [4000,999999]
+            }
+        },
+        "physique_condition": {
+            "sliders": ["Belly:-1", "BigBelly:-0.2", "PregnancyBelly:-0.05", "ChubbyWaist:-0.3", "ChubbyButt:-0.1", "ChubbyLegs:-0.1", "ChubbyArms:-0.1", "BellyFrontUpFat_v2:-1", "BellyFrontDownFat_v2:-1", "BellySideUpFat_v2:-1", "BellySideDownFat_v2:-1", "MuscleAbs", "MuscleArms", "MuscleButt", "MuscleLegs", "MusclePecs", "MuscleBack_v2", "MuscleMoreAbs_v2", "MuscleMoreArms_v2", "MuscleMoreLegs_v2"],
+            "ranges": {
+                "obese": [-999999999,-1000],
+                "chubby": [-1000,-500],
+                "plump": [-500,0],
+                "soft": [0,500],
+                "lean": [500,1200],
+                "athletic": [1200,1900],
+                "muscular": [1900,999999]
+            }
+        }
+    }
+}

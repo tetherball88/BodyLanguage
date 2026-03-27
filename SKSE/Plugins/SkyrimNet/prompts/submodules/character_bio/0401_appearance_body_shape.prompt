@@ -2,9 +2,7 @@
 {% set shouldRender = isFullDescription or render_mode == "short_inline" %}
 {% if not decnpc(actorUUID).isVirtual and shouldRender %}
     {% set npcData = decnpc(actorUUID) %}
-    {% set isCbbe = is_plugin_loaded("CBBE.esp") %}
-    {% set isBhunp = is_plugin_loaded("BHUNP3BBB.esp") %} 
-    {% set isHimbo = is_plugin_loaded("HIMBO.esp") %}
+    {% set npcHeight = npcData.height %}
     {% set race = lower(decnpc(actorUUID).race) %}
     {% set npcName = npcData.name %}
 
@@ -16,100 +14,11 @@
         {% set hasTng = false %}
     {% endif %}
 
-    {% set weight = npcData.weight %}
-    {% if weight <= 33 %}
-        {% set weightKey = "0" %}
-    {% else if weight >= 66 %}
-        {% set weightKey = "100" %}
-    {% else %}
-        {% set weightKey = "50" %}
-    {% endif %}
-
-    {% set isClothed = has_key(get_worn_equipment(actorUUID), "torso") %}
-    {% if isClothed %}
-        {% set clothingKey = "clothed" %}
-    {% else %}
-        {% set clothingKey = "naked" %}
-    {% endif %}
-
-    {% set obodyPreset = papyrus_util("GetStringValue", null, "obody_" + to_string(npcData.formId) + "_preset") %}
-    {# try signed form id #}
-    {% if obodyPreset == "" %}
-        {% set obodyPreset = papyrus_util("GetStringValue", null, "obody_" + to_string(npcData.formId - 4294967296) + "_preset") %}
-    {% endif %}
-
-    {% if isCbbe %}
-        {% set femaleBodyDescriptionsPath = "./SkyrimNet/jsonData/cbbeMain.json" %}
-    {% endif %}
-    {% if isBhunp %}
-        {% set femaleBodyDescriptionsPath = "./SkyrimNet/jsonData/bhunpMain.json" %}
-    {% endif %}
-    {% if isHimbo %}
-        {% set maleBodyDescriptionsPath = "./SkyrimNet/jsonData/himboMain.json" %}
-    {% endif %}
-
+    {% set isNaked = ttlb_is_naked(actorUUID) == "true" %}
     {% if npcData.isFemale %}
-        {% set bodyDescriptionsPath = femaleBodyDescriptionsPath %}
         {% set addons = papyrus_util("GetStringList", null, "TTLB_TNG_FemaleAddons") %}
     {% else %}
-        {% set bodyDescriptionsPath = maleBodyDescriptionsPath %}
         {% set addons = papyrus_util("GetStringList", null, "TTLB_TNG_MaleAddons") %}
-    {% endif %}
-
-    {% if bodyDescriptionsPath and obodyPreset %}
-        {% set bodyDescription = read_json(bodyDescriptionsPath, obodyPreset + "." + weightKey + "." + clothingKey) %}
-    {% endif %}
-
-    {% if not bodyDescription and obodyPreset %}
-        {% if npcData.isFemale %}
-            {% set parts = read_json("./SkyrimNet/jsonData/femaleBodyPartDescriptions.json") %}
-            {% set femalePresets = read_json("./SkyrimNet/jsonData/cbbe/cbbeAdditional.json") %}
-            {% set presetData = at(at(at(femalePresets, obodyPreset), weightKey), "bodyParts") %}
-            {% if presetData %}
-                {% set partKey = at(presetData, "overall_frame") %}
-                {% set overall_frame = at(at(at(parts, "overall_frame"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "breasts_size") %}
-                {% set breasts_size = at(at(at(parts, "breasts_size"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "breasts_shape") %}
-                {% set breasts_shape = at(at(at(parts, "breasts_shape"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "butt_size") %}
-                {% set butt_size = at(at(at(parts, "butt_size"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "butt_shape") %}
-                {% set butt_shape = at(at(at(parts, "butt_shape"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "legs_size") %}
-                {% set legs_size = at(at(at(parts, "legs_size"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "legs_shape") %}
-                {% set legs_shape = at(at(at(parts, "legs_shape"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "body_composition") %}
-                {% set body_composition = at(at(at(parts, "body_composition"), partKey), clothingKey) %}
-                {% set bodyDescription = overall_frame + " " + breasts_size + " " + breasts_shape + " " + butt_size + " " + butt_shape + " " + legs_size + " " + legs_shape + " " + body_composition %}
-                {% set shortBodyDescription = overall_frame + " " + breasts_size + " " + butt_size + " " + body_composition %}
-            {% endif %}
-        {% else %}
-            {% set parts = read_json("./SkyrimNet/jsonData/maleBodyPartDescriptions.json") %}
-            {% set malePresets = read_json("./SkyrimNet/jsonData/himbo/himbo.json") %}
-            {% set presetData = at(at(at(malePresets, obodyPreset), weightKey), "bodyParts") %}
-            {% if presetData %}
-                {% set partKey = at(presetData, "overall_frame") %}
-                {% set overall_frame = at(at(at(parts, "overall_frame"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "chest_build") %}
-                {% set chest_build = at(at(at(parts, "chest_build"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "shoulders_build") %}
-                {% set shoulders_build = at(at(at(parts, "shoulders_build"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "arms") %}
-                {% set arms = at(at(at(parts, "arms"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "back") %}
-                {% set back = at(at(at(parts, "back"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "butt") %}
-                {% set butt = at(at(at(parts, "butt"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "legs") %}
-                {% set legs = at(at(at(parts, "legs"), partKey), clothingKey) %}
-                {% set partKey = at(presetData, "body_composition") %}
-                {% set body_composition = at(at(at(parts, "body_composition"), partKey), clothingKey) %}
-                {% set bodyDescription = overall_frame + " " + chest_build + " " + shoulders_build + " " + arms + " " + back + " " + butt + " " + legs + " " + body_composition %}
-                {% set shortBodyDescription = overall_frame + " " + chest_build + " " + body_composition %}
-            {% endif %}
-        {% endif %}
     {% endif %}
 
     {% if hasTng %}
@@ -157,30 +66,56 @@
         {% endif %}
     {% endif %}
 
+    {% set heightRanges = read_json("./SkyrimNet/jsonData/heightRanges.json") %}
+    {% set heightPhrase = "" %}
+    {% if npcHeight >= heightRanges.towering %}
+        {% set heightPhrase = "Standing at a striking, towering height, " %}
+    {% else if npcHeight >= heightRanges.tall %}
+        {% set heightPhrase = "Standing notably tall, " %}
+    {% else if npcHeight >= heightRanges.above_average %}
+        {% set heightPhrase = "Carrying a slightly above-average height, " %}
+    {% else if npcHeight >= heightRanges.average %}
+        {% set heightPhrase = "Standing at an average height, " %}
+    {% else if npcHeight >= heightRanges.short %}
+        {% set heightPhrase = "Standing on the shorter side, " %}
+    {% else %}
+        {% set heightPhrase = "Notably petite in stature, " %}
+    {% endif %}
+
     {% if isFullDescription %}
         {{ "### Body shape" }}        
     {% endif %}
-    {{npcName}} is {{clothingKey}}.
+
+    {% set bodyPhrase = "" %}
     {% if isFullDescription %}
-        {% if bodyDescription %}
-            {{npcName}}'s figure reveals {{bodyDescription}}
-        {% endif %}
-        {% if not isClothed and hasTng %}
-            {% if tngSize == "XS" %}
-                {{npcName}}'s exposed penis is quite small - short and thin, barely filling a hand. It has a {{tngAddon}}
-            {% else if tngSize == "S" %}
-                {{npcName}}'s exposed penis is noticeably small, short in length with modest girth. It has a {{tngAddon}}
-            {% else if tngSize == "M" %}
-                {{npcName}}'s exposed penis is average-sized and well-proportioned, perfectly adequate. It has a {{tngAddon}}
-            {% else if tngSize == "L" %}
-                {{npcName}}'s exposed penis is impressively large - the substantial length and girth immediately draw attention. It has a {{tngAddon}}
-            {% else if tngSize == "XL" %}
-                {{npcName}}'s exposed penis is extraordinarily massive - its sheer size is striking and unforgettable. It has a {{tngAddon}}
-            {% endif %}
-        {% endif %}
+        {% set bodyPhrase = ttlb_get_full_body_description(actorUUID) %}
     {% else %}
-        {% if shortBodyDescription %}
-            {{npcName}}'s figure reveals {{shortBodyDescription}}
+        {% set bodyPhrase = ttlb_get_short_body_description(actorUUID) %}
+    {% endif %}
+
+    {% if bodyPhrase != "" %}
+        {% if isNaked %}
+            {% set bodyPhrase = " - " + npcData.possessiveAdjective + " figure revealing " + bodyPhrase %}
+        {% else %}
+            {% set bodyPhrase = " - " + npcData.possessiveAdjective + " figure suggests " + bodyPhrase %}
         {% endif %}
+    {% endif %}
+
+
+    {{heightPhrase}}{{npcName}}{% if isNaked %} is fully naked {% else %} is clothed{% endif %}{{bodyPhrase}}.
+    {% if isFullDescription and isNaked and hasTng %}
+        {% set sizePart = "average in size, neither remarkable nor lacking." %}
+        {% if tngSize == "XS" %}
+            {% set sizePart = "quite small — short and thin, barely filling a hand." %}
+        {% else if tngSize == "S" %}
+            {% set sizePart = "on the smaller side, short with modest girth." %}
+        {% else if tngSize == "M" %}
+            {% set sizePart = "average in size, neither remarkable nor lacking." %}
+        {% else if tngSize == "L" %}
+            {% set sizePart = "impressively large — substantial in both length and girth, it commands immediate attention." %}
+        {% else if tngSize == "XL" %}
+            {% set sizePart = "of extraordinary size — its sheer scale is almost shocking, far beyond what one would expect of any man." %}
+        {% endif %}
+        {{npcName}}'s exposed penis is {{sizePart}} {{tngAddon}}
     {% endif %}
 {% endif %}

@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SliderSetInfo version="1">
+    <SliderSet name="HIMBO Ref - Vanilla Nude High Poly">
+        <DataFolder>HIMBO Ref</DataFolder>
+        <SourceFile>HIMBO Ref - Vanilla Nude High Poly.nif</SourceFile>
+        <OutputPath>meshes\actors\character\character assets</OutputPath>
+        <OutputFile GenWeights="true">malebody</OutputFile>
+        <Shape target="HIMBO - Body HP" DataFolder="HIMBO Ref">HIMBO - Body HP</Shape>
+        <Slider name="Belly Button Match" invert="false" small="0" big="0" uv="true">
+            <Data name="HIMBO - Body HPBelly Button Match" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPBelly Button Match</Data>
+        </Slider>
+        <Slider name="ChestUV" invert="false" small="0" big="0" uv="true">
+            <Data name="HIMBO - Body HPChestUV" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPChestUV</Data>
+        </Slider>
+        <Slider name="Weight 0 to 1" invert="false" small="0" big="100" hidden="true">
+            <Data name="HIMBO - Body HPWeight 0 to 1" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPWeight 0 to 1</Data>
+        </Slider>
+        <Slider name="Chubby" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPChubby" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPChubby</Data>
+        </Slider>
+        <Slider name="Lean" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLean" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLean</Data>
+        </Slider>
+        <Slider name="Muscle" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPMuscle" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPMuscle</Data>
+        </Slider>
+        <Slider name="SOSlike" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPSOSlike" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPSOSlike</Data>
+        </Slider>
+        <Slider name="PecsClavicle" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsClavicle" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsClavicle</Data>
+        </Slider>
+        <Slider name="PecsSize" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsSize" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsSize</Data>
+        </Slider>
+        <Slider name="PecsMass" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsMass" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsMass</Data>
+        </Slider>
+        <Slider name="PecsSaggy" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsSaggy" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsSaggy</Data>
+        </Slider>
+        <Slider name="PecsWidth" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsWidth" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsWidth</Data>
+        </Slider>
+        <Slider name="PecsFlatten" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsFlatten" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsFlatten</Data>
+        </Slider>
+        <Slider name="PecsPosV" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsPosV" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsPosV</Data>
+        </Slider>
+        <Slider name="PecsPosH" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsPosH" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsPosH</Data>
+        </Slider>
+        <Slider name="PecsSide" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsSide" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsSide</Data>
+        </Slider>
+        <Slider name="PecsPush" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsPush" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsPush</Data>
+        </Slider>
+        <Slider name="PecsLowerSide" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsLowerSide" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsLowerSide</Data>
+        </Slider>
+        <Slider name="PecsDecrease" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsDecrease" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsDecrease</Data>
+        </Slider>
+        <Slider name="PecsCrease" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsCrease" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsCrease</Data>
+        </Slider>
+        <Slider name="NipsAreola" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPNipsAreola" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPNipsAreola</Data>
+        </Slider>
+        <Slider name="NipsTips" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPNipsTips" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPNipsTips</Data>
+        </Slider>
+        <Slider name="NipsLength" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPNipsLength" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPNipsLength</Data>
+        </Slider>
+        <Slider name="NipsRound" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPNipsRound" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPNipsRound</Data>
+        </Slider>
+        <Slider name="NipsAngle" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPNipsAngle" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPNipsAngle</Data>
+        </Slider>
+        <Slider name="NipsPuffy" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPNipsPuffy" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPNipsPuffy</Data>
+        </Slider>
+        <Slider name="NipsLower" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPNipsLower" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPNipsLower</Data>
+        </Slider>
+        <Slider name="ArmsTraps" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsTraps" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsTraps</Data>
+        </Slider>
+        <Slider name="ArmsTrapsMeat" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsTrapsMeat" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsTrapsMeat</Data>
+        </Slider>
+        <Slider name="ArmsTrapsPush" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsTrapsPush" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsTrapsPush</Data>
+        </Slider>
+        <Slider name="ArmsTrapsValleys" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsTrapsValleys" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsTrapsValleys</Data>
+        </Slider>
+        <Slider name="ArmsClavicleCurve" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsClavicleCurve" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsClavicleCurve</Data>
+        </Slider>
+        <Slider name="ArmsShoulders" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsShoulders" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsShoulders</Data>
+        </Slider>
+        <Slider name="ArmsDelts" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsDelts" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsDelts</Data>
+        </Slider>
+        <Slider name="ArmsDeltsBack" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsDeltsBack" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsDeltsBack</Data>
+        </Slider>
+        <Slider name="ArmsDeltsUpper" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsDeltsUpper" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsDeltsUpper</Data>
+        </Slider>
+        <Slider name="ArmsDeltsLower" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsDeltsLower" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsDeltsLower</Data>
+        </Slider>
+        <Slider name="ArmsBiceps" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsBiceps" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsBiceps</Data>
+        </Slider>
+        <Slider name="ArmsBicepsBack" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsBicepsBack" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsBicepsBack</Data>
+        </Slider>
+        <Slider name="ArmsSide" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsSide" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsSide</Data>
+        </Slider>
+        <Slider name="ArmsBrachio" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsBrachio" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsBrachio</Data>
+        </Slider>
+        <Slider name="ArmsFore" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsFore" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsFore</Data>
+        </Slider>
+        <Slider name="TorsoSterHeight" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoSterHeight" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoSterHeight</Data>
+        </Slider>
+        <Slider name="TorsoSterDepth" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoSterDepth" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoSterDepth</Data>
+        </Slider>
+        <Slider name="TorsoSterWidth" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoSterWidth" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoSterWidth</Data>
+        </Slider>
+        <Slider name="TorsoBackSize" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoBackSize" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoBackSize</Data>
+        </Slider>
+        <Slider name="TorsoBackSlope" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoBackSlope" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoBackSlope</Data>
+        </Slider>
+        <Slider name="TorsoBackShape" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoBackShape" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoBackShape</Data>
+        </Slider>
+        <Slider name="TorsoBackCenter" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoBackCenter" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoBackCenter</Data>
+        </Slider>
+        <Slider name="TorsoBackSerratusMid" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoBackSerratusMid" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoBackSerratusMid</Data>
+        </Slider>
+        <Slider name="TorsoBackObliques" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoBackObliques" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoBackObliques</Data>
+        </Slider>
+        <Slider name="TorsoMass" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoMass" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoMass</Data>
+        </Slider>
+        <Slider name="TorsoWidth" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoWidth" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoWidth</Data>
+        </Slider>
+        <Slider name="TorsoLower" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoLower" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoLower</Data>
+        </Slider>
+        <Slider name="TorsoWaistSize" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoWaistSize" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoWaistSize</Data>
+        </Slider>
+        <Slider name="TorsoWaistHeight" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoWaistHeight" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoWaistHeight</Data>
+        </Slider>
+        <Slider name="TorsoHip" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoHip" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoHip</Data>
+        </Slider>
+        <Slider name="TorsoFlatAbs" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoFlatAbs" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoFlatAbs</Data>
+        </Slider>
+        <Slider name="TorsoRibsDefinition" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoRibsDefinition" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoRibsDefinition</Data>
+        </Slider>
+        <Slider name="TorsoVLine" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoVLine" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoVLine</Data>
+        </Slider>
+        <Slider name="TorsoBelly" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoBelly" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoBelly</Data>
+        </Slider>
+        <Slider name="TorsoBellyChub" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoBellyChub" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoBellyChub</Data>
+        </Slider>
+        <Slider name="TorsoBellyLHandles" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoBellyLHandles" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoBellyLHandles</Data>
+        </Slider>
+        <Slider name="TorsoSpine" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoSpine" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoSpine</Data>
+        </Slider>
+        <Slider name="ButtBooty" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtBooty" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtBooty</Data>
+        </Slider>
+        <Slider name="ButtRoundy" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtRoundy" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtRoundy</Data>
+        </Slider>
+        <Slider name="ButtSaggy" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtSaggy" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtSaggy</Data>
+        </Slider>
+        <Slider name="ButtCleft" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtCleft" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtCleft</Data>
+        </Slider>
+        <Slider name="ButtSide" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtSide" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtSide</Data>
+        </Slider>
+        <Slider name="ButtCenterPush" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtCenterPush" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtCenterPush</Data>
+        </Slider>
+        <Slider name="ButtCurve" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtCurve" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtCurve</Data>
+        </Slider>
+        <Slider name="ButtDimpleDeepen" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtDimpleDeepen" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtDimpleDeepen</Data>
+        </Slider>
+        <Slider name="ButtDimpleFatten" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtDimpleFatten" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtDimpleFatten</Data>
+        </Slider>
+        <Slider name="LegsSize" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsSize" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsSize</Data>
+        </Slider>
+        <Slider name="LegsThigh" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsThigh" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsThigh</Data>
+        </Slider>
+        <Slider name="LegsThinner" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsThinner" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsThinner</Data>
+        </Slider>
+        <Slider name="LegsChubby" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsChubby" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsChubby</Data>
+        </Slider>
+        <Slider name="LegsGlutes" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsGlutes" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsGlutes</Data>
+        </Slider>
+        <Slider name="LegsFemurUpper" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsFemurUpper" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsFemurUpper</Data>
+        </Slider>
+        <Slider name="LegsFemurLower" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsFemurLower" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsFemurLower</Data>
+        </Slider>
+        <Slider name="LegsFemurSide" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsFemurSide" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsFemurSide</Data>
+        </Slider>
+        <Slider name="LegsFemurBack" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsFemurBack" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsFemurBack</Data>
+        </Slider>
+        <Slider name="LegsKneePit" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsKneePit" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsKneePit</Data>
+        </Slider>
+        <Slider name="LegsCalfSize" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsCalfSize" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsCalfSize</Data>
+        </Slider>
+        <Slider name="LegsCalfWidth" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsCalfWidth" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsCalfWidth</Data>
+        </Slider>
+        <Slider name="LegsCalfUpper" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsCalfUpper" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsCalfUpper</Data>
+        </Slider>
+        <Slider name="LegsCalfLower" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsCalfLower" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsCalfLower</Data>
+        </Slider>
+        <Slider name="LegsCalfFlatten" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsCalfFlatten" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsCalfFlatten</Data>
+        </Slider>
+        <Slider name="LegsShinCrease" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsShinCrease" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsShinCrease</Data>
+        </Slider>
+        <Slider name="FemmeT" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPFemmeT" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPFemmeT</Data>
+        </Slider>
+        <Slider name="FemmeB" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPFemmeB" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPFemmeB</Data>
+        </Slider>
+        <Slider name="TorsoHipLarge" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoHipLarge" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoHipLarge</Data>
+        </Slider>
+        <Slider name="LegsThighUpperSide" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsThighUpperSide" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsThighUpperSide</Data>
+        </Slider>
+        <Slider name="TorsoShoulderInc" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoShoulderInc" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoShoulderInc</Data>
+        </Slider>
+        <Slider name="TorsoShoulderDec" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoShoulderDec" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoShoulderDec</Data>
+        </Slider>
+        <Slider name="LegsVastusMReduction" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsVastusMReduction" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsVastusMReduction</Data>
+        </Slider>
+        <Slider name="ArmsDeltsShape" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPArmsDeltsShape" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPArmsDeltsShape</Data>
+        </Slider>
+        <Slider name="PecsMinor" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsMinor" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsMinor</Data>
+        </Slider>
+        <Slider name="PecsLower" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPecsLower" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPecsLower</Data>
+        </Slider>
+        <Slider name="BodyMass" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPBodyMass" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPBodyMass</Data>
+        </Slider>
+        <Slider name="BellyPot" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPBellyPot" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPBellyPot</Data>
+        </Slider>
+        <Slider name="BellySmooth" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPBellySmooth" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPBellySmooth</Data>
+        </Slider>
+        <Slider name="ButtTailbone" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtTailbone" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtTailbone</Data>
+        </Slider>
+        <Slider name="ButtUpper" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtUpper" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtUpper</Data>
+        </Slider>
+        <Slider name="PregnancyBelly" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPPregnancyBelly" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPPregnancyBelly</Data>
+        </Slider>
+        <Slider name="BubbleButt" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPBubbleButt" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPBubbleButt</Data>
+        </Slider>
+        <Slider name="SSBBW butt growth" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPSSBBW butt growth" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPSSBBW butt growth</Data>
+        </Slider>
+        <Slider name="SSBBW2 boobs growth" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPSSBBW2 boobs growth" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPSSBBW2 boobs growth</Data>
+        </Slider>
+        <Slider name="SamuelLike" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPSamuelLike" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPSamuelLike</Data>
+        </Slider>
+        <Slider name="ButtLower" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtLower" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtLower</Data>
+        </Slider>
+        <Slider name="FemmeBooba" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPFemmeBooba" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPFemmeBooba</Data>
+        </Slider>
+        <Slider name="FemmeBoobaBig" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPFemmeBoobaBig" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPFemmeBoobaBig</Data>
+        </Slider>
+        <Slider name="BellyButtonPush" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPBellyButtonPush" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPBellyButtonPush</Data>
+        </Slider>
+        <Slider name="BellyRounder" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPBellyRounder" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPBellyRounder</Data>
+        </Slider>
+        <Slider name="TorsoBackDefinition" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoBackDefinition" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoBackDefinition</Data>
+        </Slider>
+        <Slider name="LegsThighInnerSide" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsThighInnerSide" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsThighInnerSide</Data>
+        </Slider>
+        <Slider name="LegsKneeInner" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsKneeInner" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsKneeInner</Data>
+        </Slider>
+        <Slider name="LegsKneeOuter" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsKneeOuter" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsKneeOuter</Data>
+        </Slider>
+        <Slider name="LegsThighIn" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsThighIn" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsThighIn</Data>
+        </Slider>
+        <Slider name="LegsCalfSideIn" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsCalfSideIn" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsCalfSideIn</Data>
+        </Slider>
+        <Slider name="LegsCalfOut" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsCalfOut" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsCalfOut</Data>
+        </Slider>
+        <Slider name="ButtTighten" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtTighten" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtTighten</Data>
+        </Slider>
+        <Slider name="LegsThighSmoothCurve" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPLegsThighSmoothCurve" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPLegsThighSmoothCurve</Data>
+        </Slider>
+        <Slider name="ButtScrapeUpper" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPButtScrapeUpper" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPButtScrapeUpper</Data>
+        </Slider>
+        <Slider name="TorsoMassSmooth" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoMassSmooth" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoMassSmooth</Data>
+        </Slider>
+        <Slider name="TorsoHipSmooth" invert="false" small="0" big="0">
+            <Data name="HIMBO - Body HPTorsoHipSmooth" target="HIMBO - Body HP" local="true">HIMBO Ref - Vanilla Nude High Poly.osd\HIMBO - Body HPTorsoHipSmooth</Data>
+        </Slider>
+    </SliderSet>
+</SliderSetInfo>

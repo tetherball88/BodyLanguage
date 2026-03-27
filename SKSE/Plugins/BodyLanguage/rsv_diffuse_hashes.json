@@ -1,0 +1,193 @@
+{
+  "0ce1fbef4f9fd175dfe13f596c87f6d5": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "vampire_beast",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/monstervampire/+markings/textures/actors/character/RSV/VampireBeastFemale/FemaleBody_1.dds"
+  },
+  "0d0076052322bcf198633517d43fa0b2": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "stretch_marks",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/altmer/+stretchmark/textures/actors/character/RSV/highelffemale/femalebody_1.dds"
+  },
+  "137e10866a644467286bf676ddcef6df": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "scars",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/imperial/+scars/textures/actors/character/RSV/ImperialMale/malebody_1.dds"
+  },
+  "1d867b04fec06cc2411e517227b9710d": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "purple_dunmer",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/fantasydunmer/purple/textures/actors/character/RSV/DarkElfMale/malebodyFantasy_1.dds"
+  },
+  "20ec60a3e9955bac616b34f1140f6aee": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "vampire_beast",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/monstervampire/+markings/textures/actors/character/RSV/VampireBeastMale/malebody_1.dds"
+  },
+  "24b57f2dde510508273574764176acb0": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "spring_bosmer",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/fantasybosmer/spring/textures/actors/character/RSV/woodelffemale/FemaleBodyFantasy_1.dds"
+  },
+  "27860b4f474b978719bd3006b0e1b2c9": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "dremora_red",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/dremora/red/textures/actors/character/RSV/DremoraFemale/FemaleBody_1.dds"
+  },
+  "292ad4c8dffc71b23d153d42bb7fde30": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "dremora_red",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/dremora/red/textures/actors/character/RSV/DremoraMale/MaleBody_1.dds"
+  },
+  "2a968a286ca20a3c6d6624a0a99b736e": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "dremora_dark",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/dremora/grey/textures/actors/character/RSV/DremoraMale/MaleBody_1.dds"
+  },
+  "36e4d5b6a5114b0fa926764618bf824c": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "red_orc",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/fantasyorc/red/textures/actors/character/RSV/femaleorc/FemaleBodyFantasy_1.dds"
+  },
+  "38748735b67c5bea6f2049bf38b917fb": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "frostnip",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/nord/+frostnip/textures/actors/character/RSV/NordMale/malebody_1.dds"
+  },
+  "47aaea705e48c9262c6fa475abf72ebc": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "spring_bosmer",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/fantasybosmer/spring/textures/actors/character/RSV/WoodElfMale/malebodyFantasy_1.dds"
+  },
+  "48af4304bd3fc3d35ee14ede5efc119e": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "dremora_dark",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/dremora/grey/textures/actors/character/RSV/DremoraFemale/FemaleBody_1.dds"
+  },
+  "4ec051dca7d903e2a531b4af97144190": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "dirty",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/orc/+dirt/textures/actors/character/RSV/femaleorc/femalebody_1.dds"
+  },
+  "5aeeec9d805f0fe3390fefd0144e618a": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "silver_dunmer",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/fantasydunmer/silver/textures/actors/character/RSV/DarkElfMale/malebodyFantasy_1.dds"
+  },
+  "5f09191a2058e653c846bd70da2d4565": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "frostnip",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/nord/+frostnip/textures/actors/character/RSV/NordFemale/femalebody_1.dds"
+  },
+  "7c40b90e8509d30c93010cba05afa0f3": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "freckles_light",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/bosmer/+freckles/textures/actors/character/RSV/woodelffemale/femalebody_1.dds"
+  },
+  "87c4d40b63a344494eee4a3af0a3c77e": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "red_orc",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/fantasyorc/red/textures/actors/character/RSV/OrcMale/malebodyFantasy_1.dds"
+  },
+  "8e97822e754151369fe6ba03d65f13a7": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "golden_altmer",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/fantasyaltmer/gold/textures/actors/character/RSV/highelffemale/FemaleBodyFantasy_1.dds"
+  },
+  "9794c83fda32dddb19d62aeae2ce1075": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "autumn_bosmer",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/fantasybosmer/autumn/textures/actors/character/RSV/WoodElfMale/malebodyFantasy_1.dds"
+  },
+  "9e4c7551f104a30697ed0a053b87edd4": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "green_orc",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/fantasyorc/green/textures/actors/character/RSV/OrcMale/malebodyFantasy_1.dds"
+  },
+  "__version": "4edda8773a16469b5d79cfbeb7fd2032:5ed9324f3663b4100b1fa0b1cad61e2e",
+  "a1bbb70b1839f16c4c2be525307cc072": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "purple_dunmer",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/fantasydunmer/purple/textures/actors/character/RSV/darkelffemale/FemaleBodyFantasy_1.dds"
+  },
+  "a8e2fd2f6f89f8b7a9850bc35e157dc3": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "akaviri",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/akaviri/pink/textures/actors/character/RSV/AsianFemale/FemaleBody_1.dds"
+  },
+  "b3ca15aeacdee0a22f8b4dbbc78ff0ca": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "freckles_light",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/bosmer/+freckles/textures/actors/character/RSV/WoodElfMale/malebody_1.dds"
+  },
+  "b5a6e527ca5dbd771f73a7809b002b31": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "dunmer_veiny",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/dunmer/+veins/textures/actors/character/RSV/darkelffemale/femalebody_1.dds"
+  },
+  "bc8a79d6f160bdceb55a6be310068ed3": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "tanlines",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/redguard/+dark/textures/actors/character/RSV/redguardfemale/femalebody_1.dds"
+  },
+  "bdb4ef332e3ee10da7f04a6b1bb0c766": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "akaviri",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/akaviri/brown/textures/actors/character/RSV/AsianFemale/FemaleBody_1.dds"
+  },
+  "bf2123f806979b563e0469c31c03dd6a": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "stretch_marks",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/altmer/+stretchmark/textures/actors/character/RSV/HighElfMale/malebody_1.dds"
+  },
+  "bf3d969be0adf9bc9cf871512fba4a00": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "silver_dunmer",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/fantasydunmer/silver/textures/actors/character/RSV/darkelffemale/FemaleBodyFantasy_1.dds"
+  },
+  "c0ca7dcc4165fd176319ae31cc527223": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "autumn_bosmer",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/fantasybosmer/autumn/textures/actors/character/RSV/woodelffemale/FemaleBodyFantasy_1.dds"
+  },
+  "d040f7ab274fbc2ac9581856ae389eb8": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "green_orc",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/fantasyorc/green/textures/actors/character/RSV/femaleorc/FemaleBodyFantasy_1.dds"
+  },
+  "d55789ab94bfa838d7be4e6e11d777bb": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "dunmer_veiny",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/dunmer/+veins/textures/actors/character/RSV/DarkElfMale/malebody_1.dds"
+  },
+  "d6a274c6c38c09aa5a0c7b1d27a5a343": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "tanlines",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/redguard/+dark/textures/actors/character/RSV/RedguardMale/malebody_1.dds"
+  },
+  "dd73618fa91ea0ae586494f4919728ca": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "golden_altmer",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/fantasyaltmer/gold/textures/actors/character/RSV/HighElfMale/malebodyFantasy_1.dds"
+  },
+  "de9ce59db1f1200731b6e1579f578a87": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "silver_altmer",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/fantasyaltmer/silver/textures/actors/character/RSV/HighElfMale/malebodyFantasy_1.dds"
+  },
+  "e36d22d832cc1f9c2bf293a98d8c7ab5": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "scars",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/imperial/+scars/textures/actors/character/RSV/imperialfemale/femalebody_1.dds"
+  },
+  "e6776d4e856eca78d89aa73d0d214ee5": {
+    "archive": "BnP male RSV (SOS full) 4k-102667-1-0-1697393495.7z",
+    "complexion": "dirty",
+    "filePath": "BnP RSV patch (SOS) 4k/options/diffuse/orc/+dirt/textures/actors/character/RSV/OrcMale/malebody_1.dds"
+  },
+  "fe7b6b60eb120c1d2cf8f8faa49a359f": {
+    "archive": "BnP female RSV (CBBE) 4k-102667-1-0-1697382132.7z",
+    "complexion": "silver_altmer",
+    "filePath": "BnP RSV patch (CBBE) 4k/options/diffuse/fantasyaltmer/silver/textures/actors/character/RSV/highelffemale/FemaleBodyFantasy_1.dds"
+  }
+}

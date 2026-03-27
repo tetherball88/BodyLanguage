@@ -1,0 +1,677 @@
+{
+    "VanillaSSELo": {
+        "group": "Full Body",
+        "displayName": "Vanilla SSE Low",
+        "referenceName": "3BA RefVanillaSSELo",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefVanillaSSELo",
+        "impact": 21334.3711
+    },
+    "VanillaSSEHi": {
+        "group": "Full Body",
+        "displayName": "Vanilla SSE High",
+        "referenceName": "3BA RefVanillaSSEHi",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefVanillaSSEHi",
+        "impact": 28999.9517
+    },
+    "OldBaseShape": {
+        "group": "Full Body",
+        "displayName": "Old Shape",
+        "referenceName": "3BA RefOldBaseShape",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefOldBaseShape",
+        "impact": 17142.2594
+    },
+    "7B Lower": {
+        "group": "Full Body",
+        "displayName": "7B Lower",
+        "referenceName": "3BA Ref7B Lower",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA Ref7B Lower",
+        "impact": 6416.8673
+    },
+    "7B Upper": {
+        "group": "Full Body",
+        "displayName": "7B Upper",
+        "referenceName": "3BA Ref7B Upper",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA Ref7B Upper",
+        "impact": 22569.51
+    },
+    "Breasts": {
+        "group": "Breasts",
+        "displayName": "Size",
+        "referenceName": "3BA RefBreasts",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreasts",
+        "impact": 9626.393
+    },
+    "BreastsSmall": {
+        "group": "Breasts",
+        "displayName": "Smaller 1",
+        "referenceName": "3BA RefBreastsSmall",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastsSmall",
+        "impact": 10028.2008
+    },
+    "BreastsSmall2": {
+        "group": "Breasts",
+        "displayName": "Smaller 2",
+        "referenceName": "3BA RefBreastsSmall2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastsSmall2",
+        "impact": 7291.5514
+    },
+    "BreastsNewSH": {
+        "group": "Breasts",
+        "displayName": "Silly Huge",
+        "referenceName": "3BA RefBreastsNewSH",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastsNewSH",
+        "impact": 21322.2681
+    },
+    "BreastsFantasy": {
+        "group": "Breasts",
+        "displayName": "Fantasy",
+        "referenceName": "3BA RefBreastsFantasy",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastsFantasy",
+        "impact": 12469.5926
+    },
+    "DoubleMelon": {
+        "group": "Breasts",
+        "displayName": "Melons",
+        "referenceName": "3BA RefDoubleMelon",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefDoubleMelon",
+        "impact": 10514.3961
+    },
+    "BreastFlatness2": {
+        "group": "Breasts",
+        "displayName": "Flatness",
+        "referenceName": "3BA RefBreastFlatness2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastFlatness2",
+        "impact": 10786.4812
+    },
+    "BreastFlatness": {
+        "group": "Breasts",
+        "displayName": "More Flatness",
+        "referenceName": "3BA RefBreastFlatness",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastFlatness",
+        "impact": 13468.2406
+    },
+    "BreastsGone": {
+        "group": "Breasts",
+        "displayName": "Gone",
+        "referenceName": "3BA RefBreastsGone",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastsGone",
+        "impact": 9493.2496
+    },
+    "BreastGravity2": {
+        "group": "Breasts",
+        "displayName": "Gravity",
+        "referenceName": "3BA RefBreastGravity2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastGravity2",
+        "impact": 12952.5596
+    },
+    "PushUp": {
+        "group": "Breasts",
+        "displayName": "Push Up",
+        "referenceName": "3BA RefPushUp",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefPushUp",
+        "impact": 10816.4263
+    },
+    "BreastHeight": {
+        "group": "Breasts",
+        "displayName": "Height",
+        "referenceName": "3BA RefBreastHeight",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastHeight",
+        "impact": 13739.1189
+    },
+    "BreastPerkiness": {
+        "group": "Breasts",
+        "displayName": "Perkiness",
+        "referenceName": "3BA RefBreastPerkiness",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastPerkiness",
+        "impact": 2553.5024
+    },
+    "BreastWidth": {
+        "group": "Breasts",
+        "displayName": "Width",
+        "referenceName": "3BA RefBreastWidth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastWidth",
+        "impact": 5875.3621
+    },
+    "BreastsPressed_v2": {
+        "group": "Breasts",
+        "displayName": "Pressed",
+        "referenceName": "3BA RefBreastsPressed_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBreastsPressed_v2",
+        "impact": 7295.8414
+    },
+    "ChestDepth": {
+        "group": "Torso",
+        "displayName": "Chest Depth",
+        "referenceName": "3BA RefChestDepth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefChestDepth",
+        "impact": 10896.1526
+    },
+    "ChestWidth": {
+        "group": "Torso",
+        "displayName": "Chest Width",
+        "referenceName": "3BA RefChestWidth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefChestWidth",
+        "impact": 1849.0969
+    },
+    "RibsProminance": {
+        "group": "Torso",
+        "displayName": "Ribs",
+        "referenceName": "3BA RefRibsProminance",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefRibsProminance",
+        "impact": 44.9118
+    },
+    "RibsMore_v2": {
+        "group": "Torso",
+        "displayName": "Protruded Ribs",
+        "referenceName": "3BA RefRibsMore_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefRibsMore_v2",
+        "impact": 127.0773
+    },
+    "BigTorso": {
+        "group": "Torso",
+        "displayName": "Size",
+        "referenceName": "3BA RefBigTorso",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBigTorso",
+        "impact": 7062.2271
+    },
+    "Waist": {
+        "group": "Torso",
+        "displayName": "Waist Size",
+        "referenceName": "3BA RefWaist",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefWaist",
+        "impact": 571.0691
+    },
+    "WideWaistLine": {
+        "group": "Torso",
+        "displayName": "Waist Line",
+        "referenceName": "3BA RefWideWaistLine",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefWideWaistLine",
+        "impact": 259.8523
+    },
+    "ChubbyWaist": {
+        "group": "Torso",
+        "displayName": "Chubby Waist",
+        "referenceName": "3BA RefChubbyWaist",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefChubbyWaist",
+        "impact": 1603.5408
+    },
+    "Back": {
+        "group": "Torso",
+        "displayName": "Back Size",
+        "referenceName": "3BA RefBack",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBack",
+        "impact": 1463.4288
+    },
+    "BackArch": {
+        "group": "Torso",
+        "displayName": "Back Arch",
+        "referenceName": "3BA RefBackArch",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBackArch",
+        "impact": 573.8943
+    },
+    "Butt": {
+        "group": "Butt",
+        "displayName": "Size",
+        "referenceName": "3BA RefButt",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefButt",
+        "impact": 1571.7514
+    },
+    "ButtSmall": {
+        "group": "Butt",
+        "displayName": "Smaller",
+        "referenceName": "3BA RefButtSmall",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefButtSmall",
+        "impact": 2504.4804
+    },
+    "BigButt": {
+        "group": "Butt",
+        "displayName": "Big",
+        "referenceName": "3BA RefBigButt",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBigButt",
+        "impact": 1342.4012
+    },
+    "ChubbyButt": {
+        "group": "Butt",
+        "displayName": "Chubby",
+        "referenceName": "3BA RefChubbyButt",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefChubbyButt",
+        "impact": 1730.3939
+    },
+    "AppleCheeks": {
+        "group": "Butt",
+        "displayName": "Apple",
+        "referenceName": "3BA RefAppleCheeks",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefAppleCheeks",
+        "impact": 2238.0163
+    },
+    "RoundAss": {
+        "group": "Butt",
+        "displayName": "Round",
+        "referenceName": "3BA RefRoundAss",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefRoundAss",
+        "impact": 453.02
+    },
+    "ButtPressed_v2": {
+        "group": "Butt",
+        "displayName": "Pressed",
+        "referenceName": "3BA RefButtPressed_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefButtPressed_v2",
+        "impact": 1245.659
+    },
+    "ButtNarrow_v2": {
+        "group": "Butt",
+        "displayName": "Narrow",
+        "referenceName": "3BA RefButtNarrow_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefButtNarrow_v2",
+        "impact": 242.8689
+    },
+    "7BLeg_v2": {
+        "group": "Legs and Feet",
+        "displayName": "7B Legs",
+        "referenceName": "3BA Ref7BLeg_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA Ref7BLeg_v2",
+        "impact": 2285.0571
+    },
+    "LegsThin": {
+        "group": "Legs and Feet",
+        "displayName": "Thin",
+        "referenceName": "3BA RefLegsThin",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefLegsThin",
+        "impact": 906.0418
+    },
+    "SlimThighs": {
+        "group": "Legs and Feet",
+        "displayName": "Slim",
+        "referenceName": "3BA RefSlimThighs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefSlimThighs",
+        "impact": 1664.5406
+    },
+    "Thighs": {
+        "group": "Legs and Feet",
+        "displayName": "Thighs",
+        "referenceName": "3BA RefThighs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefThighs",
+        "impact": 2078.9789
+    },
+    "ChubbyLegs": {
+        "group": "Legs and Feet",
+        "displayName": "Chubby",
+        "referenceName": "3BA RefChubbyLegs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefChubbyLegs",
+        "impact": 3865.7999
+    },
+    "ThighOutsideThicc_v2": {
+        "group": "Legs and Feet",
+        "displayName": "Outside",
+        "referenceName": "3BA RefThighOutsideThicc_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefThighOutsideThicc_v2",
+        "impact": 691.8808
+    },
+    "ThighInsideThicc_v2": {
+        "group": "Legs and Feet",
+        "displayName": "Inside",
+        "referenceName": "3BA RefThighInsideThicc_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefThighInsideThicc_v2",
+        "impact": 315.2972
+    },
+    "ThighFBThicc_v2": {
+        "group": "Legs and Feet",
+        "displayName": "FrontBack",
+        "referenceName": "3BA RefThighFBThicc_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefThighFBThicc_v2",
+        "impact": 431.972
+    },
+    "CalfSize": {
+        "group": "Legs and Feet",
+        "displayName": "Calf Size",
+        "referenceName": "3BA RefCalfSize",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefCalfSize",
+        "impact": 137.4657
+    },
+    "CalfSmooth": {
+        "group": "Legs and Feet",
+        "displayName": "Calf Smooth",
+        "referenceName": "3BA RefCalfSmooth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefCalfSmooth",
+        "impact": 180.3489
+    },
+    "CalfFBThicc_v2": {
+        "group": "Legs and Feet",
+        "displayName": "Calf FrontBack",
+        "referenceName": "3BA RefCalfFBThicc_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefCalfFBThicc_v2",
+        "impact": 149.4833
+    },
+    "LegSpread_v2": {
+        "group": "Legs and Feet",
+        "displayName": "Leg Spread",
+        "referenceName": "3BA RefLegSpread_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefLegSpread_v2",
+        "impact": 1811.1865
+    },
+    "MuscleAbs": {
+        "group": "Muscle Definition",
+        "displayName": "Abs",
+        "referenceName": "3BA RefMuscleAbs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefMuscleAbs",
+        "impact": 105.2935
+    },
+    "MuscleArms": {
+        "group": "Muscle Definition",
+        "displayName": "Arms",
+        "referenceName": "3BA RefMuscleArms",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefMuscleArms",
+        "impact": 394.6641
+    },
+    "MuscleButt": {
+        "group": "Muscle Definition",
+        "displayName": "Butt",
+        "referenceName": "3BA RefMuscleButt",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefMuscleButt",
+        "impact": 215.7415
+    },
+    "MuscleLegs": {
+        "group": "Muscle Definition",
+        "displayName": "Legs",
+        "referenceName": "3BA RefMuscleLegs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefMuscleLegs",
+        "impact": 895.6507
+    },
+    "MusclePecs": {
+        "group": "Muscle Definition",
+        "displayName": "Pecs",
+        "referenceName": "3BA RefMusclePecs",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefMusclePecs",
+        "impact": 320.1034
+    },
+    "MuscleBack_v2": {
+        "group": "Muscle Definition",
+        "displayName": "Back",
+        "referenceName": "3BA RefMuscleBack_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefMuscleBack_v2",
+        "impact": 1333.5389
+    },
+    "MuscleMoreAbs_v2": {
+        "group": "Muscle Definition",
+        "displayName": "More Abs",
+        "referenceName": "3BA RefMuscleMoreAbs_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefMuscleMoreAbs_v2",
+        "impact": 376.3
+    },
+    "MuscleMoreArms_v2": {
+        "group": "Muscle Definition",
+        "displayName": "More Arms",
+        "referenceName": "3BA RefMuscleMoreArms_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefMuscleMoreArms_v2",
+        "impact": 1630.4294
+    },
+    "MuscleMoreLegs_v2": {
+        "group": "Muscle Definition",
+        "displayName": "More Legs",
+        "referenceName": "3BA RefMuscleMoreLegs_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefMuscleMoreLegs_v2",
+        "impact": 712.1853
+    },
+    "HipBone": {
+        "group": "Hips",
+        "displayName": "Hip Bone",
+        "referenceName": "3BA RefHipBone",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefHipBone",
+        "impact": 246.3824
+    },
+    "Hips": {
+        "group": "Hips",
+        "displayName": "Size",
+        "referenceName": "3BA RefHips",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefHips",
+        "impact": 931.2299
+    },
+    "HipUpperWidth": {
+        "group": "Hips",
+        "displayName": "Upper Width",
+        "referenceName": "3BA RefHipUpperWidth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefHipUpperWidth",
+        "impact": 567.6571
+    },
+    "HipNarrow_v2": {
+        "group": "Hips",
+        "displayName": "Hip Narrow",
+        "referenceName": "3BA RefHipNarrow_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefHipNarrow_v2",
+        "impact": 296.95
+    },
+    "Arms": {
+        "group": "Arms",
+        "displayName": "Size",
+        "referenceName": "3BA RefArms",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefArms",
+        "impact": 575.6572
+    },
+    "ForearmSize": {
+        "group": "Arms",
+        "displayName": "Forearm Size",
+        "referenceName": "3BA RefForearmSize",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefForearmSize",
+        "impact": 115.3643
+    },
+    "ChubbyArms": {
+        "group": "Arms",
+        "displayName": "Chubby",
+        "referenceName": "3BA RefChubbyArms",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefChubbyArms",
+        "impact": 912.3276
+    },
+    "ShoulderSmooth": {
+        "group": "Arms",
+        "displayName": "Shoulder Smooth",
+        "referenceName": "3BA RefShoulderSmooth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefShoulderSmooth",
+        "impact": 128.9854
+    },
+    "ShoulderWidth": {
+        "group": "Arms",
+        "displayName": "Shoulder Width",
+        "referenceName": "3BA RefShoulderWidth",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefShoulderWidth",
+        "impact": 2403.124
+    },
+    "Belly": {
+        "group": "Belly",
+        "displayName": "Size",
+        "referenceName": "3BA RefBelly",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBelly",
+        "impact": 292.7767
+    },
+    "BigBelly": {
+        "group": "Belly",
+        "displayName": "Big",
+        "referenceName": "3BA RefBigBelly",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBigBelly",
+        "impact": 1664.5709
+    },
+    "PregnancyBelly": {
+        "group": "Belly",
+        "displayName": "Pregnant",
+        "referenceName": "3BA RefPregnancyBelly",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefPregnancyBelly",
+        "impact": 9720.999
+    },
+    "BellyFrontUpFat_v2": {
+        "group": "Belly",
+        "displayName": "Front Up Fat",
+        "referenceName": "3BA RefBellyFrontUpFat_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBellyFrontUpFat_v2",
+        "impact": 201.7023
+    },
+    "BellyFrontDownFat_v2": {
+        "group": "Belly",
+        "displayName": "Front Down Fat",
+        "referenceName": "3BA RefBellyFrontDownFat_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBellyFrontDownFat_v2",
+        "impact": 144.3665
+    },
+    "BellySideUpFat_v2": {
+        "group": "Belly",
+        "displayName": "Side Up Fat",
+        "referenceName": "3BA RefBellySideUpFat_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBellySideUpFat_v2",
+        "impact": 24.7623
+    },
+    "BellySideDownFat_v2": {
+        "group": "Belly",
+        "displayName": "Side Down Fat",
+        "referenceName": "3BA RefBellySideDownFat_v2",
+        "smallDefault": 0.0,
+        "bigDefault": 0.0,
+        "sliderName": "3BA RefBellySideDownFat_v2",
+        "impact": 39.105
+    }
+}
