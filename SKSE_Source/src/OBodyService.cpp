@@ -77,9 +77,11 @@ std::string OBodyService::GetPresetName(RE::Actor* actor) const
 
 bool OBodyService::IsNaked(RE::Actor* actor) const
 {
-    if (!m_ready.load(std::memory_order_acquire) || !m_interface || !actor)
+    if (!actor)
         return false;
-    return m_interface->ActorIsNaked(actor);
+    const auto body  = actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
+    const auto chest = actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kModChestPrimary);
+    return !body && !chest;
 }
 
 bool OBodyService::IsAvailable() const
