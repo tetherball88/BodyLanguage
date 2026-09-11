@@ -6,7 +6,7 @@
 
 ## Requirements 📋
 
-- [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin)
+- [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin) *(v0.25.0 or later)*
 - [OBody NG](https://www.nexusmods.com/skyrimspecialedition/mods/77016) (tested on 4.3.7)
 - [The New Gentleman](https://www.nexusmods.com/skyrimspecialedition/mods/104215) *(optional, tested on 4.2.3)*
 - [Racial Skin Variance - SPID](https://www.nexusmods.com/skyrimspecialedition/mods/81668) *(optional)*

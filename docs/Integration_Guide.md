@@ -389,7 +389,7 @@ Maps each complexion key to the sentence fragment appended to the description. T
 
 ### How it works
 
-Height is handled entirely in SkyrimNet's Jinja2 prompt template (`0401_appearance_body_shape.prompt`). No C++ code is involved. The template reads the actor's `height` value (a float, where `1.0` is the race base height) and compares it against the thresholds in `heightRanges.json` to select a canned sentence.
+Height is handled entirely in SkyrimNet's Jinja2 prompt template (`SKSE/Plugins/SkyrimNet/external/tetherball88.bodylanguage/prompts/submodules/character_bio/0401_appearance_body_shape.prompt`). No C++ code is involved. The template reads the actor's `height` value (a float, where `1.0` is the race base height) and compares it against the thresholds in `heightRanges.json` to select a canned sentence.
 
 The six tiers, from tallest to shortest:
 

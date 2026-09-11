@@ -197,17 +197,6 @@
             "meta": "breasts_volume:impossible(29216);physique_condition:lean(932);butt_hips:huge(5227);frame:average(4378);legs:collosal(5065);waist:tiny(-1059)"
         }
     },
-    "Astrid Preset": {
-        "big": {
-            "meta": "breasts_volume:average(4587);physique_condition:athletic(1287);butt_hips:average(320);frame:slim(337);legs:average(23);waist:slim(169)"
-        },
-        "medium": {
-            "meta": "breasts_volume:average(4587);physique_condition:athletic(1287);butt_hips:average(320);frame:slim(337);legs:average(23);waist:slim(169)"
-        },
-        "small": {
-            "meta": "breasts_volume:average(4587);physique_condition:athletic(1287);butt_hips:average(320);frame:slim(337);legs:average(23);waist:slim(169)"
-        }
-    },
     "Body - Super Curvy": {
         "big": {
             "meta": "breasts_volume:large(13090);physique_condition:chubby(-621);butt_hips:huge(3010);frame:average(8170);legs:average(1109);waist:thick(1471)"
@@ -811,17 +800,6 @@
         },
         "small": {
             "meta": "breasts_volume:average(3091);physique_condition:soft(66);butt_hips:average(851);frame:small(-4205);legs:average(820);waist:slim(293)"
-        }
-    },
-    "Valenwood Ranger Preste": {
-        "big": {
-            "meta": "breasts_volume:large(7755);physique_condition:soft(194);butt_hips:large(1620);frame:small(-1956);legs:lean(-19);waist:tiny(11)"
-        },
-        "medium": {
-            "meta": "breasts_volume:large(7755);physique_condition:soft(194);butt_hips:large(1620);frame:small(-1956);legs:lean(-19);waist:tiny(11)"
-        },
-        "small": {
-            "meta": "breasts_volume:large(7755);physique_condition:soft(194);butt_hips:large(1620);frame:small(-1956);legs:lean(-19);waist:tiny(11)"
         }
     },
     "ZincTO's Preset": {

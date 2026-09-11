@@ -218,15 +218,54 @@ namespace {
 
     static std::string DetectBodyType(RE::Actor* actor)
     {
-        auto* base = actor->GetActorBase();
+        auto* base = actor ? actor->GetActorBase() : nullptr;
         const bool isFemale = base && base->GetSex() == RE::SEX::kFemale;
         if (isFemale) {
-            if (IsPluginLoaded("CBBE.esp"))      return "3ba";
-            if (IsPluginLoaded("BHUNP3BBB.esp")) return "bhunp";
+            // Check BHUNP before CBBE/3BA because BHUNP users often have CBBE.esp in load order for compatibility/patches
+            if (IsPluginLoaded("BHUNP3BBB.esp") || IsPluginLoaded("BHUNP.esp") || IsPluginLoaded("BHUNP - Advanced.esp"))
+                return "bhunp";
+            if (IsPluginLoaded("3BBB.esp") || IsPluginLoaded("CBBE.esp"))
+                return "3ba";
+            return "3ba";
         } else {
-            if (IsPluginLoaded("HIMBO.esp"))     return "himbo";
+            if (IsPluginLoaded("HIMBO.esp"))
+                return "himbo";
+            return "himbo";
         }
-        return "";
+    }
+
+    static std::string ResolveBodyTypeForPreset(
+        RE::Actor* actor,
+        const std::string& preset,
+        bool isFemale,
+        const std::unordered_map<std::string, nlohmann::json>& descData)
+    {
+        if (!preset.empty()) {
+            std::vector<std::string> matchingTypes;
+            for (const auto& [typeKey, typeJson] : descData) {
+                if (typeJson.contains(preset)) {
+                    const bool isTypeMale = (typeKey == "himbo");
+                    if ((isFemale && !isTypeMale) || (!isFemale && isTypeMale)) {
+                        matchingTypes.push_back(typeKey);
+                    }
+                }
+            }
+
+            if (matchingTypes.size() == 1) {
+                return matchingTypes.front();
+            }
+
+            if (matchingTypes.size() > 1) {
+                // Ambiguous match across multiple body types — use plugin detection preference
+                const std::string detected = DetectBodyType(actor);
+                if (std::ranges::find(matchingTypes, detected) != matchingTypes.end()) {
+                    return detected;
+                }
+                return matchingTypes.front();
+            }
+        }
+
+        return DetectBodyType(actor);
     }
 
     static std::string_view WeightTier(RE::Actor* actor)
@@ -496,12 +535,15 @@ std::string GetBodyDescription(RE::Actor* actor, std::string_view mode)
         return "";
     }
 
+    auto* base = actor->GetActorBase();
+    const bool isFemale = base && base->GetSex() == RE::SEX::kFemale;
+    const bool isMale   = !isFemale;
+    const auto& parts   = isMale ? data.maleParts : data.femaleParts;
+
     const std::string preset   = obody.GetPresetName(actor);
-    const std::string bodyType = DetectBodyType(actor);
+    const std::string bodyType = ResolveBodyTypeForPreset(actor, preset, isFemale, data.descData);
     const std::string tier     = std::string(WeightTier(actor));
     const std::string ctx      = obody.IsNaked(actor) ? "naked" : "clothed";
-    const bool        isMale   = bodyType == "himbo";
-    const auto& parts          = isMale ? data.maleParts : data.femaleParts;
 
     spdlog::info("[BodyDescription] mode={} preset='{}' bodyType='{}' tier='{}' ctx='{}'",
         mode, preset, bodyType, tier, ctx);
@@ -577,6 +619,9 @@ std::string GetBodyDescription(RE::Actor* actor, std::string_view mode)
                         ? BuildMaleFullSentence(kw, parts, ctx)
                         : BuildFemaleFullSentence(kw, parts, ctx);
                 }
+            } else {
+                spdlog::warn("[BodyDescription] Preset '{}' not found in '{}' description data for tier '{}'.",
+                    preset, bodyType, tier);
             }
         }
     }

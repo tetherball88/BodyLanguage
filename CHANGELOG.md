@@ -2,6 +2,17 @@
 
 All notable changes to TT BodyLanguage will be documented in this file.
 
+## v1.0.3
+
+### SkyrimNet Beta 25+ External Plugin Layout Migration
+
+- **Migrated to External Plugin Bundle:**
+  - Packaged prompts into external plugin layout at `SKSE/Plugins/SkyrimNet/external/tetherball88.bodylanguage/`
+  - Added plugin `manifest.json` targeting SkyrimNet `min_skyrimnet_version: "0.25.0"`
+  - Relocated `0401_appearance_body_shape.prompt` to `external/tetherball88.bodylanguage/prompts/submodules/character_bio/`
+  - Relocated `0501_exposure.prompt` to `external/tetherball88.bodylanguage/prompts/submodules/user_final_instructions/`
+  - Cleaned up legacy loose `prompts/` directory while preserving `jsonData/` lookup tables and config files
+
 ## v0.1.0
 
 ### Major Architectural Overhaul
