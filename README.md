@@ -1,126 +1,83 @@
 # TT Body Language 🎭
 
-✨ A Skyrim SKSE plugin that integrates with SkyrimNet to generate rich, context-aware body descriptions for every NPC. It reads live body data from OBody NG, enriches it with muscularity hints and skin complexion details from Racial Skin Variance, and adds height and T.N.G (The New Gentleman) details — all surfaced to SkyrimNet's prompt templates automatically.
+✨ A Skyrim SKSE plugin for **SkyrimNet** that generates rich, context-aware physical descriptions for every NPC using **real-time 3D geometry and normal-map analysis**.
 
-> 💡 **Note:** The mod ships with pre-generated descriptions for popular BodySlide presets. Unknown presets are detected and their descriptions computed automatically on each game load using your installed BodySlide XML files.
+Instead of relying on static BodySlide preset databases or external archive scans, **BodyLanguage v2.0** inspects each NPC's actual 3D body mesh (`.nif`), active `.tri` morph sliders via RaceMenu (`skee64.dll`), live XPMSE skeleton bone scales, object-space normal maps (`_msn.dds`), SPID skin keywords, height, and *The New Gentleman* (TNG) anatomy directly through Skyrim's Virtual File System.
+
+> 💡 **Zero Setup Required:** Every body replacer, custom follower body, runtime body morph, dynamic pregnancy/muscle morph, and skin texture overhaul works out of the box—whether loose files or packed inside BSAs.
+
+---
 
 ## Requirements 📋
 
+- [SKSE64](https://skse.silverlock.org/)
 - [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin) *(v0.25.0 or later)*
-- [OBody NG](https://www.nexusmods.com/skyrimspecialedition/mods/77016) (tested on 4.3.7)
-- [The New Gentleman](https://www.nexusmods.com/skyrimspecialedition/mods/104215) *(optional, tested on 4.2.3)*
-- [Racial Skin Variance - SPID](https://www.nexusmods.com/skyrimspecialedition/mods/81668) *(optional)*
-  - [BnP - RSV patch](https://www.nexusmods.com/skyrimspecialedition/mods/102667)
-  - **ATTENTION**: You need to configure `SKSE\Plugins\BodyLanguage.ini` to provide pathes to RSV and BnP original archives you downloaded from Nexus Mods!!!
+- [RaceMenu](https://www.nexusmods.com/skyrimspecialedition/mods/19080) *(optional, required only if you use runtime `.tri` body morphs)*
+- [XP32 Maximum Skeleton Special Extended (XPMSE)](https://www.nexusmods.com/skyrimspecialedition/mods/1988) *(optional, required only if you use bone-scale morphs on Breast/Belly/Butt nodes)*
+- [Racial Skin Variance - SPID (RSV)](https://www.nexusmods.com/skyrimspecialedition/mods/81668) & [BnP - RSV Patch](https://www.nexusmods.com/skyrimspecialedition/mods/102667) *(optional — normal-map muscularity and SPID skin complexion features are detected automatically)*
+- [The New Gentleman (TNG)](https://www.nexusmods.com/skyrimspecialedition/mods/104215) or **Schlongs of Skyrim (SOS)** *(optional — adds unclothed size and addon anatomy descriptions natively via C++)*
 
-## Features ✨
+---
 
-- 🔄 **Automatic preset scanning** — on every game load the plugin reads your BodySlide XML preset files and computes body keyword descriptions for every installed preset. No manual steps required.
-- 🎯 **Context-aware descriptions** — different wording is used depending on whether an actor is clothed or naked, and whether the description is full (for bios) or short (for inline dialogue).
-- 👗 **Supported body types:** BHUNP 💃, CBBE 3BA 👒, HIMBO 💪
-- 💪 **RSV muscularity detection** — if Racial Skin Variance is installed, the active body normal map is identified and used to adjust the physique keyword (e.g. a `boxer` normal map shifts the description toward muscular).
-- 🎨 **RSV skin complexion detection** — when the BnP RSV diffuse patch is installed, the active body diffuse texture is identified and a complexion sentence is prepended to the naked full-body description (e.g. frost-nip, freckles, scars, veins, tanlines).
-- 📏 **Height descriptions** — each actor's height multiplier is mapped to a tier (towering / tall / above average / average / short / diminutive) with configurable thresholds.
-- 🔞 **TNG genital descriptions** — when The New Gentleman is active and the actor is unclothed, a size + anatomy descriptor is appended to the prompt. Racial size multipliers are applied automatically.
+## Key Features ✨
+
+- 📐 **Universal 3D Mesh & Morph Analysis** — Slices any humanoid `_0.nif` and `_1.nif` into **10 anatomical cross-section rings (80 landmark vertices)** and reconstructs each actor's live body shape at runtime from their weight, active `SKEE` `.tri` morph sliders, and XPMSE bone scales.
+- 👗 **Body-Replacer Agnostic** — Works seamlessly with **CBBE 3BA**, **BHUNP**, **UNP**, **TBD**, **UBE**, **HIMBO**, **SAM**, **COtR**, custom standalone follower bodies, and vanilla meshes.
+- 🤰 **Pregnancy vs. Systemic Build Isolation** — Distinguishes localized anterior belly distension (pregnancy morphs or `NPC Belly` node scaling) from systemic body mass so pregnant slender or athletic NPCs are accurately described as pregnant rather than overweight.
+- 💪 **On-Demand Normal Map Muscularity (`_msn.dds`)** — Streams each NPC's active object-space normal map from the VFS, decodes the $256 \times 256$ mipmap via `DirectXTex`, and runs a 2D Laplacian filter over the abdomen and deltoid UV regions to measure muscle definition.
+- 🎨 **RSV Skin Complexion Features** — Detects Racial Skin Variance SPID keywords (`RSVnord`, `RSVbreton`, `RSVimperial`, `RSVredguard`, `RSVhighelf`, `RSVdarkelf`, `RSVwoodelf`, `RSVorc`, `RSVfantasymer`, `RSVvampirebeast`, `RSVdremora`, `RSVasian`) and injects clothed or naked complexion details (frostnip, freckles, scars, veins, tanlines, fantasy patterns, etc.).
+- 🎯 **Context-Aware Prose** — Generates distinct descriptions for **clothed** vs. **naked** states and **full** (character bio / dialogue target) vs. **short** (inline reference) render modes.
+- 📏 **Height Tiers** — Maps each actor's effective height multiplier to configurable height descriptors (`towering`, `tall`, `above_average`, `average`, `short`, `diminutive`).
+- 🔞 **Native C++ TNG & SOS Integration** — Inspects equipped Slot 52 addons, XPMSE `NPC GenitalsBase [GenBase]` bone scales, TNG keywords, and SOS factions directly in C++ (no `.esp` or `StorageUtil` scripts needed).
+
+---
 
 ## How Descriptions Reach SkyrimNet 🤖
 
-The plugin registers two decorator functions with SkyrimNet's public API:
+The plugin registers four native C++ decorator functions with SkyrimNet's public API:
 
-| Decorator | Used when |
-|---|---|
-| `get_full_body_description` | NPC bio, full dialogue context |
-| `get_short_body_description` | Short inline references |
+| Decorator | Returns |
+| :--- | :--- |
+| `ttlb_get_full_body_description(actor)` | Full multi-sentence body description (`clothed` or `naked`) |
+| `ttlb_get_short_body_description(actor)` | Concise single-phrase summary (`clothed` or `naked`) |
+| `ttlb_is_naked(actor)` | `"true"` or `"false"` based on live equipment slot inspection |
+| `ttlb_get_genitals(actor)` | JSON object (`{"hasGenitals": true, "size": "XS..XL", "addon": "<addonKey>"}`) for TNG or SOS |
 
-Descriptions appear in these contexts:
-- 📝 Whenever an NPC's bio is requested
-- 💬 During dialogues for the speaking NPC and the dialogue target
+SkyrimNet's character bio prompt [`0401_appearance_body_shape.prompt`](./SKSE/Plugins/SkyrimNet/external/tetherball88.bodylanguage/prompts/submodules/character_bio/0401_appearance_body_shape.prompt) renders the modular `body_language` subcomponents:
+1. **[`0001_body.prompt`](./SKSE/Plugins/SkyrimNet/external/tetherball88.bodylanguage/prompts/submodules/body_language/0001_body.prompt)** — Clothed/naked status and 3D physique description.
+2. **[`0005_skin_features.prompt`](./SKSE/Plugins/SkyrimNet/external/tetherball88.bodylanguage/prompts/submodules/body_language/0005_skin_features.prompt)** — RSV skin complexion details from [`skinFeatures.json`](./SKSE/Plugins/SkyrimNet/jsonData/skinFeatures.json).
+3. **[`0010_height.prompt`](./SKSE/Plugins/SkyrimNet/external/tetherball88.bodylanguage/prompts/submodules/body_language/0010_height.prompt)** — Height tier phrase from [`heightRanges.json`](./SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json).
+4. **[`0020_genitals.prompt`](./SKSE/Plugins/SkyrimNet/external/tetherball88.bodylanguage/prompts/submodules/body_language/0020_genitals.prompt)** — Unclothed TNG / SOS anatomy description assembled from `0020_genitals.prompt` and [`tngAddons.json`](./SKSE/Plugins/SkyrimNet/jsonData/tngAddons.json).
 
-## Integrations 🔌
+---
 
-For full technical detail on every integration see **[docs/Integration_Guide.md](./docs/Integration_Guide.md)**.
+## Customization & Tuning 🛠️
 
-### OBody NG
+`BodyLanguage` is 100% data-driven. All anthropometric ratio cutoffs, descriptive text snippets, normal-map roughness baselines, skin features, height ranges, and TNG addon descriptions live in plain-text JSON/INI files under `Data/SKSE/Plugins/`:
 
-The SKSE plugin connects to OBody NG at startup via its public API to read the preset name and naked/clothed state of any actor on demand. At `kDataLoaded` it also scans all BodySlide XML preset files and computes weighted goal scores (breast volume, waist, physique condition, etc.) using the slider impact tables in `SKSE/Plugins/BodyLanguage/bodyConfigs/`. The results are written to `SKSE/Plugins/SkyrimNet/jsonData/descriptions/` and used as the lookup table at runtime.
+| Configuration File | Purpose |
+| :--- | :--- |
+| [`SKSE/Plugins/BodyLanguage/geometryThresholds.json`](./SKSE/Plugins/BodyLanguage/geometryThresholds.json) | Sex-specific 3D ratio thresholds (`shoulder_breadth`, `chest_prominence`, `waist_to_hip`, `glute_girth`, `thigh_girth`, `arm_girth`, `belly_drop`, `pregnancy_score`, `body_mass_index`, `tone_index`). |
+| [`SKSE/Plugins/BodyLanguage/bodyConfigs/FemaleParts.json`](./SKSE/Plugins/BodyLanguage/bodyConfigs/FemaleParts.json) | Clothed and naked text phrases for every female body region and tier. |
+| [`SKSE/Plugins/BodyLanguage/bodyConfigs/MaleParts.json`](./SKSE/Plugins/BodyLanguage/bodyConfigs/MaleParts.json) | Clothed and naked text phrases for every male body region and tier. |
+| [`SKSE/Plugins/BodyLanguage.ini`](./SKSE/Plugins/BodyLanguage.ini) | `SmoothBaseline` and `RippedBaseline` calibration for normal-map (`_msn.dds`) muscularity detection. |
+| [`SKSE/Plugins/SkyrimNet/jsonData/skinFeatures.json`](./SKSE/Plugins/SkyrimNet/jsonData/skinFeatures.json) | Clothed and naked complexion sentences for RSV racial/special skin keywords. |
+| [`SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json`](./SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json) | Height multiplier cutoffs (`towering` down to `diminutive`). |
+| [`SKSE/Plugins/SkyrimNet/jsonData/tngAddons.json`](./SKSE/Plugins/SkyrimNet/jsonData/tngAddons.json) | Anatomy descriptions for default and custom *The New Gentleman* addons. |
 
-### Racial Skin Variance (RSV) 💪🎨
+### Inspecting Actor Measurements in `BodyLanguage.log`
+Whenever SkyrimNet requests a description for an NPC, `BodyLanguage` logs their exact real-world measurements (`cm` / `inches`), dimensionless ratios, normal-map roughness score, and resulting tier classifications to `Documents\My Games\Skyrim Special Edition\SKSE\BodyLanguage.log`:
 
-Two separate background scans run on startup from the same `.7z` archives configured in `BodyLanguage.ini`:
-
-**Normal map scan** — builds `rsv_normal_map_hashes.json`. At description time, the actor's active body normal map is hashed and the match used to adjust the `physique_condition` keyword (e.g. `vigorexia` → two steps toward muscular).
-
-**Diffuse scan** — builds `rsv_diffuse_hashes.json`. At naked full-body description time, the actor's active body diffuse texture is hashed and the match looked up in `rsvSkinComplexions.json` to produce a complexion sentence such as *"She has faint patches of frostnip..."* that is prepended to the description. Only BnP RSV variant diffuse textures (freckles, scars, veins, tanlines, etc.) produce a match — the default unmarked textures are intentionally excluded.
-
-Configure the archive paths in `Data/SKSE/Plugins/BodyLanguage.ini`:
-
-```ini
-[RSV]
-RSV_Main_ArchivePath=C:\path\to\Racial Skin Variance - SPID 4K Version.7z
-BNP_RSV__Female_ArchivePath=C:\path\to\BnP female RSV (CBBE) 4k.7z
-BNP_RSV__Male_ArchivePath=C:\path\to\BnP male RSV (SOS full) 4k.7z
+```text
+[ActorBodyEvaluator] Measurements 'Serana' (02002B74) [scale=1.03]: shoulderWidth=49.5cm(19.5") chest=93.9cm(36.9") underbust=79.2cm(31.2") waist=78.7cm(31.0") belly=101.4cm(39.9") hips=110.9cm(43.7") thigh=60.8cm(23.9") calf=42.3cm(16.6") arm=30.3cm(11.9")
+[ActorBodyEvaluator] Evaluated 'Serana' (02002B74) [sex=F w=75 naked=false ...]: ratios=[mass=0.48 shldr=0.33 vtaper=1.89 whr=0.71 bustCup=1.18 hips=0.73 thigh=0.40 arm=0.20 bellyDrop=-0.002] S_geo_tone=-0.035 S_preg=0.085
+[PhysiqueClassifier] Female classification (I_tone=0.069, ctx='clothed'): frame='average' breasts='large' waist='standard' belly='flat' butt_hips='large' legs='thick' arms='average' condition='curvy'
 ```
 
-Leave blank or remove any key to skip that archive. Complexion sentences can be customised by editing `SKSE/Plugins/BodyLanguage/rsvSkinComplexions.json`.
-
-### Height 📏
-
-Height is handled in the SkyrimNet prompt template. The actor's height multiplier is compared against the thresholds in `SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json`:
-
-```json
-{
-    "towering":      1.12,
-    "tall":          1.08,
-    "above_average": 1.04,
-    "average":       0.99,
-    "short":         0.95,
-    "diminutive":    0.90
-}
-```
-
-Edit these values to adjust what counts as tall or short for your load order. Changes take effect on the next game load.
-
-### T.N.G (The New Gentleman) 🔞
-
-A Papyrus quest script reads TNG's racial group data and addon lists on every load and caches them via `StorageUtil`. The prompt template then checks TNG size keywords (`TNG_XS` through `TNG_XL`), applies the racial size multiplier, and looks up the addon's anatomy description in `SKSE/Plugins/SkyrimNet/jsonData/tngAddons.json`. Descriptions only appear when the actor is unclothed.
-
-To add descriptions for additional TNG addons, open `tngAddons.json` and add an entry whose key matches the addon name exactly as shown in TNG's MCM:
-
-```json
-{
-    "My Custom Addon": "smooth, slender shaft with subtle veining and a well-defined tapered head."
-}
-```
-
-The description completes the sentence: *"It has a [description]"*
-
-## Manual Overrides ✍️
-
-If the auto-computed description for a preset is inaccurate, you can override it without touching any generated file. Create a sidecar file:
-
-```
-SKSE/Plugins/SkyrimNet/jsonData/descriptions/<bodytype>_manual.json
-```
-
-Example (`3ba_manual.json`):
-
-```json
-{
-    "My Custom Preset": {
-        "big":    { "meta": "breasts_volume:huge;physique_condition:soft;butt_hips:large;frame:average;legs:thick;waist:standard" },
-        "medium": { "meta": "breasts_volume:large;physique_condition:lean;butt_hips:average;frame:slim;legs:average;waist:standard" },
-        "small":  { "meta": "breasts_volume:average;physique_condition:lean;butt_hips:average;frame:slim;legs:lean;waist:slim" }
-    }
-}
-```
-
-Manual entries always win over auto-computed ones and survive regeneration on reload. 🏆
-
-See `SKSE/Plugins/SkyrimNet/jsonData/descriptions/Example_3ba_manual.json` for a working example.
+---
 
 ## Documentation 📖
 
-- **[Integration Guide](./docs/Integration_Guide.md)** — full technical reference for all six integrations, config files, and manual overrides
-- [BHUNP Body Presets](./docs/BHUNP_descriptions.md)
-- [CBBE 3BA Body Presets](./docs/CBBE_3BA_descriptions.md)
-- [HIMBO Body Presets](./docs/HIMBO_descriptions.md)
+- **[User & Modder Customization Guide (`USER_CUSTOMIZATION.md`)](./USER_CUSTOMIZATION.md)** — Complete step-by-step guide to tuning ratio thresholds, editing body part phrases, calibrating normal maps, and adding custom TNG addons.
+- **[Architecture & Lifecycle Documentation (`ARCHITECTURE.md`)](./ARCHITECTURE.md)** — Technical deep-dive into the 10-ring 80-vertex slicer, `.tri` morph evaluation, Laplacian normal-map filter, and thread-safe caching pipeline.
+- **[Changelog (`CHANGELOG.md`)](./CHANGELOG.md)** — Full version history and release notes.

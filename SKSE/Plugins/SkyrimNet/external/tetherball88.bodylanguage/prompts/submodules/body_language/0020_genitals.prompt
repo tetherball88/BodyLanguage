@@ -1,0 +1,29 @@
+{% set isFullDescription = render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target" %}
+{% if not decnpc(actorUUID).isVirtual and isFullDescription %}
+    {% set isNaked = ttlb_is_naked(actorUUID) == "true" %}
+    {% if isNaked %}
+        {% set npcName = decnpc(actorUUID).name %}
+        {% set genitalData = ttlb_get_genitals(actorUUID) %}
+        {% if genitalData.hasGenitals %}
+            {% set tngSize = genitalData.size %}
+            {% set tngAddonKey = genitalData.addon %}
+            {% set tngAddon = read_json("./SkyrimNet/jsonData/tngAddons.json", tngAddonKey) %}
+            {% if not tngAddon %}
+                {% set tngAddon = read_json("./SkyrimNet/jsonData/tngAddons.json", "$TNG_TRT") %}
+            {% endif %}
+            {% set sizePart = "average in size, neither remarkable nor lacking." %}
+            {% if tngSize == "XS" %}
+                {% set sizePart = "quite small — short and thin, barely filling a hand." %}
+            {% else if tngSize == "S" %}
+                {% set sizePart = "on the smaller side, short with modest girth." %}
+            {% else if tngSize == "M" %}
+                {% set sizePart = "average in size, neither remarkable nor lacking." %}
+            {% else if tngSize == "L" %}
+                {% set sizePart = "impressively large — substantial in both length and girth, it commands immediate attention." %}
+            {% else if tngSize == "XL" %}
+                {% set sizePart = "of extraordinary size — its sheer scale is almost shocking, far beyond what one would expect of any mortal." %}
+            {% endif %}
+        {{npcName}}'s exposed penis is {{sizePart}} It {{tngAddon}}
+        {% endif %}
+    {% endif %}
+{% endif %}

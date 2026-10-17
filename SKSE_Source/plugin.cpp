@@ -1,23 +1,23 @@
+#include "PCH.h"
+
 #include <Windows.h>
+#include <exception>
+#include <filesystem>
+#include <memory>
+
 #include <spdlog/sinks/basic_file_sink.h>
 #include <spdlog/spdlog.h>
-#include <thread>
 
-#include "PCH.h"
-#include "src/RsvNormalMapScanner.h"
-#include "src/RsvDiffuseScanner.h"
-#include "src/SliderPresetScanner.h"
-#include "src/SkyrimNetIntegration.h"
-#include "src/BodyDescription.h"
+#include "BodyDescription.h"
+#include "Geometry/NifRingIndexer.h"
+#include "SkyrimNetIntegration.h"
 
 using namespace SKSE;
 
 namespace {
-    // Returns the "Data" root by walking two directories up from the DLL's location.
-    // DLL lives at <dataRoot>/SKSE/Plugins/BodyLanguage.dll, so:
-    //   parent       -> <dataRoot>/SKSE/Plugins/
-    //   parent.parent -> <dataRoot>/SKSE/
-    //   parent.parent.parent -> <dataRoot>/
+
+    // Returns the "Data" root by walking three parent directories up from the DLL's location.
+    // DLL lives at <dataRoot>/SKSE/Plugins/BodyLanguage.dll
     std::filesystem::path GetDataRoot() {
         wchar_t buf[MAX_PATH]{};
         HMODULE hSelf = nullptr;
@@ -26,10 +26,10 @@ namespace {
             reinterpret_cast<LPCWSTR>(&GetDataRoot),
             &hSelf);
         GetModuleFileNameW(hSelf, buf, MAX_PATH);
-        return std::filesystem::path(buf)   // .../SKSE/Plugins/BodyLanguage.dll
-                   .parent_path()           // .../SKSE/Plugins/
-                   .parent_path()           // .../SKSE/
-                   .parent_path();          // <dataRoot>/
+        return std::filesystem::path(buf)
+            .parent_path()
+            .parent_path()
+            .parent_path();
     }
 
     void SetupLogging() {
@@ -65,51 +65,51 @@ namespace {
         spdlog::set_default_logger(std::move(logger));
     }
 
-    void PrintToConsole(std::string_view message) {
-        SKSE::log::info("{}", message);
-        if (auto* console = RE::ConsoleLog::GetSingleton()) {
-            console->Print("%s", message.data());
-        }
-    }
-}
+}  // namespace
 
 SKSEPluginLoad(const LoadInterface* skse) {
     SKSE::Init(skse);
 
     SetupLogging();
-    SKSE::log::info("BodyLanguage plugin loading...");
+    SKSE::log::info("BodyLanguage v2.0.0 plugin loading...");
 
     if (const auto* messaging = SKSE::GetMessagingInterface()) {
         if (!messaging->RegisterListener([](SKSE::MessagingInterface::Message* message) {
-                switch (message->type) {
-                    case SKSE::MessagingInterface::kPostPostLoad:
-                        BodyLanguage::RegisterSkyrimNetDecorators();
-                        break;
+                if (!message) {
+                    return;
+                }
+                try {
+                    switch (message->type) {
+                        case SKSE::MessagingInterface::kPostPostLoad:
+                            BodyLanguage::RegisterSkyrimNetDecorators();
+                            break;
 
-                    case SKSE::MessagingInterface::kPreLoadGame:
-                        SKSE::log::info("PreLoadGame...");
-                        break;
+                        case SKSE::MessagingInterface::kPreLoadGame:
+                            SKSE::log::info("PreLoadGame...");
+                            BodyLanguage::ClearActorDescriptionCache();
+                            break;
 
-                    case SKSE::MessagingInterface::kPostLoadGame:
-                    case SKSE::MessagingInterface::kNewGame:
-                        SKSE::log::info("New game/Load...");
-                        break;
+                        case SKSE::MessagingInterface::kPostLoadGame:
+                        case SKSE::MessagingInterface::kNewGame:
+                            SKSE::log::info("New game/Load...");
+                            BodyLanguage::ClearActorDescriptionCache();
+                            break;
 
-                    case SKSE::MessagingInterface::kDataLoaded: {
-                        SKSE::log::info("Data loaded successfully.");
-                        BodyLanguage::ScanAndGeneratePresetDescriptions(GetDataRoot());
-                        BodyLanguage::InitBodyDescriptions(GetDataRoot());
-                        std::thread([]() {
-                            BodyLanguage::ScanRsvNormalMaps(GetDataRoot());
-                            BodyLanguage::ReloadRsvHashes(GetDataRoot());
-                            BodyLanguage::ScanRsvDiffuseMaps(GetDataRoot());
-                            BodyLanguage::ReloadRsvDiffuseHashes(GetDataRoot());
-                        }).detach();
-                        break;
+                        case SKSE::MessagingInterface::kDataLoaded: {
+                            SKSE::log::info("Data loaded successfully.");
+                            const auto dataRoot = GetDataRoot();
+                            BodyLanguage::InitBodyDescriptions(dataRoot);
+                            BodyLanguage::NifRingIndexer::GetInstance().IndexAllBodyTemplates();
+                            break;
+                        }
+
+                        default:
+                            break;
                     }
-
-                    default:
-                        break;
+                } catch (const std::exception& e) {
+                    SKSE::log::error("Unhandled exception in SKSE message listener: {}", e.what());
+                } catch (...) {
+                    SKSE::log::error("Unknown unhandled exception in SKSE message listener.");
                 }
             })) {
             SKSE::log::critical("Failed to register messaging listener.");

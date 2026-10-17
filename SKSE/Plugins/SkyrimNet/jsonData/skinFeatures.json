@@ -1,0 +1,76 @@
+{
+  "rsv": {
+    "female": {
+      "clothed": {
+        "vampire_beast": " has dead, gaunt gray skin, blood-stained and heavily veined, with protective runes against vampirism carved into her visible flesh",
+        "tanlines": " has darker, sun-resistant skin with warm dark undertones that rarely gets burnt by heavy sunlight",
+        "dirty": " has skin covered in dust and mud, looking thoroughly dirty from head to toe as if she has had no time for a bath",
+        "freckles": " has natural, sun-sensitive skin dusted with lots of pretty freckles",
+        "frostnip": " has blushed skin showing dryness and light frostnip from exposure to extreme cold",
+        "highlights": " has fair, slightly pale highlighted skin with a warm yellow undertone",
+        "moles": " has soft skin with moles spread out like stars in the sky and plenty of natural imperfections",
+        "scars": " has harsh, aging skin with a natural brown undertone and light freckles, marked by cuts, bruises, and combat scars",
+        "veiny_skinny": " has thin, almost translucent skin with a cool undertone that reveals visible veins beneath the surface",
+        "orc_fantasy": " has thick skin with a green undertone, marked across her visible flesh with bold, natural patterns",
+        "dunmer_fantasy": " has skin etched with mystical patterns, looking as though true magical power is embroidered directly into her flesh",
+        "bosmer_fantasy": " has skin camouflaged with natural woodland patterns of moss and branches, blending seamlessly with nature for hunting",
+        "altmer_fantasy": " has skin elegantly decorated with glittery, bird-inspired feather patterns of fine metallic sheen",
+        "dremora": " has otherworldly Dremora skin marked by prominent veins, sharp bone structure, patches of scales, and intricate tattoos",
+        "akaviri": " has fair, smooth skin with zero blemishes"
+      },
+      "naked": {
+        "vampire_beast": " has dead, gaunt gray skin stretched over a skinny frame, bloody and heavily veined, with protective runes against vampirism carved deep into her flesh",
+        "tanlines": " has darker, sun-resistant skin with warm dark undertones that rarely gets burnt, marked by distinct tan lines across her body and black nipples",
+        "dirty": " has skin coated in dust and mud from head to toe as if she has had no time for a bath, with light brown nipples",
+        "freckles": " has natural, sun-sensitive skin covered in lots of pretty freckles across her body, with pink nipples",
+        "frostnip": " has blushed skin with pale nipples, her exposed body showing dryness and light frostnip from extreme cold",
+        "highlights": " has fair, slightly pale highlighted skin with a warm yellow undertone, orange-tinted nipples, and subtle stretch marks along her body",
+        "moles": " has soft skin with moles spread out like stars in the sky and plenty of natural imperfections across her body, paired with rosy nipples",
+        "scars": " has harsh, aging skin with a natural brown undertone and light freckles, covered in cuts, bruises, and combat scars across her body, with dark brown nipples",
+        "veiny_skinny": " has thin, almost translucent skin with a cool undertone through which her ribs and veins are clearly visible, paired with cold purple nipples",
+        "orc_fantasy": " has thick skin with a green undertone, covered across her body in bold, natural patterns",
+        "dunmer_fantasy": " has skin covered across her body in mystical patterns, looking as though true magical power is embroidered directly into her flesh",
+        "bosmer_fantasy": " has skin camouflaged across her body with natural woodland patterns of moss and branches, blending with nature for hunting",
+        "altmer_fantasy": " has skin elegantly decorated across her body in glittery, bird-inspired feather patterns with a fine metallic sheen",
+        "dremora": " has true Dremora skin across her body, full of prominent veins, sharp bone structure, patches of scales, and intricate tattoos",
+        "akaviri": " has fair, smooth skin across her body with zero blemishes and naturally pigmented nipples"
+      }
+    },
+    "male": {
+      "clothed": {
+        "vampire_beast": " has dead, gaunt gray skin, blood-stained and heavily veined, with protective runes against vampirism carved into his visible flesh",
+        "tanlines": " has darker, sun-resistant skin with warm dark undertones that rarely gets burnt by heavy sunlight",
+        "dirty": " has skin covered in dust and mud, looking thoroughly dirty from head to toe as if he has had no time for a bath",
+        "freckles": " has natural, sun-sensitive skin dusted with lots of freckles",
+        "frostnip": " has ruddy, blushed skin showing dryness and light frostnip from exposure to extreme cold",
+        "highlights": " has fair, slightly pale highlighted skin with a warm yellow undertone",
+        "moles": " has soft skin with moles spread out like stars in the sky and plenty of natural imperfections",
+        "scars": " has harsh, weathered, aging skin with a natural brown undertone and light freckles, marked by cuts, bruises, and combat scars",
+        "veiny_skinny": " has thin, almost translucent skin with a cool undertone that reveals visible veins beneath the surface",
+        "orc_fantasy": " has thick skin with a green undertone, marked across his visible flesh with bold, natural patterns",
+        "dunmer_fantasy": " has skin etched with mystical patterns, looking as though true magical power is embroidered directly into his flesh",
+        "bosmer_fantasy": " has skin camouflaged with natural woodland patterns of moss and branches, blending seamlessly with nature for hunting",
+        "altmer_fantasy": " has skin elegantly decorated with glittery, bird-inspired feather patterns of fine metallic sheen",
+        "dremora": " has otherworldly Dremora skin marked by prominent veins, sharp bone structure, patches of scales, and intricate tattoos",
+        "akaviri": " has fair, smooth skin with zero blemishes"
+      },
+      "naked": {
+        "vampire_beast": " has dead, gaunt gray skin stretched over a skinny frame, bloody and heavily veined, with protective runes against vampirism carved deep into his flesh",
+        "tanlines": " has darker, sun-resistant skin with warm dark undertones that rarely gets burnt, marked by distinct tan lines across his body and black nipples",
+        "dirty": " has skin coated in dust and mud from head to toe as if he has had no time for a bath, with light brown nipples",
+        "freckles": " has natural, sun-sensitive skin covered in lots of freckles across his body, with pink nipples",
+        "frostnip": " has ruddy, blushed skin with pale nipples, his exposed body showing dryness and light frostnip from extreme cold",
+        "highlights": " has fair, slightly pale highlighted skin with a warm yellow undertone, orange-tinted nipples, and subtle stretch marks along his body",
+        "moles": " has soft skin with moles spread out like stars in the sky and plenty of natural imperfections across his body, paired with rosy nipples",
+        "scars": " has harsh, weathered, aging skin with a natural brown undertone and light freckles, covered in cuts, bruises, and combat scars across his body, with dark brown nipples",
+        "veiny_skinny": " has thin, almost translucent skin with a cool undertone through which his ribs and veins are clearly visible, paired with cold purple nipples",
+        "orc_fantasy": " has thick skin with a green undertone, covered across his body in bold, natural patterns",
+        "dunmer_fantasy": " has skin covered across his body in mystical patterns, looking as though true magical power is embroidered directly into his flesh",
+        "bosmer_fantasy": " has skin camouflaged across his body with natural woodland patterns of moss and branches, blending with nature for hunting",
+        "altmer_fantasy": " has skin elegantly decorated across his body in glittery, bird-inspired feather patterns with a fine metallic sheen",
+        "dremora": " has true Dremora skin across his body, full of prominent veins, sharp bone structure, patches of scales, and intricate tattoos",
+        "akaviri": " has fair, smooth skin across his body with zero blemishes and naturally pigmented nipples"
+      }
+    }
+  }
+}

@@ -1,10 +1,16 @@
 {
     "$TNG_TCT": "is smooth and taut with a clean, fully exposed head and sharply defined coronal ridge.",
-    "$TNG_TMT": "is thick and heavily veined, with firm musculature visible beneath the skin and a broad, fully exposed head.",
+    "$TNG_TMT": "is heavily veined and densely muscled, with firm sinew visible beneath the skin and a broad, fully exposed head.",
     "$TNG_TRT": "is well-balanced with moderate veining and a naturally tapered, proportionate head.",
-    "[LDD] TRX - Bosmer Schlong": "is slender and smooth with faint veining, the rounded head transitioning gently with subtle definition.",
+    "VectorPlexus Muscular": "is heavily veined and densely muscled, with firm sinew visible beneath the skin and a broad, fully exposed head.",
+    "VectorPlexus Regular": "is well-balanced with moderate veining and a naturally tapered, proportionate head.",
+    "Smurf Average": "is smooth and taut with a clean, fully exposed head and sharply defined coronal ridge.",
+    "TRX - Male": "is robustly contoured with prominent vascularity and a well-defined, rounded head.",
+    "ERF - HighPoly": "is smoothly contoured with subtle veining and a cleanly sculpted, proportionate head.",
+    "Leito": "is well-proportioned with light veining and a naturally rounded head.",
+    "[LDD] TRX - Bosmer Schlong": "is sleekly tapered and smooth with faint veining, the rounded head transitioning gently with subtle definition.",
     "[LDD] TRX - Argonian Schlong": "bears scale-like textures across its surface, ending in a tapered, pointed tip with distinctive ridged patterns unlike any mammalian anatomy.",
-    "[LDD] TRX - Nord Schlong": "is thick and robust with prominent veining and a ruddy, florid complexion. The head is broad with a pronounced ridge.",
+    "[LDD] TRX - Nord Schlong": "is ruggedly contoured with prominent veining and a ruddy, florid complexion. The head is broad with a pronounced ridge.",
     "[LDD] TRX - Redguard Schlong": "is smooth and dark-skinned with taut, close-fitting skin. The head is distinctly conical, tapering cleanly to a smooth tip.",
     "[LDD] TRX - Orsimer Schlong": "carries a green-gray hue with prominent ridge-like veins running its length. The head is exceptionally broad and flat-topped with an exaggerated flared ridge — brutish and imposing.",
     "[LDD] TRX - Imperial Schlong": "has a natural, even texture with moderate veining. The head is circumcised, clean and rounded with a visible ridge.",
@@ -13,6 +19,6 @@
     "[LDD] TRX - Altmer Schlong": "is exceptionally smooth with barely visible veining beneath pale skin. The head is fully concealed by foreskin, giving it a seamless, unbroken profile.",
     "[LDD] TRX - Afflicted Schlong": "is sickly pale with an unhealthy sheen, bearing discolored patches and an uneven surface that speaks plainly of disease.",
     "[LDD] TRX - Khajiit Schlong": "has a rough, textured surface with a feline quality. The sharply tapered head differs in coloration from the shaft and bears small barb-like ridges along the glans.",
-    "[LDD] TRX - Elder Schlong": "is thin and weathered with faint veining barely visible beneath aged, loose skin. The head is small, adding to its diminished appearance.",
+    "[LDD] TRX - Elder Schlong": "is weathered and creased with faint veining barely visible beneath aged, loose skin, and a softly worn, muted ridge.",
     "[LDD] TRX - Snow Elf Schlong": "is pale and smooth with delicate veining and a subtle taper. The head is notably well-formed and bulbous, with an almost luminescent quality to the skin."
 }

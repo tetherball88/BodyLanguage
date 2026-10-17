@@ -1,0 +1,26 @@
+{% set isFullDescription = render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target" %}
+{% set shouldRender = isFullDescription or render_mode == "short_inline" %}
+{% if not decnpc(actorUUID).isVirtual and shouldRender %}
+    {% set npcData = decnpc(actorUUID) %}
+    {% set npcHeight = npcData.height %}
+    {% set race = lower(decnpc(actorUUID).race) %}
+    {% set npcName = npcData.name %}
+
+    {% set heightRanges = read_json("./SkyrimNet/jsonData/heightRanges.json") %}
+    {% set heightPhrase = "" %}
+    {% if npcHeight >= heightRanges.towering %}
+        {% set heightPhrase = " stands at a striking, towering height" %}
+    {% else if npcHeight >= heightRanges.tall %}
+        {% set heightPhrase = " stands notably tall" %}
+    {% else if npcHeight >= heightRanges.above_average %}
+        {% set heightPhrase = " carries a slightly above-average height" %}
+    {% else if npcHeight >= heightRanges.average %}
+        {% set heightPhrase = " stands at an average height" %}
+    {% else if npcHeight >= heightRanges.short %}
+        {% set heightPhrase = " stands on the shorter side" %}
+    {% else %}
+        {% set heightPhrase = " is notably petite in stature" %}
+    {% endif %}
+
+    {{npcName}}{{heightPhrase}}.
+{% endif %}

@@ -26,9 +26,7 @@ jobs:
           TAG="${{ github.ref_name }}"
           # quote paths in case
           zip -r "out/BodyLanguage_${TAG}.zip" \
-            Scripts/ \
             SKSE/ \
-            TT_BodyLanguage.esp \
             -x ".github/*"
 
       - name: Create GitHub Release

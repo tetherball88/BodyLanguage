@@ -1,0 +1,119 @@
+{
+    "female": {
+        "body_mass_index": {
+            "very_low_max": 0.43,
+            "medium_max": 0.49,
+            "high_max": 0.55
+        },
+        "tone_index": {
+            "low_max": -0.15,
+            "neutral_max": 0.25,
+            "ripped_min": 0.55
+        },
+        "shoulder_breadth": {
+            "small_max": 0.29,
+            "slim_max": 0.31,
+            "average_max": 0.34,
+            "broad_max": 0.37
+        },
+        "waist_to_hip": {
+            "tiny_max": 0.61,
+            "slim_max": 0.67,
+            "standard_max": 0.73,
+            "soft_max": 0.79
+        },
+        "chest_prominence": {
+            "flat_max": 1.06,
+            "small_max": 1.11,
+            "average_max": 1.17,
+            "large_max": 1.24,
+            "huge_max": 1.34
+        },
+        "glute_girth": {
+            "flat_max": 0.58,
+            "small_max": 0.63,
+            "average_max": 0.69,
+            "large_max": 0.76
+        },
+        "thigh_girth": {
+            "thin_max": 0.34,
+            "lean_max": 0.37,
+            "average_max": 0.40,
+            "thick_max": 0.45
+        },
+        "arm_girth": {
+            "thin_max": 0.18,
+            "medium_max": 0.21,
+            "thick_max": 0.24
+        },
+        "belly_drop": {
+            "flat_min": -0.006,
+            "soft_min": -0.022,
+            "chubby_min": -0.045,
+            "large_min": -0.075
+        },
+        "pregnancy_score": {
+            "early_min": 0.25,
+            "mid_min": 0.50,
+            "full_min": 0.75
+        }
+    },
+    "male": {
+        "body_mass_index": {
+            "very_low_max": 0.45,
+            "compact_max": 0.49,
+            "medium_max": 0.54,
+            "high_max": 0.59
+        },
+        "tone_index": {
+            "low_max": -0.15,
+            "neutral_max": 0.25,
+            "ripped_min": 0.55
+        },
+        "shoulder_breadth": {
+            "narrow_max": 0.34,
+            "average_max": 0.38,
+            "broad_max": 0.41
+        },
+        "waist_to_hip": {
+            "tapered_max": 0.81,
+            "straight_max": 0.87,
+            "thick_max": 0.94
+        },
+        "chest_prominence": {
+            "flat_max": 1.04,
+            "average_max": 1.09,
+            "broad_max": 1.14
+        },
+        "glute_girth": {
+            "flat_max": 0.58,
+            "firm_max": 0.65,
+            "large_max": 0.72
+        },
+        "thigh_girth": {
+            "spindly_max": 0.35,
+            "athletic_max": 0.40,
+            "pillars_max": 0.46
+        },
+        "arm_girth": {
+            "thin_max": 0.20,
+            "athletic_max": 0.24,
+            "brawny_max": 0.28
+        },
+        "belly_drop": {
+            "flat_min": -0.006,
+            "straight_min": -0.022,
+            "thick_min": -0.045
+        },
+        "pregnancy_score": {
+            "distended_min": 0.35
+        },
+        "genital_size": {
+            "xs_max": 0.79,
+            "s_max": 0.99,
+            "m_max": 1.19,
+            "l_max": 1.39
+        }
+    }
+}
+

@@ -3,7 +3,7 @@
 cmake_minimum_required(VERSION 3.21)
 
 # Set your project name. This will be the name of your SKSE .dll file.
-project(BodyLanguage VERSION 0.0.1 LANGUAGES CXX)
+project(BodyLanguage VERSION 2.0.0 LANGUAGES CXX)
 
 # #
 # YOU DO NOT NEED TO EDIT ANYTHING BELOW HERE
@@ -64,23 +64,22 @@ file(GLOB_RECURSE SOURCES
 # add_library(${PROJECT_NAME} SHARED ${SOURCES})
 add_commonlibsse_plugin(${PROJECT_NAME} SOURCES ${SOURCES})
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23) # <--- use C++23 standard
-# Ensure project root, src/, and include/ are on the include path so files can include headers by name
-target_include_directories(${PROJECT_NAME} PRIVATE ${PROJECT_SOURCE_DIR} ${PROJECT_SOURCE_DIR}/src ${PROJECT_SOURCE_DIR}/include)
+# Ensure project root, src/, include/, and nifly/include are on the include path
+add_subdirectory(extern/nifly EXCLUDE_FROM_ALL)
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ${PROJECT_SOURCE_DIR}
+    ${PROJECT_SOURCE_DIR}/src
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/extern/nifly/include
+)
 target_precompile_headers(${PROJECT_NAME} PRIVATE PCH.h) # <--- PCH.h is required!
 
-# Add include directories
-target_include_directories(${PROJECT_NAME} PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
-    ${CMAKE_CURRENT_SOURCE_DIR}/extern/OBody-API
+find_package(directxtex CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE
+    nifly
+    Microsoft::DirectXTex
 )
 
-find_package(pugixml CONFIG REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE pugixml::pugixml)
-
-find_package(LibArchive REQUIRED)
-target_link_libraries(${PROJECT_NAME} PRIVATE LibArchive::LibArchive)
-target_link_libraries(${PROJECT_NAME} PRIVATE advapi32)
 
 # Silence Microsoft STL deprecation warnings
 target_compile_definitions(${PROJECT_NAME} PRIVATE _SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING)
@@ -104,9 +103,12 @@ endif()
 if(MSVC)
     set_property(TARGET ${PROJECT_NAME} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 
-    # Also ensure CommonLibSSE uses static runtime
+    # Also ensure CommonLibSSE and nifly use static runtime
     if(TARGET ${CommonLibName})
         set_property(TARGET ${CommonLibName} PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
+    endif()
+    if(TARGET nifly)
+        set_property(TARGET nifly PROPERTY MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
     endif()
 
     # Additional linker flags to embed dependencies

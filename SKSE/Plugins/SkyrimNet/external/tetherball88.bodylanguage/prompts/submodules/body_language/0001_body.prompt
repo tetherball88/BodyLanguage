@@ -1,0 +1,30 @@
+{% set isFullDescription = render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target" %}
+{% set shouldRender = isFullDescription or render_mode == "short_inline" %}
+{% if not decnpc(actorUUID).isVirtual and shouldRender %}
+    {% set npcData = decnpc(actorUUID) %}
+    {% set race = lower(decnpc(actorUUID).race) %}
+    {% set npcName = npcData.name %}
+
+    {% set isNaked = ttlb_is_naked(actorUUID) == "true" %}
+    {% if isFullDescription %}
+        {{ "### Body shape" }}
+    {% endif %}
+
+    {% set bodyPhrase = "" %}
+    {% if isFullDescription %}
+        {% set bodyPhrase = ttlb_get_full_body_description(actorUUID) %}
+    {% else %}
+        {% set bodyPhrase = ttlb_get_short_body_description(actorUUID) %}
+    {% endif %}
+
+    {% if bodyPhrase != "" %}
+        {% if isNaked %}
+            {% set bodyPhrase = " - " + npcData.possessiveAdjective + " figure revealing " + bodyPhrase %}
+        {% else %}
+            {% set bodyPhrase = " - " + npcData.possessiveAdjective + " figure suggests " + bodyPhrase %}
+        {% endif %}
+    {% endif %}
+
+
+    {{npcName}}{% if isNaked %} is fully naked {% else %} is clothed{% endif %}{{bodyPhrase}}.
+{% endif %}

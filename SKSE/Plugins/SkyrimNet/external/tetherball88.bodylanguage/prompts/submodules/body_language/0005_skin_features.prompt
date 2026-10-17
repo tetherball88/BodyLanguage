@@ -1,0 +1,87 @@
+{% set isFullDescription = render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target" %}
+{% set shouldRender = isFullDescription or render_mode == "short_inline" %}
+{% if not decnpc(actorUUID).isVirtual and shouldRender %}
+    {% set npcData = decnpc(actorUUID) %}
+    {% set npcName = npcData.name %}
+
+    {% set isMan = actor_has_keyword(actorUUID, "RSVman") %}
+    {% set isMer = actor_has_keyword(actorUUID, "RSVmer") %}
+    {% if isMan or isMer %}
+        {% set isNord = actor_has_keyword(actorUUID, "RSVnord") %}
+        {% set isBreton = actor_has_keyword(actorUUID, "RSVbreton") %}
+        {% set isImperial = actor_has_keyword(actorUUID, "RSVimperial") %}
+        {% set isRedguard = actor_has_keyword(actorUUID, "RSVredguard") %}
+        {% set isFantasy = actor_has_keyword(actorUUID, "RSVfantasymer") %}
+        {% set isHighElf = actor_has_keyword(actorUUID, "RSVhighelf") %}
+        {% set isDarkElf = actor_has_keyword(actorUUID, "RSVdarkelf") %}
+        {% set isWoodElf = actor_has_keyword(actorUUID, "RSVwoodelf") %}
+        {% set isOrc = actor_has_keyword(actorUUID, "RSVorc") %}
+        {% set isVampireBeast = actor_has_keyword(actorUUID, "RSVvampirebeast") %}
+        {% set isAkaviri = actor_has_keyword(actorUUID, "RSVasian") %}
+        {% set isDremora = actor_has_keyword(actorUUID, "RSVdremora") %}
+
+        {% set isNaked = ttlb_is_naked(actorUUID) == "true" %}
+        {% set skinFeatures = read_json("./SkyrimNet/jsonData/skinFeatures.json") %}
+
+        {% if npcData.isFemale %}
+            {% set genderFeatures = skinFeatures.rsv.female %}
+        {% else %}
+            {% set genderFeatures = skinFeatures.rsv.male %}
+        {% endif %}
+
+        {% if isNaked %}
+            {% set rsvFeatures = genderFeatures.naked %}
+        {% else %}
+            {% set rsvFeatures = genderFeatures.clothed %}
+        {% endif %}
+
+        {% set skinFeature = "" %}
+        {% if isVampireBeast %}
+            {% set skinFeature = rsvFeatures.vampire_beast %}
+        {% else if isDremora %}
+            {% set skinFeature = rsvFeatures.dremora %}
+        {% else if isMan %}
+            {% if isAkaviri %}
+                {% set skinFeature = rsvFeatures.akaviri %}
+            {% else if isNord %}
+                {% set skinFeature = rsvFeatures.frostnip %}
+            {% else if isBreton %}
+                {% set skinFeature = rsvFeatures.moles %}
+            {% else if isImperial %}
+                {% set skinFeature = rsvFeatures.scars %}
+            {% else if isRedguard %}
+                {% set skinFeature = rsvFeatures.tanlines %}
+            {% endif %}
+        {% else if isMer %}
+            {% if isHighElf %}
+                {% if isFantasy %}
+                    {% set skinFeature = rsvFeatures.altmer_fantasy %}
+                {% else %}
+                    {% set skinFeature = rsvFeatures.highlights %}
+                {% endif %}
+            {% else if isDarkElf %}
+                {% if isFantasy %}
+                    {% set skinFeature = rsvFeatures.dunmer_fantasy %}
+                {% else %}
+                    {% set skinFeature = rsvFeatures.veiny_skinny %}
+                {% endif %}
+            {% else if isWoodElf %}
+                {% if isFantasy %}
+                    {% set skinFeature = rsvFeatures.bosmer_fantasy %}
+                {% else %}
+                    {% set skinFeature = rsvFeatures.freckles %}
+                {% endif %}
+            {% else if isOrc %}
+                {% if isFantasy %}
+                    {% set skinFeature = rsvFeatures.orc_fantasy %}
+                {% else %}
+                    {% set skinFeature = rsvFeatures.dirty %}
+                {% endif %}
+            {% endif %}
+        {% endif %}
+
+        {% if isFullDescription and skinFeature != "" %}
+            {{npcName}}{{skinFeature}}.
+        {% endif %}
+    {% endif %}
+{% endif %}

@@ -2,26 +2,19 @@
   "id": "tetherball88.bodylanguage",
   "type": "bundle",
   "title": "TT Body Language",
-  "tagline": "Context-aware NPC body descriptions powered by OBody NG, RSV, and TNG.",
-  "description": "Generates rich, context-aware body descriptions for NPCs in dialogue and bios. Integrates live body data from OBody NG, muscularity and complexion details from Racial Skin Variance, and height and genital descriptions from The New Gentleman.",
+  "tagline": "Real-time 3D body geometry, normal-map muscularity, RSV, and TNG/SOS descriptions.",
+  "description": "Generates rich, context-aware body descriptions for NPCs in dialogue and bios using real-time 3D mesh/morph geometry, normal-map muscularity analysis, Racial Skin Variance keywords, height, and TNG/SOS anatomy.",
   "author": "tetherball88",
   "tags": [
     "body",
     "descriptions",
-    "obody",
     "npc",
     "immersion",
     "appearance"
   ],
   "nsfw": true,
   "icon": "sparkles",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "min_skyrimnet_version": "0.25.0",
-  "mods": [
-    {
-      "name": "TT_BodyLanguage",
-      "file": "TT_BodyLanguage.esp",
-      "required": false
-    }
-  ]
+  "mods": []
 }

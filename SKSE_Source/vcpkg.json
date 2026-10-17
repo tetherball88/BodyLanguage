@@ -1,17 +1,16 @@
 {
     "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
     "name": "body-language-plugin",
-    "version-string": "1.0.0",
+    "version-string": "2.0.0",
     "builtin-baseline": "cc288af760054fa489574bd8e22d05aa8fa01e5c",
     "dependencies": [
-        "nlohmann-json",
-        "spdlog",
+        "directxmath",
         "directxtk",
+        "directxtex",
+        "fmt",
+        "nlohmann-json",
         "rapidcsv",
-        "pugixml",
-        {
-            "name": "libarchive",
-            "features": ["lzma"]
-        }
+        "spdlog",
+        "xbyak"
     ]
 }
