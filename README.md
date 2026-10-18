@@ -81,3 +81,15 @@ Whenever SkyrimNet requests a description for an NPC, `BodyLanguage` logs their 
 - **[User & Modder Customization Guide (`USER_CUSTOMIZATION.md`)](./USER_CUSTOMIZATION.md)** — Complete step-by-step guide to tuning ratio thresholds, editing body part phrases, calibrating normal maps, and adding custom TNG addons.
 - **[Architecture & Lifecycle Documentation (`ARCHITECTURE.md`)](./ARCHITECTURE.md)** — Technical deep-dive into the 10-ring 80-vertex slicer, `.tri` morph evaluation, Laplacian normal-map filter, and thread-safe caching pipeline.
 - **[Changelog (`CHANGELOG.md`)](./CHANGELOG.md)** — Full version history and release notes.
+
+---
+
+## License & Permissions ⚖️
+
+See [`LICENSE`](./LICENSE) for full details:
+
+- **Mod Package, Prose Databases & SkyrimNet Prompts (`SKSE/`):** Copyright © 2026 `tetherball88`. **All Rights Reserved.**
+  - **Forking & Contributions:** You are welcome to fork this repository on GitHub, submit pull requests, and publish compatibility/customization patches that require the original mod.
+  - **No "As-Is" Redistribution:** Re-uploading, mirroring, or redistributing the complete mod package or its prose/prompt files "as-is" on Nexus Mods, third-party websites, or paid modlists without explicit permission is prohibited.
+- **C++ SKSE Plugin Source Code (`SKSE_Source/`):** Licensed under the **GNU General Public License v3.0 (`GPL-3.0`)** with **Section 7 Additional Terms** (requiring modified versions to be clearly marked as unofficial and prohibiting redistribution under the name *"TT Body Language"* or *"tetherball88"* without permission).
+
