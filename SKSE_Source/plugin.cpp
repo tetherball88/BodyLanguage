@@ -64,7 +64,7 @@ namespace {
         auto logger = std::make_shared<spdlog::logger>("BodyLanguage", std::move(sink));
         logger->set_level(spdlog::level::trace);
         logger->flush_on(spdlog::level::info);
-        logger->set_pattern("[%H:%M:%S] [%l] %v");
+        logger->set_pattern("[%Y-%m-%d %T.%e] [%t] [%l] [%s:%#] %v");
 
         spdlog::set_default_logger(std::move(logger));
     }
@@ -72,10 +72,16 @@ namespace {
 }  // namespace
 
 SKSEPluginLoad(const LoadInterface* skse) {
-    SKSE::Init(skse);
 
     SetupLogging();
-    SKSE::log::info("BodyLanguage v2.0.0 plugin loading...");
+
+    const auto plugin{ SKSE::PluginDeclaration::GetSingleton() };
+    const auto version{ plugin->GetVersion() };
+
+    SKSE::log::info("BodyLanguage v{} plugin loading...", version);
+    SKSE::log::info("  Skyrim v{}", REL::Module::get().version().string());
+
+    SKSE::Init(skse, false);
 
     if (const auto* messaging = SKSE::GetMessagingInterface()) {
         if (!messaging->RegisterListener([](SKSE::MessagingInterface::Message* message) {
