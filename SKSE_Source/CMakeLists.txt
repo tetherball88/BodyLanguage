@@ -119,6 +119,17 @@ if(MSVC)
     )
 endif()
 
+# Always copy the compiled BodyLanguage.dll into utility_scripts/bin/ on every build
+# so anyone pulling the repo can run the Python test/visual scripts without building C++.
+set(UTILITY_BIN_FOLDER "${PROJECT_SOURCE_DIR}/../utility_scripts/bin")
+add_custom_command(
+    TARGET "${PROJECT_NAME}"
+    POST_BUILD
+    COMMAND "${CMAKE_COMMAND}" -E make_directory "${UTILITY_BIN_FOLDER}"
+    COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_FILE:${PROJECT_NAME}>" "${UTILITY_BIN_FOLDER}/$<TARGET_FILE_NAME:${PROJECT_NAME}>"
+    VERBATIM
+)
+
 # When your SKSE .dll is compiled, this will automatically copy the .dll into your mods folder.
 # Only works if you configure DEPLOY_ROOT above (or set the SKYRIM_MODS_FOLDER environment variable)
 if(DEFINED OUTPUT_FOLDER)

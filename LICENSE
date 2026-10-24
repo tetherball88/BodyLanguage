@@ -6,15 +6,17 @@ Copyright (c) 2026 tetherball88
 This repository is divided into two distinctly licensed components:
 
 -------------------------------------------------------------------------------
-1. MOD PACKAGE, PROSE DATABASES, CONFIGURATIONS & SKYRIMNET PROMPTS (`SKSE/`)
+1. MOD PACKAGE, PROSE DATABASES, CONFIGURATIONS, SKYRIMNET PROMPTS &
+   UTILITY / TESTING SCRIPTS (`SKSE/`, `utility_scripts/`)
 -------------------------------------------------------------------------------
 Copyright (c) 2026 tetherball88. All Rights Reserved.
 
 All creative prose databases (`FemaleParts.json`, `MaleParts.json`,
 `skinFeatures.json`, `tngAddons.json`), configuration files
 (`geometryThresholds.json`, `heightRanges.json`, `BodyLanguage.ini`),
-SkyrimNet `.prompt` templates, documentation, and the packaged mod archive
-as a whole are proprietary to the author (`tetherball88`).
+SkyrimNet `.prompt` templates, Python analysis/testing/visualization scripts
+and ground-truth datasets (`utility_scripts/`), documentation, and the
+packaged mod archive as a whole are proprietary to the author (`tetherball88`).
 
 PERMISSIONS:
 - Forking & Contributing: You are welcome and encouraged to fork this
@@ -22,9 +24,10 @@ PERMISSIONS:
   addon/compatibility patches or custom preset overrides that require the
   original mod.
 - NO "AS-IS" REDISTRIBUTION: You may NOT re-upload, mirror, repackage, or
-  redistribute this mod or its prose/prompt files "as-is" on Nexus Mods,
-  other modding websites, Discord servers, or paid modlists/paywalled
-  collections without explicit prior permission from the author.
+  redistribute this mod, its prose/prompt files, or its testing/visualization
+  scripts "as-is" on Nexus Mods, other modding websites, Discord servers, or
+  paid modlists/paywalled collections without explicit prior permission from
+  the author.
 
 -------------------------------------------------------------------------------
 2. C++ SKSE PLUGIN SOURCE CODE (`SKSE_Source/`)

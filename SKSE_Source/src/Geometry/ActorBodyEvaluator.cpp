@@ -41,8 +41,24 @@ namespace BodyLanguage {
             if (!root3D || boneName.empty()) {
                 return 1.0f;
             }
-            if (auto* node = root3D->GetObjectByName(RE::BSFixedString(boneName.data()))) {
-                const float s = node->local.scale;
+            RE::NiAVObject* searchRoot = root3D->GetObjectByName(RE::BSFixedString("NPC Root [Root]"));
+            if (!searchRoot) {
+                searchRoot = root3D;
+            }
+            if (auto* node = searchRoot->GetObjectByName(RE::BSFixedString(boneName.data()))) {
+                float s = node->local.scale;
+                if (auto* parent = node->parent; parent && parent->name.c_str()) {
+                    const std::string_view parentName(parent->name.c_str());
+                    if (parentName.starts_with("CME ") || parentName.starts_with("cme ")) {
+                        s *= parent->local.scale;
+                    }
+                }
+                if (root3D->world.scale > 0.1f && node->world.scale > 0.1f) {
+                    const float worldRel = node->world.scale / root3D->world.scale;
+                    if (std::isfinite(worldRel) && worldRel > s && worldRel < 5.0f) {
+                        s = worldRel;
+                    }
+                }
                 if (std::isfinite(s) && s > 0.1f && s < 5.0f) {
                     return s;
                 }
@@ -206,8 +222,9 @@ namespace BodyLanguage {
         }
 
         const bool isFemale = base && (base->GetSex() == RE::SEX::kFemale);
+        const bool isNaked = IsActorNaked(actor);
         metrics.isFemale = isFemale;
-        metrics.isNaked = IsActorNaked(actor);
+        metrics.isNaked = isNaked;
 
         RE::TESObjectARMA* nakedArma = ResolveNakedBodyARMA(actor);
         std::string modelPath;
@@ -230,9 +247,6 @@ namespace BodyLanguage {
             spdlog::warn("[ActorBodyEvaluator] No body template cache available for '{}'", modelPath);
             return metrics;
         }
-
-        metrics.abdomenUV = templateCache->abdomenUV;
-        metrics.deltoidUV = templateCache->deltoidUV;
 
         // 1. Base weight interpolation
         const float rawWeight = base ? base->GetWeight() : actor->GetWeight();
@@ -290,7 +304,7 @@ namespace BodyLanguage {
                     }
                 }
 
-                if (morphSummary.size() < 240) {
+                if (morphSummary.size() < 4096 || isPregMorph) {
                     if (!morphSummary.empty()) {
                         morphSummary += ", ";
                     }
@@ -381,77 +395,19 @@ namespace BodyLanguage {
             }
         }
 
-        // 4. Compute normalized ring measurements & composite ratios
+        // 4. Compute normalized ring measurements & composite ratios via shared core method
         const float h0 = std::max(10.0f, templateCache->baseReferenceHeight);
-        const float invH0 = 1.0f / h0;
-
-        for (std::size_t r = 0; r < kRingCount; ++r) {
-            std::array<RE::NiPoint3, kPointsPerRing> ringPts{};
-            for (std::size_t c = 0; c < kPointsPerRing; ++c) {
-                ringPts[c] = verts[r * kPointsPerRing + c];
-            }
-            const bool isArmRing = (r == static_cast<std::size_t>(AnatomicalRingId::kUpperArm));
-            metrics.rings[r] = ComputeRingMeasurements(ringPts, invH0, isArmRing);
-        }
-
-        const RingMeasurements sysMidBelly = ComputeRingMeasurements(systemicRing5, invH0, false);
-
-        const auto& rShoulders = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kShoulders)];
-        const auto& rChest = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kChestBust)];
-        const auto& rUnderbust = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUnderbust)];
-        const auto& rWaist = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kNaturalWaist)];
-        const auto& rBelly = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kMidBelly)];
-        const auto& rHips = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kHipsGlutes)];
-        const auto& rThigh = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUpperThigh)];
-        const auto& rCalf = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kCalf)];
-        const auto& rArm = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUpperArm)];
-
-        // Direct, body-agnostic anthropometric ratios (dimensionless, divided by H_0 or paired ring)
-        metrics.shoulderToHeight = rShoulders.width;
-        metrics.vTaperRatio = rShoulders.width / std::max(0.05f, rWaist.width);
-        metrics.waistToHipRatio = rWaist.girth / std::max(0.10f, rHips.girth);
-        metrics.bustToUnderbust = rChest.girth / std::max(0.10f, rUnderbust.girth);
-        metrics.hipsToHeight = rHips.girth;
-        metrics.upperThighGirth = rThigh.girth;
-        metrics.calfGirth = rCalf.girth;
-        metrics.upperArmGirth = rArm.girth;
-        metrics.sagittalBellyDrop =
-            (rUnderbust.frontProj - rBelly.frontProj) - templateCache->baseSagittalBellyDrop;
-        metrics.flankFlareRatio = rBelly.width / std::max(0.05f, rWaist.width);
-
-        // Systemic Frame Mass M_body = unweighted mean of the 5 core height-normalized girths
-        metrics.bodyMassIndex =
-            (rUnderbust.girth + rWaist.girth + rHips.girth + rThigh.girth + rArm.girth) * 0.20f;
-
-        // 5. Section 3.5: Decoupled Pregnancy Belly Score & Systemic Build
-        const float domeProtrusion = std::max(0.0f, -metrics.sagittalBellyDrop);
-        const float bellyEccentricity = rBelly.depth / std::max(0.05f, rBelly.width);
-        const float sysFlankFlare = sysMidBelly.width / std::max(0.05f, rWaist.width);
-
-        const float sPregMorph = std::clamp((pregMorphForwardDisp * invH0) / 0.08f, 0.0f, 1.0f);
-        const float sPregNode = std::clamp((bellyNodeScale - 1.05f) / 0.80f, 0.0f, 1.0f);
-        const float sPregGeo =
-            (domeProtrusion > 0.030f && bellyEccentricity > 0.84f && sysFlankFlare < 1.35f)
-                ? std::clamp((domeProtrusion - 0.025f) / 0.10f, 0.0f, 1.0f)
-                : 0.0f;
-
-        metrics.pregnancyBellyScore = std::clamp(
-            std::max({sPregMorph, sPregNode, sPregGeo}), 0.0f, 1.0f);
-
-        // Systemic Geometric Tone S_geo_tone (pure 3D geometry: flat stomach + V-taper minus waist-to-hip thickness)
-        const float sysBellyDrop =
-            (rUnderbust.frontProj - sysMidBelly.frontProj) - templateCache->baseSagittalBellyDrop;
-        const float neutralWHR = isFemale ? 0.70f : 0.84f;
-        const float neutralVTaper = isFemale ? 1.95f : 1.90f;
-
-        const float bellyFlatnessTerm = std::clamp(sysBellyDrop / 0.030f, -1.0f, 1.0f);
-        const float waistTaperTerm = std::clamp((neutralWHR - metrics.waistToHipRatio) / 0.12f, -1.0f, 1.0f);
-        const float vTaperTerm = std::clamp((metrics.vTaperRatio - neutralVTaper) / 0.30f, -1.0f, 1.0f);
-
-        metrics.geoToneSignal = std::clamp(
-            (bellyFlatnessTerm + waistTaperTerm + vTaperTerm) / 3.0f,
-            -1.0f,
-            1.0f);
+        metrics = ComputeMetricsFromVertices(
+            verts,
+            systemicRing5,
+            h0,
+            isFemale,
+            isNaked,
+            rawWeight,
+            pregMorphForwardDisp,
+            bellyNodeScale);
+        metrics.abdomenUV = templateCache->abdomenUV;
+        metrics.deltoidUV = templateCache->deltoidUV;
 
         // 6. Resolve active normal map path
         std::string msnPath = FindSceneGraphBodyMsn(actor);
@@ -471,7 +427,16 @@ namespace BodyLanguage {
             msnSource = "TemplateNIF";
         }
         metrics.activeMsnPath = std::move(msnPath);
-        metrics.valid = true;
+
+        const auto& rShoulders = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kShoulders)];
+        const auto& rChest = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kChestBust)];
+        const auto& rUnderbust = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUnderbust)];
+        const auto& rWaist = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kNaturalWaist)];
+        const auto& rBelly = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kMidBelly)];
+        const auto& rHips = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kHipsGlutes)];
+        const auto& rThigh = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUpperThigh)];
+        const auto& rCalf = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kCalf)];
+        const auto& rArm = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUpperArm)];
 
         // Convert normalized measurements to real-world cm and inches (scaled by actor height scale)
         const float rawScale = actor->GetScale();
@@ -500,7 +465,7 @@ namespace BodyLanguage {
         spdlog::info(
             "[ActorBodyEvaluator] Evaluated '{}' ({:08X}) [sex={} w={:.0f} naked={} tpl='{}' msn='{}' ({})]: "
             "ratios=[mass={:.2f} shldr={:.2f} vtaper={:.2f} whr={:.2f} bustCup={:.2f} hips={:.2f} thigh={:.2f} arm={:.2f} bellyDrop={:+.3f}] "
-            "S_geo_tone={:.3f} S_preg={:.3f} (morph={:.2f}, node={:.2f}, geo={:.2f})",
+            "S_geo_tone={:.3f} S_preg={:.3f}",
             safeName,
             actor->GetFormID(),
             isFemale ? "F" : "M",
@@ -519,10 +484,130 @@ namespace BodyLanguage {
             metrics.upperArmGirth,
             metrics.sagittalBellyDrop,
             metrics.geoToneSignal,
-            metrics.pregnancyBellyScore,
-            sPregMorph,
-            sPregNode,
-            sPregGeo);
+            metrics.pregnancyBellyScore);
+
+        return metrics;
+    }
+
+    ActorBodyMetrics ActorBodyEvaluator::ComputeMetricsFromVertices(
+        const std::array<RE::NiPoint3, kTotalLandmarkVertices>& verts,
+        const std::array<RE::NiPoint3, kPointsPerRing>& systemicRing5,
+        float baseReferenceHeight,
+        bool isFemale,
+        bool isNaked,
+        [[maybe_unused]] float weight,
+        float pregMorphForwardDisp,
+        float bellyNodeScale) {
+        ActorBodyMetrics metrics{};
+        metrics.isFemale = isFemale;
+        metrics.isNaked = isNaked;
+        metrics.valid = true;
+
+        const float h0 = std::max(10.0f, baseReferenceHeight);
+        const float invH0 = 1.0f / h0;
+
+        // Clamp anterior (+Y) vertices of Ring 6 (Hips/Glutes) to the natural pelvic wall
+        // (0.82 * underbust front Y) so a lower-belly or pregnancy dome overhang at hip height
+        // never inflates Hips circumference or tilts the Belly Drop reference chord forward.
+        constexpr std::size_t kUnderBase =
+            static_cast<std::size_t>(AnatomicalRingId::kUnderbust) * kPointsPerRing;
+        const float underbustFrontY =
+            verts[kUnderBase + static_cast<std::size_t>(CompassDir::kFront)].y;
+        const float pelvicWallY = 0.82f * underbustFrontY;
+
+        for (std::size_t r = 0; r < kRingCount; ++r) {
+            std::array<RE::NiPoint3, kPointsPerRing> ringPts{};
+            for (std::size_t c = 0; c < kPointsPerRing; ++c) {
+                ringPts[c] = verts[r * kPointsPerRing + c];
+                if (r == static_cast<std::size_t>(AnatomicalRingId::kHipsGlutes)) {
+                    ringPts[c].y = std::min(ringPts[c].y, pelvicWallY);
+                }
+            }
+            const bool isArmRing = (r == static_cast<std::size_t>(AnatomicalRingId::kUpperArm));
+            metrics.rings[r] = ComputeRingMeasurements(ringPts, invH0, isArmRing);
+        }
+
+        const RingMeasurements sysMidBelly = ComputeRingMeasurements(systemicRing5, invH0, false);
+
+        const auto& rShoulders = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kShoulders)];
+        const auto& rChest = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kChestBust)];
+        const auto& rUnderbust = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUnderbust)];
+        const auto& rWaist = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kNaturalWaist)];
+        const auto& rBelly = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kMidBelly)];
+        const auto& rHips = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kHipsGlutes)];
+        const auto& rThigh = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUpperThigh)];
+        const auto& rCalf = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kCalf)];
+        const auto& rArm = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUpperArm)];
+
+        metrics.shoulderToHeight = rShoulders.width;
+        metrics.vTaperRatio = rShoulders.width / std::max(0.05f, rWaist.width);
+        metrics.waistToHipRatio = rWaist.girth / std::max(0.10f, rHips.girth);
+        if (isFemale) {
+            constexpr std::size_t kChestBase =
+                static_cast<std::size_t>(AnatomicalRingId::kChestBust) * kPointsPerRing;
+            const float apexY = 0.5f *
+                (verts[kChestBase + static_cast<std::size_t>(CompassDir::kFrontRight)].y +
+                 verts[kChestBase + static_cast<std::size_t>(CompassDir::kFrontLeft)].y) * invH0;
+            const float sternumY =
+                verts[kChestBase + static_cast<std::size_t>(CompassDir::kFront)].y * invH0;
+            const float subMammaryY = 0.5f *
+                (verts[kUnderBase + static_cast<std::size_t>(CompassDir::kFrontRight)].y +
+                 verts[kUnderBase + static_cast<std::size_t>(CompassDir::kFrontLeft)].y) * invH0;
+            const float ribWallY = 0.65f * sternumY + 0.35f * subMammaryY;
+            metrics.bustToUnderbust = 1.0f + 6.0f * (apexY - ribWallY);
+        } else {
+            metrics.bustToUnderbust = rChest.girth / std::max(0.10f, rUnderbust.girth);
+        }
+        metrics.hipsToHeight = rHips.girth;
+        metrics.upperThighGirth = rThigh.girth;
+        metrics.calfGirth = rCalf.girth;
+        metrics.upperArmGirth = rArm.girth;
+
+        const auto computeBellyDrop = [&](const RingMeasurements& bellyRing) {
+            return (0.60f * rUnderbust.frontProj + 0.40f * rHips.frontProj) - bellyRing.frontProj;
+        };
+        metrics.sagittalBellyDrop = computeBellyDrop(rBelly);
+        metrics.flankFlareRatio = rBelly.width / std::max(0.05f, rWaist.width);
+        metrics.bodyMassIndex =
+            (rUnderbust.girth + rWaist.girth + rHips.girth + rThigh.girth + rArm.girth) * 0.20f;
+
+        const float domeProtrusion = std::max(0.0f, -metrics.sagittalBellyDrop);
+        const float bellyEccentricity = rBelly.depth / std::max(0.05f, rBelly.width);
+        const float bellyToWaistGirth = rBelly.girth / std::max(0.05f, rWaist.girth);
+
+        const float sPregMorph = std::clamp((pregMorphForwardDisp * invH0) / 0.08f, 0.0f, 1.0f);
+        const float sPregNode = std::clamp((bellyNodeScale - 1.05f) / 0.80f, 0.0f, 1.0f);
+        const bool isRoundGravidDome =
+            isFemale &&
+            (domeProtrusion > 0.025f) &&
+            (bellyEccentricity > 0.72f || (bellyToWaistGirth > 1.22f && metrics.waistToHipRatio < 0.75f));
+        const float sPregGeo = isRoundGravidDome
+            ? std::clamp((domeProtrusion - 0.016f) / 0.055f, 0.0f, 1.0f)
+            : 0.0f;
+
+        metrics.pregnancyBellyScore = isFemale
+            ? std::clamp(std::max({sPregMorph, sPregNode, sPregGeo}), 0.0f, 1.0f)
+            : 0.0f;
+
+        const float sysBellyDrop = computeBellyDrop(sysMidBelly);
+        const float neutralWHR = isFemale ? 0.70f : 0.84f;
+        const float neutralVTaper = isFemale ? 1.95f : 1.90f;
+
+        // Isolate localized pregnancy dome from whole-body tone penalty so gravid bellies
+        // do not drag toneIndex down and misclassify average limbs as soft/flabby.
+        const float bellyFlatnessTerm =
+            (metrics.pregnancyBellyScore >= 0.25f)
+                ? 0.0f
+                : std::clamp((sysBellyDrop + 0.012f) / 0.020f, -1.0f, 1.0f);
+        const float waistTaperTerm = std::clamp((neutralWHR - metrics.waistToHipRatio) / 0.12f, -1.0f, 1.0f);
+        const float vTaperTerm = std::clamp((metrics.vTaperRatio - neutralVTaper) / 0.30f, -1.0f, 1.0f);
+
+        metrics.geoToneSignal = std::clamp(
+            isFemale
+                ? (0.5f * (bellyFlatnessTerm + vTaperTerm) + 0.5f * std::min(0.0f, waistTaperTerm))
+                : ((bellyFlatnessTerm + waistTaperTerm + vTaperTerm) / 3.0f),
+            -1.0f,
+            1.0f);
 
         return metrics;
     }
@@ -776,4 +861,3 @@ namespace BodyLanguage {
     }
 
 }  // namespace BodyLanguage
-

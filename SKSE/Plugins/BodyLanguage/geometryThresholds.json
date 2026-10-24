@@ -1,9 +1,9 @@
 {
     "female": {
         "body_mass_index": {
-            "very_low_max": 0.43,
-            "medium_max": 0.49,
-            "high_max": 0.55
+            "very_low_max": 0.40,
+            "medium_max": 0.48,
+            "high_max": 0.56
         },
         "tone_index": {
             "low_max": -0.15,
@@ -24,27 +24,27 @@
         },
         "chest_prominence": {
             "flat_max": 1.06,
-            "small_max": 1.11,
-            "average_max": 1.17,
-            "large_max": 1.24,
-            "huge_max": 1.34
+            "small_max": 1.13,
+            "average_max": 1.20,
+            "large_max": 1.30,
+            "huge_max": 1.42
         },
         "glute_girth": {
-            "flat_max": 0.58,
-            "small_max": 0.63,
-            "average_max": 0.69,
-            "large_max": 0.76
+            "flat_max": 0.60,
+            "small_max": 0.66,
+            "average_max": 0.73,
+            "large_max": 0.82
         },
         "thigh_girth": {
-            "thin_max": 0.34,
+            "thin_max": 0.33,
             "lean_max": 0.37,
-            "average_max": 0.40,
-            "thick_max": 0.45
+            "average_max": 0.42,
+            "thick_max": 0.48
         },
         "arm_girth": {
             "thin_max": 0.18,
-            "medium_max": 0.21,
-            "thick_max": 0.24
+            "medium_max": 0.22,
+            "thick_max": 0.25
         },
         "belly_drop": {
             "flat_min": -0.006,
@@ -60,10 +60,10 @@
     },
     "male": {
         "body_mass_index": {
-            "very_low_max": 0.45,
-            "compact_max": 0.49,
-            "medium_max": 0.54,
-            "high_max": 0.59
+            "very_low_max": 0.43,
+            "compact_max": 0.47,
+            "medium_max": 0.52,
+            "high_max": 0.57
         },
         "tone_index": {
             "low_max": -0.15,
@@ -72,33 +72,33 @@
         },
         "shoulder_breadth": {
             "narrow_max": 0.34,
-            "average_max": 0.38,
-            "broad_max": 0.41
+            "average_max": 0.37,
+            "broad_max": 0.40
         },
         "waist_to_hip": {
-            "tapered_max": 0.81,
-            "straight_max": 0.87,
-            "thick_max": 0.94
+            "tapered_max": 0.82,
+            "straight_max": 0.90,
+            "thick_max": 0.96
         },
         "chest_prominence": {
-            "flat_max": 1.04,
+            "flat_max": 1.02,
             "average_max": 1.09,
-            "broad_max": 1.14
+            "broad_max": 1.15
         },
         "glute_girth": {
             "flat_max": 0.58,
-            "firm_max": 0.65,
-            "large_max": 0.72
+            "firm_max": 0.68,
+            "large_max": 0.74
         },
         "thigh_girth": {
             "spindly_max": 0.35,
-            "athletic_max": 0.40,
-            "pillars_max": 0.46
+            "athletic_max": 0.41,
+            "pillars_max": 0.47
         },
         "arm_girth": {
             "thin_max": 0.20,
-            "athletic_max": 0.24,
-            "brawny_max": 0.28
+            "athletic_max": 0.25,
+            "brawny_max": 0.30
         },
         "belly_drop": {
             "flat_min": -0.006,
@@ -116,4 +116,3 @@
         }
     }
 }
-

@@ -22,6 +22,17 @@ namespace BodyLanguage {
         // and computes normalized geometric ratios + decoupled pregnancy belly score.
         ActorBodyMetrics EvaluateActorBody(RE::Actor* actor) const;
 
+        // Pure geometric evaluation of 80 landmark vertices into normalized ActorBodyMetrics.
+        static ActorBodyMetrics ComputeMetricsFromVertices(
+            const std::array<RE::NiPoint3, kTotalLandmarkVertices>& verts,
+            const std::array<RE::NiPoint3, kPointsPerRing>& systemicRing5,
+            float baseReferenceHeight,
+            bool isFemale,
+            bool isNaked,
+            float weight,
+            float pregMorphForwardDisp = 0.0f,
+            float bellyNodeScale = 1.0f);
+
         // Evaluates the actor's exposed genital addon and size multiplier (supporting both TNG and SOS).
         ActorGenitalMetrics EvaluateActorGenitals(RE::Actor* actor) const;
 

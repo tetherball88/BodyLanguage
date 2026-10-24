@@ -7,6 +7,7 @@
 #include <unordered_map>
 
 #include "Geometry/BodyTemplateCache.h"
+#include "Geometry/NifTriParser.h"
 
 namespace BodyLanguage {
 
@@ -17,6 +18,14 @@ namespace BodyLanguage {
         // Called at kDataLoaded: scans all race skins, custom NPC skins, and standalone body ARMA forms
         // occupying slot 32 (kBody) and pre-populates the 80-vertex ring cache.
         void IndexAllBodyTemplates();
+
+        // Builds a 10-ring BodyTemplateCache directly from parsed _0 and _1 meshes.
+        std::shared_ptr<const BodyTemplateCache> BuildTemplateCacheFromMeshes(
+            std::string_view canonicalKey,
+            const RawNifMesh& mesh0,
+            const RawNifMesh& mesh1,
+            bool isFemale,
+            bool parseVfsTri = true);
 
         // Thread-safe lookup or on-demand indexing of a naked body NIF path.
         std::shared_ptr<const BodyTemplateCache> GetOrIndexTemplate(
@@ -36,4 +45,3 @@ namespace BodyLanguage {
     };
 
 }  // namespace BodyLanguage
-

@@ -2,6 +2,27 @@
 
 All notable changes to TT BodyLanguage will be documented in this file.
 
+## v2.1.0
+
+### Improved Body Classification, Roleplay Descriptions & Visual Blueprint Tooling
+
+### Added
+
+- **Offline Testing & Visual Blueprint Suite (`utility_scripts/`)**
+  - Added an interactive HTML visual blueprint generator (`generate_visual_report.py` -> `body_visual_report.html`) with side-by-side Sagittal, Front Silhouette, and Top-Down cross-section views, organized into tabs by body type (`3BA`, `HIMBO`, `ALL`).
+  - Added a 3D ground-truth analyzer (`analyze_body_samples.py`) and automated C++ DLL test runner (`test_body_logic.py`) with 30 reference presets (`19` 3BA female and `11` HIMBO male) and a prebuilt `BodyLanguage.dll` so presets can be tested without compiling C++.
+
+### Changed
+
+- **Natural, Roleplay-Friendly Body Descriptions (`FemaleParts.json` & `MaleParts.json`)**
+  - Rewrote female and male body part descriptions to use natural, visual language instead of clinical/anatomical terminology, making descriptions read smoothly for roleplay LLMs.
+  - Short descriptions for pregnant characters now automatically include the pregnant belly instead of skipping it.
+- **Refined Female & Male Proportion Accuracy**
+  - **Breast Size Detection:** Breast volume now measures true forward breast projection independent of ribcage/back width, so broad-chested or athletic women are no longer misclassified as having oversized breasts, and deep cleavage is properly accounted for.
+  - **Pregnancy vs. Chubby/Heavy Builds:** Improved pregnancy detection for both baked BodySlide meshes and runtime morphs, and separated lower-belly overhang from hip measurements so a large or pregnant belly no longer inflates hip size or distorts stomach curvature.
+  - **Male Chest & Midsection Accuracy:** Male chest measurements now capture full upper-chest and back breadth rather than female bust-apex points, and heavy-bellied male builds with wide hips are now accurately recognized as `potbellied` instead of `straight`.
+  - **Shoulder & Arm Calibration:** Recalibrated shoulder, waist, hip, and upper-arm thresholds against real-world proportions across slim, curvy, chubby, pregnant, and muscular presets.
+
 ## v2.0.0
 
 ### Real-Time 3D Geometry & Normal-Map Analysis Engine

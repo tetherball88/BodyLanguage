@@ -32,6 +32,10 @@ namespace BodyLanguage {
 
         // Classifies regional anatomical categories once and builds both "full" and "short" descriptions
         // for the actor's current context (clothed vs. naked from metrics.isNaked).
+        std::unordered_map<std::string, std::string> ClassifyRegions(
+            const ActorBodyMetrics& metrics,
+            float texToneScore) const;
+
         ActorDescriptionPair BuildBothDescriptions(
             const ActorBodyMetrics& metrics,
             float texToneScore) const;

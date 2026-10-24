@@ -216,7 +216,8 @@ namespace BodyLanguage {
                 std::size_t midlineCount = 0;
                 for (const auto& v : mesh.vertices) {
                     const float zNorm = (v.pos.z - mesh.minZ) / h0;
-                    if (zNorm >= zCenter - 0.008f && zNorm <= zCenter + 0.008f && std::fabs(v.pos.x) < 1.2f) {
+                    if (zNorm >= zCenter - 0.008f && zNorm <= zCenter + 0.008f && std::fabs(v.pos.x) < 1.2f &&
+                        (mesh.boneNames.empty() || GetBoneWeightBySubstring(v, mesh.boneNames, "thigh") <= 0.25f)) {
                         ++midlineCount;
                     }
                 }
@@ -271,12 +272,45 @@ namespace BodyLanguage {
                 cache.rings[1].secondaryBone = "NPC R Clavicle [RClv]";
             }
 
+            auto pinMidlineFront = [&](const std::vector<std::uint16_t>& cands,
+                                       std::uint16_t& outFrontIdx,
+                                       float maxAbsX = 1.5f) {
+                float bestY = std::numeric_limits<float>::lowest();
+                for (const std::uint16_t idx : cands) {
+                    const auto& p = mesh1.vertices[idx].pos;
+                    if (std::fabs(p.x) <= maxAbsX && p.y > 0.0f && p.y > bestY) {
+                        bestY = p.y;
+                        outFrontIdx = idx;
+                    }
+                }
+                if (bestY == std::numeric_limits<float>::lowest() && maxAbsX < 3.5f) {
+                    for (const std::uint16_t idx : cands) {
+                        const auto& p = mesh1.vertices[idx].pos;
+                        if (std::fabs(p.x) <= 3.5f && p.y > 0.0f && p.y > bestY) {
+                            bestY = p.y;
+                            outFrontIdx = idx;
+                        }
+                    }
+                }
+            };
+
+            auto pinMidlineBack = [&](const std::vector<std::uint16_t>& cands, std::uint16_t& outBackIdx) {
+                float bestY = std::numeric_limits<float>::max();
+                for (const std::uint16_t idx : cands) {
+                    const auto& p = mesh1.vertices[idx].pos;
+                    if (std::fabs(p.x) <= 1.5f && p.y < 0.0f && p.y < bestY) {
+                        bestY = p.y;
+                        outBackIdx = idx;
+                    }
+                }
+            };
+
             // Ring 2: Upper Chest / Bust Peak (scan thin sub-bands in [0.78, 0.85] for max anterior +Y projection)
             {
                 float bestBandZ = 0.81f;
                 float maxFrontY = std::numeric_limits<float>::lowest();
                 for (float zCenter = 0.78f; zCenter <= 0.85f; zCenter += 0.01f) {
-                    auto band = CollectTorsoSliceCandidates(mesh1, zCenter - 0.012f, zCenter + 0.012f, 15.5f);
+                    auto band = CollectTorsoSliceCandidates(mesh1, zCenter - 0.012f, zCenter + 0.012f, 18.5f);
                     if (band.size() < 8) {
                         continue;
                     }
@@ -287,16 +321,54 @@ namespace BodyLanguage {
                         }
                     }
                 }
-                auto cands = CollectTorsoSliceCandidates(mesh1, bestBandZ - 0.015f, bestBandZ + 0.015f, 15.5f);
+                auto cands = CollectTorsoSliceCandidates(mesh1, bestBandZ - 0.015f, bestBandZ + 0.015f, 18.5f);
                 cache.rings[2].vIdx = SelectOctagonVertices(mesh1, cands);
+
+                if (isFemale) {
+                    // Female: Pin kFrontRight (1) and kFrontLeft (3) to the true right/left breast apices (max +Y),
+                    // and kFront (2) to the anterior midline sternum cleavage floor (|X| <= 1.2, min anterior +Y).
+                    float maxRightApexY = std::numeric_limits<float>::lowest();
+                    float maxLeftApexY = std::numeric_limits<float>::lowest();
+                    float minSternumY = std::numeric_limits<float>::max();
+                    for (const std::uint16_t idx : cands) {
+                        const auto& p = mesh1.vertices[idx].pos;
+                        if (p.y <= 0.0f) {
+                            continue;
+                        }
+                        if (p.x >= 1.8f && p.x <= 11.0f && p.y > maxRightApexY) {
+                            maxRightApexY = p.y;
+                            cache.rings[2].vIdx[static_cast<std::size_t>(CompassDir::kFrontRight)] = idx;
+                        } else if (p.x >= -11.0f && p.x <= -1.8f && p.y > maxLeftApexY) {
+                            maxLeftApexY = p.y;
+                            cache.rings[2].vIdx[static_cast<std::size_t>(CompassDir::kFrontLeft)] = idx;
+                        }
+                        if (std::fabs(p.x) <= 1.2f && p.y < minSternumY) {
+                            minSternumY = p.y;
+                            cache.rings[2].vIdx[static_cast<std::size_t>(CompassDir::kFront)] = idx;
+                        }
+                    }
+                } else {
+                    // Male: Preserve the full 8-point octagonal pectoral & latissimus dorsi contour for chest girth.
+                    pinMidlineFront(cands, cache.rings[2].vIdx[static_cast<std::size_t>(CompassDir::kFront)]);
+                    pinMidlineBack(cands, cache.rings[2].vIdx[static_cast<std::size_t>(CompassDir::kBack)]);
+                }
                 cache.rings[2].primaryBone = "NPC Spine2 [Spn2]";
                 cache.rings[2].secondaryBone = isFemale ? "NPC L Breast" : "NPC Spine2 [Spn2]";
             }
 
             // Ring 3: Underbust / Ribcage (zNorm in [0.73, 0.76], excluding breast weight > 0.20)
             {
-                auto cands = CollectTorsoSliceCandidates(mesh1, 0.73f, 0.76f, 15.0f, "breast", 0.20f);
+                auto cands = CollectTorsoSliceCandidates(mesh1, 0.735f, 0.76f, 18.5f, "breast", 0.15f);
                 cache.rings[3].vIdx = SelectOctagonVertices(mesh1, cands);
+                float minCreaseY = std::numeric_limits<float>::max();
+                for (const std::uint16_t idx : cands) {
+                    const auto& p = mesh1.vertices[idx].pos;
+                    if (std::fabs(p.x) <= 1.5f && p.y > 0.0f && p.y < minCreaseY) {
+                        minCreaseY = p.y;
+                        cache.rings[3].vIdx[static_cast<std::size_t>(CompassDir::kFront)] = idx;
+                    }
+                }
+                pinMidlineBack(cands, cache.rings[3].vIdx[static_cast<std::size_t>(CompassDir::kBack)]);
                 cache.rings[3].primaryBone = "NPC Spine2 [Spn2]";
             }
 
@@ -306,7 +378,7 @@ namespace BodyLanguage {
                 float minSpanX = std::numeric_limits<float>::max();
                 for (float zCenter = 0.65f; zCenter <= 0.72f; zCenter += 0.01f) {
                     auto band = CollectTorsoSliceCandidates(
-                        mesh1, zCenter - 0.012f, zCenter + 0.012f, 15.0f, "breast", 0.15f);
+                        mesh1, zCenter - 0.012f, zCenter + 0.012f, 18.5f, "breast", 0.15f);
                     if (band.size() < 8) {
                         continue;
                     }
@@ -323,17 +395,21 @@ namespace BodyLanguage {
                     }
                 }
                 auto cands = CollectTorsoSliceCandidates(
-                    mesh1, bestWaistZ - 0.015f, bestWaistZ + 0.015f, 15.0f, "breast", 0.15f);
+                    mesh1, bestWaistZ - 0.015f, bestWaistZ + 0.015f, 18.5f, "breast", 0.15f);
                 cache.rings[4].vIdx = SelectOctagonVertices(mesh1, cands);
+                pinMidlineFront(cands, cache.rings[4].vIdx[static_cast<std::size_t>(CompassDir::kFront)]);
+                pinMidlineBack(cands, cache.rings[4].vIdx[static_cast<std::size_t>(CompassDir::kBack)]);
                 cache.rings[4].primaryBone = "NPC Spine1 [Spn1]";
             }
 
             // Ring 5: Mid-Belly / Flanks (navel / high iliac level just below natural waist, ~zNorm in [0.60, 0.63])
             {
-                const float bellyZCenter = std::clamp(bestWaistZ - 0.055f, zCrotch + 0.09f, 0.64f);
+                const float bellyZCenter = std::clamp(bestWaistZ - 0.050f, zCrotch + 0.12f, 0.675f);
                 auto cands = CollectTorsoSliceCandidates(
-                    mesh1, bellyZCenter - 0.015f, bellyZCenter + 0.015f, 16.0f, "thigh", 0.20f);
+                    mesh1, bellyZCenter - 0.015f, bellyZCenter + 0.015f, 19.0f, "thigh", 0.20f);
                 cache.rings[5].vIdx = SelectOctagonVertices(mesh1, cands);
+                pinMidlineFront(cands, cache.rings[5].vIdx[static_cast<std::size_t>(CompassDir::kFront)]);
+                pinMidlineBack(cands, cache.rings[5].vIdx[static_cast<std::size_t>(CompassDir::kBack)]);
                 cache.rings[5].primaryBone = "NPC Spine [Spn0]";
                 cache.rings[5].secondaryBone = "NPC Belly";
             }
@@ -345,7 +421,7 @@ namespace BodyLanguage {
                 float bestHipZ = 0.5f * (hipMinZ + hipMaxZ);
                 float minBackY = std::numeric_limits<float>::max();
                 for (float zCenter = hipMinZ; zCenter <= hipMaxZ; zCenter += 0.01f) {
-                    auto band = CollectTorsoSliceCandidates(mesh1, zCenter - 0.012f, zCenter + 0.012f, 16.5f);
+                    auto band = CollectTorsoSliceCandidates(mesh1, zCenter - 0.012f, zCenter + 0.012f, 19.5f);
                     if (band.size() < 8) {
                         continue;
                     }
@@ -356,8 +432,12 @@ namespace BodyLanguage {
                         }
                     }
                 }
-                auto cands = CollectTorsoSliceCandidates(mesh1, bestHipZ - 0.015f, bestHipZ + 0.015f, 16.5f);
+                auto cands = CollectTorsoSliceCandidates(mesh1, bestHipZ - 0.015f, bestHipZ + 0.015f, 19.5f);
                 cache.rings[6].vIdx = SelectOctagonVertices(mesh1, cands);
+                pinMidlineFront(
+                    cands,
+                    cache.rings[6].vIdx[static_cast<std::size_t>(CompassDir::kFront)],
+                    isFemale ? 1.5f : 3.5f);
                 cache.rings[6].primaryBone = "NPC Pelvis [Pelv]";
                 cache.rings[6].secondaryBone = "NPC L Butt";
             }
@@ -374,7 +454,9 @@ namespace BodyLanguage {
                         continue;
                     }
                     if (!mesh1.boneNames.empty()) {
-                        const float thighW = GetBoneWeightBySubstring(v, mesh1.boneNames, "l thigh");
+                        const float thighW = GetBoneWeightBySubstring(v, mesh1.boneNames, "l thigh") +
+                                             GetBoneWeightBySubstring(v, mesh1.boneNames, "l frontthigh") +
+                                             GetBoneWeightBySubstring(v, mesh1.boneNames, "l rearthigh");
                         if (thighW < 0.40f) {
                             continue;
                         }
@@ -409,7 +491,8 @@ namespace BodyLanguage {
                             continue;
                         }
                         if (!mesh1.boneNames.empty() &&
-                            GetBoneWeightBySubstring(v, mesh1.boneNames, "l calf") < 0.40f) {
+                            (GetBoneWeightBySubstring(v, mesh1.boneNames, "l calf") +
+                             GetBoneWeightBySubstring(v, mesh1.boneNames, "l rearcalf")) < 0.40f) {
                             continue;
                         }
                         minX = std::min(minX, v.pos.x);
@@ -430,7 +513,8 @@ namespace BodyLanguage {
                         continue;
                     }
                     if (!mesh1.boneNames.empty() &&
-                        GetBoneWeightBySubstring(v, mesh1.boneNames, "l calf") < 0.40f) {
+                        (GetBoneWeightBySubstring(v, mesh1.boneNames, "l calf") +
+                         GetBoneWeightBySubstring(v, mesh1.boneNames, "l rearcalf")) < 0.40f) {
                         continue;
                     }
                     cands.push_back(static_cast<std::uint16_t>(i));
@@ -455,7 +539,7 @@ namespace BodyLanguage {
                 float sumShaft = 0.0f;
                 for (std::size_t i = 0; i < mesh1.vertices.size() && i < 65535; ++i) {
                     const auto& v = mesh1.vertices[i];
-                    if (v.pos.x > -11.5f || v.pos.x < -23.0f) {
+                    if (v.pos.x > -13.5f || v.pos.x < -22.5f) {
                         continue;
                     }
                     if (!mesh1.boneNames.empty()) {
@@ -477,8 +561,11 @@ namespace BodyLanguage {
                 }
 
                 const float shaftMid = !armPool.empty()
-                    ? (sumShaft / static_cast<float>(armPool.size()))
-                    : (0.78f * h0 + mesh1.minZ - 16.5f) * kInvSqrt2;
+                    ? std::clamp(
+                          sumShaft / static_cast<float>(armPool.size()),
+                          (0.78f * h0 + mesh1.minZ - 17.8f) * kInvSqrt2,
+                          (0.83f * h0 + mesh1.minZ - 15.6f) * kInvSqrt2)
+                    : (0.81f * h0 + mesh1.minZ - 16.8f) * kInvSqrt2;
 
                 std::vector<std::uint16_t> cands;
                 for (const std::uint16_t idx : armPool) {
@@ -501,7 +588,7 @@ namespace BodyLanguage {
                 if (cands.size() < 8) {
                     for (std::size_t i = 0; i < mesh1.vertices.size() && i < 65535; ++i) {
                         const auto& p = mesh1.vertices[i].pos;
-                        if (p.x < -11.5f && p.x > -23.0f) {
+                        if (p.x < -13.5f && p.x > -22.5f) {
                             const float s = (p.x + p.z) * kInvSqrt2;
                             if (std::fabs(s - shaftMid) <= 1.8f) {
                                 cands.push_back(static_cast<std::uint16_t>(i));
@@ -607,45 +694,25 @@ namespace BodyLanguage {
                    sf.find("actors\\character\\") != std::string::npos;
         };
 
-        auto isHumanoidBodyModelPath = [](std::string_view rawPath) -> bool {
-            if (rawPath.empty()) {
-                return false;
-            }
-            const std::string norm = NormalizeMeshPath(rawPath);
-            if (norm.find("child") != std::string::npos ||
-                norm.find("draugr") != std::string::npos ||
-                norm.find("falmer") != std::string::npos ||
-                norm.find("riekling") != std::string::npos ||
-                norm.find("werewolf") != std::string::npos ||
-                norm.find("werebear") != std::string::npos ||
-                norm.find("vampirelord") != std::string::npos ||
-                norm.find("vampirebrute") != std::string::npos ||
-                norm.find("gargoyle") != std::string::npos ||
-                norm.find("hagraven") != std::string::npos ||
-                norm.find("spriggan") != std::string::npos ||
-                norm.find("skeleton") != std::string::npos ||
-                norm.find("dragon") != std::string::npos ||
-                norm.find("dwarven") != std::string::npos ||
-                norm.find("chaurus") != std::string::npos ||
-                norm.find("spider") != std::string::npos ||
-                norm.find("sabrecat") != std::string::npos ||
-                norm.find("mudcrab") != std::string::npos ||
-                norm.find("clutter\\") != std::string::npos ||
-                norm.find("armor\\") != std::string::npos ||
-                norm.find("clothes\\") != std::string::npos) {
-                return false;
-            }
-            return norm.find("actors\\character\\") != std::string::npos ||
-                   norm.find("body") != std::string::npos ||
-                   norm.find("torso") != std::string::npos;
-        };
-
-        std::unordered_set<const RE::TESRace*> humanoidRaces;
+        std::unordered_set<RE::TESRace*> humanoidRaces;
         for (auto* race : dataHandler->GetFormArray<RE::TESRace>()) {
             if (isHumanoidAdultRace(race)) {
                 humanoidRaces.insert(race);
             }
         }
+
+        auto isArmaForHumanoidRace = [&](RE::TESObjectARMA* arma, const RE::TESObjectARMO* parentSkin) -> bool {
+            if (!arma || !arma->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody)) {
+                return false;
+            }
+            for (auto* race : humanoidRaces) {
+                if (arma->IsValidRace(race)) {
+                    return true;
+                }
+            }
+            return parentSkin && parentSkin->armorAddons.size() == 1 &&
+                   arma->race && !arma->race->IsChildRace();
+        };
 
         // 1. Collect default humanoid race skins
         for (const auto* race : humanoidRaces) {
@@ -665,26 +732,17 @@ namespace BodyLanguage {
             }
         }
 
-        // 3. Collect standalone humanoid body skin ARMO forms (e.g. Modern Physique Framework / BodyChange / OBody)
+        // 3. Collect standalone non-playable humanoid body skin ARMO forms (e.g. OBody / BodyChange / custom skins)
         for (auto* armo : dataHandler->GetFormArray<RE::TESObjectARMO>()) {
-            if (!armo || !armo->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody)) {
+            if (!armo || armo->GetPlayable() || !armo->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody)) {
                 continue;
             }
             for (auto* arma : armo->armorAddons) {
-                if (!arma || !arma->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody)) {
-                    continue;
-                }
-                const char* mPath = arma->bipedModels[RE::SEXES::kMale].model.c_str();
-                const char* fPath = arma->bipedModels[RE::SEXES::kFemale].model.c_str();
-                const std::string mLower = mPath ? ToLowerAscii(mPath) : "";
-                const std::string fLower = fPath ? ToLowerAscii(fPath) : "";
-                if ((mLower.find("actors\\character\\") != std::string::npos && mLower.find("body") != std::string::npos) ||
-                    (fLower.find("actors\\character\\") != std::string::npos && fLower.find("body") != std::string::npos)) {
-                    if (isHumanoidBodyModelPath(mLower) || isHumanoidBodyModelPath(fLower)) {
-                        if (skinArmors.insert(armo).second) {
-                            ++standaloneSkinCount;
-                        }
+                if (isArmaForHumanoidRace(arma, armo)) {
+                    if (skinArmors.insert(armo).second) {
+                        ++standaloneSkinCount;
                     }
+                    break;
                 }
             }
         }
@@ -702,17 +760,17 @@ namespace BodyLanguage {
                 continue;
             }
             for (auto* arma : skin->armorAddons) {
-                if (!arma || !arma->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody)) {
+                if (!isArmaForHumanoidRace(arma, skin)) {
                     continue;
                 }
                 const char* maleModel = arma->bipedModels[RE::SEXES::kMale].model.c_str();
-                if (maleModel && *maleModel != '\0' && isHumanoidBodyModelPath(maleModel)) {
+                if (maleModel && *maleModel != '\0') {
                     if (GetOrIndexTemplate(maleModel, false)) {
                         ++indexedCount;
                     }
                 }
                 const char* femaleModel = arma->bipedModels[RE::SEXES::kFemale].model.c_str();
-                if (femaleModel && *femaleModel != '\0' && isHumanoidBodyModelPath(femaleModel)) {
+                if (femaleModel && *femaleModel != '\0') {
                     if (GetOrIndexTemplate(femaleModel, true)) {
                         ++indexedCount;
                     }
@@ -778,8 +836,16 @@ namespace BodyLanguage {
             mesh0Opt = mesh1Opt;
         }
 
-        const RawNifMesh& mesh1 = *mesh1Opt;
-        const RawNifMesh& mesh0 = *mesh0Opt;
+
+        return BuildTemplateCacheFromMeshes(canonicalKey, *mesh0Opt, *mesh1Opt, isFemale, true);
+    }
+
+    std::shared_ptr<const BodyTemplateCache> NifRingIndexer::BuildTemplateCacheFromMeshes(
+        std::string_view canonicalKey,
+        const RawNifMesh& mesh0,
+        const RawNifMesh& mesh1,
+        bool isFemale,
+        bool parseVfsTri) {
 
         auto cache = std::make_shared<BodyTemplateCache>();
         cache->nifPathKey = std::string(canonicalKey);
@@ -823,29 +889,48 @@ namespace BodyLanguage {
         const auto& bChest = cache->baseRings[static_cast<std::size_t>(AnatomicalRingId::kChestBust)];
         const auto& bUnderbust = cache->baseRings[static_cast<std::size_t>(AnatomicalRingId::kUnderbust)];
         const auto& bWaist = cache->baseRings[static_cast<std::size_t>(AnatomicalRingId::kNaturalWaist)];
-        const auto& bBelly = cache->baseRings[static_cast<std::size_t>(AnatomicalRingId::kMidBelly)];
+
         const auto& bHips = cache->baseRings[static_cast<std::size_t>(AnatomicalRingId::kHipsGlutes)];
         const auto& bThigh = cache->baseRings[static_cast<std::size_t>(AnatomicalRingId::kUpperThigh)];
         const auto& bArm = cache->baseRings[static_cast<std::size_t>(AnatomicalRingId::kUpperArm)];
 
-        cache->baseSagittalBellyDrop = bUnderbust.frontProj - bBelly.frontProj;
+
 
         // Resolve .tri path from "BODYTRI" extra data
         std::string triPath = !mesh1.bodyTriPath.empty() ? mesh1.bodyTriPath : mesh0.bodyTriPath;
         cache->triPath = triPath;
 
-        if (!triPath.empty()) {
+        if (parseVfsTri && !triPath.empty()) {
             ParseTriMorphDeltas(triPath, mesh1.shapeName, *cache);
         }
 
         const float toCm = h0 * kSkyrimUnitToCm;
         const float toIn = toCm * kCmToInches;
+        float baseBustCup = bChest.girth / std::max(0.10f, bUnderbust.girth);
+        if (isFemale) {
+            constexpr std::size_t kChestBase =
+                static_cast<std::size_t>(AnatomicalRingId::kChestBust) * kPointsPerRing;
+            constexpr std::size_t kUnderBase =
+                static_cast<std::size_t>(AnatomicalRingId::kUnderbust) * kPointsPerRing;
+            const auto midY = [&](std::size_t idx) {
+                return 0.5f * (cache->verts0[idx].y + cache->verts1[idx].y) * invH0;
+            };
+            const float apexY = 0.5f *
+                (midY(kChestBase + static_cast<std::size_t>(CompassDir::kFrontRight)) +
+                 midY(kChestBase + static_cast<std::size_t>(CompassDir::kFrontLeft)));
+            const float sternumY = midY(kChestBase + static_cast<std::size_t>(CompassDir::kFront));
+            const float subMammaryY = 0.5f *
+                (midY(kUnderBase + static_cast<std::size_t>(CompassDir::kFrontRight)) +
+                 midY(kUnderBase + static_cast<std::size_t>(CompassDir::kFrontLeft)));
+            const float ribWallY = 0.65f * sternumY + 0.35f * subMammaryY;
+            baseBustCup = 1.0f + 6.0f * (apexY - ribWallY);
+        }
         const float baseWHR = bWaist.girth / std::max(0.10f, bHips.girth);
         const float baseVTaper = bShoulders.width / std::max(0.05f, bWaist.width);
 
         spdlog::info(
             "[NifRingIndexer] Cached template '{}' (sex={}, verts0={}, verts1={}, refHeight={:.1f}, morphs={}, "
-            "baseW50=[shoulderWidth={:.1f}cm({:.1f}\") chest={:.1f}cm({:.1f}\") waist={:.1f}cm({:.1f}\") hips={:.1f}cm({:.1f}\") thigh={:.1f}cm({:.1f}\") arm={:.1f}cm({:.1f}\") whr={:.2f} vtaper={:.2f}], "
+            "baseW50=[shoulderWidth={:.1f}cm({:.1f}\") chest={:.1f}cm({:.1f}\") underbust={:.1f}cm({:.1f}\") waist={:.1f}cm({:.1f}\") hips={:.1f}cm({:.1f}\") thigh={:.1f}cm({:.1f}\") arm={:.1f}cm({:.1f}\") bustCup={:.2f} whr={:.2f} vtaper={:.2f}], "
             "abdomenUV=[{:.2f}..{:.2f}, {:.2f}..{:.2f}], deltoidUV=[{:.2f}..{:.2f}, {:.2f}..{:.2f}], tri='{}')",
             cache->nifPathKey,
             isFemale ? "F" : "M",
@@ -855,10 +940,12 @@ namespace BodyLanguage {
             cache->triDeltas.size(),
             bShoulders.width * toCm, bShoulders.width * toIn,
             bChest.girth * toCm, bChest.girth * toIn,
+            bUnderbust.girth * toCm, bUnderbust.girth * toIn,
             bWaist.girth * toCm, bWaist.girth * toIn,
             bHips.girth * toCm, bHips.girth * toIn,
             bThigh.girth * toCm, bThigh.girth * toIn,
             bArm.girth * toCm, bArm.girth * toIn,
+            baseBustCup,
             baseWHR,
             baseVTaper,
             cache->abdomenUV.uMin,

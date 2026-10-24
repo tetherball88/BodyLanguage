@@ -6,6 +6,8 @@
 #include <cctype>
 #include <cmath>
 #include <cstring>
+#include <fstream>
+#include <limits>
 #include <limits>
 #include <sstream>
 #include <unordered_map>
@@ -69,38 +71,18 @@ namespace BodyLanguage {
             return !outBytes.empty();
         }
 
-        bool IsAuxiliaryPartShape(std::string_view shapeName) {
-            const std::string lower = ToLowerAscii(shapeName);
-            return lower.find("feet") != std::string::npos ||
-                   lower.find("foot") != std::string::npos ||
-                   lower.find("hand") != std::string::npos ||
-                   lower.find("head") != std::string::npos ||
-                   lower.find("eyes") != std::string::npos ||
-                   lower.find("hair") != std::string::npos ||
-                   lower.find("Brow") != std::string::npos ||
-                   lower.find("genital") != std::string::npos ||
-                   lower.find("schlong") != std::string::npos ||
-                   lower.find("anus") != std::string::npos ||
-                   lower.find("labia") != std::string::npos ||
-                   lower.find("vagina") != std::string::npos;
-        }
-
         // Purely geometric classification of localized anterior belly-dome morphs (zero slider-name assumptions).
         // A morph is classified as a localized belly/pregnancy dome iff:
-        // 1. It pushes the anterior mid-belly (Ring 5 Front/FrontLeft/FrontRight) strongly forward (+Y > 2.5 units).
+        // 1. It pushes the anterior midline navel (Ring 5 Front) strongly forward (+Y > 2.5 units).
         // 2. Its forward +Y projection exceeds lateral flank widening (X-span delta) by > 2.0x.
         // 3. Its forward +Y projection exceeds posterior back movement by > 2.5x.
-        // 4. It is spatially isolated to the belly: non-belly rings (Shoulders, Chest, Hips/Glutes, Thigh, Calf, Arm)
-        //    have < 1/3.5 of the belly's displacement.
+        // 4. It is spatially isolated to the abdomen: non-abdominal rings (Shoulders, Chest, Thigh, Calf, Arm)
+        //    have < 1/3.5 of the belly's forward displacement.
         void ClassifyLocalizedBellyMorph(MorphDeltaEntry& entry) {
             constexpr std::size_t kRing5Base = static_cast<std::size_t>(AnatomicalRingId::kMidBelly) * kPointsPerRing;
 
             const float frontY = entry.deltas[kRing5Base + static_cast<std::size_t>(CompassDir::kFront)].y;
-            const float frontYSum =
-                entry.deltas[kRing5Base + static_cast<std::size_t>(CompassDir::kFrontRight)].y +
-                frontY +
-                entry.deltas[kRing5Base + static_cast<std::size_t>(CompassDir::kFrontLeft)].y;
-            const float deltaY5 = std::max(0.0f, frontYSum / 3.0f);
+            const float deltaY5 = std::max(0.0f, frontY);
 
             const float backYSum =
                 std::fabs(entry.deltas[kRing5Base + static_cast<std::size_t>(CompassDir::kBackRight)].y) +
@@ -112,11 +94,12 @@ namespace BodyLanguage {
             const float leftDeltaX = entry.deltas[kRing5Base + static_cast<std::size_t>(CompassDir::kLeft)].x;
             const float lateralWidening5 = std::fabs(rightDeltaX - leftDeltaX);
 
-            // Measure mean vertex displacement across all non-belly rings (Rings 1, 2, 6, 7, 8, 9)
-            constexpr std::array<AnatomicalRingId, 6> kNonBellyRings = {
+            // Measure mean vertex displacement across non-abdominal rings (Rings 1, 2, 7, 8, 9).
+            // Ring 6 (kHipsGlutes) is excluded because its anterior vertices sit on the lower abdomen
+            // and move forward with the lower pregnancy dome.
+            constexpr std::array<AnatomicalRingId, 5> kNonBellyRings = {
                 AnatomicalRingId::kShoulders,
                 AnatomicalRingId::kChestBust,
-                AnatomicalRingId::kHipsGlutes,
                 AnatomicalRingId::kUpperThigh,
                 AnatomicalRingId::kCalf,
                 AnatomicalRingId::kUpperArm
@@ -135,7 +118,6 @@ namespace BodyLanguage {
             }
 
             const bool isAnteriorDome =
-                (frontY > 2.5f) &&
                 (deltaY5 > 2.5f) &&
                 (deltaY5 > 2.0f * lateralWidening5) &&
                 (deltaY5 > 2.5f * backMove5);
@@ -157,6 +139,8 @@ namespace BodyLanguage {
         return path;
     }
 
+    std::optional<RawNifMesh> ParseNifBodyMeshFromStream(std::istream& iss, std::string_view normalizedPath);
+
     std::optional<RawNifMesh> ParseNifBodyMesh(std::string_view nifRelativePath) {
         if (nifRelativePath.empty()) {
             return std::nullopt;
@@ -171,6 +155,18 @@ namespace BodyLanguage {
 
         std::string byteStr(reinterpret_cast<const char*>(rawBytes.data()), rawBytes.size());
         std::istringstream iss(byteStr, std::ios::in | std::ios::binary);
+        return ParseNifBodyMeshFromStream(iss, normalizedPath);
+    }
+
+    std::optional<RawNifMesh> ParseNifBodyMeshFromDisk(const std::filesystem::path& diskPath) {
+        std::ifstream file(diskPath, std::ios::in | std::ios::binary);
+        if (!file.is_open()) {
+            return std::nullopt;
+        }
+        return ParseNifBodyMeshFromStream(file, diskPath.string());
+    }
+
+    std::optional<RawNifMesh> ParseNifBodyMeshFromStream(std::istream& iss, std::string_view normalizedPath) {
 
         nifly::NifFile nif;
         if (nif.Load(iss) != 0 || !nif.IsValid()) {
@@ -191,15 +187,16 @@ namespace BodyLanguage {
             }
         }
 
-        // 2. Select primary body shape
+        // 2. Select primary full-height humanoid body shape (validated by 3D bounding box)
         const auto shapes = nif.GetShapes();
         if (shapes.empty()) {
             return std::nullopt;
         }
 
         nifly::NiShape* bestShape = nullptr;
-        std::size_t bestVertCount = 0;
-        bool bestIsPrimaryBody = false;
+        std::vector<nifly::Vector3> bestVerts;
+        float bestMinZ = std::numeric_limits<float>::max();
+        float bestMaxZ = std::numeric_limits<float>::lowest();
 
         for (auto* shape : shapes) {
             if (!shape) {
@@ -217,48 +214,56 @@ namespace BodyLanguage {
                 }
             }
 
-            const std::size_t vCount = shape->GetNumVertices();
-            if (vCount < 100) {
+            if (!shape->IsSkinned() || shape->GetNumVertices() < 400) {
                 continue;
             }
 
-            const bool isPrimaryCandidate = shape->IsSkinned() && !IsAuxiliaryPartShape(shape->name.get());
-            if (!bestShape ||
-                (isPrimaryCandidate && !bestIsPrimaryBody) ||
-                (isPrimaryCandidate == bestIsPrimaryBody && vCount > bestVertCount)) {
+            std::vector<nifly::Vector3> candVerts;
+            if (!nif.GetVertsForShape(shape, candVerts) || candVerts.size() < 400) {
+                continue;
+            }
+
+            float cMinZ = std::numeric_limits<float>::max();
+            float cMaxZ = std::numeric_limits<float>::lowest();
+            for (const auto& v : candVerts) {
+                cMinZ = std::min(cMinZ, v.z);
+                cMaxZ = std::max(cMaxZ, v.z);
+            }
+            const float zSpan = cMaxZ - cMinZ;
+
+            // A full humanoid body mesh (ankle to neck) spans ~95..110 Skyrim units in Z (minZ ~11, maxZ ~114).
+            // Reject partial attachments (e.g. breast motors, jewelry, hands/feet) or non-humanoid props.
+            if (zSpan < 75.0f || zSpan > 135.0f || cMinZ < -5.0f || cMaxZ < 85.0f) {
+                continue;
+            }
+
+            if (!bestShape || candVerts.size() > bestVerts.size()) {
                 bestShape = shape;
-                bestVertCount = vCount;
-                bestIsPrimaryBody = isPrimaryCandidate;
+                bestVerts = std::move(candVerts);
+                bestMinZ = cMinZ;
+                bestMaxZ = cMaxZ;
             }
         }
 
-        if (!bestShape) {
+        if (!bestShape || bestVerts.empty()) {
             return std::nullopt;
         }
 
         result.shapeName = bestShape->name.get();
+        result.minZ = bestMinZ;
+        result.maxZ = bestMaxZ;
 
         // 3. Extract vertices & UVs
-        std::vector<nifly::Vector3> nifVerts;
-        if (!nif.GetVertsForShape(bestShape, nifVerts) || nifVerts.empty()) {
-            return std::nullopt;
-        }
-
         std::vector<nifly::Vector2> nifUvs;
         nif.GetUvsForShape(bestShape, nifUvs);
 
-        result.vertices.resize(nifVerts.size());
-        result.minZ = std::numeric_limits<float>::max();
-        result.maxZ = std::numeric_limits<float>::lowest();
-
-        for (std::size_t i = 0; i < nifVerts.size(); ++i) {
+        result.vertices.resize(bestVerts.size());
+        for (std::size_t i = 0; i < bestVerts.size(); ++i) {
             auto& dst = result.vertices[i];
-            dst.pos = RE::NiPoint3(nifVerts[i].x, nifVerts[i].y, nifVerts[i].z);
+            dst.pos = RE::NiPoint3(bestVerts[i].x, bestVerts[i].y, bestVerts[i].z);
             if (i < nifUvs.size()) {
                 dst.uv = RE::NiPoint2(nifUvs[i].u, nifUvs[i].v);
             }
-            result.minZ = std::min(result.minZ, dst.pos.z);
-            result.maxZ = std::max(result.maxZ, dst.pos.z);
         }
 
         // 4. Extract normal map path from texture slot 1
@@ -269,7 +274,23 @@ namespace BodyLanguage {
 
         // 5. Extract bone list and per-vertex bone weights
         nif.GetShapeBoneList(bestShape, result.boneNames);
-        for (std::uint32_t boneIdx = 0; boneIdx < result.boneNames.size(); ++boneIdx) {
+        bool extractedFromSkinData = false;
+        if (auto* skinInst = nif.GetHeader().GetBlock<nifly::NiSkinInstance>(bestShape->SkinInstanceRef())) {
+            if (auto* skinData = nif.GetHeader().GetBlock<nifly::NiSkinData>(skinInst->dataRef)) {
+                if (skinData->hasVertWeights && skinData->bones.size() == result.boneNames.size()) {
+                    for (std::uint32_t boneIdx = 0; boneIdx < skinData->bones.size(); ++boneIdx) {
+                        for (const auto& sw : skinData->bones[boneIdx].vertexWeights) {
+                            if (sw.index < result.vertices.size() && sw.weight > 0.001f) {
+                                result.vertices[sw.index].boneWeights.emplace_back(
+                                    static_cast<std::uint16_t>(boneIdx), sw.weight);
+                                extractedFromSkinData = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        for (std::uint32_t boneIdx = 0; !extractedFromSkinData && boneIdx < result.boneNames.size(); ++boneIdx) {
             std::unordered_map<std::uint16_t, float> boneWeights;
             nif.GetShapeBoneWeights(bestShape, boneIdx, boneWeights);
             for (const auto& [vIdx, weight] : boneWeights) {

@@ -11,6 +11,10 @@
    - Do not leave commented-out code blocks, `#if 0` dead regions, `[[deprecated]]` shims, unused helper functions, or legacy fallback paths unless explicitly requested by the user.
    - Keep `CMakeLists.txt`, `vcpkg.json`, `#include` directives, and `plugin.cpp` clean of any references to removed modules or unused third-party libraries.
 
+3. **Strictly Body-Type Agnostic & Calibrated to Real-World Anthropometric Golden Standards**
+   - The entire geometry and classification pipeline must remain 100% **body-type agnostic** (no hardcoded assumptions, branches, or slider-name checks for 3BA, BHUNP, UNP, CBBE, HIMBO, SAM, Vanilla, etc.).
+   - All measurements, ratios, and thresholds in `geometryThresholds.json` / `PhysiqueClassifier.cpp` must be derived purely from 3D mesh geometry and calibrated against an objective **real-world human anthropometric "Golden Standard"** (cm / inches), never tuned to force an equal statistical distribution across a specific user's log or modlist.
+
 ---
 
 ## C++ Language & Architecture Standards
@@ -50,4 +54,3 @@
   - Never allow C++ exceptions to escape across SKSE messaging listeners or SkyrimNet callback boundaries.
 - **Logging:**
   - Use `spdlog` (`spdlog::info`, `spdlog::warn`, `spdlog::error`, `spdlog::debug`) with a consistent module prefix tag (e.g., `[NifRingIndexer]`, `[NormalMapAnalyzer]`, `[BodyDescription]`).
-

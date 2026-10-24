@@ -78,9 +78,9 @@ namespace BodyLanguage {
             const nlohmann::json& femThresh) {
             std::unordered_map<std::string, std::string> kw;
 
-            const float massVeryLow = GetThreshold(femThresh, "body_mass_index", "very_low_max", 0.43f);
-            const float massMedium = GetThreshold(femThresh, "body_mass_index", "medium_max", 0.49f);
-            const float massHigh = GetThreshold(femThresh, "body_mass_index", "high_max", 0.55f);
+            const float massVeryLow = GetThreshold(femThresh, "body_mass_index", "very_low_max", 0.40f);
+            const float massMedium = GetThreshold(femThresh, "body_mass_index", "medium_max", 0.48f);
+            const float massHigh = GetThreshold(femThresh, "body_mass_index", "high_max", 0.56f);
 
             const float toneLow = GetThreshold(femThresh, "tone_index", "low_max", -0.15f);
             const float toneNeutral = GetThreshold(femThresh, "tone_index", "neutral_max", 0.25f);
@@ -91,11 +91,12 @@ namespace BodyLanguage {
             const float shldrSlim = GetThreshold(femThresh, "shoulder_breadth", "slim_max", 0.31f);
             const float shldrAvg = GetThreshold(femThresh, "shoulder_breadth", "average_max", 0.34f);
             const float shldrBroad = GetThreshold(femThresh, "shoulder_breadth", "broad_max", 0.37f);
+            const float gluteAvg = GetThreshold(femThresh, "glute_girth", "average_max", 0.73f);
 
             if (m.shoulderToHeight < shldrSmall) {
                 kw["frame"] = "small";
             } else if (m.shoulderToHeight < shldrSlim) {
-                kw["frame"] = "slim";
+                kw["frame"] = (m.hipsToHeight >= gluteAvg || m.bodyMassIndex >= 0.45f) ? "average" : "slim";
             } else if (m.shoulderToHeight < shldrAvg) {
                 kw["frame"] = "average";
             } else if (m.shoulderToHeight < shldrBroad) {
@@ -104,12 +105,12 @@ namespace BodyLanguage {
                 kw["frame"] = "massive";
             }
 
-            // 2. Breasts volume (Bust-to-Underbust circumference ratio G_2 / G_3)
+            // 2. Breasts volume (Ribcage-invariant anterior breast projection ratio)
             const float bustFlat = GetThreshold(femThresh, "chest_prominence", "flat_max", 1.06f);
-            const float bustSmall = GetThreshold(femThresh, "chest_prominence", "small_max", 1.11f);
-            const float bustAvg = GetThreshold(femThresh, "chest_prominence", "average_max", 1.17f);
-            const float bustLarge = GetThreshold(femThresh, "chest_prominence", "large_max", 1.24f);
-            const float bustHuge = GetThreshold(femThresh, "chest_prominence", "huge_max", 1.34f);
+            const float bustSmall = GetThreshold(femThresh, "chest_prominence", "small_max", 1.13f);
+            const float bustAvg = GetThreshold(femThresh, "chest_prominence", "average_max", 1.20f);
+            const float bustLarge = GetThreshold(femThresh, "chest_prominence", "large_max", 1.30f);
+            const float bustHuge = GetThreshold(femThresh, "chest_prominence", "huge_max", 1.42f);
 
             if (m.bustToUnderbust < bustFlat) {
                 kw["breasts_volume"] = "flat";
@@ -182,10 +183,9 @@ namespace BodyLanguage {
             }
 
             // 5. Butt & Hips (Hip circumference-to-height ratio G_6 / H_0, tone-aware for high volume)
-            const float gluteFlat = GetThreshold(femThresh, "glute_girth", "flat_max", 0.58f);
-            const float gluteSmall = GetThreshold(femThresh, "glute_girth", "small_max", 0.63f);
-            const float gluteAvg = GetThreshold(femThresh, "glute_girth", "average_max", 0.69f);
-            const float gluteLarge = GetThreshold(femThresh, "glute_girth", "large_max", 0.76f);
+            const float gluteFlat = GetThreshold(femThresh, "glute_girth", "flat_max", 0.60f);
+            const float gluteSmall = GetThreshold(femThresh, "glute_girth", "small_max", 0.66f);
+            const float gluteLarge = GetThreshold(femThresh, "glute_girth", "large_max", 0.82f);
 
             if (m.hipsToHeight < gluteFlat) {
                 kw["butt_hips"] = "flat";
@@ -194,16 +194,16 @@ namespace BodyLanguage {
             } else if (m.hipsToHeight < gluteAvg) {
                 kw["butt_hips"] = "average";
             } else if (m.hipsToHeight < gluteLarge) {
-                kw["butt_hips"] = (toneIndex >= toneNeutral) ? "large_muscular" : "large";
+                kw["butt_hips"] = (toneIndex >= toneRipped) ? "large_muscular" : "large";
             } else {
-                kw["butt_hips"] = (toneIndex >= toneNeutral) ? "huge_muscular" : "huge";
+                kw["butt_hips"] = (toneIndex >= toneRipped) ? "huge_muscular" : "huge";
             }
 
             // 6. Legs (Upper Thigh circumference-to-height ratio G_7 / H_0, tone-aware for high volume)
-            const float thighThin = GetThreshold(femThresh, "thigh_girth", "thin_max", 0.34f);
+            const float thighThin = GetThreshold(femThresh, "thigh_girth", "thin_max", 0.33f);
             const float thighLean = GetThreshold(femThresh, "thigh_girth", "lean_max", 0.37f);
-            const float thighAvg = GetThreshold(femThresh, "thigh_girth", "average_max", 0.40f);
-            const float thighThick = GetThreshold(femThresh, "thigh_girth", "thick_max", 0.45f);
+            const float thighAvg = GetThreshold(femThresh, "thigh_girth", "average_max", 0.42f);
+            const float thighThick = GetThreshold(femThresh, "thigh_girth", "thick_max", 0.48f);
 
             if (m.upperThighGirth < thighThin) {
                 kw["legs"] = "thin";
@@ -212,15 +212,15 @@ namespace BodyLanguage {
             } else if (m.upperThighGirth < thighAvg) {
                 kw["legs"] = (toneIndex > toneNeutral) ? "lean" : "average";
             } else if (m.upperThighGirth < thighThick) {
-                kw["legs"] = (toneIndex >= toneNeutral) ? "muscular" : "thick";
+                kw["legs"] = (toneIndex >= toneRipped) ? "muscular" : "thick";
             } else {
-                kw["legs"] = (toneIndex >= toneNeutral) ? "colossal_muscular" : "colossal";
+                kw["legs"] = (toneIndex >= toneRipped) ? "colossal_muscular" : "colossal";
             }
 
             // 7. Arms (Upper Arm circumference-to-height ratio G_9 / H_0)
             const float armThin = GetThreshold(femThresh, "arm_girth", "thin_max", 0.18f);
-            const float armMed = GetThreshold(femThresh, "arm_girth", "medium_max", 0.21f);
-            const float armThick = GetThreshold(femThresh, "arm_girth", "thick_max", 0.24f);
+            const float armMed = GetThreshold(femThresh, "arm_girth", "medium_max", 0.22f);
+            const float armThick = GetThreshold(femThresh, "arm_girth", "thick_max", 0.25f);
 
             if (m.upperArmGirth < armThin) {
                 kw["arms"] = (toneIndex > toneNeutral) ? "toned" : "thin";
@@ -259,7 +259,9 @@ namespace BodyLanguage {
                 if (toneIndex < toneLow) {
                     kw["physique_condition"] = isHourglass ? "curvy" : "soft";
                 } else if (toneIndex <= toneNeutral) {
-                    kw["physique_condition"] = (m.waistToHipRatio < whrSlim) ? "lean" : (isHourglass ? "curvy" : "average");
+                    kw["physique_condition"] = (m.waistToHipRatio < whrSlim && !isHourglass) ? "lean" : (isHourglass ? "curvy" : "average");
+                } else if (toneIndex < toneRipped) {
+                    kw["physique_condition"] = (isHourglass && m.hipsToHeight >= gluteAvg) ? "curvy" : ((m.upperThighGirth < thighLean) ? "lean" : "athletic");
                 } else if (toneIndex >= toneRipped) {
                     kw["physique_condition"] = "shredded";
                 } else {
@@ -295,10 +297,10 @@ namespace BodyLanguage {
             const nlohmann::json& maleThresh) {
             std::unordered_map<std::string, std::string> kw;
 
-            const float massVeryLow = GetThreshold(maleThresh, "body_mass_index", "very_low_max", 0.45f);
-            const float massCompact = GetThreshold(maleThresh, "body_mass_index", "compact_max", 0.49f);
-            const float massMedium = GetThreshold(maleThresh, "body_mass_index", "medium_max", 0.54f);
-            const float massHigh = GetThreshold(maleThresh, "body_mass_index", "high_max", 0.59f);
+            const float massVeryLow = GetThreshold(maleThresh, "body_mass_index", "very_low_max", 0.43f);
+            const float massCompact = GetThreshold(maleThresh, "body_mass_index", "compact_max", 0.47f);
+            const float massMedium = GetThreshold(maleThresh, "body_mass_index", "medium_max", 0.52f);
+            const float massHigh = GetThreshold(maleThresh, "body_mass_index", "high_max", 0.57f);
 
             const float toneLow = GetThreshold(maleThresh, "tone_index", "low_max", -0.15f);
             const float toneNeutral = GetThreshold(maleThresh, "tone_index", "neutral_max", 0.25f);
@@ -319,8 +321,8 @@ namespace BodyLanguage {
 
             // 2. Shoulder Breadth (Shoulder width-to-height ratio W_1 / H_0)
             const float shldrNarrow = GetThreshold(maleThresh, "shoulder_breadth", "narrow_max", 0.34f);
-            const float shldrAvg = GetThreshold(maleThresh, "shoulder_breadth", "average_max", 0.38f);
-            const float shldrBroad = GetThreshold(maleThresh, "shoulder_breadth", "broad_max", 0.41f);
+            const float shldrAvg = GetThreshold(maleThresh, "shoulder_breadth", "average_max", 0.37f);
+            const float shldrBroad = GetThreshold(maleThresh, "shoulder_breadth", "broad_max", 0.40f);
 
             if (m.shoulderToHeight < shldrNarrow) {
                 kw["shoulder_breadth"] = "narrow";
@@ -333,12 +335,12 @@ namespace BodyLanguage {
             }
 
             // 3. Chest (Chest-to-Underbust circumference ratio G_2 / G_3 combined with tone)
-            const float chestFlat = GetThreshold(maleThresh, "chest_prominence", "flat_max", 1.04f);
+            const float chestFlat = GetThreshold(maleThresh, "chest_prominence", "flat_max", 1.02f);
             const float chestAvg = GetThreshold(maleThresh, "chest_prominence", "average_max", 1.09f);
-            const float chestBroad = GetThreshold(maleThresh, "chest_prominence", "broad_max", 1.14f);
+            const float chestBroad = GetThreshold(maleThresh, "chest_prominence", "broad_max", 1.15f);
 
             if (m.bustToUnderbust < chestFlat) {
-                kw["chest"] = "flat";
+                kw["chest"] = (m.bodyMassIndex >= massMedium) ? ((toneIndex < toneLow) ? "heavyset" : "average") : "flat";
             } else if (m.bustToUnderbust < chestAvg) {
                 kw["chest"] = (toneIndex > toneRipped) ? "sculpted" : "average";
             } else if (m.bustToUnderbust < chestBroad) {
@@ -353,22 +355,26 @@ namespace BodyLanguage {
                 kw["chest"] = (toneIndex < toneLow) ? "heavyset" : "sculpted";
             }
 
-            // 4. Midsection (Anatomical Waist-to-Hip Ratio WHR = G_4 / G_6 and sagittalBellyDrop)
+            // 4. Midsection (Anatomical Waist-to-Hip Ratio WHR = G_4 / G_6, sagittalBellyDrop, and waist girth)
             const float distendedMin = GetThreshold(maleThresh, "pregnancy_score", "distended_min", 0.35f);
-            const float whrTapered = GetThreshold(maleThresh, "waist_to_hip", "tapered_max", 0.81f);
-            const float whrStraight = GetThreshold(maleThresh, "waist_to_hip", "straight_max", 0.87f);
-            const float whrThick = GetThreshold(maleThresh, "waist_to_hip", "thick_max", 0.94f);
+            const float whrTapered = GetThreshold(maleThresh, "waist_to_hip", "tapered_max", 0.82f);
+            const float whrStraight = GetThreshold(maleThresh, "waist_to_hip", "straight_max", 0.90f);
+            const float whrThick = GetThreshold(maleThresh, "waist_to_hip", "thick_max", 0.96f);
+            const float dropFlat = GetThreshold(maleThresh, "belly_drop", "flat_min", -0.006f);
+            const float dropStraight = GetThreshold(maleThresh, "belly_drop", "straight_min", -0.022f);
             const float dropThick = GetThreshold(maleThresh, "belly_drop", "thick_min", -0.045f);
+            const float waistGirth = m.rings[static_cast<std::size_t>(AnatomicalRingId::kNaturalWaist)].girth;
 
             if (m.pregnancyBellyScore >= distendedMin) {
                 kw["midsection"] = "distended";
-            } else if (m.waistToHipRatio > whrThick || m.sagittalBellyDrop < dropThick) {
+            } else if (m.waistToHipRatio > whrThick || m.sagittalBellyDrop < dropThick ||
+                       (m.sagittalBellyDrop < dropStraight && toneIndex <= toneNeutral)) {
                 kw["midsection"] = "potbellied";
-            } else if (m.waistToHipRatio > whrStraight) {
+            } else if (m.waistToHipRatio > whrStraight || m.sagittalBellyDrop < dropStraight || waistGirth >= 0.58f) {
                 kw["midsection"] = "thick";
-            } else if (toneIndex >= toneRipped && m.sagittalBellyDrop >= -0.010f) {
+            } else if (toneIndex >= toneRipped && m.sagittalBellyDrop >= dropFlat) {
                 kw["midsection"] = "ripped";
-            } else if (m.waistToHipRatio < whrTapered || toneIndex > toneNeutral) {
+            } else if ((m.waistToHipRatio < whrTapered || toneIndex > toneNeutral) && m.sagittalBellyDrop >= dropStraight) {
                 kw["midsection"] = "tapered";
             } else {
                 kw["midsection"] = "straight";
@@ -376,8 +382,8 @@ namespace BodyLanguage {
 
             // 5. Glutes (Hip circumference-to-height ratio G_6 / H_0, tone-aware for huge tier)
             const float gluteFlat = GetThreshold(maleThresh, "glute_girth", "flat_max", 0.58f);
-            const float gluteFirm = GetThreshold(maleThresh, "glute_girth", "firm_max", 0.65f);
-            const float gluteLarge = GetThreshold(maleThresh, "glute_girth", "large_max", 0.72f);
+            const float gluteFirm = GetThreshold(maleThresh, "glute_girth", "firm_max", 0.68f);
+            const float gluteLarge = GetThreshold(maleThresh, "glute_girth", "large_max", 0.74f);
 
             if (m.hipsToHeight < gluteFlat) {
                 kw["glutes"] = "flat";
@@ -391,8 +397,8 @@ namespace BodyLanguage {
 
             // 6. Legs (Upper Thigh circumference-to-height ratio G_7 / H_0, tone-aware for immense tier)
             const float thighSpindly = GetThreshold(maleThresh, "thigh_girth", "spindly_max", 0.35f);
-            const float thighAthletic = GetThreshold(maleThresh, "thigh_girth", "athletic_max", 0.40f);
-            const float thighPillars = GetThreshold(maleThresh, "thigh_girth", "pillars_max", 0.46f);
+            const float thighAthletic = GetThreshold(maleThresh, "thigh_girth", "athletic_max", 0.41f);
+            const float thighPillars = GetThreshold(maleThresh, "thigh_girth", "pillars_max", 0.47f);
 
             if (m.upperThighGirth < thighSpindly) {
                 kw["legs"] = "spindly";
@@ -406,8 +412,8 @@ namespace BodyLanguage {
 
             // 7. Arms (Upper Arm circumference-to-height ratio G_9 / H_0)
             const float armThin = GetThreshold(maleThresh, "arm_girth", "thin_max", 0.20f);
-            const float armAthletic = GetThreshold(maleThresh, "arm_girth", "athletic_max", 0.24f);
-            const float armBrawny = GetThreshold(maleThresh, "arm_girth", "brawny_max", 0.28f);
+            const float armAthletic = GetThreshold(maleThresh, "arm_girth", "athletic_max", 0.25f);
+            const float armBrawny = GetThreshold(maleThresh, "arm_girth", "brawny_max", 0.30f);
 
             if (m.upperArmGirth < armThin) {
                 kw["arms"] = "thin";
@@ -483,7 +489,7 @@ namespace BodyLanguage {
             if (mode == "short") {
                 if (isPregnant) {
                     return get("frame") + ", with " + get("breasts_volume") + " and " +
-                           get("belly") + " — overall " + get("physique_condition");
+                           ((ctx == "naked") ? ("her belly " + get("belly")) : get("belly")) + " — overall " + get("physique_condition");
                 }
                 return get("frame") + ", with " + get("breasts_volume") + " and " +
                        get("butt_hips") + " — overall " + get("physique_condition");
@@ -643,6 +649,26 @@ namespace BodyLanguage {
             0.35f * geoToneSignal +
             0.65f * (2.0f * texToneScore - 0.5f);
         return std::clamp(combined, -1.0f, 1.0f);
+    }
+
+    std::unordered_map<std::string, std::string> PhysiqueClassifier::ClassifyRegions(
+        const ActorBodyMetrics& metrics,
+        float texToneScore) const {
+        const float toneIndex = ComputeToneIndex(metrics.geoToneSignal, texToneScore);
+        std::shared_lock lock(m_configMutex);
+        const nlohmann::json emptyObj = nlohmann::json::object();
+        if (metrics.isFemale) {
+            const auto& femThresh =
+                (m_thresholds.is_object() && m_thresholds.contains("female"))
+                    ? m_thresholds["female"]
+                    : emptyObj;
+            return ClassifyFemaleRegions(metrics, toneIndex, femThresh);
+        }
+        const auto& maleThresh =
+            (m_thresholds.is_object() && m_thresholds.contains("male"))
+                ? m_thresholds["male"]
+                : emptyObj;
+        return ClassifyMaleRegions(metrics, toneIndex, texToneScore, maleThresh);
     }
 
     ActorDescriptionPair PhysiqueClassifier::BuildBothDescriptions(
