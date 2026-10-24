@@ -28,31 +28,15 @@ elseif(DEFINED SKYRIM_MODS_FOLDER AND IS_DIRECTORY "${SKYRIM_MODS_FOLDER}")
     set(OUTPUT_FOLDER "${SKYRIM_MODS_FOLDER}/${MOD_FOLDER_NAME}")
 endif()
 
-set(CommonLibPath "extern/CommonLibSSE-NG")
-set(CommonLibName "CommonLibSSE")
-
-set(BUILD_TESTS       OFF CACHE BOOL "" FORCE)
-
-# Force static linking for all vcpkg dependencies
-set(VCPKG_TARGET_TRIPLET "x64-windows-static" CACHE STRING "")
-set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>" CACHE STRING "" FORCE)
-
-if (DEFINED CommonLibPath AND NOT ${CommonLibPath} STREQUAL "")
-        add_subdirectory(${CommonLibPath} ${CommonLibName} EXCLUDE_FROM_ALL)
-else ()
-        message(
-                FATAL_ERROR
-                "Variable ${CommonLibName}Path is not set."
-        )
-endif()
-
-include("${CommonLibPath}/cmake/CommonLibSSE.cmake")
 
 # Otherwise, you can set OUTPUT_FOLDER to any place you'd like :)
 # set(OUTPUT_FOLDER "C:/path/to/any/folder")
 
 # Setup your SKSE plugin as an SKSE plugin!
-# find_package(CommonLibSSE CONFIG REQUIRED)
+find_package(directxtex CONFIG REQUIRED)
+find_package(directxtk CONFIG REQUIRED)
+find_package(CommonLibSSE CONFIG REQUIRED)
+find_package(nifly CONFIG REQUIRED)
 
 # Collect all source files
 file(GLOB_RECURSE SOURCES
@@ -64,20 +48,20 @@ file(GLOB_RECURSE SOURCES
 # add_library(${PROJECT_NAME} SHARED ${SOURCES})
 add_commonlibsse_plugin(${PROJECT_NAME} SOURCES ${SOURCES})
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23) # <--- use C++23 standard
-# Ensure project root, src/, include/, and nifly/include are on the include path
-add_subdirectory(extern/nifly EXCLUDE_FROM_ALL)
+
+# Ensure project root, src/, include/ are on the include path
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${PROJECT_SOURCE_DIR}
     ${PROJECT_SOURCE_DIR}/src
     ${PROJECT_SOURCE_DIR}/include
-    ${PROJECT_SOURCE_DIR}/extern/nifly/include
 )
 target_precompile_headers(${PROJECT_NAME} PRIVATE PCH.h) # <--- PCH.h is required!
 
-find_package(directxtex CONFIG REQUIRED)
+
 target_link_libraries(${PROJECT_NAME} PRIVATE
     nifly
     Microsoft::DirectXTex
+    CommonLibSSE::CommonLibSSE
 )
 
 
@@ -98,6 +82,9 @@ if(MSVC)
     # Tell Visual Studio to import our props file (use relative path to avoid space issues)
     set_target_properties(${PROJECT_NAME} PROPERTIES VS_USER_PROPS "${PROJECT_NAME}.props")
 endif()
+
+
+target_link_options(${PROJECT_NAME} PRIVATE $<$<NOT:$<CONFIG:Debug>>:/DEBUG>)
 
 # Force static linking of runtime library to reduce dependencies
 if(MSVC)
@@ -146,16 +133,8 @@ if(DEFINED OUTPUT_FOLDER)
         POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${DLL_FOLDER}"
         COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_FILE:${PROJECT_NAME}>" "${DLL_FOLDER}/$<TARGET_FILE_NAME:${PROJECT_NAME}>"
+        COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_PDB_FILE:${PROJECT_NAME}>" "${DLL_FOLDER}/$<TARGET_PDB_FILE_NAME:${PROJECT_NAME}>"
         VERBATIM
     )
 
-    # If you perform a "Debug" build, also copy .pdb file (for debug symbols)
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-        add_custom_command(
-            TARGET "${PROJECT_NAME}"
-            POST_BUILD
-            COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_PDB_FILE:${PROJECT_NAME}>" "${DLL_FOLDER}/$<TARGET_PDB_FILE_NAME:${PROJECT_NAME}>"
-            VERBATIM
-        )
-    endif()
 endif()
