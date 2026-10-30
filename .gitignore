@@ -13,9 +13,7 @@ tag-push.bat
 validateBodyParts.js
 /SKSE_Source/build
 SKSE_Source/docs/PublicAPI.h
-/SKSE_Source/extern/nifly
+/SKSE_Source/extern/
 __pycache__/
 *.py[cod]
-__pycache__/
-*.py[cod]
-
+*.pdb

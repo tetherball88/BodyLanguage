@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-10-23 20:05:55",
+    "generated_at": "2026-10-29 23:05:18",
     "samples": {
         "3ba/bulky woman": {
             "nif_path": "utility_scripts/body samples/3ba/bulky woman/femalebody_1.nif",
@@ -976,6 +976,136 @@
                 "bellyDrop": -0.0066
             }
         },
+        "3ba/petite to plenty 0": {
+            "nif_path": "utility_scripts/body samples/3ba/petite to plenty 0/femalebody_0.nif",
+            "is_female": true,
+            "h0_units": 102.701,
+            "z_landmarks": {
+                "crotch": 0.519,
+                "bust": 0.8278,
+                "underbust": 0.755,
+                "waist": 0.7275,
+                "belly": 0.675,
+                "hips": 0.579,
+                "thigh": 0.474
+            },
+            "perimeters_units": {
+                "shoulder_width": 28.06,
+                "bust_tape": 61.18,
+                "bust_contour": 61.71,
+                "underbust": 46.81,
+                "waist": 44.96,
+                "belly": 51.65,
+                "hips": 69.66,
+                "thigh": 39.67,
+                "calf": 26.66,
+                "arm": 19.04
+            },
+            "measurements_cm": {
+                "shoulder_width": 39.1,
+                "breast_proj": 2.51,
+                "chest": 85.4,
+                "underbust": 65.3,
+                "waist": 62.7,
+                "belly": 72.1,
+                "hips": 97.2,
+                "thigh": 55.3,
+                "calf": 37.2,
+                "arm": 26.6
+            },
+            "measurements_in": {
+                "shoulder_width": 15.4,
+                "breast_proj": 0.99,
+                "chest": 33.6,
+                "underbust": 25.7,
+                "waist": 24.7,
+                "belly": 28.4,
+                "hips": 38.3,
+                "thigh": 21.8,
+                "calf": 14.6,
+                "arm": 10.5
+            },
+            "volumes_cm3": {
+                "chest_segment": 6638.0,
+                "pelvis_segment": 4475.0
+            },
+            "ratios": {
+                "bmi": 0.4287,
+                "shldr": 0.2732,
+                "vtaper": 1.7601,
+                "whr": 0.6455,
+                "bustCup": 1.1049,
+                "hips": 0.6783,
+                "thigh": 0.3862,
+                "arm": 0.1854,
+                "bellyDrop": 0.0001
+            }
+        },
+        "3ba/petite to plenty 100": {
+            "nif_path": "utility_scripts/body samples/3ba/petite to plenty 100/femalebody_1.nif",
+            "is_female": true,
+            "h0_units": 102.551,
+            "z_landmarks": {
+                "crotch": 0.517,
+                "bust": 0.785,
+                "underbust": 0.74,
+                "waist": 0.7225,
+                "belly": 0.6725,
+                "hips": 0.567,
+                "thigh": 0.472
+            },
+            "perimeters_units": {
+                "shoulder_width": 28.44,
+                "bust_tape": 68.77,
+                "bust_contour": 70.18,
+                "underbust": 47.64,
+                "waist": 46.85,
+                "belly": 54.87,
+                "hips": 75.78,
+                "thigh": 42.97,
+                "calf": 26.78,
+                "arm": 19.29
+            },
+            "measurements_cm": {
+                "shoulder_width": 39.7,
+                "breast_proj": 7.31,
+                "chest": 96.1,
+                "underbust": 66.6,
+                "waist": 65.5,
+                "belly": 76.7,
+                "hips": 105.9,
+                "thigh": 60.0,
+                "calf": 37.4,
+                "arm": 27.0
+            },
+            "measurements_in": {
+                "shoulder_width": 15.6,
+                "breast_proj": 2.88,
+                "chest": 37.8,
+                "underbust": 26.2,
+                "waist": 25.8,
+                "belly": 30.2,
+                "hips": 41.7,
+                "thigh": 23.6,
+                "calf": 14.7,
+                "arm": 10.6
+            },
+            "volumes_cm3": {
+                "chest_segment": 6863.0,
+                "pelvis_segment": 5552.0
+            },
+            "ratios": {
+                "bmi": 0.4535,
+                "shldr": 0.2773,
+                "vtaper": 1.7135,
+                "whr": 0.6183,
+                "bustCup": 1.3062,
+                "hips": 0.7389,
+                "thigh": 0.419,
+                "arm": 0.1881,
+                "bellyDrop": -0.0037
+            }
+        },
         "3ba/sexy beauty pregnant": {
             "nif_path": "utility_scripts/body samples/3ba/sexy beauty pregnant/femalebody_1.nif",
             "is_female": true,
@@ -1499,66 +1629,66 @@
         "himbo/hideo": {
             "nif_path": "utility_scripts/body samples/himbo/hideo/malebody_1.nif",
             "is_female": false,
-            "h0_units": 103.823,
+            "h0_units": 102.598,
             "z_landmarks": {
-                "crotch": 0.476,
-                "bust": 0.847,
+                "crotch": 0.484,
+                "bust": 0.8479,
                 "underbust": 0.755,
-                "waist": 0.7175,
-                "belly": 0.6675,
-                "hips": 0.535,
-                "thigh": 0.431
+                "waist": 0.715,
+                "belly": 0.665,
+                "hips": 0.55,
+                "thigh": 0.439
             },
             "perimeters_units": {
-                "shoulder_width": 33.04,
-                "bust_tape": 69.17,
-                "bust_contour": 69.33,
-                "underbust": 54.71,
-                "waist": 51.92,
-                "belly": 57.33,
-                "hips": 70.64,
-                "thigh": 38.69,
-                "calf": 25.77,
-                "arm": 27.04
+                "shoulder_width": 32.05,
+                "bust_tape": 65.04,
+                "bust_contour": 65.22,
+                "underbust": 50.41,
+                "waist": 47.8,
+                "belly": 51.01,
+                "hips": 62.91,
+                "thigh": 34.38,
+                "calf": 22.81,
+                "arm": 21.18
             },
             "measurements_cm": {
-                "shoulder_width": 45.6,
-                "breast_proj": 1.03,
-                "chest": 95.5,
-                "underbust": 75.5,
-                "waist": 71.7,
-                "belly": 79.1,
-                "hips": 97.5,
-                "thigh": 53.4,
-                "calf": 35.6,
-                "arm": 37.3
+                "shoulder_width": 44.8,
+                "breast_proj": 0.92,
+                "chest": 90.8,
+                "underbust": 70.4,
+                "waist": 66.8,
+                "belly": 71.2,
+                "hips": 87.9,
+                "thigh": 48.0,
+                "calf": 31.9,
+                "arm": 29.6
             },
             "measurements_in": {
-                "shoulder_width": 18.0,
-                "breast_proj": 0.4,
-                "chest": 37.6,
-                "underbust": 29.7,
-                "waist": 28.2,
-                "belly": 31.2,
-                "hips": 38.4,
-                "thigh": 21.0,
-                "calf": 14.0,
-                "arm": 14.7
+                "shoulder_width": 17.6,
+                "breast_proj": 0.36,
+                "chest": 35.8,
+                "underbust": 27.7,
+                "waist": 26.3,
+                "belly": 28.1,
+                "hips": 34.6,
+                "thigh": 18.9,
+                "calf": 12.5,
+                "arm": 11.6
             },
             "volumes_cm3": {
-                "chest_segment": 10064.0,
-                "pelvis_segment": 3135.0
+                "chest_segment": 8843.0,
+                "pelvis_segment": 3265.0
             },
             "ratios": {
-                "bmi": 0.4681,
-                "shldr": 0.3182,
-                "vtaper": 1.7894,
-                "whr": 0.735,
-                "bustCup": 1.2644,
-                "hips": 0.6804,
-                "thigh": 0.3726,
-                "arm": 0.2604,
-                "bellyDrop": -0.015
+                "bmi": 0.4224,
+                "shldr": 0.3123,
+                "vtaper": 1.8361,
+                "whr": 0.7597,
+                "bustCup": 1.2902,
+                "hips": 0.6132,
+                "thigh": 0.3351,
+                "arm": 0.2064,
+                "bellyDrop": -0.0065
             }
         },
         "himbo/jack": {

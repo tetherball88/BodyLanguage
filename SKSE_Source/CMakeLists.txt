@@ -38,11 +38,14 @@ find_package(directxtk CONFIG REQUIRED)
 find_package(CommonLibSSE CONFIG REQUIRED)
 find_package(nifly CONFIG REQUIRED)
 
-# Collect all source files
-file(GLOB_RECURSE SOURCES
-    "plugin.cpp"
-    "src/*.cpp"
-    "version.rc"
+# Collect all source files (scoped strictly to root and src/ so build/vcpkg_installed is never globbed)
+file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
+)
+set(SOURCES
+    "${CMAKE_CURRENT_SOURCE_DIR}/plugin.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/version.rc"
+    ${SRC_FILES}
 )
 
 # add_library(${PROJECT_NAME} SHARED ${SOURCES})
@@ -133,7 +136,6 @@ if(DEFINED OUTPUT_FOLDER)
         POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E make_directory "${DLL_FOLDER}"
         COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_FILE:${PROJECT_NAME}>" "${DLL_FOLDER}/$<TARGET_FILE_NAME:${PROJECT_NAME}>"
-        COMMAND "${CMAKE_COMMAND}" -E copy_if_different "$<TARGET_PDB_FILE:${PROJECT_NAME}>" "${DLL_FOLDER}/$<TARGET_PDB_FILE_NAME:${PROJECT_NAME}>"
         VERBATIM
     )
 
