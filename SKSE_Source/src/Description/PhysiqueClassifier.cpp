@@ -785,25 +785,39 @@ namespace BodyLanguage {
                 ? m_thresholds["male"]
                 : emptyObj;
 
-        const float xsMax = GetThreshold(maleThresh, "genital_size", "xs_max", 0.79f);
-        const float sMax = GetThreshold(maleThresh, "genital_size", "s_max", 0.99f);
-        const float mMax = GetThreshold(maleThresh, "genital_size", "m_max", 1.19f);
-        const float lMax = GetThreshold(maleThresh, "genital_size", "l_max", 1.39f);
-        const float xlMax = GetThreshold(maleThresh, "genital_size", "xl_max", 1.79f);
-        const float xxlMax = GetThreshold(maleThresh, "genital_size", "xxl_max", 2.39f);
+        bool includeActorScale = true;
+        if (maleThresh.is_object() && maleThresh.contains("genital_size") &&
+            maleThresh["genital_size"].is_object() &&
+            maleThresh["genital_size"].contains("include_actor_scale") &&
+            maleThresh["genital_size"]["include_actor_scale"].is_boolean()) {
+            includeActorScale = maleThresh["genital_size"]["include_actor_scale"].get<bool>();
+        }
+
+        const float flaccidComp = GetThreshold(maleThresh, "genital_size", "flaccid_length_compensation", 1.0f);
+        const float xsMaxCm = GetThreshold(maleThresh, "genital_size", "xs_max_cm", 10.0f);
+        const float sMaxCm = GetThreshold(maleThresh, "genital_size", "s_max_cm", 12.5f);
+        const float mMaxCm = GetThreshold(maleThresh, "genital_size", "m_max_cm", 16.0f);
+        const float lMaxCm = GetThreshold(maleThresh, "genital_size", "l_max_cm", 19.0f);
+        const float xlMaxCm = GetThreshold(maleThresh, "genital_size", "xl_max_cm", 24.0f);
+        const float xxlMaxCm = GetThreshold(maleThresh, "genital_size", "xxl_max_cm", 34.0f);
+
+        const float scaleFactor = includeActorScale ? genitalMetrics.actorScale : 1.0f;
+        const float stateFactor = genitalMetrics.isErect ? 1.0f : flaccidComp;
+        const float effectiveLengthCm = genitalMetrics.lengthCm * scaleFactor * stateFactor;
+        const float effectiveGirthCm = genitalMetrics.girthCm * scaleFactor;
 
         std::string_view sizeTier = "M";
-        if (genitalMetrics.sizeMultiplier < xsMax) {
+        if (effectiveLengthCm < xsMaxCm) {
             sizeTier = "XS";
-        } else if (genitalMetrics.sizeMultiplier < sMax) {
+        } else if (effectiveLengthCm < sMaxCm) {
             sizeTier = "S";
-        } else if (genitalMetrics.sizeMultiplier < mMax) {
+        } else if (effectiveLengthCm < mMaxCm) {
             sizeTier = "M";
-        } else if (genitalMetrics.sizeMultiplier < lMax) {
+        } else if (effectiveLengthCm < lMaxCm) {
             sizeTier = "L";
-        } else if (genitalMetrics.sizeMultiplier < xlMax) {
+        } else if (effectiveLengthCm < xlMaxCm) {
             sizeTier = "XL";
-        } else if (genitalMetrics.sizeMultiplier < xxlMax) {
+        } else if (effectiveLengthCm < xxlMaxCm) {
             sizeTier = "XXL";
         } else {
             sizeTier = "XXXL";
@@ -814,16 +828,26 @@ namespace BodyLanguage {
             genitalMetrics.addonName,
             genitalMetrics.addonSourceFile);
 
+        const std::string_view stateStr = genitalMetrics.isErect ? "hard" : "flaccid";
+
         spdlog::info(
-            "[PhysiqueClassifier] Genital classification: size='{}' (mult={:.2f}) addon='{}' (raw='{}')",
+            "[PhysiqueClassifier] Genital classification: size='{}' state='{}' "
+            "length={:.1f}cm({:.1f}\") girth={:.1f}cm({:.1f}\") addon='{}' (raw='{}')",
             sizeTier,
-            genitalMetrics.sizeMultiplier,
+            stateStr,
+            effectiveLengthCm,
+            effectiveLengthCm * kCmToInches,
+            effectiveGirthCm,
+            effectiveGirthCm * kCmToInches,
             addonKey,
             genitalMetrics.addonName);
 
         const nlohmann::json out = {
             {"hasGenitals", true},
+            {"state", stateStr},
             {"size", sizeTier},
+            {"lengthCm", std::round(effectiveLengthCm * 10.0f) / 10.0f},
+            {"girthCm", std::round(effectiveGirthCm * 10.0f) / 10.0f},
             {"addon", addonKey}
         };
         return out.dump();

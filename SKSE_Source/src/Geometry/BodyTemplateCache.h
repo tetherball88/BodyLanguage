@@ -209,9 +209,20 @@ namespace BodyLanguage {
         UVRect deltoidUV{};
     };
 
+    struct GenitalNifTemplate {
+        std::string nifPathKey;
+        float baseLengthUnits{10.78f};
+        float baseGirthUnits{11.42f};
+        float bindChainArcUnits{8.94f};
+        std::vector<std::string> shaftBoneChain;
+    };
+
     struct ActorGenitalMetrics {
         bool hasGenitals{false};
-        float sizeMultiplier{1.0f};
+        bool isErect{false};
+        float lengthCm{0.0f};
+        float girthCm{0.0f};
+        float actorScale{1.0f};
         std::string addonName;
         std::string addonSourceFile;
     };

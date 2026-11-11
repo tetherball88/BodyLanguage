@@ -6,6 +6,10 @@
         {% set genitalData = ttlb_get_genitals(actorUUID) %}
         {% if genitalData.hasGenitals %}
             {% set tngSize = genitalData.size %}
+            {% set genitalState = "flaccid" %}
+            {% if genitalData.state == "hard" %}
+                {% set genitalState = "erect" %}
+            {% endif %}
             {% set tngAddonKey = genitalData.addon %}
             {% set tngAddon = read_json("./SkyrimNet/jsonData/tngAddons.json", tngAddonKey) %}
             {% if not tngAddon %}
@@ -27,7 +31,7 @@
             {% else if tngSize == "XXXL" %}
                 {% set sizePart = "monstrous in scale — well over a foot long with an enormous, overwhelming girth." %}
             {% endif %}
-        {{npcName}}'s exposed penis is {{sizePart}} It {{tngAddon}}
+        {{npcName}}'s exposed, {{genitalState}} penis is {{sizePart}} It {{tngAddon}}
         {% endif %}
     {% endif %}
 {% endif %}

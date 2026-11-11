@@ -94,26 +94,34 @@ namespace BodyLanguage {
             return BeastFormType::kNone;
         }
 
-        bool IsNakedBeastOrCreatureSkinArmor(const RE::TESObjectARMO* armo) {
+        bool IsNakedSkinOrGenitalArmor(const RE::Actor* actor, const RE::TESObjectARMO* armo) {
             if (!armo) {
                 return false;
             }
-            if (armo->HasKeywordString("SOS_Genitals")) {
+            if (actor) {
+                if (armo == actor->GetSkin()) {
+                    return true;
+                }
+                if (const auto* base = actor->GetActorBase(); base && armo == base->skin) {
+                    return true;
+                }
+                if (const auto* race = actor->GetRace(); race && armo == race->skin) {
+                    return true;
+                }
+            }
+            if (!armo->GetPlayable() && armo->armorRating == 0) {
                 return true;
             }
-            const auto* file = armo->GetFile(0);
-            const std::string lowerFile = (file && file->fileName[0] != '\0')
-                ? ToLowerAscii(file->fileName)
-                : std::string{};
-            if (lowerFile == "morenastycritters.esp" ||
-                lowerFile == "creatureframework.esm" ||
-                lowerFile == "bakafactoryabc.esp" ||
-                lowerFile == "abc.esp") {
-                return true;
-            }
-            const std::uint32_t localId = armo->GetFormID() & 0x00FFFFFFu;
-            if (lowerFile == "dawnguard.esm" && localId == 0x0023F5u) {  // DLC1SkinNakedVampireLord
-                return true;
+            for (const auto* arma : armo->armorAddons) {
+                if (!arma) {
+                    continue;
+                }
+                for (std::uint32_t s = 0; s < RE::SEXES::kTotal; ++s) {
+                    const char* rawModel = arma->bipedModels[s].model.c_str();
+                    if (rawModel && *rawModel != '\0' && GetOrIndexGenitalNif(rawModel) != nullptr) {
+                        return true;
+                    }
+                }
             }
             return false;
         }
@@ -295,11 +303,11 @@ namespace BodyLanguage {
             return false;
         }
         const auto* bodyArmor = actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
-        if (IsNakedBeastOrCreatureSkinArmor(bodyArmor)) {
+        if (IsNakedSkinOrGenitalArmor(actor, bodyArmor)) {
             bodyArmor = nullptr;
         }
         const auto* chestArmor = actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kModChestPrimary);
-        if (IsNakedBeastOrCreatureSkinArmor(chestArmor)) {
+        if (IsNakedSkinOrGenitalArmor(actor, chestArmor)) {
             chestArmor = nullptr;
         }
         return !bodyArmor && !chestArmor;
@@ -764,113 +772,160 @@ namespace BodyLanguage {
             race = base->race;
         }
         const BeastFormType beastForm = GetActorBeastForm(actor);
-        if (!race || race->IsChildRace() ||
-            (beastForm == BeastFormType::kNone && !race->HasKeywordString("ActorTypeNPC"))) {
+        if (!race || race->IsChildRace()) {
             return result;
         }
 
-        if (actor->HasKeywordString("TNG_Ignored") || actor->HasKeywordString("TNG_Excluded")) {
-            return result;
-        }
+        const bool isFemale = base && (base->GetSex() == RE::SEX::kFemale);
+        const auto sexIdx = isFemale ? RE::SEXES::kFemale : RE::SEXES::kMale;
 
-        // Check if pelvis is covered by TNG underwear/covering on Slot 52 (kModPelvisSecondary)
-        const auto* slot52Armor = actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kModPelvisSecondary);
-        if (slot52Armor && slot52Armor->HasKeywordString("TNG_Covering")) {
-            return result;
-        }
+        auto getArmaModelPath = [sexIdx](const RE::TESObjectARMA* arma) -> const char* {
+            if (!arma) {
+                return nullptr;
+            }
+            const char* rawModel = arma->bipedModels[sexIdx].model.c_str();
+            if (!rawModel || *rawModel == '\0') {
+                rawModel = arma->bipedModels[RE::SEXES::kMale].model.c_str();
+            }
+            return (rawModel && *rawModel != '\0') ? rawModel : nullptr;
+        };
 
-        auto isGenitalAddonArmor = [beastForm](const RE::TESObjectARMO* armo) -> bool {
-            if (!armo || armo->HasKeywordString("TNG_Covering")) {
-                return false;
-            }
-            if (armo->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody) &&
-                !IsNakedBeastOrCreatureSkinArmor(armo)) {
-                return false;
-            }
-            if (armo->HasKeywordString("SOS_Genitals") || armo->HasKeywordString("TNG_Gentlewoman")) {
-                return true;
-            }
+        struct MatchedGenitalMesh {
+            const RE::TESObjectARMA* arma = nullptr;
+            std::string nifPath;
+            std::shared_ptr<const GenitalNifTemplate> tmpl;
+        };
 
-            const char* rawName = armo->GetName();
-            const std::string lowerName = rawName ? ToLowerAscii(rawName) : std::string{};
-            if (lowerName.starts_with("$tng_") ||
-                lowerName.find("schlong") != std::string::npos ||
-                lowerName.find("addon") != std::string::npos ||
-                lowerName.find("trx") != std::string::npos ||
-                lowerName.find("vectorplexus") != std::string::npos ||
-                lowerName.find("smurf") != std::string::npos ||
-                lowerName.find("erf") != std::string::npos ||
-                lowerName.find("leito") != std::string::npos ||
-                (beastForm != BeastFormType::kNone && (
-                    lowerName.find("werewolf") != std::string::npos ||
-                    lowerName.find("vampire") != std::string::npos ||
-                    lowerName.find("werebear") != std::string::npos ||
-                    lowerName.find("mnc") != std::string::npos))) {
-                return true;
+        auto findGenitalMeshInArmor = [&](const RE::TESObjectARMO* armo,
+                                          bool requireSlot52) -> MatchedGenitalMesh {
+            MatchedGenitalMesh matched{};
+            if (!armo) {
+                return matched;
             }
-
-            if (const auto* file = armo->GetFile(0); file && file->fileName[0] != '\0') {
-                const std::string lowerFile = ToLowerAscii(file->fileName);
-                if (lowerFile == "thenewgentleman.esp" ||
-                    lowerFile == "schlongs of skyrim.esp" ||
-                    lowerFile == "morenastycritters.esp" ||
-                    lowerFile == "creatureframework.esm" ||
-                    lowerFile == "bakafactoryabc.esp" ||
-                    lowerFile == "abc.esp" ||
-                    lowerFile.find("sos") != std::string::npos ||
-                    lowerFile.find("tng") != std::string::npos ||
-                    lowerFile.find("schlong") != std::string::npos ||
-                    lowerFile.find("trx") != std::string::npos ||
-                    lowerFile.find("vectorplexus") != std::string::npos ||
-                    lowerFile.find("smurf") != std::string::npos) {
-                    return true;
-                }
-            }
-
             for (const auto* arma : armo->armorAddons) {
                 if (!arma) {
                     continue;
                 }
-                for (std::uint32_t s = 0; s < RE::SEXES::kTotal; ++s) {
-                    const char* rawModel = arma->bipedModels[s].model.c_str();
-                    if (!rawModel || *rawModel == '\0') {
+                if (requireSlot52) {
+                    const bool isSlot52Addon =
+                        arma->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kModPelvisSecondary) &&
+                        !arma->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
+                    if (!isSlot52Addon) {
                         continue;
                     }
-                    const std::string lowerModel = ToLowerAscii(rawModel);
-                    if (lowerModel.find("schlong") != std::string::npos ||
-                        lowerModel.find("genital") != std::string::npos ||
-                        lowerModel.find("penis") != std::string::npos ||
-                        lowerModel.find("tng") != std::string::npos ||
-                        lowerModel.find("sos") != std::string::npos ||
-                        lowerModel.find("trx") != std::string::npos ||
-                        lowerModel.find("vectorplexus") != std::string::npos ||
-                        lowerModel.find("smurf") != std::string::npos ||
-                        lowerModel.find("morenastycritters") != std::string::npos ||
-                        lowerModel.find("bakafactory") != std::string::npos) {
-                        return true;
-                    }
+                }
+                const char* rawModel = getArmaModelPath(arma);
+                if (!rawModel) {
+                    continue;
+                }
+                auto tmpl = GetOrIndexGenitalNif(rawModel);
+                if (!tmpl) {
+                    continue;
+                }
+                if (!matched.tmpl || arma->IsValidRace(race)) {
+                    matched.arma = arma;
+                    matched.nifPath = rawModel;
+                    matched.tmpl = std::move(tmpl);
                 }
             }
-
-            return false;
+            return matched;
         };
 
-        // 1. Check active Slot 52 (kModPelvisSecondary) or naked creature skin Slot 32 worn armor
-        const auto* wornGenitalArmor = isGenitalAddonArmor(slot52Armor)
-            ? slot52Armor
-            : actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
-        if (isGenitalAddonArmor(wornGenitalArmor)) {
-            result.hasGenitals = true;
-            if (const char* name = wornGenitalArmor->GetName(); name && *name != '\0') {
-                result.addonName = name;
+        auto findParentAddonArmor = [](const RE::TESObjectARMA* targetArma,
+                                       std::string_view modelPath,
+                                       const RE::TESObjectARMO* excludeSkin) -> const RE::TESObjectARMO* {
+            auto* dataHandler = RE::TESDataHandler::GetSingleton();
+            if (!dataHandler || (!targetArma && modelPath.empty())) {
+                return nullptr;
             }
-            if (const auto* file = wornGenitalArmor->GetFile(0); file && file->fileName[0] != '\0') {
-                result.addonSourceFile = file->fileName;
+
+            const RE::TESObjectARMO* bestMatch = nullptr;
+            int bestPriority = -1;
+            const std::string lowerTargetModel = ToLowerAscii(modelPath);
+
+            for (const auto* armo : dataHandler->GetFormArray<RE::TESObjectARMO>()) {
+                if (!armo || armo == excludeSkin ||
+                    armo->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody)) {
+                    continue;
+                }
+
+                bool pointerMatch = false;
+                bool modelMatch = false;
+                for (const auto* arma : armo->armorAddons) {
+                    if (!arma) {
+                        continue;
+                    }
+                    if (arma == targetArma) {
+                        pointerMatch = true;
+                        break;
+                    }
+                    if (!lowerTargetModel.empty()) {
+                        for (std::uint32_t s = 0; s < RE::SEXES::kTotal; ++s) {
+                            const char* m = arma->bipedModels[s].model.c_str();
+                            if (m && *m != '\0' && ToLowerAscii(m) == lowerTargetModel) {
+                                modelMatch = true;
+                            }
+                        }
+                    }
+                }
+
+                if (!pointerMatch && !modelMatch) {
+                    continue;
+                }
+
+                const char* rawName = armo->GetName();
+                const bool hasName = (rawName && *rawName != '\0');
+                const int priority = (pointerMatch ? 10 : 4) + (hasName ? 5 : 0);
+                if (priority > bestPriority) {
+                    bestPriority = priority;
+                    bestMatch = armo;
+                }
+            }
+            return bestMatch;
+        };
+
+        MatchedGenitalMesh activeMesh{};
+        const RE::TESObjectARMO* activeGenitalArmor = nullptr;
+
+        // 1. Check Slot 52 (kModPelvisSecondary) worn item:
+        //    If a Slot 52 item is worn, check if its NIF contains a 3D genital mesh; if not, it is pelvic covering/underwear.
+        if (const auto* slot52Armor = actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kModPelvisSecondary)) {
+            activeMesh = findGenitalMeshInArmor(slot52Armor, false);
+            if (!activeMesh.tmpl) {
+                return result;
+            }
+            activeGenitalArmor = slot52Armor;
+        }
+
+        // 2. Check actor/NPC/race skin and worn body skin (Slot 52 addon ARMAs first, then full-body creature/genital ARMAs)
+        if (!activeMesh.tmpl) {
+            const std::array<const RE::TESObjectARMO*, 4> skinCandidates = {
+                actor->GetSkin(),
+                actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody),
+                base ? base->skin : nullptr,
+                race ? race->skin : nullptr
+            };
+
+            for (const auto* skinArmo : skinCandidates) {
+                if (!skinArmo) {
+                    continue;
+                }
+                activeMesh = findGenitalMeshInArmor(skinArmo, true);
+                if (!activeMesh.tmpl) {
+                    activeMesh = findGenitalMeshInArmor(skinArmo, false);
+                }
+                if (activeMesh.tmpl) {
+                    activeGenitalArmor = findParentAddonArmor(activeMesh.arma, activeMesh.nifPath, skinArmo);
+                    if (!activeGenitalArmor) {
+                        activeGenitalArmor = skinArmo;
+                    }
+                    break;
+                }
             }
         }
 
-        // 2. Check actor inventory for unequipped SOS/TNG schlong armor items
-        if (!result.hasGenitals) {
+        // 3. Check actor inventory for unequipped Slot 52 genital addon items
+        if (!activeMesh.tmpl) {
             const auto inv = actor->GetInventory([](RE::TESBoundObject& obj) {
                 return obj.IsArmor();
             });
@@ -879,159 +934,164 @@ namespace BodyLanguage {
                     continue;
                 }
                 const auto* armo = item ? item->As<RE::TESObjectARMO>() : nullptr;
-                if (isGenitalAddonArmor(armo)) {
-                    result.hasGenitals = true;
-                    if (const char* name = armo->GetName(); name && *name != '\0') {
-                        result.addonName = name;
-                    }
-                    if (const auto* file = armo->GetFile(0); file && file->fileName[0] != '\0') {
-                        result.addonSourceFile = file->fileName;
-                    }
+                if (!armo || armo->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody) ||
+                    !armo->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kModPelvisSecondary)) {
+                    continue;
+                }
+                activeMesh = findGenitalMeshInArmor(armo, false);
+                if (activeMesh.tmpl) {
+                    activeGenitalArmor = armo;
                     break;
                 }
             }
         }
 
-        // 3. Inspect SOS factions (SOS_SchlongifiedFaction and SOS addon factions) for rank & addon ESP
-        std::int32_t sosFactionRank = -1;
-        actor->VisitFactions([&](RE::TESFaction* faction, std::int8_t rank) -> bool {
-            if (!faction || rank < 0) {
-                return false;
-            }
-            const auto* file = faction->GetFile(0);
-            const std::string lowerFile = (file && file->fileName[0] != '\0')
-                ? ToLowerAscii(file->fileName)
-                : std::string{};
-            const char* rawName = faction->GetName();
-            const std::string lowerName = rawName ? ToLowerAscii(rawName) : std::string{};
-
-            const bool isSosCore = (lowerFile == "schlongs of skyrim.esp");
-            const bool isSosAddon = !isSosCore && (
-                lowerFile.find("sos") != std::string::npos ||
-                lowerFile.find("schlong") != std::string::npos ||
-                lowerName.find("schlong") != std::string::npos ||
-                lowerName.find("sos_") != std::string::npos);
-
-            if (isSosCore || isSosAddon) {
-                sosFactionRank = std::max(sosFactionRank, static_cast<std::int32_t>(rank));
-                if (isSosAddon && !result.hasGenitals) {
-                    result.hasGenitals = true;
-                    if (rawName && *rawName != '\0') {
-                        result.addonName = rawName;
-                    }
-                    if (file && file->fileName[0] != '\0') {
-                        result.addonSourceFile = file->fileName;
-                    }
-                }
-            }
-            return false;
-        });
-
-        // 4. Fallback for TNG / SOS / Creature frameworks when 3D or Slot 52 item hasn't been equipped yet
-        const bool isFemale = base && (base->GetSex() == RE::SEX::kFemale);
-        const bool eligibleSex = !isFemale || actor->HasKeywordString("TNG_Gentlewoman");
-        if (!result.hasGenitals && eligibleSex) {
-            auto* dataHandler = RE::TESDataHandler::GetSingleton();
-            const bool tngLoaded = dataHandler && (dataHandler->LookupModByName("TheNewGentleman.esp") != nullptr);
-            const bool mncLoaded = dataHandler && (
-                dataHandler->LookupModByName("MoreNastyCritters.esp") != nullptr ||
-                dataHandler->LookupModByName("BakaFactoryABC.esp") != nullptr ||
-                dataHandler->LookupModByName("ABC.esp") != nullptr ||
-                dataHandler->LookupModByName("CreatureFramework.esm") != nullptr);
-            if (beastForm != BeastFormType::kNone && mncLoaded) {
-                result.hasGenitals = true;
-                result.addonSourceFile = "MoreNastyCritters.esp";
-            } else if (tngLoaded) {
-                result.hasGenitals = true;
-                result.addonName = "$TNG_TRT";
-                result.addonSourceFile = "TheNewGentleman.esp";
-            } else if (sosFactionRank >= 0) {
-                result.hasGenitals = true;
-                result.addonName = "$TNG_TRT";
-                result.addonSourceFile = "Schlongs of Skyrim.esp";
-            }
-        }
-
-        if (!result.hasGenitals) {
+        if (!activeMesh.tmpl) {
             return result;
         }
 
-        if (beastForm == BeastFormType::kWerewolf) {
-            result.addonName = "Werewolf";
-            result.sizeMultiplier = 2.70f;
-        } else if (beastForm == BeastFormType::kVampireLord) {
-            result.addonName = "Vampire Lord";
-            result.sizeMultiplier = 2.03f;
-        } else if (beastForm == BeastFormType::kWerebear) {
-            result.addonName = "Werebear";
-            result.sizeMultiplier = 2.85f;
-        } else {
-            // 5. Resolve effective human genital size multiplier (3D XPMSE bone scale -> TNG keywords -> SOS faction rank)
-            float boneScale = 1.0f;
-            if (auto* root3D = actor->Get3D(false)) {
-                boneScale = ReadBoneScale(root3D, "NPC GenitalsBase [GenBase]");
-                if (std::fabs(boneScale - 1.0f) <= 0.01f) {
-                    boneScale = ReadBoneScale(root3D, "NPC Genitals01 [Gen01]");
-                }
+        result.hasGenitals = true;
+        if (activeGenitalArmor) {
+            if (const char* name = activeGenitalArmor->GetName(); name && *name != '\0') {
+                result.addonName = name;
             }
-
-            float keywordMult = -1.0f;
-            if (actor->HasKeywordString("TNG_XS")) {
-                keywordMult = 0.80f;
-            } else if (actor->HasKeywordString("TNG_S")) {
-                keywordMult = 0.90f;
-            } else if (actor->HasKeywordString("TNG_M")) {
-                keywordMult = 1.00f;
-            } else if (actor->HasKeywordString("TNG_L")) {
-                keywordMult = 1.20f;
-            } else if (actor->HasKeywordString("TNG_XL")) {
-                keywordMult = 1.40f;
+            if (const auto* file = activeGenitalArmor->GetFile(0); file && file->fileName[0] != '\0') {
+                result.addonSourceFile = file->fileName;
             }
-
-            if (std::fabs(boneScale - 1.0f) > 0.01f) {
-                result.sizeMultiplier = boneScale;
-            } else if (keywordMult > 0.0f) {
-                result.sizeMultiplier = keywordMult;
-            } else if (sosFactionRank >= 1) {
-                if (sosFactionRank == 1) {
-                    result.sizeMultiplier = 0.75f;
-                } else if (sosFactionRank == 2) {
-                    result.sizeMultiplier = 0.88f;
-                } else if (sosFactionRank <= 5) {
-                    result.sizeMultiplier = 1.00f;
-                } else if (sosFactionRank <= 8) {
-                    result.sizeMultiplier = 1.25f;
-                } else {
-                    result.sizeMultiplier = 1.45f;
-                }
-            } else {
-                result.sizeMultiplier = 1.00f;
+        }
+        if (result.addonSourceFile.empty() && activeMesh.arma) {
+            if (const auto* file = activeMesh.arma->GetFile(0); file && file->fileName[0] != '\0') {
+                result.addonSourceFile = file->fileName;
+            }
+        }
+        if (result.addonName.empty()) {
+            if (beastForm == BeastFormType::kWerewolf) {
+                result.addonName = "Werewolf";
+            } else if (beastForm == BeastFormType::kVampireLord) {
+                result.addonName = "Vampire Lord";
+            } else if (beastForm == BeastFormType::kWerebear) {
+                result.addonName = "Werebear";
             }
         }
 
-        const float rawScale = actor->GetScale();
-        const float actorScale = (std::isfinite(rawScale) && rawScale > 0.2f && rawScale < 3.0f) ? rawScale : 1.0f;
+        const std::string& genitalNifPath = activeMesh.nifPath;
+        const auto& genitalTemplate = activeMesh.tmpl;
 
-        const float lengthCm = 15.24f * result.sizeMultiplier * actorScale;
-        const float girthCm = 12.70f * result.sizeMultiplier * actorScale;
-        const float lengthIn = lengthCm * kCmToInches;
-        const float girthIn = girthCm * kCmToInches;
+        // 4. Interpolate _0.nif and _1.nif base dimensions by actor weight if a weight-slider pair exists
+        float baseLengthUnits = genitalTemplate->baseLengthUnits;
+        float baseGirthUnits = genitalTemplate->baseGirthUnits;
+
+        if (genitalNifPath.size() > 6) {
+            const std::string lowerPath = ToLowerAscii(genitalNifPath);
+            if (lowerPath.ends_with("_1.nif") || lowerPath.ends_with("_0.nif")) {
+                std::string pairPath = lowerPath;
+                pairPath[pairPath.size() - 5] = lowerPath.ends_with("_1.nif") ? '0' : '1';
+                if (auto pairTemplate = GetOrIndexGenitalNif(pairPath)) {
+                    const float rawWeight = base ? base->GetWeight() : actor->GetWeight();
+                    const float w = std::clamp(rawWeight / 100.0f, 0.0f, 1.0f);
+                    const auto& t0 = lowerPath.ends_with("_0.nif") ? genitalTemplate : pairTemplate;
+                    const auto& t1 = lowerPath.ends_with("_1.nif") ? genitalTemplate : pairTemplate;
+                    baseLengthUnits = t0->baseLengthUnits * (1.0f - w) + t1->baseLengthUnits * w;
+                    baseGirthUnits = t0->baseGirthUnits * (1.0f - w) + t1->baseGirthUnits * w;
+                }
+            }
+        }
+
+        // 5. Real-time 3D skeleton bone-chain measurement & flaccid/erect state detection
+        auto* root3D = actor->Get3D(false);
+        float actorScale = 1.0f;
+        if (root3D && std::isfinite(root3D->world.scale) && root3D->world.scale > 0.2f && root3D->world.scale < 3.0f) {
+            actorScale = root3D->world.scale;
+        } else {
+            const float rawScale = actor->GetScale();
+            if (std::isfinite(rawScale) && rawScale > 0.2f && rawScale < 3.0f) {
+                actorScale = rawScale;
+            }
+        }
+        result.actorScale = actorScale;
+
+        std::vector<RE::NiAVObject*> liveChainNodes;
+        if (root3D && !genitalTemplate->shaftBoneChain.empty()) {
+            for (const auto& bName : genitalTemplate->shaftBoneChain) {
+                if (auto* node = root3D->GetObjectByName(bName)) {
+                    liveChainNodes.push_back(node);
+                }
+            }
+        }
+
+        float lengthStretch = 1.0f;
+        float girthStretch = 1.0f;
+        float pitchDeg = 0.0f;
+        bool isErect = false;
+
+        if (!liveChainNodes.empty()) {
+            float scaleSum = 0.0f;
+            std::size_t scaleCount = 0;
+
+            for (const auto* node : liveChainNodes) {
+                const float relScale = node->world.scale / actorScale;
+                if (std::isfinite(relScale) && relScale > 0.2f && relScale < 4.0f) {
+                    scaleSum += relScale;
+                    ++scaleCount;
+                }
+            }
+
+            if (scaleCount > 0) {
+                girthStretch = scaleSum / static_cast<float>(scaleCount);
+            }
+            if (std::fabs(girthStretch - 1.0f) < 0.01f) {
+                if (const auto* parentBase = liveChainNodes.front()->parent) {
+                    if (std::isfinite(parentBase->local.scale) &&
+                        parentBase->local.scale > 0.2f && parentBase->local.scale < 4.0f &&
+                        std::fabs(parentBase->local.scale - 1.0f) >= 0.01f) {
+                        girthStretch = parentBase->local.scale;
+                    }
+                }
+            }
+            lengthStretch = girthStretch;
+
+            if (liveChainNodes.size() >= 2) {
+                // Detect flaccid vs. hard state from sagittal pitch angle relative to parent/pelvis local space
+                const RE::NiPoint3 vWorld =
+                    liveChainNodes.back()->world.translate - liveChainNodes.front()->world.translate;
+                const RE::NiAVObject* refNode = liveChainNodes.front()->parent
+                    ? liveChainNodes.front()->parent
+                    : root3D;
+                if (refNode && refNode->parent && refNode != root3D) {
+                    refNode = refNode->parent;
+                }
+                const RE::NiMatrix3& refRot = refNode ? refNode->world.rotate : root3D->world.rotate;
+                const RE::NiPoint3 vLocal = refRot.Transpose() * vWorld;
+                const float vNorm = std::sqrt(vLocal.x * vLocal.x + vLocal.y * vLocal.y + vLocal.z * vLocal.z);
+                if (vNorm > 0.5f) {
+                    pitchDeg = std::atan2(vLocal.z, vLocal.y) * (180.0f / std::numbers::pi_v<float>);
+                    isErect = (pitchDeg >= -25.0f);
+                }
+            }
+        }
+
+        result.isErect = isErect;
+        result.lengthCm = baseLengthUnits * lengthStretch * kSkyrimUnitToCm;
+        result.girthCm = baseGirthUnits * girthStretch * kSkyrimUnitToCm;
+
+        const float worldLengthCm = result.lengthCm * actorScale;
+        const float worldGirthCm = result.girthCm * actorScale;
 
         const char* actorName = actor->GetName();
         spdlog::info(
-            "[ActorBodyEvaluator] Genitals '{}' ({:08X}): addon='{}' file='{}' "
-            "length={:.1f}cm({:.1f}\") girth={:.1f}cm({:.1f}\") "
-            "sizeMult={:.2f} (bone={:.2f}, kw={:.2f}, sosRank={})",
+            "[ActorBodyEvaluator] Genitals '{}' ({:08X}): addon='{}' nif='{}' state='{}' (pitch={:.1f}deg) "
+            "base={:.1f}cm stretch={:.2f}x actorScale={:.2f} -> length={:.1f}cm({:.1f}\") girth={:.1f}cm({:.1f}\")",
             (actorName && *actorName != '\0') ? actorName : "<unnamed>",
             actor->GetFormID(),
             result.addonName,
-            result.addonSourceFile,
-            lengthCm, lengthIn,
-            girthCm, girthIn,
-            result.sizeMultiplier,
-            boneScale,
-            keywordMult,
-            sosFactionRank);
+            genitalNifPath,
+            result.isErect ? "hard" : "flaccid",
+            pitchDeg,
+            baseLengthUnits * kSkyrimUnitToCm,
+            lengthStretch,
+            actorScale,
+            worldLengthCm, worldLengthCm * kCmToInches,
+            worldGirthCm, worldGirthCm * kCmToInches);
 
         return result;
     }

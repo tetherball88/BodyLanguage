@@ -8,9 +8,11 @@
 #include <cstring>
 #include <fstream>
 #include <limits>
-#include <limits>
+#include <numbers>
+#include <shared_mutex>
 #include <sstream>
 #include <unordered_map>
+#include <unordered_set>
 
 #include <NifFile.hpp>
 #include <spdlog/spdlog.h>
@@ -469,6 +471,347 @@ namespace BodyLanguage {
             normalizedPath,
             shapeCount,
             outCache.nifPathKey);
+    }
+
+    namespace {
+
+        bool IsPelvicNonShaftBoneName(std::string_view lowerBoneName) {
+            constexpr std::array<std::string_view, 19> kNonShaftSubstrings = {
+                "pelv",  "thigh", "thg",   "spine", "spn",  "belly", "groin",
+                "butt",  "glute", " hip",  "scrot", "ball", "wwlb",  "wwrb",
+                "anus",  "vagina","clit",  "labia", "mouth"
+            };
+            for (const auto kw : kNonShaftSubstrings) {
+                if (lowerBoneName.find(kw) != std::string_view::npos) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        std::shared_ptr<const GenitalNifTemplate> ParseNifGenitalMesh(std::string_view normalizedPath) {
+            std::vector<std::uint8_t> rawBytes;
+            if (!ReadVfsFileToBytes(normalizedPath, rawBytes)) {
+                return nullptr;
+            }
+
+            std::string byteStr(reinterpret_cast<const char*>(rawBytes.data()), rawBytes.size());
+            std::istringstream iss(byteStr, std::ios::in | std::ios::binary);
+
+            nifly::NifFile nif;
+            if (nif.Load(iss) != 0 || !nif.IsValid()) {
+                return nullptr;
+            }
+
+            const auto shapes = nif.GetShapes();
+            if (shapes.empty()) {
+                return nullptr;
+            }
+
+            struct BoneNodePos {
+                std::string name;
+                RE::NiPoint3 pos{};
+            };
+
+            std::size_t bestScore = 0;
+            std::vector<RE::NiPoint3> bestShaftVerts;
+            std::vector<BoneNodePos> bestChain;
+
+            for (auto* shape : shapes) {
+                if (!shape || !shape->IsSkinned() || shape->GetNumVertices() < 50) {
+                    continue;
+                }
+
+                const std::string lowerShapeName = ToLowerAscii(shape->name.get());
+                if (lowerShapeName.find("collision") != std::string::npos ||
+                    lowerShapeName.find("tongue") != std::string::npos ||
+                    lowerShapeName.find("ball") != std::string::npos ||
+                    lowerShapeName.find("scrot") != std::string::npos ||
+                    lowerShapeName.find("hands") != std::string::npos ||
+                    lowerShapeName.find("feet") != std::string::npos ||
+                    lowerShapeName.find("head") != std::string::npos) {
+                    continue;
+                }
+
+                std::vector<nifly::Vector3> verts;
+                if (!nif.GetVertsForShape(shape, verts) || verts.size() < 50) {
+                    continue;
+                }
+
+                std::vector<std::string> boneNames;
+                nif.GetShapeBoneList(shape, boneNames);
+                if (boneNames.empty()) {
+                    continue;
+                }
+
+                std::vector<std::string> lowerBones(boneNames.size());
+                for (std::size_t b = 0; b < boneNames.size(); ++b) {
+                    lowerBones[b] = ToLowerAscii(boneNames[b]);
+                }
+
+                std::vector<std::vector<std::pair<std::uint32_t, float>>> vertWeights(verts.size());
+                std::vector<float> boneWeightSum(boneNames.size(), 0.0f);
+                std::vector<RE::NiPoint3> bonePosSum(boneNames.size(), RE::NiPoint3(0.0f, 0.0f, 0.0f));
+
+                auto accumulateWeight = [&](std::uint32_t boneIdx, std::uint16_t vIdx, float w) {
+                    if (vIdx >= verts.size() || boneIdx >= boneNames.size() || w <= 0.001f) {
+                        return;
+                    }
+                    vertWeights[vIdx].emplace_back(boneIdx, w);
+                    boneWeightSum[boneIdx] += w;
+                    bonePosSum[boneIdx].x += w * verts[vIdx].x;
+                    bonePosSum[boneIdx].y += w * verts[vIdx].y;
+                    bonePosSum[boneIdx].z += w * verts[vIdx].z;
+                };
+
+                bool extractedFromSkinData = false;
+                if (auto* skinInst = nif.GetHeader().GetBlock<nifly::NiSkinInstance>(shape->SkinInstanceRef())) {
+                    if (auto* skinData = nif.GetHeader().GetBlock<nifly::NiSkinData>(skinInst->dataRef)) {
+                        if (skinData->hasVertWeights && skinData->bones.size() == boneNames.size()) {
+                            for (std::uint32_t bIdx = 0; bIdx < skinData->bones.size(); ++bIdx) {
+                                for (const auto& sw : skinData->bones[bIdx].vertexWeights) {
+                                    accumulateWeight(bIdx, sw.index, sw.weight);
+                                    extractedFromSkinData = true;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (std::uint32_t bIdx = 0; !extractedFromSkinData && bIdx < boneNames.size(); ++bIdx) {
+                    std::unordered_map<std::uint16_t, float> bWeights;
+                    nif.GetShapeBoneWeights(shape, bIdx, bWeights);
+                    for (const auto& [vIdx, w] : bWeights) {
+                        accumulateWeight(bIdx, vIdx, w);
+                    }
+                }
+
+                // Geometrically classify each bone using its NiNode transform and vertex-weighted 3D centroid
+                std::vector<bool> isShaftBone(boneNames.size(), false);
+                std::vector<bool> isAxialMidlineBone(boneNames.size(), false);
+                std::vector<RE::NiPoint3> bonePos3D(boneNames.size(), RE::NiPoint3(0.0f, 0.0f, 0.0f));
+
+                for (std::size_t b = 0; b < boneNames.size(); ++b) {
+                    if (boneWeightSum[b] <= 0.01f) {
+                        continue;
+                    }
+                    const RE::NiPoint3 centroid = bonePosSum[b] / boneWeightSum[b];
+                    RE::NiPoint3 bPos = centroid;
+
+                    nifly::MatTransform xform{};
+                    if (nif.GetNodeTransformToGlobal(boneNames[b], xform) ||
+                        nif.GetNodeTransformToParent(boneNames[b], xform)) {
+                        const float absSum = std::fabs(xform.translation.x) +
+                                             std::fabs(xform.translation.y) +
+                                             std::fabs(xform.translation.z);
+                        if (absSum > 0.1f) {
+                            bPos = RE::NiPoint3(xform.translation.x, xform.translation.y, xform.translation.z);
+                        }
+                    }
+                    bonePos3D[b] = bPos;
+
+                    const bool inAnteriorPelvicZone =
+                        (std::fabs(centroid.x) < 4.5f) &&
+                        (centroid.y > 0.2f) &&
+                        (centroid.z >= 40.0f && centroid.z <= 90.0f);
+
+                    if (inAnteriorPelvicZone && !IsPelvicNonShaftBoneName(lowerBones[b])) {
+                        isShaftBone[b] = true;
+                        if (std::fabs(bPos.x) < 0.6f && std::fabs(centroid.x) < 0.8f) {
+                            isAxialMidlineBone[b] = true;
+                        }
+                    }
+                }
+
+                std::vector<RE::NiPoint3> candVerts;
+                candVerts.reserve(verts.size());
+                std::unordered_set<std::size_t> usedAxialBoneIndices;
+
+                for (std::size_t v = 0; v < verts.size(); ++v) {
+                    float axialShaftW = 0.0f;
+                    float nonShaftW = 0.0f;
+                    for (const auto& [bIdx, w] : vertWeights[v]) {
+                        if (isShaftBone[bIdx]) {
+                            if (isAxialMidlineBone[bIdx]) {
+                                axialShaftW += w;
+                                if (w > 0.15f) {
+                                    usedAxialBoneIndices.insert(bIdx);
+                                }
+                            }
+                        } else {
+                            nonShaftW += w;
+                        }
+                    }
+                    if (axialShaftW > 0.35f && axialShaftW > nonShaftW) {
+                        candVerts.emplace_back(verts[v].x, verts[v].y, verts[v].z);
+                    }
+                }
+
+                if (candVerts.size() < 20) {
+                    continue;
+                }
+
+                float minShapeZ = std::numeric_limits<float>::max();
+                float maxShapeZ = std::numeric_limits<float>::lowest();
+                for (const auto& v : verts) {
+                    minShapeZ = std::min(minShapeZ, v.z);
+                    maxShapeZ = std::max(maxShapeZ, v.z);
+                }
+                const bool isDedicatedGenitalShape = (maxShapeZ - minShapeZ) < 45.0f;
+                const std::size_t score = candVerts.size() + (isDedicatedGenitalShape ? 100000u : 0u);
+
+                if (score > bestScore) {
+                    bestScore = score;
+                    bestShaftVerts = std::move(candVerts);
+
+                    std::vector<BoneNodePos> rawChain;
+                    for (const std::size_t bIdx : usedAxialBoneIndices) {
+                        rawChain.push_back(BoneNodePos{boneNames[bIdx], bonePos3D[bIdx]});
+                    }
+                    std::ranges::sort(rawChain, [](const BoneNodePos& a, const BoneNodePos& b) {
+                        return a.pos.y < b.pos.y;
+                    });
+
+                    bestChain.clear();
+                    if (!rawChain.empty()) {
+                        std::vector<float> zs;
+                        zs.reserve(rawChain.size());
+                        for (const auto& item : rawChain) {
+                            zs.push_back(item.pos.z);
+                        }
+                        std::ranges::sort(zs);
+                        const float medianZ = zs[zs.size() / 2];
+                        for (const auto& item : rawChain) {
+                            if (std::fabs(item.pos.z - medianZ) < 3.5f) {
+                                bestChain.push_back(item);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (bestShaftVerts.size() < 20 || bestChain.size() < 2) {
+                return nullptr;
+            }
+
+            const auto& midlineBones = bestChain;
+
+            auto tmpl = std::make_shared<GenitalNifTemplate>();
+            tmpl->nifPathKey = std::string(normalizedPath);
+
+            float chainArc = 0.0f;
+            for (std::size_t i = 0; i < midlineBones.size(); ++i) {
+                tmpl->shaftBoneChain.push_back(midlineBones[i].name);
+                if (i > 0) {
+                    const RE::NiPoint3 d = midlineBones[i].pos - midlineBones[i - 1].pos;
+                    chainArc += std::sqrt(d.x * d.x + d.y * d.y + d.z * d.z);
+                }
+            }
+            tmpl->bindChainArcUnits = std::max(1.0f, chainArc);
+
+            float axisY = 1.0f;
+            float axisZ = 0.0f;
+            if (midlineBones.size() >= 2) {
+                const float dy = midlineBones.back().pos.y - midlineBones.front().pos.y;
+                const float dz = midlineBones.back().pos.z - midlineBones.front().pos.z;
+                const float norm = std::hypot(dy, dz);
+                if (norm > 1e-4f) {
+                    axisY = dy / norm;
+                    axisZ = dz / norm;
+                }
+            }
+            const float perpY = -axisZ;
+            const float perpZ = axisY;
+
+            std::vector<float> projAlong;
+            projAlong.reserve(bestShaftVerts.size());
+            for (const auto& v : bestShaftVerts) {
+                projAlong.push_back(v.y * axisY + v.z * axisZ);
+            }
+            std::ranges::sort(projAlong);
+
+            float sMin = projAlong[static_cast<std::size_t>(0.02f * static_cast<float>(projAlong.size()))];
+            const float sMax = projAlong[static_cast<std::size_t>(0.99f * static_cast<float>(projAlong.size()))];
+            if (midlineBones.size() >= 2) {
+                const float rootY = 0.35f * midlineBones[0].pos.y + 0.65f * midlineBones[1].pos.y;
+                const float rootZ = 0.35f * midlineBones[0].pos.z + 0.65f * midlineBones[1].pos.z;
+                const float rootS = rootY * axisY + rootZ * axisZ;
+                sMin = std::max(sMin, rootS);
+            }
+
+            if ((sMax - sMin) < 3.5f) {
+                return nullptr;
+            }
+
+            const float lengthU = sMax - sMin;
+            tmpl->baseLengthUnits = lengthU;
+
+            float minX = std::numeric_limits<float>::max();
+            float maxX = std::numeric_limits<float>::lowest();
+            float minP = std::numeric_limits<float>::max();
+            float maxP = std::numeric_limits<float>::lowest();
+            std::size_t midCount = 0;
+
+            for (const auto& v : bestShaftVerts) {
+                const float s = v.y * axisY + v.z * axisZ;
+                if (s >= (sMin + 0.25f * lengthU) && s <= (sMin + 0.65f * lengthU)) {
+                    const float p = v.y * perpY + v.z * perpZ;
+                    minX = std::min(minX, v.x);
+                    maxX = std::max(maxX, v.x);
+                    minP = std::min(minP, p);
+                    maxP = std::max(maxP, p);
+                    ++midCount;
+                }
+            }
+
+            if (midCount >= 8 && maxX > minX && maxP > minP) {
+                const float a = 0.5f * (maxX - minX);
+                const float b = 0.5f * (maxP - minP);
+                tmpl->baseGirthUnits = std::numbers::pi_v<float> *
+                    (3.0f * (a + b) - std::sqrt(std::max(0.0f, (3.0f * a + b) * (a + 3.0f * b))));
+            } else {
+                tmpl->baseGirthUnits = lengthU * 0.90f;
+            }
+
+            spdlog::info(
+                "[NifTriParser] Indexed Genital NIF '{}': baseLen={:.2f}u ({:.1f}cm) baseGirth={:.2f}u ({:.1f}cm) "
+                "chainBones={} bindArc={:.2f}u",
+                normalizedPath,
+                tmpl->baseLengthUnits,
+                tmpl->baseLengthUnits * kSkyrimUnitToCm,
+                tmpl->baseGirthUnits,
+                tmpl->baseGirthUnits * kSkyrimUnitToCm,
+                tmpl->shaftBoneChain.size(),
+                tmpl->bindChainArcUnits);
+
+            return tmpl;
+        }
+
+        std::shared_mutex g_genitalNifMutex;
+        std::unordered_map<std::string, std::shared_ptr<const GenitalNifTemplate>> g_genitalNifCache;
+
+    }  // namespace
+
+    std::shared_ptr<const GenitalNifTemplate> GetOrIndexGenitalNif(std::string_view nifRelativePath) {
+        if (nifRelativePath.empty()) {
+            return nullptr;
+        }
+
+        const std::string normalizedPath = NormalizeMeshPath(nifRelativePath);
+        {
+            std::shared_lock readLock(g_genitalNifMutex);
+            auto it = g_genitalNifCache.find(normalizedPath);
+            if (it != g_genitalNifCache.end()) {
+                return it->second;
+            }
+        }
+
+        auto parsed = ParseNifGenitalMesh(normalizedPath);
+        {
+            std::unique_lock writeLock(g_genitalNifMutex);
+            g_genitalNifCache[normalizedPath] = parsed;
+        }
+        return parsed;
     }
 
 }  // namespace BodyLanguage

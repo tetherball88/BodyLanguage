@@ -166,17 +166,17 @@ When an NPC with a TNG or SOS addon is **naked** (`ttlb_is_naked == "true"`) and
 - **Adding Custom TNG or SOS Addons:** Check `[ActorBodyEvaluator] Genitals` in `BodyLanguage.log` to see the exact `addon='...'` display name or `file='...'` `.esp` filename detected on the actor, then add a matching key in `tngAddons.json`.
 
 ### 7.2 Genital Size Tiers & Prose (`geometryThresholds.json` & `0020_genitals.prompt`)
-The C++ evaluator reads the live 3D scale of the **`NPC GenitalsBase [GenBase]`** bone (which reflects TNG racial multipliers + `TNG_XS..XL` keywords or SOS scaling), falling back to `TNG_XS..XL` keywords or `SOS_SchlongifiedFaction` rank when 3D is unloaded.
-- **Numeric Thresholds:** Configured under `"male" -> "genital_size"` in [`geometryThresholds.json`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/BodyLanguage/geometryThresholds.json).
+The C++ evaluator measures genital shaft dimensions directly from the equipped addon `.nif` mesh geometry combined with the live 3D axial bone chain (`NPC GenitalsBase [GenBase]`..`NPC Genitals06 [Gen06]`, `WWD 2`..`WWD 9`, `VLDickBase`..`VLDick06`, or any custom mod's midline shaft bones), and detects `"flaccid"` vs. `"hard"` state from the 3D shaft pitch angle relative to `NPC Pelvis [Pelv]`.
+- **Numeric Thresholds (in cm):** Configured under `"male" -> "genital_size"` in [`geometryThresholds.json`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/BodyLanguage/geometryThresholds.json), along with `"include_actor_scale"` (default `true`) and `"flaccid_length_compensation"` (default `1.0`).
 - **Size Prose (`sizePart`):** Directly editable in [`0020_genitals.prompt`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/SkyrimNet/external/tetherball88.bodylanguage/prompts/submodules/body_language/0020_genitals.prompt) without rebuilding the DLL:
 
-| Size Tier | Default `sizeMultiplier` Cutoff | Threshold Key in `geometryThresholds.json` |
+| Size Tier | Default Length Cutoff (cm / in) | Threshold Key in `geometryThresholds.json` |
 | :--- | :--- | :--- |
-| `XS` | `< 0.79` | `xs_max` |
-| `S` | `< 0.99` | `s_max` |
-| `M` | `< 1.19` | `m_max` |
-| `L` | `< 1.39` | `l_max` |
-| `XL` | `< 1.79` | `xl_max` |
-| `XXL` | `< 2.39` | `xxl_max` (e.g., Vampire Lord) |
-| `XXXL` | `>= 2.39` | `>= xxl_max` (e.g., Werewolf, Werebear) |
+| `XS` | `< 10.0 cm` (`< 3.9"`) | `xs_max_cm` |
+| `S` | `10.0 – 12.5 cm` (`3.9" – 4.9"`) | `s_max_cm` |
+| `M` | `12.5 – 16.0 cm` (`4.9" – 6.3"`) | `m_max_cm` (Real-world avg `~13.5 cm` + TNG 1.0x `15.4 cm`) |
+| `L` | `16.0 – 19.0 cm` (`6.3" – 7.5"`) | `l_max_cm` |
+| `XL` | `19.0 – 24.0 cm` (`7.5" – 9.4"`) | `xl_max_cm` |
+| `XXL` | `24.0 – 34.0 cm` (`9.4" – 13.4"`) | `xxl_max_cm` (e.g., Vampire Lord ≈ `32.1 cm` / `12.6"`) |
+| `XXXL` | `>= 34.0 cm` (`>= 13.4"`) | `>= xxl_max_cm` (e.g., Werewolf ≈ `38.1 cm`, Werebear ≈ `38.8 cm`) |
 

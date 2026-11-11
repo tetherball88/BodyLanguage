@@ -2,7 +2,7 @@
 
 #include <cstdint>
 #include <filesystem>
-#include <optional>
+#include <memory>
 #include <optional>
 #include <string>
 #include <string_view>
@@ -37,6 +37,9 @@ namespace BodyLanguage {
 
     // Reads a NIF file directly from a filesystem path on disk and parses it with nifly::NifFile.
     std::optional<RawNifMesh> ParseNifBodyMeshFromDisk(const std::filesystem::path& diskPath);
+
+    // Thread-safe VFS parser and cache for genital addon NIF meshes (human and creature).
+    std::shared_ptr<const GenitalNifTemplate> GetOrIndexGenitalNif(std::string_view nifRelativePath);
 
     // Reads a Data-relative BodySlide/RaceMenu .tri path ("TRIP" or zlib-compressed "PIRT" format)
     // via RE::BSResourceNiBinaryStream, extracts morph deltas for the 80 landmark vertices in `outCache`,
