@@ -2,6 +2,31 @@
 
 All notable changes to TT BodyLanguage will be documented in this file.
 
+## v2.2.0
+
+### Beast Form Support, Dynamic Anatomy Evaluation, NPC Exclusions & Accurate Height Detection
+
+### Added
+
+- **Werewolf, Vampire Lord & Werebear Descriptions (`BeastParts.json`)**
+  - Added dedicated full and short body descriptions for characters transformed into **Werewolves**, **Vampire Lords**, and **Werebears**, with distinct male and female phrasing customizable in `SKSE/Plugins/BodyLanguage/bodyConfigs/BeastParts.json`.
+  - Automatically hides human height and racial skin-feature lines while a character is transformed into a beast form.
+  - Added `Werewolf`, `Vampire Lord`, and `Werebear` anatomy descriptions to `tngAddons.json`.
+
+- **NPC Exclusion List (`BodyLanguage.ini`)**
+  - Added an `[Exclusions]` section (`ExcludedNPCs=`) in `SKSE/Plugins/BodyLanguage.ini` to exclude specific characters from body evaluation and omit their `Body shape` description block entirely (ideal for characters who already have custom hand-written appearance bios).
+  - Supports excluding the player character (`player`), specific NPCs by plugin and FormID (`Plugin.esp:ShortFormID`), or by EditorID (`DLC1Serana`).
+
+### Changed
+
+- **Real-Time Genital Size, State & Addon Detection**
+  - Genital size is now measured directly from the character's 3D anatomy and live in-game scaling (in cm/inches) rather than relying solely on static keywords or faction ranks, working out of the box with TNG, SOS, and custom or creature addons.
+  - Descriptions now automatically distinguish between **flaccid** and **erect** states in real time.
+  - Added **`XXL`** and **`XXXL`** size tiers in `0020_genitals.prompt` and customizable centimeter cutoffs in `geometryThresholds.json` (with options to toggle character height scaling and flaccid length compensation).
+
+- **More Accurate Character Height Descriptions**
+  - Height descriptions now calculate each character's true in-game stature by combining racial height, NPC base height, reference scale, and live RaceMenu/skeleton height sliders instead of relying on SkyrimNet's default height value.
+
 ## v2.1.0
 
 ### Improved Body Classification, Roleplay Descriptions & Visual Blueprint Tooling
