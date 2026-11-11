@@ -4,9 +4,10 @@
     {% set npcData = decnpc(actorUUID) %}
     {% set npcName = npcData.name %}
 
+    {% set beastForm = ttlb_get_beast_form(actorUUID) %}
     {% set isMan = actor_has_keyword(actorUUID, "RSVman") %}
     {% set isMer = actor_has_keyword(actorUUID, "RSVmer") %}
-    {% if isMan or isMer %}
+    {% if beastForm == "" and (isMan or isMer) %}
         {% set isNord = actor_has_keyword(actorUUID, "RSVnord") %}
         {% set isBreton = actor_has_keyword(actorUUID, "RSVbreton") %}
         {% set isImperial = actor_has_keyword(actorUUID, "RSVimperial") %}

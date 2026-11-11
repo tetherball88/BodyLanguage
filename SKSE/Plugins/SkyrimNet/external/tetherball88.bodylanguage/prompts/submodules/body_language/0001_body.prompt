@@ -5,6 +5,7 @@
     {% set race = lower(decnpc(actorUUID).race) %}
     {% set npcName = npcData.name %}
 
+    {% set beastForm = ttlb_get_beast_form(actorUUID) %}
     {% set isNaked = ttlb_is_naked(actorUUID) == "true" %}
     {% if isFullDescription %}
         {{ "### Body shape" }}
@@ -17,14 +18,20 @@
         {% set bodyPhrase = ttlb_get_short_body_description(actorUUID) %}
     {% endif %}
 
-    {% if bodyPhrase != "" %}
-        {% if isNaked %}
-            {% set bodyPhrase = " - " + npcData.possessiveAdjective + " figure revealing " + bodyPhrase %}
-        {% else %}
-            {% set bodyPhrase = " - " + npcData.possessiveAdjective + " figure suggests " + bodyPhrase %}
+    {% if beastForm != "" %}
+        {% if bodyPhrase != "" %}
+            {{npcName}} {{bodyPhrase}}.
         {% endif %}
+    {% else %}
+        {% if bodyPhrase != "" %}
+            {% if isNaked %}
+                {% set bodyPhrase = " - " + npcData.possessiveAdjective + " figure revealing " + bodyPhrase %}
+            {% else %}
+                {% set bodyPhrase = " - " + npcData.possessiveAdjective + " figure suggests " + bodyPhrase %}
+            {% endif %}
+        {% endif %}
+
+
+        {{npcName}}{% if isNaked %} is fully naked {% else %} is clothed{% endif %}{{bodyPhrase}}.
     {% endif %}
-
-
-    {{npcName}}{% if isNaked %} is fully naked {% else %} is clothed{% endif %}{{bodyPhrase}}.
 {% endif %}

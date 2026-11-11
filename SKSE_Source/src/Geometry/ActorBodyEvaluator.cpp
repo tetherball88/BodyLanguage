@@ -26,6 +26,98 @@ namespace BodyLanguage {
             return out;
         }
 
+        BeastFormType ClassifySingleRaceBeastForm(const RE::TESRace* race, bool checkBehaviorGraph) {
+            if (!race) {
+                return BeastFormType::kNone;
+            }
+
+            const std::uint32_t formId = race->GetFormID();
+            const std::uint32_t localId = formId & 0x00FFFFFFu;
+            const auto* file = race->GetFile(0);
+            const std::string lowerFile = (file && file->fileName[0] != '\0')
+                ? ToLowerAscii(file->fileName)
+                : std::string{};
+
+            if (lowerFile == "dragonborn.esm" && localId == 0x01E17Bu) {
+                return BeastFormType::kWerebear;
+            }
+            if (lowerFile == "dawnguard.esm" && localId == 0x00283Au) {
+                return BeastFormType::kVampireLord;
+            }
+            if (formId == 0x000CDD84u) {
+                return BeastFormType::kWerewolf;
+            }
+
+            const char* rawEdid = race->GetFormEditorID();
+            const std::string lowerEdid = (rawEdid && *rawEdid != '\0')
+                ? ToLowerAscii(rawEdid)
+                : std::string{};
+            const char* rawName = race->GetName();
+            const std::string lowerName = (rawName && *rawName != '\0')
+                ? ToLowerAscii(rawName)
+                : std::string{};
+
+            // Check Werebear before Werewolf so modded werebear races using werewolf behavior graphs match werebear first
+            if (lowerEdid.find("werebear") != std::string::npos ||
+                lowerName.find("werebear") != std::string::npos) {
+                return BeastFormType::kWerebear;
+            }
+
+            if (lowerEdid.find("vampirebeast") != std::string::npos ||
+                lowerEdid.find("vampirelord") != std::string::npos ||
+                lowerEdid.find("vampire_lord") != std::string::npos ||
+                lowerName.find("vampire lord") != std::string::npos ||
+                lowerName.find("vampire beast") != std::string::npos) {
+                return BeastFormType::kVampireLord;
+            }
+
+            if (lowerEdid.find("werewolf") != std::string::npos ||
+                lowerName.find("werewolf") != std::string::npos) {
+                return BeastFormType::kWerewolf;
+            }
+
+            if (checkBehaviorGraph) {
+                for (std::uint32_t s = 0; s < RE::SEXES::kTotal; ++s) {
+                    const char* rawGraph = race->behaviorGraphProjectNames[s].c_str();
+                    const std::string lowerGraph = (rawGraph && *rawGraph != '\0')
+                        ? ToLowerAscii(rawGraph)
+                        : std::string{};
+                    if (lowerGraph.find("vampirelord") != std::string::npos) {
+                        return BeastFormType::kVampireLord;
+                    }
+                    if (lowerGraph.find("werewolfbeast") != std::string::npos) {
+                        return BeastFormType::kWerewolf;
+                    }
+                }
+            }
+
+            return BeastFormType::kNone;
+        }
+
+        bool IsNakedBeastOrCreatureSkinArmor(const RE::TESObjectARMO* armo) {
+            if (!armo) {
+                return false;
+            }
+            if (armo->HasKeywordString("SOS_Genitals")) {
+                return true;
+            }
+            const auto* file = armo->GetFile(0);
+            const std::string lowerFile = (file && file->fileName[0] != '\0')
+                ? ToLowerAscii(file->fileName)
+                : std::string{};
+            if (lowerFile == "morenastycritters.esp" ||
+                lowerFile == "creatureframework.esm" ||
+                lowerFile == "bakafactoryabc.esp" ||
+                lowerFile == "abc.esp") {
+                return true;
+            }
+            const std::uint32_t localId = armo->GetFormID() & 0x00FFFFFFu;
+            if (lowerFile == "dawnguard.esm" && localId == 0x0023F5u) {  // DLC1SkinNakedVampireLord
+                return true;
+            }
+            return false;
+        }
+
         class ActiveMorphCollector final : public SKEE::IBodyMorphInterface::MorphVisitor {
         public:
             std::vector<std::string> morphNames;
@@ -156,12 +248,60 @@ namespace BodyLanguage {
         }
     }
 
+    BeastFormType ActorBodyEvaluator::GetActorBeastForm(RE::Actor* actor) const {
+        if (!actor) {
+            return BeastFormType::kNone;
+        }
+        const auto* race = actor->GetRace();
+        if (!race) {
+            return BeastFormType::kNone;
+        }
+
+        BeastFormType detected = ClassifySingleRaceBeastForm(race, false);
+        if (detected != BeastFormType::kNone) {
+            return detected;
+        }
+        if (race->morphRace) {
+            detected = ClassifySingleRaceBeastForm(race->morphRace, false);
+            if (detected != BeastFormType::kNone) {
+                return detected;
+            }
+        }
+        if (race->armorParentRace) {
+            detected = ClassifySingleRaceBeastForm(race->armorParentRace, false);
+            if (detected != BeastFormType::kNone) {
+                return detected;
+            }
+        }
+        return ClassifySingleRaceBeastForm(race, true);
+    }
+
+    std::string_view ActorBodyEvaluator::BeastFormToKey(BeastFormType beastForm) {
+        switch (beastForm) {
+            case BeastFormType::kWerewolf:
+                return "werewolf";
+            case BeastFormType::kVampireLord:
+                return "vampire_lord";
+            case BeastFormType::kWerebear:
+                return "werebear";
+            case BeastFormType::kNone:
+            default:
+                return {};
+        }
+    }
+
     bool ActorBodyEvaluator::IsActorNaked(RE::Actor* actor) const {
         if (!actor) {
             return false;
         }
         const auto* bodyArmor = actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
+        if (IsNakedBeastOrCreatureSkinArmor(bodyArmor)) {
+            bodyArmor = nullptr;
+        }
         const auto* chestArmor = actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kModChestPrimary);
+        if (IsNakedBeastOrCreatureSkinArmor(chestArmor)) {
+            chestArmor = nullptr;
+        }
         return !bodyArmor && !chestArmor;
     }
 
@@ -623,7 +763,9 @@ namespace BodyLanguage {
         if (!race && base) {
             race = base->race;
         }
-        if (!race || race->IsChildRace() || !race->HasKeywordString("ActorTypeNPC")) {
+        const BeastFormType beastForm = GetActorBeastForm(actor);
+        if (!race || race->IsChildRace() ||
+            (beastForm == BeastFormType::kNone && !race->HasKeywordString("ActorTypeNPC"))) {
             return result;
         }
 
@@ -637,11 +779,12 @@ namespace BodyLanguage {
             return result;
         }
 
-        auto isGenitalAddonArmor = [](const RE::TESObjectARMO* armo) -> bool {
+        auto isGenitalAddonArmor = [beastForm](const RE::TESObjectARMO* armo) -> bool {
             if (!armo || armo->HasKeywordString("TNG_Covering")) {
                 return false;
             }
-            if (armo->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody)) {
+            if (armo->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody) &&
+                !IsNakedBeastOrCreatureSkinArmor(armo)) {
                 return false;
             }
             if (armo->HasKeywordString("SOS_Genitals") || armo->HasKeywordString("TNG_Gentlewoman")) {
@@ -657,7 +800,12 @@ namespace BodyLanguage {
                 lowerName.find("vectorplexus") != std::string::npos ||
                 lowerName.find("smurf") != std::string::npos ||
                 lowerName.find("erf") != std::string::npos ||
-                lowerName.find("leito") != std::string::npos) {
+                lowerName.find("leito") != std::string::npos ||
+                (beastForm != BeastFormType::kNone && (
+                    lowerName.find("werewolf") != std::string::npos ||
+                    lowerName.find("vampire") != std::string::npos ||
+                    lowerName.find("werebear") != std::string::npos ||
+                    lowerName.find("mnc") != std::string::npos))) {
                 return true;
             }
 
@@ -665,6 +813,10 @@ namespace BodyLanguage {
                 const std::string lowerFile = ToLowerAscii(file->fileName);
                 if (lowerFile == "thenewgentleman.esp" ||
                     lowerFile == "schlongs of skyrim.esp" ||
+                    lowerFile == "morenastycritters.esp" ||
+                    lowerFile == "creatureframework.esm" ||
+                    lowerFile == "bakafactoryabc.esp" ||
+                    lowerFile == "abc.esp" ||
                     lowerFile.find("sos") != std::string::npos ||
                     lowerFile.find("tng") != std::string::npos ||
                     lowerFile.find("schlong") != std::string::npos ||
@@ -692,7 +844,9 @@ namespace BodyLanguage {
                         lowerModel.find("sos") != std::string::npos ||
                         lowerModel.find("trx") != std::string::npos ||
                         lowerModel.find("vectorplexus") != std::string::npos ||
-                        lowerModel.find("smurf") != std::string::npos) {
+                        lowerModel.find("smurf") != std::string::npos ||
+                        lowerModel.find("morenastycritters") != std::string::npos ||
+                        lowerModel.find("bakafactory") != std::string::npos) {
                         return true;
                     }
                 }
@@ -701,13 +855,16 @@ namespace BodyLanguage {
             return false;
         };
 
-        // 1. Check active Slot 52 (kModPelvisSecondary) worn armor (used by both TNG and SOS)
-        if (isGenitalAddonArmor(slot52Armor)) {
+        // 1. Check active Slot 52 (kModPelvisSecondary) or naked creature skin Slot 32 worn armor
+        const auto* wornGenitalArmor = isGenitalAddonArmor(slot52Armor)
+            ? slot52Armor
+            : actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
+        if (isGenitalAddonArmor(wornGenitalArmor)) {
             result.hasGenitals = true;
-            if (const char* name = slot52Armor->GetName(); name && *name != '\0') {
+            if (const char* name = wornGenitalArmor->GetName(); name && *name != '\0') {
                 result.addonName = name;
             }
-            if (const auto* file = slot52Armor->GetFile(0); file && file->fileName[0] != '\0') {
+            if (const auto* file = wornGenitalArmor->GetFile(0); file && file->fileName[0] != '\0') {
                 result.addonSourceFile = file->fileName;
             }
         }
@@ -770,13 +927,21 @@ namespace BodyLanguage {
             return false;
         });
 
-        // 4. Fallback for TNG / SOS when 3D or Slot 52 item hasn't been equipped yet
+        // 4. Fallback for TNG / SOS / Creature frameworks when 3D or Slot 52 item hasn't been equipped yet
         const bool isFemale = base && (base->GetSex() == RE::SEX::kFemale);
         const bool eligibleSex = !isFemale || actor->HasKeywordString("TNG_Gentlewoman");
         if (!result.hasGenitals && eligibleSex) {
             auto* dataHandler = RE::TESDataHandler::GetSingleton();
             const bool tngLoaded = dataHandler && (dataHandler->LookupModByName("TheNewGentleman.esp") != nullptr);
-            if (tngLoaded) {
+            const bool mncLoaded = dataHandler && (
+                dataHandler->LookupModByName("MoreNastyCritters.esp") != nullptr ||
+                dataHandler->LookupModByName("BakaFactoryABC.esp") != nullptr ||
+                dataHandler->LookupModByName("ABC.esp") != nullptr ||
+                dataHandler->LookupModByName("CreatureFramework.esm") != nullptr);
+            if (beastForm != BeastFormType::kNone && mncLoaded) {
+                result.hasGenitals = true;
+                result.addonSourceFile = "MoreNastyCritters.esp";
+            } else if (tngLoaded) {
                 result.hasGenitals = true;
                 result.addonName = "$TNG_TRT";
                 result.addonSourceFile = "TheNewGentleman.esp";
@@ -791,46 +956,57 @@ namespace BodyLanguage {
             return result;
         }
 
-        // 5. Resolve effective genital size multiplier (3D XPMSE bone scale -> TNG keywords -> SOS faction rank)
-        float boneScale = 1.0f;
-        if (auto* root3D = actor->Get3D(false)) {
-            boneScale = ReadBoneScale(root3D, "NPC GenitalsBase [GenBase]");
-            if (std::fabs(boneScale - 1.0f) <= 0.01f) {
-                boneScale = ReadBoneScale(root3D, "NPC Genitals01 [Gen01]");
-            }
-        }
-
-        float keywordMult = -1.0f;
-        if (actor->HasKeywordString("TNG_XS")) {
-            keywordMult = 0.80f;
-        } else if (actor->HasKeywordString("TNG_S")) {
-            keywordMult = 0.90f;
-        } else if (actor->HasKeywordString("TNG_M")) {
-            keywordMult = 1.00f;
-        } else if (actor->HasKeywordString("TNG_L")) {
-            keywordMult = 1.20f;
-        } else if (actor->HasKeywordString("TNG_XL")) {
-            keywordMult = 1.40f;
-        }
-
-        if (std::fabs(boneScale - 1.0f) > 0.01f) {
-            result.sizeMultiplier = boneScale;
-        } else if (keywordMult > 0.0f) {
-            result.sizeMultiplier = keywordMult;
-        } else if (sosFactionRank >= 1) {
-            if (sosFactionRank == 1) {
-                result.sizeMultiplier = 0.75f;
-            } else if (sosFactionRank == 2) {
-                result.sizeMultiplier = 0.88f;
-            } else if (sosFactionRank <= 5) {
-                result.sizeMultiplier = 1.00f;
-            } else if (sosFactionRank <= 8) {
-                result.sizeMultiplier = 1.25f;
-            } else {
-                result.sizeMultiplier = 1.45f;
-            }
+        if (beastForm == BeastFormType::kWerewolf) {
+            result.addonName = "Werewolf";
+            result.sizeMultiplier = 2.70f;
+        } else if (beastForm == BeastFormType::kVampireLord) {
+            result.addonName = "Vampire Lord";
+            result.sizeMultiplier = 2.03f;
+        } else if (beastForm == BeastFormType::kWerebear) {
+            result.addonName = "Werebear";
+            result.sizeMultiplier = 2.85f;
         } else {
-            result.sizeMultiplier = 1.00f;
+            // 5. Resolve effective human genital size multiplier (3D XPMSE bone scale -> TNG keywords -> SOS faction rank)
+            float boneScale = 1.0f;
+            if (auto* root3D = actor->Get3D(false)) {
+                boneScale = ReadBoneScale(root3D, "NPC GenitalsBase [GenBase]");
+                if (std::fabs(boneScale - 1.0f) <= 0.01f) {
+                    boneScale = ReadBoneScale(root3D, "NPC Genitals01 [Gen01]");
+                }
+            }
+
+            float keywordMult = -1.0f;
+            if (actor->HasKeywordString("TNG_XS")) {
+                keywordMult = 0.80f;
+            } else if (actor->HasKeywordString("TNG_S")) {
+                keywordMult = 0.90f;
+            } else if (actor->HasKeywordString("TNG_M")) {
+                keywordMult = 1.00f;
+            } else if (actor->HasKeywordString("TNG_L")) {
+                keywordMult = 1.20f;
+            } else if (actor->HasKeywordString("TNG_XL")) {
+                keywordMult = 1.40f;
+            }
+
+            if (std::fabs(boneScale - 1.0f) > 0.01f) {
+                result.sizeMultiplier = boneScale;
+            } else if (keywordMult > 0.0f) {
+                result.sizeMultiplier = keywordMult;
+            } else if (sosFactionRank >= 1) {
+                if (sosFactionRank == 1) {
+                    result.sizeMultiplier = 0.75f;
+                } else if (sosFactionRank == 2) {
+                    result.sizeMultiplier = 0.88f;
+                } else if (sosFactionRank <= 5) {
+                    result.sizeMultiplier = 1.00f;
+                } else if (sosFactionRank <= 8) {
+                    result.sizeMultiplier = 1.25f;
+                } else {
+                    result.sizeMultiplier = 1.45f;
+                }
+            } else {
+                result.sizeMultiplier = 1.00f;
+            }
         }
 
         const float rawScale = actor->GetScale();

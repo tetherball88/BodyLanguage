@@ -23,6 +23,7 @@ namespace BodyLanguage {
 
         struct CachedActorDescription {
             std::chrono::steady_clock::time_point timestamp{};
+            BeastFormType beastForm{BeastFormType::kNone};
             bool isNaked{false};
             bool has3D{false};
             float weight{0.0f};
@@ -43,6 +44,7 @@ namespace BodyLanguage {
 
             bool TryGet(
                 RE::FormID formId,
+                BeastFormType beastForm,
                 bool isNaked,
                 bool has3D,
                 float weight,
@@ -56,6 +58,9 @@ namespace BodyLanguage {
 
                 const auto& entry = it->second;
                 if ((now - entry.timestamp) > kActorCacheTtl) {
+                    return false;
+                }
+                if (entry.beastForm != beastForm) {
                     return false;
                 }
                 if (entry.isNaked != isNaked) {
@@ -75,6 +80,7 @@ namespace BodyLanguage {
 
             void Store(
                 RE::FormID formId,
+                BeastFormType beastForm,
                 bool isNaked,
                 bool has3D,
                 float weight,
@@ -83,6 +89,7 @@ namespace BodyLanguage {
                 std::unique_lock lock(m_mutex);
                 m_entries[formId] = CachedActorDescription{
                     now,
+                    beastForm,
                     isNaked,
                     has3D,
                     weight,
@@ -120,6 +127,7 @@ namespace BodyLanguage {
 
         try {
             const RE::FormID formId = actor->GetFormID();
+            const BeastFormType beastForm = ActorBodyEvaluator::GetInstance().GetActorBeastForm(actor);
             const bool isNakedNow = ActorBodyEvaluator::GetInstance().IsActorNaked(actor);
             const bool has3DNow = (actor->Get3D(false) != nullptr);
             const auto* base = actor->GetActorBase();
@@ -128,17 +136,44 @@ namespace BodyLanguage {
 
             ActorDescriptionPair cachedPair{};
             if (ActorDescriptionCache::GetInstance().TryGet(
-                    formId, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
                 const std::string& cachedResult = (mode == "short") ? cachedPair.shortDesc : cachedPair.full;
-                // const char* actorName = actor->GetName();
-                // spdlog::info(
-                //     "[BodyDescription] Cache hit for '{}' ({:08X}) [mode='{}' naked={}]: \"{}\"",
-                //     actorName ? actorName : "<unnamed>",
-                //     formId,
-                //     mode,
-                //     isNakedNow,
-                //     cachedResult);
                 return cachedResult;
+            }
+
+            // Beast shape takes priority over human body shape regardless of clothed/naked state
+            if (beastForm != BeastFormType::kNone) {
+                const bool isFemale = base && (base->GetSex() == RE::SEX::kFemale);
+                auto pair = PhysiqueClassifier::GetInstance().BuildBeastBothDescriptions(
+                    beastForm,
+                    isFemale);
+
+                if (isNakedNow) {
+                    const auto genitalMetrics = ActorBodyEvaluator::GetInstance().EvaluateActorGenitals(actor);
+                    pair.genitalsJson = PhysiqueClassifier::GetInstance().BuildGenitalsJson(genitalMetrics);
+                }
+
+                ActorDescriptionCache::GetInstance().Store(
+                    formId,
+                    beastForm,
+                    isNakedNow,
+                    has3DNow,
+                    weightNow,
+                    now,
+                    pair);
+
+                const std::string& sentence = (mode == "short") ? pair.shortDesc : pair.full;
+                const char* actorName = actor->GetName();
+                spdlog::info(
+                    "[BodyDescription] Beast result for '{}' ({:08X}) [form='{}' mode='{}' naked={}]: \"{}\"",
+                    actorName ? actorName : "<unnamed>",
+                    formId,
+                    ActorBodyEvaluator::BeastFormToKey(beastForm),
+                    mode,
+                    isNakedNow,
+                    sentence);
+
+                return sentence;
             }
 
             const auto metrics = ActorBodyEvaluator::GetInstance().EvaluateActorBody(actor);
@@ -167,6 +202,7 @@ namespace BodyLanguage {
 
             ActorDescriptionCache::GetInstance().Store(
                 formId,
+                beastForm,
                 metrics.isNaked,
                 has3DNow,
                 weightNow,
@@ -200,6 +236,7 @@ namespace BodyLanguage {
 
         try {
             const RE::FormID formId = actor->GetFormID();
+            const BeastFormType beastForm = ActorBodyEvaluator::GetInstance().GetActorBeastForm(actor);
             const bool isNakedNow = ActorBodyEvaluator::GetInstance().IsActorNaked(actor);
             if (!isNakedNow) {
                 return "{\"hasGenitals\":false}";
@@ -212,7 +249,7 @@ namespace BodyLanguage {
 
             ActorDescriptionPair cachedPair{};
             if (ActorDescriptionCache::GetInstance().TryGet(
-                    formId, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
                 return cachedPair.genitalsJson;
             }
 

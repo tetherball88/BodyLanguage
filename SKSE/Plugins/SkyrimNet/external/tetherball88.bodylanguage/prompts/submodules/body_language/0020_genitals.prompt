@@ -22,6 +22,10 @@
                 {% set sizePart = "impressively large — substantial in both length and girth, it commands immediate attention." %}
             {% else if tngSize == "XL" %}
                 {% set sizePart = "of extraordinary size — its sheer scale is almost shocking, far beyond what one would expect of any mortal." %}
+            {% else if tngSize == "XXL" %}
+                {% set sizePart = "massive in scale — roughly a foot in length with a thick, heavy shaft that a single hand cannot close around." %}
+            {% else if tngSize == "XXXL" %}
+                {% set sizePart = "monstrous in scale — well over a foot long with an enormous, overwhelming girth." %}
             {% endif %}
         {{npcName}}'s exposed penis is {{sizePart}} It {{tngAddon}}
         {% endif %}

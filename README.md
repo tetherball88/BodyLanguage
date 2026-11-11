@@ -34,13 +34,14 @@ Instead of relying on static BodySlide preset databases or external archive scan
 
 ## How Descriptions Reach SkyrimNet 🤖
 
-The plugin registers four native C++ decorator functions with SkyrimNet's public API:
+The plugin registers five native C++ decorator functions with SkyrimNet's public API:
 
 | Decorator | Returns |
 | :--- | :--- |
-| `ttlb_get_full_body_description(actor)` | Full multi-sentence body description (`clothed` or `naked`) |
-| `ttlb_get_short_body_description(actor)` | Concise single-phrase summary (`clothed` or `naked`) |
+| `ttlb_get_full_body_description(actor)` | Full multi-sentence body description (`clothed`, `naked`, or static beast shape) |
+| `ttlb_get_short_body_description(actor)` | Concise single-phrase summary (`clothed`, `naked`, or static beast shape) |
 | `ttlb_is_naked(actor)` | `"true"` or `"false"` based on live equipment slot inspection |
+| `ttlb_get_beast_form(actor)` | `"werewolf"`, `"vampire_lord"`, `"werebear"`, or `""` if not in beast form |
 | `ttlb_get_genitals(actor)` | JSON object (`{"hasGenitals": true, "size": "XS..XL", "addon": "<addonKey>"}`) for TNG or SOS |
 
 SkyrimNet's character bio prompt [`0401_appearance_body_shape.prompt`](./SKSE/Plugins/SkyrimNet/external/tetherball88.bodylanguage/prompts/submodules/character_bio/0401_appearance_body_shape.prompt) renders the modular `body_language` subcomponents:
@@ -60,6 +61,7 @@ SkyrimNet's character bio prompt [`0401_appearance_body_shape.prompt`](./SKSE/Pl
 | [`SKSE/Plugins/BodyLanguage/geometryThresholds.json`](./SKSE/Plugins/BodyLanguage/geometryThresholds.json) | Sex-specific 3D ratio thresholds (`shoulder_breadth`, `chest_prominence`, `waist_to_hip`, `glute_girth`, `thigh_girth`, `arm_girth`, `belly_drop`, `pregnancy_score`, `body_mass_index`, `tone_index`). |
 | [`SKSE/Plugins/BodyLanguage/bodyConfigs/FemaleParts.json`](./SKSE/Plugins/BodyLanguage/bodyConfigs/FemaleParts.json) | Clothed and naked text phrases for every female body region and tier. |
 | [`SKSE/Plugins/BodyLanguage/bodyConfigs/MaleParts.json`](./SKSE/Plugins/BodyLanguage/bodyConfigs/MaleParts.json) | Clothed and naked text phrases for every male body region and tier. |
+| [`SKSE/Plugins/BodyLanguage/bodyConfigs/BeastParts.json`](./SKSE/Plugins/BodyLanguage/bodyConfigs/BeastParts.json) | Static full and short descriptions for Werewolf, Vampire Lord, and Werebear forms (`female` and `male`). |
 | [`SKSE/Plugins/BodyLanguage.ini`](./SKSE/Plugins/BodyLanguage.ini) | `SmoothBaseline` and `RippedBaseline` calibration for normal-map (`_msn.dds`) muscularity detection. |
 | [`SKSE/Plugins/SkyrimNet/jsonData/skinFeatures.json`](./SKSE/Plugins/SkyrimNet/jsonData/skinFeatures.json) | Clothed and naked complexion sentences for RSV racial/special skin keywords. |
 | [`SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json`](./SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json) | Height multiplier cutoffs (`towering` down to `diminutive`). |

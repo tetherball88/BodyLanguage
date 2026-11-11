@@ -9,7 +9,7 @@
 namespace BodyLanguage {
 
     // Called at kDataLoaded to load BodyLanguage.ini, geometryThresholds.json,
-    // FemaleParts.json, and MaleParts.json.
+    // FemaleParts.json, MaleParts.json, and BeastParts.json.
     void InitBodyDescriptions(const std::filesystem::path& dataRoot);
 
     // Clears the per-actor runtime description cache (called on game load / new game).

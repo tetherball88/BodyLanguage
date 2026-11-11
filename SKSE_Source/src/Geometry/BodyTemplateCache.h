@@ -18,8 +18,12 @@ namespace BodyLanguage {
     inline constexpr float kSkyrimUnitToCm = 1.42875f;
     inline constexpr float kCmToInches = 1.0f / 2.54f;
 
-
-
+    enum class BeastFormType : std::uint8_t {
+        kNone = 0,
+        kWerewolf,
+        kVampireLord,
+        kWerebear
+    };
 
     enum class AnatomicalRingId : std::size_t {
         kNeck = 0,          // Ring 0: Neck / Base (Reference Z_top)

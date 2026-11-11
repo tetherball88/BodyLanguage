@@ -22,8 +22,13 @@ namespace BodyLanguage {
     public:
         static PhysiqueClassifier& GetInstance();
 
-        // Loads geometryThresholds.json, FemaleParts.json, MaleParts.json, and tngAddons.json
+        // Loads geometryThresholds.json, FemaleParts.json, MaleParts.json, BeastParts.json, and tngAddons.json
         void LoadConfigs(const std::filesystem::path& dataRoot);
+
+        // Builds static "full" and "short" descriptions for an actor in beast form (werewolf, vampire_lord, werebear).
+        ActorDescriptionPair BuildBeastBothDescriptions(
+            BeastFormType beastForm,
+            bool isFemale) const;
 
         // Computes unified Muscularity vs. Body Fat Index I_tone in [-1.0, +1.0] purely from 3D geometry and normal map
         static float ComputeToneIndex(
@@ -57,6 +62,7 @@ namespace BodyLanguage {
         nlohmann::json m_thresholds;
         nlohmann::json m_femaleParts;
         nlohmann::json m_maleParts;
+        nlohmann::json m_beastParts;
         nlohmann::json m_genitalAddons;
     };
 

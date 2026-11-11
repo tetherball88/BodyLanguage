@@ -1,0 +1,32 @@
+{
+    "werewolf": {
+        "female": {
+            "full": "is transformed into a towering werewolf — a lean, ferocious lupine predator covered in coarse fur, with a broad ribcage, sinewy haunches built for bounding leaps, elongated clawed forelimbs, and a snarling, fang-filled muzzle",
+            "short": "is transformed into a towering, ferocious werewolf with a lean, muscular lupine frame, thick fur, and wicked claws"
+        },
+        "male": {
+            "full": "is transformed into a hulking werewolf — a massive, savage lupine beast covered in thick, bristling fur, with a barrel-like chest, heavily muscled shoulders, powerful digitigrade hind legs, and long, tearing claws",
+            "short": "is transformed into a hulking, savage werewolf with a massive, fur-covered lupine frame and razor-sharp claws"
+        }
+    },
+    "vampire_lord": {
+        "female": {
+            "full": "is transformed into a Vampire Lord — an unnatural, predatory figure with taut, ashen-gray skin stretched over a lean, sinewy frame, elongated clawed hands, and tattered, leathery bat-like wings sprouting from her back",
+            "short": "is transformed into a predatory Vampire Lord with a lean, ashen-skinned frame, clawed hands, and bat-like wings"
+        },
+        "male": {
+            "full": "is transformed into a Vampire Lord — an imposing, monstrous figure with gaunt, ashen-gray skin pulled taut over corded muscle and prominent ribs, broad shoulders, long clawed talons, and ragged bat-like wings rising from his back",
+            "short": "is transformed into an imposing Vampire Lord with a gaunt, muscular ashen frame, clawed talons, and bat-like wings"
+        }
+    },
+    "werebear": {
+        "female": {
+            "full": "is transformed into a massive werebear — a towering, heavily built ursine beast covered in dense, shaggy fur, with immense shoulders, a thick, barrel-shaped torso, pillar-like legs, and crushing, hooked claws",
+            "short": "is transformed into a massive, shaggy-furred werebear with an immense, heavily muscled ursine frame and crushing claws"
+        },
+        "male": {
+            "full": "is transformed into a colossal werebear — a hulking mountain of muscle and dense, coarse fur, with enormously wide shoulders, a cavernous barrel chest, tree-trunk limbs, and massive, bone-crushing claws",
+            "short": "is transformed into a colossal, heavily furred werebear with a hulking ursine frame and bone-crushing claws"
+        }
+    }
+}

@@ -13,6 +13,7 @@ All configuration files are located inside your Skyrim `Data/` directory (or ins
 | [`SKSE/Plugins/BodyLanguage/geometryThresholds.json`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/BodyLanguage/geometryThresholds.json) | Numeric anthropometric ratio thresholds that classify 3D body measurements into tiers (`slim`, `average`, `large`, `muscular`, etc.). |
 | [`SKSE/Plugins/BodyLanguage/bodyConfigs/FemaleParts.json`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/BodyLanguage/bodyConfigs/FemaleParts.json) | Descriptive text phrases for each female body region and tier (`clothed` and `naked`). |
 | [`SKSE/Plugins/BodyLanguage/bodyConfigs/MaleParts.json`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/BodyLanguage/bodyConfigs/MaleParts.json) | Descriptive text phrases for each male body region and tier (`clothed` and `naked`). |
+| [`SKSE/Plugins/BodyLanguage/bodyConfigs/BeastParts.json`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/BodyLanguage/bodyConfigs/BeastParts.json) | Static full and short descriptions for transformed beast forms (`werewolf`, `vampire_lord`, `werebear`). |
 | [`SKSE/Plugins/BodyLanguage.ini`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/BodyLanguage.ini) | Normal-map (`_msn.dds`) roughness baselines for smooth vs. muscular/ripped skin textures. |
 | [`SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json) | Actor height scale thresholds (`towering`, `tall`, `above_average`, `average`, `short`, `diminutive`). |
 | [`SKSE/Plugins/SkyrimNet/jsonData/tngAddons.json`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/SkyrimNet/jsonData/tngAddons.json) | Visual descriptions for *The New Gentleman* (TNG) racial/custom genital addons when an actor is naked. |
@@ -175,5 +176,7 @@ The C++ evaluator reads the live 3D scale of the **`NPC GenitalsBase [GenBase]`*
 | `S` | `< 0.99` | `s_max` |
 | `M` | `< 1.19` | `m_max` |
 | `L` | `< 1.39` | `l_max` |
-| `XL` | `>= 1.39` | `>= l_max` |
+| `XL` | `< 1.79` | `xl_max` |
+| `XXL` | `< 2.39` | `xxl_max` (e.g., Vampire Lord) |
+| `XXXL` | `>= 2.39` | `>= xxl_max` (e.g., Werewolf, Werebear) |
 

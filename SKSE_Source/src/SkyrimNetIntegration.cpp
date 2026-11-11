@@ -113,12 +113,6 @@ namespace BodyLanguage {
             [](RE::Actor* actor) -> std::string {
                 try {
                     const bool naked = ActorBodyEvaluator::GetInstance().IsActorNaked(actor);
-                    // const char* name = actor ? actor->GetName() : nullptr;
-                    // spdlog::info(
-                    //     "[SkyrimNet] ttlb_is_naked called for actor '{}' ({:08X}) -> {}",
-                    //     name ? name : "<null>",
-                    //     actor ? actor->GetFormID() : 0,
-                    //     naked ? "true" : "false");
                     return naked ? "true" : "false";
                 } catch (const std::exception& e) {
                     spdlog::error("[SkyrimNet] Exception in ttlb_is_naked: {}", e.what());
@@ -126,6 +120,23 @@ namespace BodyLanguage {
                 } catch (...) {
                     spdlog::error("[SkyrimNet] Unknown exception in ttlb_is_naked");
                     return "false";
+                }
+            });
+
+        RegisterDecorator(
+            fn,
+            "ttlb_get_beast_form",
+            "Returns the actor's active beast form ('werewolf', 'vampire_lord', 'werebear', or '' if human).",
+            [](RE::Actor* actor) -> std::string {
+                try {
+                    const BeastFormType beastForm = ActorBodyEvaluator::GetInstance().GetActorBeastForm(actor);
+                    return std::string(ActorBodyEvaluator::BeastFormToKey(beastForm));
+                } catch (const std::exception& e) {
+                    spdlog::error("[SkyrimNet] Exception in ttlb_get_beast_form: {}", e.what());
+                    return {};
+                } catch (...) {
+                    spdlog::error("[SkyrimNet] Unknown exception in ttlb_get_beast_form");
+                    return {};
                 }
             });
 

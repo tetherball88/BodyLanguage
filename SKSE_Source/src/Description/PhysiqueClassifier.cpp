@@ -10,6 +10,8 @@
 
 #include <spdlog/spdlog.h>
 
+#include "Geometry/ActorBodyEvaluator.h"
+
 namespace BodyLanguage {
 
     namespace {
@@ -624,20 +626,48 @@ namespace BodyLanguage {
         auto thresholds = LoadJsonFile(baseDir / "geometryThresholds.json");
         auto femaleParts = LoadJsonFile(configsDir / "FemaleParts.json");
         auto maleParts = LoadJsonFile(configsDir / "MaleParts.json");
+        auto beastParts = LoadJsonFile(configsDir / "BeastParts.json");
         auto genitalAddons = LoadJsonFile(skyrimNetJsonDir / "tngAddons.json");
 
         std::unique_lock lock(m_configMutex);
         m_thresholds = std::move(thresholds);
         m_femaleParts = std::move(femaleParts);
         m_maleParts = std::move(maleParts);
+        m_beastParts = std::move(beastParts);
         m_genitalAddons = std::move(genitalAddons);
 
         spdlog::info(
-            "[PhysiqueClassifier] Loaded geometryThresholds.json (empty={}), FemaleParts.json (empty={}), MaleParts.json (empty={}), tngAddons.json (empty={})",
+            "[PhysiqueClassifier] Loaded geometryThresholds.json (empty={}), FemaleParts.json (empty={}), "
+            "MaleParts.json (empty={}), BeastParts.json (empty={}), tngAddons.json (empty={})",
             m_thresholds.empty(),
             m_femaleParts.empty(),
             m_maleParts.empty(),
+            m_beastParts.empty(),
             m_genitalAddons.empty());
+    }
+
+    ActorDescriptionPair PhysiqueClassifier::BuildBeastBothDescriptions(
+        BeastFormType beastForm,
+        bool isFemale) const {
+        ActorDescriptionPair pair{};
+        const std::string_view beastKey = ActorBodyEvaluator::BeastFormToKey(beastForm);
+        if (beastKey.empty()) {
+            return pair;
+        }
+
+        const std::string_view sexKey = isFemale ? "female" : "male";
+        std::shared_lock lock(m_configMutex);
+        pair.full = ResolvePartPhrase(m_beastParts, beastKey, sexKey, "full");
+        pair.shortDesc = ResolvePartPhrase(m_beastParts, beastKey, sexKey, "short");
+
+        spdlog::info(
+            "[PhysiqueClassifier] Beast classification (form='{}', sex='{}'): full=\"{}\" short=\"{}\"",
+            beastKey,
+            sexKey,
+            pair.full,
+            pair.shortDesc);
+
+        return pair;
     }
 
     float PhysiqueClassifier::ComputeToneIndex(
@@ -759,6 +789,8 @@ namespace BodyLanguage {
         const float sMax = GetThreshold(maleThresh, "genital_size", "s_max", 0.99f);
         const float mMax = GetThreshold(maleThresh, "genital_size", "m_max", 1.19f);
         const float lMax = GetThreshold(maleThresh, "genital_size", "l_max", 1.39f);
+        const float xlMax = GetThreshold(maleThresh, "genital_size", "xl_max", 1.79f);
+        const float xxlMax = GetThreshold(maleThresh, "genital_size", "xxl_max", 2.39f);
 
         std::string_view sizeTier = "M";
         if (genitalMetrics.sizeMultiplier < xsMax) {
@@ -769,8 +801,12 @@ namespace BodyLanguage {
             sizeTier = "M";
         } else if (genitalMetrics.sizeMultiplier < lMax) {
             sizeTier = "L";
-        } else {
+        } else if (genitalMetrics.sizeMultiplier < xlMax) {
             sizeTier = "XL";
+        } else if (genitalMetrics.sizeMultiplier < xxlMax) {
+            sizeTier = "XXL";
+        } else {
+            sizeTier = "XXXL";
         }
 
         const std::string addonKey = ResolveGenitalAddonKey(

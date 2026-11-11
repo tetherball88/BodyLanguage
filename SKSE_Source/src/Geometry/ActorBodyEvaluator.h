@@ -12,6 +12,12 @@ namespace BodyLanguage {
         // Call at kPostPostLoad to acquire SKEE::IBodyMorphInterface from skee64.dll.
         void InitSKEE();
 
+        // Returns the active beast form (Werewolf, Vampire Lord, Werebear) if the actor is transformed, or kNone.
+        BeastFormType GetActorBeastForm(RE::Actor* actor) const;
+
+        // Returns the config key ("werewolf", "vampire_lord", "werebear", or "") for a BeastFormType.
+        static std::string_view BeastFormToKey(BeastFormType beastForm);
+
         // Returns true if the actor is not wearing armor in slot 32 (kBody) or slot 49 (kModChestPrimary).
         bool IsActorNaked(RE::Actor* actor) const;
 
