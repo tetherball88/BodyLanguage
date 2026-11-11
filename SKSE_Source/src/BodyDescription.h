@@ -15,6 +15,10 @@ namespace BodyLanguage {
     // Clears the per-actor runtime description cache (called on game load / new game).
     void ClearActorDescriptionCache();
 
+    // Returns true if the given actor or base NPC is listed under [Exclusions] in BodyLanguage.ini.
+    bool IsActorExcluded(RE::Actor* actor);
+    bool IsNpcExcluded(const RE::TESNPC* npc);
+
     // Evaluates the actor's 3D body landmark rings, SKEE morphs, XPMSE bone scales,
     // and _msn.dds normal map Laplacian roughness to build a natural language description.
     // Results are cached per actor (FormID) with state & TTL validation.
@@ -24,5 +28,8 @@ namespace BodyLanguage {
 
     // Returns a JSON string {"hasGenitals": bool, "size": "XS..XL", "addon": "..."} for SkyrimNet.
     std::string GetActorGenitalsJson(RE::Actor* actor);
+
+    // Returns a JSON string {"height": float} with the actor's effective height scale for SkyrimNet.
+    std::string GetActorHeightJson(RE::Actor* actor);
 
 }  // namespace BodyLanguage

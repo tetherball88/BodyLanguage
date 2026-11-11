@@ -18,6 +18,10 @@ namespace BodyLanguage {
         // Returns the config key ("werewolf", "vampire_lord", "werebear", or "") for a BeastFormType.
         static std::string_view BeastFormToKey(BeastFormType beastForm);
 
+        // Returns the actor's effective height scale combining reference scale, TESNPC height,
+        // TESRace sex height, and live 3D skeleton root scale (RaceMenu / XPMSE height sliders).
+        float GetActorHeightScale(RE::Actor* actor) const;
+
         // Returns true if the actor is not wearing armor in slot 32 (kBody) or slot 49 (kModChestPrimary).
         bool IsActorNaked(RE::Actor* actor) const;
 

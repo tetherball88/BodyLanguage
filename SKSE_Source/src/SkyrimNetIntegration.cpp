@@ -161,6 +161,38 @@ namespace BodyLanguage {
                 }
             });
 
+        RegisterDecorator(
+            fn,
+            "ttlb_is_excluded",
+            "Returns whether this actor is excluded from BodyLanguage evaluation and description via BodyLanguage.ini.",
+            [](RE::Actor* actor) -> std::string {
+                try {
+                    return IsActorExcluded(actor) ? "true" : "false";
+                } catch (const std::exception& e) {
+                    spdlog::error("[SkyrimNet] Exception in ttlb_is_excluded: {}", e.what());
+                    return "false";
+                } catch (...) {
+                    spdlog::error("[SkyrimNet] Unknown exception in ttlb_is_excluded");
+                    return "false";
+                }
+            });
+
+        RegisterDecorator(
+            fn,
+            "ttlb_get_height",
+            "Returns a JSON object with the actor's effective height scale.",
+            [](RE::Actor* actor) -> std::string {
+                try {
+                    return GetActorHeightJson(actor);
+                } catch (const std::exception& e) {
+                    spdlog::error("[SkyrimNet] Exception in ttlb_get_height: {}", e.what());
+                    return "{\"height\":1.0}";
+                } catch (...) {
+                    spdlog::error("[SkyrimNet] Unknown exception in ttlb_get_height");
+                    return "{\"height\":1.0}";
+                }
+            });
+
         spdlog::info("[SkyrimNet] Decorator registration complete.");
     }
 

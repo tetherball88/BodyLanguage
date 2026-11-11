@@ -13,6 +13,7 @@
 
 #include <spdlog/spdlog.h>
 
+#include "BodyDescription.h"
 #include "Geometry/NifTriParser.h"
 
 namespace BodyLanguage {
@@ -725,7 +726,7 @@ namespace BodyLanguage {
 
         // 2. Collect custom humanoid NPC skins (standalone followers, unique NPC bodies)
         for (auto* npc : dataHandler->GetFormArray<RE::TESNPC>()) {
-            if (npc && npc->skin && isHumanoidAdultRace(npc->race)) {
+            if (npc && npc->skin && !IsNpcExcluded(npc) && isHumanoidAdultRace(npc->race)) {
                 if (skinArmors.insert(npc->skin).second) {
                     ++npcSkinCount;
                 }

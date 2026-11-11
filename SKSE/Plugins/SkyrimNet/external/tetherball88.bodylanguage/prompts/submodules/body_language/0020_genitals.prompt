@@ -1,5 +1,5 @@
 {% set isFullDescription = render_mode == "full" or render_mode == "transform" or render_mode == "thoughts" or render_mode == "dialogue_target" %}
-{% if not decnpc(actorUUID).isVirtual and isFullDescription %}
+{% if not decnpc(actorUUID).isVirtual and isFullDescription and ttlb_is_excluded(actorUUID) != "true" %}
     {% set isNaked = ttlb_is_naked(actorUUID) == "true" %}
     {% if isNaked %}
         {% set npcName = decnpc(actorUUID).name %}

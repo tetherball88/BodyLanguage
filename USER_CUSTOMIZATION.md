@@ -102,16 +102,20 @@ Keeping your custom phrases grammatically aligned with these templates ensures s
 
 ---
 
-## 5. Normal Map Muscularity Baselines (`BodyLanguage.ini`)
+## 5. Normal Map Muscularity Baselines & NPC Exclusions (`BodyLanguage.ini`)
 
-[`SKSE/Plugins/BodyLanguage.ini`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/BodyLanguage.ini) calibrates how normal maps (`_msn.dds`, including Racial Skin Variance / RSV textures) contribute to muscle tone (`S_tex_tone` in $[0.0, 1.0]$):
+[`SKSE/Plugins/BodyLanguage.ini`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/BodyLanguage.ini) calibrates how normal maps (`_msn.dds`, including Racial Skin Variance / RSV textures) contribute to muscle tone (`S_tex_tone` in $[0.0, 1.0]$) and lets you exclude specific NPCs from BodyLanguage evaluation and description blocks:
 
 ```ini
 [NormalMapAnalysis]
 SmoothBaseline=0.018
 RippedBaseline=0.045
+
+[Exclusions]
+ExcludedNPCs=
 ```
 
+### 5.1 Normal Map Baselines (`[NormalMapAnalysis]`)
 - Check `[NormalMapAnalyzer]` in `BodyLanguage.log` to see the `combined=` roughness energy of any NPC's normal map:
   ```text
   [NormalMapAnalyzer] Decoded 'textures\actors\character\rsv\nordfemale\femalebody_9_msn.dds' ... combined=0.02740 -> S_tex_tone=0.348
@@ -120,11 +124,17 @@ RippedBaseline=0.045
 - **`RippedBaseline` (default `0.045`):** Any normal map with `combined` energy at or above this value gets `S_tex_tone = 1.0` (deeply carved abs/deltoids).
 - If your skin texture overhaul has softer normal maps and athletic NPCs aren't registering as toned/ripped, **lower `RippedBaseline`** (e.g., from `0.045` to `0.035`).
 
+### 5.2 Excluding NPCs (`[Exclusions]`)
+NPCs listed under `ExcludedNPCs` (comma-separated) will not have their 3D body evaluated and will not receive any `### Body shape` or `body_language` description block in SkyrimNet prompts:
+- **`player`:** Special keyword to exclude the player character (`00000014` / `00000007`).
+- **`Plugin.esp:ShortFormID`:** Plugin filename and hex local FormID (with or without `0x` prefix, matching either the `TESNPC` base record or placed `ACHR` reference), e.g., `Skyrim.esm:13B97`, `Dawnguard.esm:0x2B6C`.
+- **`EditorID`:** Form EditorID (case-insensitive), e.g., `DLC1Serana`, `HousecarlWhiterun`.
+
 ---
 
 ## 6. Height Thresholds (`heightRanges.json`)
 
-[`SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json) controls how an NPC's effective height (`npcData.height`, where `1.00` is standard human height) maps to height descriptions in the SkyrimNet prompt:
+[`SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json`](file:///e:/Skyrim/development/mods/BodyLanguage%20Dev/SKSE/Plugins/SkyrimNet/jsonData/heightRanges.json) controls how an NPC's effective height (`ttlb_get_height(actorUUID).height`, combining reference scale, NPC base height, racial height, and live 3D skeleton height, where `1.00` is standard human height) maps to height descriptions in the SkyrimNet prompt:
 
 ```json
 {

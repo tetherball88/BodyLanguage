@@ -298,6 +298,47 @@ namespace BodyLanguage {
         }
     }
 
+    float ActorBodyEvaluator::GetActorHeightScale(RE::Actor* actor) const {
+        if (!actor) {
+            return 1.0f;
+        }
+
+        float baseScale = actor->GetScale();
+        if (!std::isfinite(baseScale) || baseScale <= 0.2f || baseScale >= 3.0f) {
+            baseScale = actor->GetBaseHeight();
+            if (!std::isfinite(baseScale) || baseScale <= 0.2f || baseScale >= 3.0f) {
+                baseScale = 1.0f;
+            }
+        }
+
+        float rootScale = baseScale;
+        float skeletonScale = 1.0f;
+        if (auto* root3D = actor->Get3D(false)) {
+            if (std::isfinite(root3D->world.scale) &&
+                root3D->world.scale > 0.2f && root3D->world.scale < 3.0f &&
+                std::fabs(root3D->world.scale - 1.0f) > 1e-4f) {
+                rootScale = root3D->world.scale;
+            }
+            if (auto* npcRoot = root3D->GetObjectByName(RE::BSFixedString("NPC Root [Root]"))) {
+                if (std::isfinite(root3D->world.scale) && root3D->world.scale > 0.2f &&
+                    std::isfinite(npcRoot->world.scale) && npcRoot->world.scale > 0.2f) {
+                    const float rel = npcRoot->world.scale / root3D->world.scale;
+                    if (std::isfinite(rel) && rel > 0.2f && rel < 3.0f) {
+                        skeletonScale = rel;
+                    }
+                } else if (std::isfinite(npcRoot->local.scale) &&
+                           npcRoot->local.scale > 0.2f && npcRoot->local.scale < 3.0f) {
+                    skeletonScale = npcRoot->local.scale;
+                }
+            }
+        }
+
+        const float effectiveScale = rootScale * skeletonScale;
+        return (std::isfinite(effectiveScale) && effectiveScale > 0.2f && effectiveScale < 3.0f)
+            ? effectiveScale
+            : baseScale;
+    }
+
     bool ActorBodyEvaluator::IsActorNaked(RE::Actor* actor) const {
         if (!actor) {
             return false;
@@ -587,8 +628,7 @@ namespace BodyLanguage {
         const auto& rArm = metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUpperArm)];
 
         // Convert normalized measurements to real-world cm and inches (scaled by actor height scale)
-        const float rawScale = actor->GetScale();
-        const float actorScale = (std::isfinite(rawScale) && rawScale > 0.2f && rawScale < 3.0f) ? rawScale : 1.0f;
+        const float actorScale = GetActorHeightScale(actor);
         const float toCm = h0 * actorScale * kSkyrimUnitToCm;
         const float toIn = toCm * kCmToInches;
 
@@ -999,15 +1039,7 @@ namespace BodyLanguage {
 
         // 5. Real-time 3D skeleton bone-chain measurement & flaccid/erect state detection
         auto* root3D = actor->Get3D(false);
-        float actorScale = 1.0f;
-        if (root3D && std::isfinite(root3D->world.scale) && root3D->world.scale > 0.2f && root3D->world.scale < 3.0f) {
-            actorScale = root3D->world.scale;
-        } else {
-            const float rawScale = actor->GetScale();
-            if (std::isfinite(rawScale) && rawScale > 0.2f && rawScale < 3.0f) {
-                actorScale = rawScale;
-            }
-        }
+        const float actorScale = GetActorHeightScale(actor);
         result.actorScale = actorScale;
 
         std::vector<RE::NiAVObject*> liveChainNodes;

@@ -2,7 +2,7 @@
   "id": "tetherball88.bodylanguage",
   "type": "bundle",
   "title": "TT Body Language",
-  "tagline": "Real-time 3D body geometry, normal-map muscularity, RSV, and TNG/SOS descriptions.",
+  "tagline": "Real-time 3D body geometry, normal-map muscularity, RSV, and mod agnostic genitals descriptions.",
   "description": "Generates rich, context-aware body descriptions for NPCs in dialogue and bios using real-time 3D mesh/morph geometry, normal-map muscularity analysis, Racial Skin Variance keywords, height, and TNG/SOS anatomy.",
   "author": "tetherball88",
   "tags": [
