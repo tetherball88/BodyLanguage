@@ -144,6 +144,9 @@ namespace BodyLanguage {
                 if (!npc) {
                     return false;
                 }
+                if (npc->race && npc->race->IsChildRace()) {
+                    return true;
+                }
 
                 std::shared_lock lock(m_mutex);
                 if (!m_excludePlayer && m_excludedFormIds.empty() && m_excludedEditorIds.empty()) {
@@ -156,6 +159,18 @@ namespace BodyLanguage {
             bool IsActorExcluded(RE::Actor* actor) const {
                 if (!actor) {
                     return false;
+                }
+                if (actor->IsChild()) {
+                    return true;
+                }
+
+                const auto* base = actor->GetActorBase();
+                const auto* race = actor->GetRace();
+                if (!race && base) {
+                    race = base->race;
+                }
+                if (race && race->IsChildRace()) {
+                    return true;
                 }
 
                 std::shared_lock lock(m_mutex);
@@ -187,10 +202,8 @@ namespace BodyLanguage {
                     }
                 }
 
-                if (const auto* base = actor->GetActorBase()) {
-                    if (IsNpcExcludedUnlocked(base)) {
-                        return true;
-                    }
+                if (base && IsNpcExcludedUnlocked(base)) {
+                    return true;
                 }
 
                 return false;

@@ -2,6 +2,13 @@
 
 All notable changes to TT BodyLanguage will be documented in this file.
 
+## v2.2.2
+
+### Hotfix: Child NPC Explicit Exclusion
+
+- **Excluded Child NPCs from All Body Prompts**
+  - Child NPCs are now automatically excluded from the `Body shape` prompt section and all subprompts (body state, skin features, height, and anatomy) in addition to 3D mesh evaluation.
+
 ## v2.2.1
 
 ### Hotfix: Female Genital Detection Fix
