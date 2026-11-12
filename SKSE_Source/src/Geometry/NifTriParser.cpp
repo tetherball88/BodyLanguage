@@ -476,10 +476,13 @@ namespace BodyLanguage {
     namespace {
 
         bool IsPelvicNonShaftBoneName(std::string_view lowerBoneName) {
-            constexpr std::array<std::string_view, 19> kNonShaftSubstrings = {
-                "pelv",  "thigh", "thg",   "spine", "spn",  "belly", "groin",
-                "butt",  "glute", " hip",  "scrot", "ball", "wwlb",  "wwrb",
-                "anus",  "vagina","clit",  "labia", "mouth"
+            constexpr std::array<std::string_view, 36> kNonShaftSubstrings = {
+                "pelv",     "thigh",    "thg",      "spine",    "spn",      "belly",
+                "groin",    "butt",     "glute",    " hip",     "scrot",    "ball",
+                "wwlb",     "wwrb",     "anus",     "vagina",   "clit",     "labia",
+                "mouth",    "neck",     "head",     "tail",     "clav",     "shldr",
+                "shoulder", "arm",      "hand",     "calf",     "foot",     "feet",
+                "toe",      "ear",      "jaw",      "chest",    "rib",      "saddle"
             };
             for (const auto kw : kNonShaftSubstrings) {
                 if (lowerBoneName.find(kw) != std::string_view::npos) {
@@ -651,6 +654,27 @@ namespace BodyLanguage {
                     continue;
                 }
 
+                float minCandX = std::numeric_limits<float>::max();
+                float maxCandX = std::numeric_limits<float>::lowest();
+                float minCandY = std::numeric_limits<float>::max();
+                float maxCandY = std::numeric_limits<float>::lowest();
+                float minCandZ = std::numeric_limits<float>::max();
+                float maxCandZ = std::numeric_limits<float>::lowest();
+                for (const auto& cv : candVerts) {
+                    minCandX = std::min(minCandX, cv.x);
+                    maxCandX = std::max(maxCandX, cv.x);
+                    minCandY = std::min(minCandY, cv.y);
+                    maxCandY = std::max(maxCandY, cv.y);
+                    minCandZ = std::min(minCandZ, cv.z);
+                    maxCandZ = std::max(maxCandZ, cv.z);
+                }
+                // Reject full-body quadruped/creature torsos whose midline vertices span a wide ribcage or body length
+                if ((maxCandX - minCandX) > 10.0f ||
+                    (maxCandY - minCandY) > 35.0f ||
+                    (maxCandZ - minCandZ) > 35.0f) {
+                    continue;
+                }
+
                 float minShapeZ = std::numeric_limits<float>::max();
                 float maxShapeZ = std::numeric_limits<float>::lowest();
                 for (const auto& v : verts) {
@@ -739,7 +763,7 @@ namespace BodyLanguage {
                 sMin = std::max(sMin, rootS);
             }
 
-            if ((sMax - sMin) < 3.5f) {
+            if ((sMax - sMin) < 3.5f || (sMax - sMin) > 30.0f) {
                 return nullptr;
             }
 
@@ -771,6 +795,12 @@ namespace BodyLanguage {
                     (3.0f * (a + b) - std::sqrt(std::max(0.0f, (3.0f * a + b) * (a + 3.0f * b))));
             } else {
                 tmpl->baseGirthUnits = lengthU * 0.90f;
+            }
+
+            if (tmpl->baseGirthUnits < 3.0f ||
+                tmpl->baseGirthUnits > 28.0f ||
+                tmpl->baseGirthUnits > lengthU * 1.65f) {
+                return nullptr;
             }
 
             spdlog::info(

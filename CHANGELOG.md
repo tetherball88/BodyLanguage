@@ -2,6 +2,17 @@
 
 All notable changes to TT BodyLanguage will be documented in this file.
 
+## v2.2.1
+
+### Hotfix: Female Genital Detection Fix
+
+### Fixed
+
+- **Fixed False Male Genital Descriptions on Female NPCs**
+  - Fixed a bug where naked female NPCs without a genital addon equipped could falsely receive a male genital description.
+  - Prevented female characters from being assigned genital descriptions from unequipped items carried in their inventory.
+  - Improved 3D mesh filtering to prevent non-genital meshes from being misidentified during anatomy evaluation.
+
 ## v2.2.0
 
 ### Beast Form Support, Dynamic Anatomy Evaluation, NPC Exclusions & Accurate Height Detection
@@ -20,7 +31,7 @@ All notable changes to TT BodyLanguage will be documented in this file.
 ### Changed
 
 - **Real-Time Genital Size, State & Addon Detection**
-  - Genital size is now measured directly from the character's 3D anatomy and live in-game scaling (in cm/inches) rather than relying solely on static keywords or faction ranks, working out of the box with TNG, SOS, and custom or creature addons.
+  - Genital size is now measured directly from the character's 3D anatomy and live in-game scaling (in cm/inches) rather than relying solely on static keywords or faction ranks, working out of the box with TNG, SOS, and custom addons.
   - Descriptions now automatically distinguish between **flaccid** and **erect** states in real time.
   - Added **`XXL`** and **`XXXL`** size tiers in `0020_genitals.prompt` and customizable centimeter cutoffs in `geometryThresholds.json` (with options to toggle character height scaling and flaccid length compensation).
 

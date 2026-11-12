@@ -818,13 +818,14 @@ namespace BodyLanguage {
 
         const bool isFemale = base && (base->GetSex() == RE::SEX::kFemale);
         const auto sexIdx = isFemale ? RE::SEXES::kFemale : RE::SEXES::kMale;
+        const bool allowMaleModelFallback = !isFemale || (beastForm != BeastFormType::kNone);
 
-        auto getArmaModelPath = [sexIdx](const RE::TESObjectARMA* arma) -> const char* {
+        auto getArmaModelPath = [sexIdx, allowMaleModelFallback](const RE::TESObjectARMA* arma) -> const char* {
             if (!arma) {
                 return nullptr;
             }
             const char* rawModel = arma->bipedModels[sexIdx].model.c_str();
-            if (!rawModel || *rawModel == '\0') {
+            if ((!rawModel || *rawModel == '\0') && allowMaleModelFallback) {
                 rawModel = arma->bipedModels[RE::SEXES::kMale].model.c_str();
             }
             return (rawModel && *rawModel != '\0') ? rawModel : nullptr;
@@ -843,7 +844,7 @@ namespace BodyLanguage {
                 return matched;
             }
             for (const auto* arma : armo->armorAddons) {
-                if (!arma) {
+                if (!arma || !arma->IsValidRace(race)) {
                     continue;
                 }
                 if (requireSlot52) {
@@ -862,11 +863,10 @@ namespace BodyLanguage {
                 if (!tmpl) {
                     continue;
                 }
-                if (!matched.tmpl || arma->IsValidRace(race)) {
-                    matched.arma = arma;
-                    matched.nifPath = rawModel;
-                    matched.tmpl = std::move(tmpl);
-                }
+                matched.arma = arma;
+                matched.nifPath = rawModel;
+                matched.tmpl = std::move(tmpl);
+                break;
             }
             return matched;
         };
@@ -964,8 +964,8 @@ namespace BodyLanguage {
             }
         }
 
-        // 3. Check actor inventory for unequipped Slot 52 genital addon items
-        if (!activeMesh.tmpl) {
+        // 3. Check actor inventory for unequipped Slot 52 genital addon items (males only)
+        if (!activeMesh.tmpl && !isFemale) {
             const auto inv = actor->GetInventory([](RE::TESBoundObject& obj) {
                 return obj.IsArmor();
             });
