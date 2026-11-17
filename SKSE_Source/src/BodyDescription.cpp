@@ -3,6 +3,7 @@
 #include "BodyDescription.h"
 
 #include <algorithm>
+#include <array>
 #include <cctype>
 #include <chrono>
 #include <cmath>
@@ -42,6 +43,28 @@ namespace BodyLanguage {
             }
             const auto last = sv.find_last_not_of(" \t\r\n\"'");
             return std::string(sv.substr(first, last - first + 1));
+        }
+
+        const RE::TESNPC* GetRootFaceNpcSafe(const RE::TESNPC* startNpc) noexcept {
+            if (!startNpc) {
+                return nullptr;
+            }
+            constexpr std::size_t kMaxFaceNpcHops = 16;
+            std::array<const RE::TESNPC*, kMaxFaceNpcHops> visited{};
+            std::size_t visitedCount = 0;
+
+            const RE::TESNPC* current = startNpc;
+            while (current->faceNPC && visitedCount < kMaxFaceNpcHops) {
+                visited[visitedCount++] = current;
+                const RE::TESNPC* next = current->faceNPC;
+                for (std::size_t i = 0; i < visitedCount; ++i) {
+                    if (visited[i] == next) {
+                        return current;
+                    }
+                }
+                current = next;
+            }
+            return current;
         }
 
         class ActorExclusionFilter {
@@ -292,7 +315,7 @@ namespace BodyLanguage {
                     return true;
                 }
 
-                const auto* rootNpc = npc->GetRootFaceNPC();
+                const auto* rootNpc = GetRootFaceNpcSafe(npc);
                 if (rootNpc && rootNpc != npc && m_excludedFormIds.contains(rootNpc->GetFormID())) {
                     return true;
                 }

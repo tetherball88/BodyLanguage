@@ -3,6 +3,7 @@
 #include "Geometry/NifRingIndexer.h"
 
 #include <algorithm>
+#include <array>
 #include <cctype>
 #include <cmath>
 #include <limits>
@@ -695,10 +696,41 @@ namespace BodyLanguage {
                    sf.find("actors\\character\\") != std::string::npos;
         };
 
-        std::unordered_set<RE::TESRace*> humanoidRaces;
+        std::unordered_set<const RE::TESRace*> humanoidRaces;
         for (auto* race : dataHandler->GetFormArray<RE::TESRace>()) {
             if (isHumanoidAdultRace(race)) {
                 humanoidRaces.insert(race);
+            }
+        }
+
+        // Precompute every race reachable via RNAM (armorParentRace) from any adult humanoid race
+        // with explicit cycle detection so modded self-referencing races never hang startup.
+        std::unordered_set<const RE::TESRace*> validArmaTargetRaces;
+        validArmaTargetRaces.reserve(humanoidRaces.size() * 2);
+        for (const auto* race : humanoidRaces) {
+            std::array<const RE::TESRace*, kMaxRaceParentHops> visited{};
+            std::size_t visitedCount = 0;
+            const RE::TESRace* current = race;
+            while (current && visitedCount < kMaxRaceParentHops) {
+                bool isCycle = false;
+                for (std::size_t i = 0; i < visitedCount; ++i) {
+                    if (visited[i] == current) {
+                        isCycle = true;
+                        break;
+                    }
+                }
+                if (isCycle) {
+                    const char* edid = race->GetFormEditorID();
+                    spdlog::warn(
+                        "[NifRingIndexer] Detected cyclic armorParentRace (RNAM) chain on race '{}' ({:08X}); "
+                        "breaking cycle.",
+                        (edid && *edid != '\0') ? edid : "<unnamed>",
+                        race->GetFormID());
+                    break;
+                }
+                visited[visitedCount++] = current;
+                validArmaTargetRaces.insert(current);
+                current = current->armorParentRace;
             }
         }
 
@@ -706,8 +738,11 @@ namespace BodyLanguage {
             if (!arma || !arma->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody)) {
                 return false;
             }
-            for (auto* race : humanoidRaces) {
-                if (arma->IsValidRace(race)) {
+            if (arma->race && validArmaTargetRaces.contains(arma->race)) {
+                return true;
+            }
+            for (const auto* targetRace : arma->additionalRaces) {
+                if (targetRace && validArmaTargetRaces.contains(targetRace)) {
                     return true;
                 }
             }
@@ -726,7 +761,7 @@ namespace BodyLanguage {
 
         // 2. Collect custom humanoid NPC skins (standalone followers, unique NPC bodies)
         for (auto* npc : dataHandler->GetFormArray<RE::TESNPC>()) {
-            if (npc && npc->skin && !IsNpcExcluded(npc) && isHumanoidAdultRace(npc->race)) {
+            if (npc && npc->skin && npc->race && humanoidRaces.contains(npc->race) && !IsNpcExcluded(npc)) {
                 if (skinArmors.insert(npc->skin).second) {
                     ++npcSkinCount;
                 }

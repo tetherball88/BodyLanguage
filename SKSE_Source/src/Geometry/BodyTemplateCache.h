@@ -17,6 +17,52 @@ namespace BodyLanguage {
     // Creation Engine scale: 128 Skyrim units = 6 ft = 182.88 cm (1 unit = 1.42875 cm = 0.5625 in)
     inline constexpr float kSkyrimUnitToCm = 1.42875f;
     inline constexpr float kCmToInches = 1.0f / 2.54f;
+    inline constexpr std::size_t kMaxRaceParentHops = 16;
+
+    // Cycle-safe replacement for CommonLibSSE-NG's HasArmorRace / TESObjectARMA::IsValidRace,
+    // preventing infinite loops when modded races set RNAM (armorParentRace) to themselves or a cycle.
+    inline bool HasArmorRaceSafe(const RE::TESRace* sourceRace, const RE::TESRace* targetRace) noexcept {
+        if (!sourceRace || !targetRace) {
+            return false;
+        }
+        if (sourceRace == targetRace) {
+            return true;
+        }
+
+        std::array<const RE::TESRace*, kMaxRaceParentHops> visited{};
+        std::size_t visitedCount = 0;
+        visited[visitedCount++] = sourceRace;
+
+        const RE::TESRace* current = sourceRace->armorParentRace;
+        while (current && visitedCount < kMaxRaceParentHops) {
+            if (current == targetRace) {
+                return true;
+            }
+            for (std::size_t i = 0; i < visitedCount; ++i) {
+                if (visited[i] == current) {
+                    return false;
+                }
+            }
+            visited[visitedCount++] = current;
+            current = current->armorParentRace;
+        }
+        return false;
+    }
+
+    inline bool IsArmaValidForRace(const RE::TESObjectARMA* arma, const RE::TESRace* sourceRace) noexcept {
+        if (!arma || !sourceRace) {
+            return false;
+        }
+        if (HasArmorRaceSafe(sourceRace, arma->race)) {
+            return true;
+        }
+        for (const auto* targetRace : arma->additionalRaces) {
+            if (HasArmorRaceSafe(sourceRace, targetRace)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     enum class BeastFormType : std::uint8_t {
         kNone = 0,

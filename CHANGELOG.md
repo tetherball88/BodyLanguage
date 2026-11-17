@@ -2,6 +2,16 @@
 
 All notable changes to TT BodyLanguage will be documented in this file.
 
+## v2.2.3
+
+### Hotfix: Startup Hang Fix for Custom Race Mods
+
+### Fixed
+
+- **Fixed Infinite Loading Screen Hang with Custom Race Mods**
+  - Fixed an infinite loop during game startup and runtime evaluation when mods (such as custom follower or custom player race mods) define races with self-referencing or cyclic `Armor Race` (`RNAM`) or face-template (`TPLT`) records.
+  - Optimized startup humanoid body-skin scanning for faster initialization on large modlists.
+
 ## v2.2.2
 
 ### Hotfix: Child NPC Explicit Exclusion

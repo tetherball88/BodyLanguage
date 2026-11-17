@@ -383,7 +383,7 @@ namespace BodyLanguage {
                 if (!fallbackBodyArma) {
                     fallbackBodyArma = arma;
                 }
-                if (!race || arma->IsValidRace(race)) {
+                if (!race || IsArmaValidForRace(arma, race)) {
                     return arma;
                 }
             }
@@ -844,7 +844,7 @@ namespace BodyLanguage {
                 return matched;
             }
             for (const auto* arma : armo->armorAddons) {
-                if (!arma || !arma->IsValidRace(race)) {
+                if (!arma || !IsArmaValidForRace(arma, race)) {
                     continue;
                 }
                 if (requireSlot52) {
