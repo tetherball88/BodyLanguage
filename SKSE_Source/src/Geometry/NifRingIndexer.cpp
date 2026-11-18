@@ -839,6 +839,15 @@ namespace BodyLanguage {
             }
         }
 
+        std::lock_guard buildLock(m_buildMutex);
+        {
+            std::shared_lock readLock(m_cacheMutex);
+            auto it = m_cache.find(lookupKey);
+            if (it != m_cache.end()) {
+                return it->second;
+            }
+        }
+
         auto built = BuildTemplateCache(lookupKey, nifModelPath, isFemale);
 
         std::unique_lock writeLock(m_cacheMutex);

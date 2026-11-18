@@ -180,7 +180,7 @@ namespace BodyLanguage {
             }
 
             bool IsActorExcluded(RE::Actor* actor) const {
-                if (!actor) {
+                if (!actor || actor->IsDeleted()) {
                     return false;
                 }
                 if (actor->IsChild()) {
@@ -433,6 +433,10 @@ namespace BodyLanguage {
             std::unordered_map<RE::FormID, CachedActorDescription> m_entries;
         };
 
+        // Serializes uncached actor evaluations across SkyrimNet worker threads so concurrent
+        // prompt renders coalesce on ActorDescriptionCache instead of stampeding the same Actor*.
+        std::mutex g_actorEvalMutex;
+
     }  // namespace
 
     void InitBodyDescriptions(const std::filesystem::path& dataRoot) {
@@ -478,7 +482,7 @@ namespace BodyLanguage {
     }
 
     std::string GetBodyDescription(RE::Actor* actor, std::string_view mode) {
-        if (!actor || IsActorExcluded(actor)) {
+        if (!actor || actor->IsDeleted() || IsActorExcluded(actor)) {
             return {};
         }
 
@@ -489,13 +493,19 @@ namespace BodyLanguage {
             const bool has3DNow = (actor->Get3D(false) != nullptr);
             const auto* base = actor->GetActorBase();
             const float weightNow = base ? base->GetWeight() : actor->GetWeight();
-            const auto now = std::chrono::steady_clock::now();
+            auto now = std::chrono::steady_clock::now();
 
             ActorDescriptionPair cachedPair{};
             if (ActorDescriptionCache::GetInstance().TryGet(
                     formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
-                const std::string& cachedResult = (mode == "short") ? cachedPair.shortDesc : cachedPair.full;
-                return cachedResult;
+                return (mode == "short") ? cachedPair.shortDesc : cachedPair.full;
+            }
+
+            std::lock_guard evalLock(g_actorEvalMutex);
+            now = std::chrono::steady_clock::now();
+            if (ActorDescriptionCache::GetInstance().TryGet(
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
+                return (mode == "short") ? cachedPair.shortDesc : cachedPair.full;
             }
 
             // Beast shape takes priority over human body shape regardless of clothed/naked state
@@ -505,7 +515,7 @@ namespace BodyLanguage {
                     beastForm,
                     isFemale);
 
-                if (isNakedNow) {
+                if (isNakedNow && !isFemale) {
                     const auto genitalMetrics = ActorBodyEvaluator::GetInstance().EvaluateActorGenitals(actor);
                     pair.genitalsJson = PhysiqueClassifier::GetInstance().BuildGenitalsJson(genitalMetrics);
                 }
@@ -587,7 +597,7 @@ namespace BodyLanguage {
     }
 
     std::string GetActorGenitalsJson(RE::Actor* actor) {
-        if (!actor || IsActorExcluded(actor)) {
+        if (!actor || actor->IsDeleted() || IsActorExcluded(actor)) {
             return "{\"hasGenitals\":false}";
         }
 
@@ -602,9 +612,16 @@ namespace BodyLanguage {
             const bool has3DNow = (actor->Get3D(false) != nullptr);
             const auto* base = actor->GetActorBase();
             const float weightNow = base ? base->GetWeight() : actor->GetWeight();
-            const auto now = std::chrono::steady_clock::now();
+            auto now = std::chrono::steady_clock::now();
 
             ActorDescriptionPair cachedPair{};
+            if (ActorDescriptionCache::GetInstance().TryGet(
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
+                return cachedPair.genitalsJson;
+            }
+
+            std::lock_guard evalLock(g_actorEvalMutex);
+            now = std::chrono::steady_clock::now();
             if (ActorDescriptionCache::GetInstance().TryGet(
                     formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
                 return cachedPair.genitalsJson;
@@ -622,7 +639,7 @@ namespace BodyLanguage {
     }
 
     std::string GetActorHeightJson(RE::Actor* actor) {
-        if (!actor || IsActorExcluded(actor)) {
+        if (!actor || actor->IsDeleted() || IsActorExcluded(actor)) {
             return "{\"height\":1.0}";
         }
 

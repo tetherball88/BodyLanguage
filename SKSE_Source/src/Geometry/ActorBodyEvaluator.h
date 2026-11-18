@@ -1,5 +1,7 @@
 #pragma once
 
+#include <mutex>
+
 #include "Geometry/BodyTemplateCache.h"
 #include "external/SKEEInterface.h"
 
@@ -49,6 +51,7 @@ namespace BodyLanguage {
     private:
         ActorBodyEvaluator() = default;
         SKEE::IBodyMorphInterface* m_morphInterface{nullptr};
+        mutable std::mutex m_skeeMutex;
     };
 
 }  // namespace BodyLanguage

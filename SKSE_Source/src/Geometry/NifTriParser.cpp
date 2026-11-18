@@ -8,6 +8,7 @@
 #include <cstring>
 #include <fstream>
 #include <limits>
+#include <mutex>
 #include <numbers>
 #include <shared_mutex>
 #include <sstream>
@@ -818,6 +819,7 @@ namespace BodyLanguage {
         }
 
         std::shared_mutex g_genitalNifMutex;
+        std::mutex g_genitalBuildMutex;
         std::unordered_map<std::string, std::shared_ptr<const GenitalNifTemplate>> g_genitalNifCache;
 
     }  // namespace
@@ -828,6 +830,15 @@ namespace BodyLanguage {
         }
 
         const std::string normalizedPath = NormalizeMeshPath(nifRelativePath);
+        {
+            std::shared_lock readLock(g_genitalNifMutex);
+            auto it = g_genitalNifCache.find(normalizedPath);
+            if (it != g_genitalNifCache.end()) {
+                return it->second;
+            }
+        }
+
+        std::lock_guard buildLock(g_genitalBuildMutex);
         {
             std::shared_lock readLock(g_genitalNifMutex);
             auto it = g_genitalNifCache.find(normalizedPath);

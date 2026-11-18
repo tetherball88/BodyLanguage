@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <mutex>
 #include <shared_mutex>
 #include <string>
 #include <string_view>
@@ -41,6 +42,7 @@ namespace BodyLanguage {
             bool isFemale);
 
         mutable std::shared_mutex m_cacheMutex;
+        std::mutex m_buildMutex;
         std::unordered_map<std::string, std::shared_ptr<const BodyTemplateCache>> m_cache;
     };
 

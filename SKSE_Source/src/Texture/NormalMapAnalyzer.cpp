@@ -245,67 +245,6 @@ namespace BodyLanguage {
             m_rippedBaseline);
     }
 
-    std::string NormalMapAnalyzer::ResolveActiveNormalMapPath(
-        RE::Actor* actor,
-        RE::TESObjectARMA* nakedArma,
-        bool isFemale,
-        std::string_view fallbackNifMsn) const {
-        if (actor) {
-            if (auto* root = actor->Get3D(false)) {
-                std::string sceneMsn;
-                RE::BSVisit::TraverseScenegraphGeometries(
-                    root,
-                    [&](RE::BSGeometry* geo) -> RE::BSVisit::BSVisitControl {
-                        if (!geo) {
-                            return RE::BSVisit::BSVisitControl::kContinue;
-                        }
-                        auto* shaderProp = geo->lightingShaderProp_cast();
-                        if (!shaderProp) {
-                            return RE::BSVisit::BSVisitControl::kContinue;
-                        }
-                        auto* mat = static_cast<RE::BSLightingShaderMaterialBase*>(
-                            shaderProp->GetBaseMaterial());
-                        if (!mat) {
-                            return RE::BSVisit::BSVisitControl::kContinue;
-                        }
-                        auto texSet = mat->GetTextureSet();
-                        if (!texSet) {
-                            return RE::BSVisit::BSVisitControl::kContinue;
-                        }
-                        const char* path = texSet->GetTexturePath(RE::BSTextureSet::Texture::kNormal);
-                        if (!path || *path == '\0') {
-                            return RE::BSVisit::BSVisitControl::kContinue;
-                        }
-
-                        const std::string fname = ToLowerAscii(
-                            std::filesystem::path(path).filename().string());
-                        if (fname.find("body") != std::string::npos &&
-                            fname.find("msn") != std::string::npos) {
-                            sceneMsn = path;
-                            return RE::BSVisit::BSVisitControl::kStop;
-                        }
-                        return RE::BSVisit::BSVisitControl::kContinue;
-                    });
-
-                if (!sceneMsn.empty()) {
-                    return sceneMsn;
-                }
-            }
-        }
-
-        if (nakedArma) {
-            const auto sexIdx = isFemale ? RE::SEXES::kFemale : RE::SEXES::kMale;
-            if (auto* skinTexSet = nakedArma->skinTextures[sexIdx]) {
-                const char* path = skinTexSet->GetTexturePath(RE::BSTextureSet::Texture::kNormal);
-                if (path && *path != '\0') {
-                    return std::string(path);
-                }
-            }
-        }
-
-        return std::string(fallbackNifMsn);
-    }
-
     float NormalMapAnalyzer::EvaluateNormalMapTone(
         std::string_view msnPath,
         const UVRect& abdomenUV,
@@ -316,6 +255,19 @@ namespace BodyLanguage {
 
         const std::string normPath = NormalizeTexturePath(msnPath);
 
+        {
+            std::shared_lock readLock(m_cacheMutex);
+            auto it = m_scoreCache.find(normPath);
+            if (it != m_scoreCache.end()) {
+                spdlog::info(
+                    "[NormalMapAnalyzer] Cache hit for '{}' -> S_tex_tone={:.3f}",
+                    normPath,
+                    it->second);
+                return it->second;
+            }
+        }
+
+        std::lock_guard decodeLock(m_decodeMutex);
         {
             std::shared_lock readLock(m_cacheMutex);
             auto it = m_scoreCache.find(normPath);

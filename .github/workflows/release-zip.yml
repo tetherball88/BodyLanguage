@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Version tag to test (e.g. v2.2.3)"
+        description: "Version tag to test (e.g. v2.2.4)"
         required: true
-        default: "v2.2.3"
+        default: "v2.2.4"
         type: string
       dry_run:
         description: "Dry run (skip GitHub Release and Nexus Mods upload)"

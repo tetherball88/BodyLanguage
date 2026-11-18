@@ -5,9 +5,9 @@
 #include <algorithm>
 #include <cctype>
 #include <cmath>
-#include <filesystem>
 #include <string>
 #include <string_view>
+#include <utility>
 #include <vector>
 
 #include <spdlog/spdlog.h>
@@ -126,6 +126,123 @@ namespace BodyLanguage {
             return false;
         }
 
+        constexpr std::size_t kMaxSceneGraphDepth = 24;
+        constexpr std::uint16_t kMaxChildArrayCapacity = 4096;
+        constexpr std::size_t kMaxInventoryEntries = 2048;
+        constexpr std::uint32_t kMaxContainerObjects = 2048u;
+        constexpr std::size_t kMaxOutfitDepth = 4;
+
+        std::int32_t GetBaseContainerCount(
+            const RE::Actor* actor,
+            const RE::TESBoundObject* item) noexcept {
+            if (!actor || !item) {
+                return 0;
+            }
+            const auto* container = actor->GetContainer();
+            if (!container || !container->containerObjects) {
+                return 0;
+            }
+            const std::uint32_t count = std::min(container->numContainerObjects, kMaxContainerObjects);
+            std::int32_t total = 0;
+            for (std::uint32_t i = 0; i < count; ++i) {
+                if (const auto* co = container->containerObjects[i]; co && co->obj == item) {
+                    total += co->count;
+                }
+            }
+            return total;
+        }
+
+        std::int32_t GetContainerDeltaInChanges(
+            const RE::InventoryChanges* invChanges,
+            const RE::TESBoundObject* item,
+            bool& outFoundEntry) noexcept {
+            outFoundEntry = false;
+            if (!invChanges || !invChanges->entryList || !item) {
+                return 0;
+            }
+            std::size_t inspected = 0;
+            for (const auto* entry : *invChanges->entryList) {
+                if (++inspected > kMaxInventoryEntries) {
+                    break;
+                }
+                if (entry && entry->object == item) {
+                    outFoundEntry = true;
+                    return entry->countDelta;
+                }
+            }
+            return 0;
+        }
+
+        const RE::TESObjectARMO* FindArmorInOutfitForm(
+            const RE::TESForm* form,
+            RE::BGSBipedObjectForm::BipedObjectSlot slot,
+            std::size_t depth = 0) noexcept {
+            if (!form || depth > kMaxOutfitDepth) {
+                return nullptr;
+            }
+            if (const auto* armo = form->As<RE::TESObjectARMO>()) {
+                return armo->HasPartOf(slot) ? armo : nullptr;
+            }
+            if (const auto* levItem = form->As<RE::TESLevItem>()) {
+                if (levItem->chanceNone >= 100 || levItem->entries.empty()) {
+                    return nullptr;
+                }
+                const std::size_t count = std::min(
+                    levItem->entries.size(),
+                    static_cast<std::size_t>(levItem->numEntries));
+                for (std::size_t i = 0; i < count; ++i) {
+                    if (const auto* found =
+                            FindArmorInOutfitForm(levItem->entries[i].form, slot, depth + 1)) {
+                        return found;
+                    }
+                }
+            }
+            return nullptr;
+        }
+
+        // Read-only worn armor query that never calls InitInventoryIfRequired / ForceInitInventoryChanges
+        // and never allocates temporary InventoryEntryData copies on Skyrim's heap.
+        const RE::TESObjectARMO* GetWornArmorReadOnly(
+            RE::Actor* actor,
+            RE::BGSBipedObjectForm::BipedObjectSlot slot) {
+            if (!actor || actor->IsDeleted()) {
+                return nullptr;
+            }
+
+            if (const auto* invChanges = actor->GetInventoryChanges(true)) {
+                if (invChanges->entryList) {
+                    std::size_t inspected = 0;
+                    for (const auto* entry : *invChanges->entryList) {
+                        if (++inspected > kMaxInventoryEntries) {
+                            break;
+                        }
+                        if (!entry || !entry->object || !entry->object->IsArmor()) {
+                            continue;
+                        }
+                        const auto* armo = entry->object->As<RE::TESObjectARMO>();
+                        if (!armo || !armo->HasPartOf(slot)) {
+                            continue;
+                        }
+                        const std::int32_t netCount =
+                            entry->countDelta + GetBaseContainerCount(actor, entry->object);
+                        if (netCount > 0 && entry->IsWorn()) {
+                            return armo;
+                        }
+                    }
+                }
+                return nullptr;
+            }
+
+            if (const auto* base = actor->GetActorBase(); base && base->defaultOutfit) {
+                for (const auto* item : base->defaultOutfit->outfitItems) {
+                    if (const auto* armo = FindArmorInOutfitForm(item, slot)) {
+                        return armo;
+                    }
+                }
+            }
+            return nullptr;
+        }
+
         class ActiveMorphCollector final : public SKEE::IBodyMorphInterface::MorphVisitor {
         public:
             std::vector<std::string> morphNames;
@@ -137,18 +254,49 @@ namespace BodyLanguage {
             }
         };
 
-        float ReadBoneScale(RE::NiAVObject* root3D, std::string_view boneName) {
-            if (!root3D || boneName.empty()) {
+        // Purely read-only scene-graph node lookup comparing existing BSFixedString storage against
+        // std::string_view without constructing/releasing temporary BSFixedStrings in BSStringPool.
+        RE::NiAVObject* FindNodeByNameReadOnly(
+            RE::NiAVObject* root,
+            std::string_view targetName,
+            std::size_t depth = 0) noexcept {
+            if (!root || targetName.empty() || depth > kMaxSceneGraphDepth) {
+                return nullptr;
+            }
+            if (root->name == targetName) {
+                return root;
+            }
+            auto* node = root->AsNode();
+            if (!node) {
+                return nullptr;
+            }
+            auto& children = node->GetChildren();
+            const auto* data = children.begin();
+            const std::uint16_t cap = children.capacity();
+            if (!data || cap > kMaxChildArrayCapacity) {
+                return nullptr;
+            }
+            for (std::uint16_t i = 0; i < cap; ++i) {
+                if (auto* child = data[i].get()) {
+                    if (auto* found = FindNodeByNameReadOnly(child, targetName, depth + 1)) {
+                        return found;
+                    }
+                }
+            }
+            return nullptr;
+        }
+
+        float ReadBoneScale(
+            RE::NiAVObject* root3D,
+            RE::NiAVObject* searchRoot,
+            std::string_view boneName) noexcept {
+            if (!root3D || !searchRoot || boneName.empty()) {
                 return 1.0f;
             }
-            RE::NiAVObject* searchRoot = root3D->GetObjectByName(RE::BSFixedString("NPC Root [Root]"));
-            if (!searchRoot) {
-                searchRoot = root3D;
-            }
-            if (auto* node = searchRoot->GetObjectByName(RE::BSFixedString(boneName.data()))) {
+            if (auto* node = FindNodeByNameReadOnly(searchRoot, boneName)) {
                 float s = node->local.scale;
-                if (auto* parent = node->parent; parent && parent->name.c_str()) {
-                    const std::string_view parentName(parent->name.c_str());
+                if (auto* parent = node->parent; parent && !parent->name.empty()) {
+                    const std::string_view parentName(parent->name);
                     if (parentName.starts_with("CME ") || parentName.starts_with("cme ")) {
                         s *= parent->local.scale;
                     }
@@ -166,8 +314,60 @@ namespace BodyLanguage {
             return 1.0f;
         }
 
+        bool FindSceneGraphBodyMsnRecursive(
+            RE::NiAVObject* obj,
+            std::string& outPath,
+            std::size_t depth = 0) {
+            if (!obj || depth > kMaxSceneGraphDepth) {
+                return false;
+            }
+
+            if (auto* geo = obj->AsGeometry()) {
+                if (auto* shaderProp = geo->lightingShaderProp_cast()) {
+                    if (auto* baseMat = shaderProp->GetBaseMaterial();
+                        baseMat && baseMat->GetType() == RE::BSShaderMaterial::Type::kLighting) {
+                        const auto* mat =
+                            static_cast<const RE::BSLightingShaderMaterialBase*>(baseMat);
+                        if (auto* texSet = mat->textureSet.get()) {
+                            const char* path =
+                                texSet->GetTexturePath(RE::BSTextureSet::Texture::kNormal);
+                            if (path && *path != '\0') {
+                                const std::string lowerPath = ToLowerAscii(path);
+                                const auto slashPos = lowerPath.find_last_of("\\/");
+                                const std::string_view fname = (slashPos == std::string::npos)
+                                    ? std::string_view(lowerPath)
+                                    : std::string_view(lowerPath).substr(slashPos + 1);
+                                if (fname.find("body") != std::string_view::npos &&
+                                    fname.find("msn") != std::string_view::npos) {
+                                    outPath = path;
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+                return false;
+            }
+
+            if (auto* node = obj->AsNode()) {
+                auto& children = node->GetChildren();
+                const auto* data = children.begin();
+                const std::uint16_t cap = children.capacity();
+                if (data && cap <= kMaxChildArrayCapacity) {
+                    for (std::uint16_t i = 0; i < cap; ++i) {
+                        if (auto* child = data[i].get()) {
+                            if (FindSceneGraphBodyMsnRecursive(child, outPath, depth + 1)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
         std::string FindSceneGraphBodyMsn(RE::Actor* actor) {
-            if (!actor) {
+            if (!actor || actor->IsDeleted()) {
                 return {};
             }
             auto* root = actor->Get3D(false);
@@ -176,40 +376,7 @@ namespace BodyLanguage {
             }
 
             std::string foundPath;
-            RE::BSVisit::TraverseScenegraphGeometries(
-                root,
-                [&](RE::BSGeometry* geo) -> RE::BSVisit::BSVisitControl {
-                    if (!geo) {
-                        return RE::BSVisit::BSVisitControl::kContinue;
-                    }
-                    auto* shaderProp = geo->lightingShaderProp_cast();
-                    if (!shaderProp) {
-                        return RE::BSVisit::BSVisitControl::kContinue;
-                    }
-                    auto* mat = static_cast<RE::BSLightingShaderMaterialBase*>(
-                        shaderProp->GetBaseMaterial());
-                    if (!mat) {
-                        return RE::BSVisit::BSVisitControl::kContinue;
-                    }
-                    auto texSet = mat->GetTextureSet();
-                    if (!texSet) {
-                        return RE::BSVisit::BSVisitControl::kContinue;
-                    }
-                    const char* path = texSet->GetTexturePath(RE::BSTextureSet::Texture::kNormal);
-                    if (!path || *path == '\0') {
-                        return RE::BSVisit::BSVisitControl::kContinue;
-                    }
-
-                    const std::string fname = ToLowerAscii(
-                        std::filesystem::path(path).filename().string());
-                    if (fname.find("body") != std::string::npos &&
-                        fname.find("msn") != std::string::npos) {
-                        foundPath = path;
-                        return RE::BSVisit::BSVisitControl::kStop;
-                    }
-                    return RE::BSVisit::BSVisitControl::kContinue;
-                });
-
+            FindSceneGraphBodyMsnRecursive(root, foundPath);
             return foundPath;
         }
 
@@ -257,7 +424,7 @@ namespace BodyLanguage {
     }
 
     BeastFormType ActorBodyEvaluator::GetActorBeastForm(RE::Actor* actor) const {
-        if (!actor) {
+        if (!actor || actor->IsDeleted()) {
             return BeastFormType::kNone;
         }
         const auto* race = actor->GetRace();
@@ -299,7 +466,7 @@ namespace BodyLanguage {
     }
 
     float ActorBodyEvaluator::GetActorHeightScale(RE::Actor* actor) const {
-        if (!actor) {
+        if (!actor || actor->IsDeleted()) {
             return 1.0f;
         }
 
@@ -319,7 +486,7 @@ namespace BodyLanguage {
                 std::fabs(root3D->world.scale - 1.0f) > 1e-4f) {
                 rootScale = root3D->world.scale;
             }
-            if (auto* npcRoot = root3D->GetObjectByName(RE::BSFixedString("NPC Root [Root]"))) {
+            if (auto* npcRoot = FindNodeByNameReadOnly(root3D, "NPC Root [Root]")) {
                 if (std::isfinite(root3D->world.scale) && root3D->world.scale > 0.2f &&
                     std::isfinite(npcRoot->world.scale) && npcRoot->world.scale > 0.2f) {
                     const float rel = npcRoot->world.scale / root3D->world.scale;
@@ -340,14 +507,18 @@ namespace BodyLanguage {
     }
 
     bool ActorBodyEvaluator::IsActorNaked(RE::Actor* actor) const {
-        if (!actor) {
+        if (!actor || actor->IsDeleted()) {
             return false;
         }
-        const auto* bodyArmor = actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
+        const auto* bodyArmor = GetWornArmorReadOnly(
+            actor,
+            RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
         if (IsNakedSkinOrGenitalArmor(actor, bodyArmor)) {
             bodyArmor = nullptr;
         }
-        const auto* chestArmor = actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kModChestPrimary);
+        const auto* chestArmor = GetWornArmorReadOnly(
+            actor,
+            RE::BGSBipedObjectForm::BipedObjectSlot::kModChestPrimary);
         if (IsNakedSkinOrGenitalArmor(actor, chestArmor)) {
             chestArmor = nullptr;
         }
@@ -355,7 +526,7 @@ namespace BodyLanguage {
     }
 
     RE::TESObjectARMA* ActorBodyEvaluator::ResolveNakedBodyARMA(RE::Actor* actor) const {
-        if (!actor) {
+        if (!actor || actor->IsDeleted()) {
             return nullptr;
         }
 
@@ -397,7 +568,7 @@ namespace BodyLanguage {
 
     ActorBodyMetrics ActorBodyEvaluator::EvaluateActorBody(RE::Actor* actor) const {
         ActorBodyMetrics metrics{};
-        if (!actor || actor->IsChild()) {
+        if (!actor || actor->IsDeleted() || actor->IsChild()) {
             return metrics;
         }
 
@@ -459,18 +630,30 @@ namespace BodyLanguage {
         // 2. Apply active SKEE body morphs & Section 3.5 geometric pregnancy morph isolation
         float pregMorphForwardDisp = 0.0f;
         std::size_t appliedMorphCount = 0;
+        std::size_t reportedMorphCount = 0;
+        bool hasActiveMorphs = false;
+        std::vector<std::pair<std::string, float>> activeMorphs;
         std::string morphSummary;
 
-        if (m_morphInterface && m_morphInterface->HasMorphs(actor)) {
-            ActiveMorphCollector collector;
-            m_morphInterface->VisitMorphs(actor, collector);
-
-            for (const auto& morphName : collector.morphNames) {
-                const float val = m_morphInterface->GetBodyMorphs(actor, morphName.c_str());
-                if (std::fabs(val) < 1e-4f) {
-                    continue;
+        if (m_morphInterface) {
+            std::lock_guard skeeLock(m_skeeMutex);
+            if (m_morphInterface->HasMorphs(actor)) {
+                hasActiveMorphs = true;
+                ActiveMorphCollector collector;
+                m_morphInterface->VisitMorphs(actor, collector);
+                reportedMorphCount = collector.morphNames.size();
+                activeMorphs.reserve(reportedMorphCount);
+                for (auto& morphName : collector.morphNames) {
+                    const float val = m_morphInterface->GetBodyMorphs(actor, morphName.c_str());
+                    if (std::fabs(val) >= 1e-4f) {
+                        activeMorphs.emplace_back(std::move(morphName), val);
+                    }
                 }
+            }
+        }
 
+        if (hasActiveMorphs) {
+            for (const auto& [morphName, val] : activeMorphs) {
                 auto it = templateCache->triDeltas.find(morphName);
                 const bool matchedTri = (it != templateCache->triDeltas.end());
                 const bool isPregMorph = matchedTri && it->second.isLocalizedBellyMorph;
@@ -510,7 +693,7 @@ namespace BodyLanguage {
                 "[ActorBodyEvaluator] Actor '{}' ({:08X}): SKEE reported {} morph(s), {} matched TRI deltas ({})",
                 safeName,
                 actor->GetFormID(),
-                collector.morphNames.size(),
+                reportedMorphCount,
                 appliedMorphCount,
                 morphSummary.empty() ? "none non-zero" : morphSummary);
         } else {
@@ -524,12 +707,16 @@ namespace BodyLanguage {
         // 3. Apply live XPMSE / NiOverride skeleton bone scales
         float bellyNodeScale = 1.0f;
         if (auto* root3D = actor->Get3D(false)) {
-            bellyNodeScale = ReadBoneScale(root3D, "NPC Belly");
+            RE::NiAVObject* searchRoot = FindNodeByNameReadOnly(root3D, "NPC Root [Root]");
+            if (!searchRoot) {
+                searchRoot = root3D;
+            }
+            bellyNodeScale = ReadBoneScale(root3D, searchRoot, "NPC Belly");
 
             for (std::size_t r = 0; r < kRingCount; ++r) {
                 const auto& ringInfo = templateCache->rings[r];
-                const float primaryScale = ReadBoneScale(root3D, ringInfo.primaryBone);
-                const float secondaryScale = ReadBoneScale(root3D, ringInfo.secondaryBone);
+                const float primaryScale = ReadBoneScale(root3D, searchRoot, ringInfo.primaryBone);
+                const float secondaryScale = ReadBoneScale(root3D, searchRoot, ringInfo.secondaryBone);
 
                 const std::size_t baseIdx = r * kPointsPerRing;
                 RE::NiPoint3 centroid{};
@@ -802,7 +989,7 @@ namespace BodyLanguage {
 
     ActorGenitalMetrics ActorBodyEvaluator::EvaluateActorGenitals(RE::Actor* actor) const {
         ActorGenitalMetrics result{};
-        if (!actor || actor->IsChild() || !IsActorNaked(actor)) {
+        if (!actor || actor->IsDeleted() || actor->IsChild() || !IsActorNaked(actor)) {
             return result;
         }
 
@@ -817,17 +1004,17 @@ namespace BodyLanguage {
         }
 
         const bool isFemale = base && (base->GetSex() == RE::SEX::kFemale);
-        const auto sexIdx = isFemale ? RE::SEXES::kFemale : RE::SEXES::kMale;
-        const bool allowMaleModelFallback = !isFemale || (beastForm != BeastFormType::kNone);
+        if (isFemale && beastForm != BeastFormType::kNone) {
+            return result;
+        }
 
-        auto getArmaModelPath = [sexIdx, allowMaleModelFallback](const RE::TESObjectARMA* arma) -> const char* {
+        const auto sexIdx = isFemale ? RE::SEXES::kFemale : RE::SEXES::kMale;
+
+        auto getArmaModelPath = [sexIdx](const RE::TESObjectARMA* arma) -> const char* {
             if (!arma) {
                 return nullptr;
             }
             const char* rawModel = arma->bipedModels[sexIdx].model.c_str();
-            if ((!rawModel || *rawModel == '\0') && allowMaleModelFallback) {
-                rawModel = arma->bipedModels[RE::SEXES::kMale].model.c_str();
-            }
             return (rawModel && *rawModel != '\0') ? rawModel : nullptr;
         };
 
@@ -929,7 +1116,9 @@ namespace BodyLanguage {
 
         // 1. Check Slot 52 (kModPelvisSecondary) worn item:
         //    If a Slot 52 item is worn, check if its NIF contains a 3D genital mesh; if not, it is pelvic covering/underwear.
-        if (const auto* slot52Armor = actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kModPelvisSecondary)) {
+        if (const auto* slot52Armor = GetWornArmorReadOnly(
+                actor,
+                RE::BGSBipedObjectForm::BipedObjectSlot::kModPelvisSecondary)) {
             activeMesh = findGenitalMeshInArmor(slot52Armor, false);
             if (!activeMesh.tmpl) {
                 return result;
@@ -941,7 +1130,7 @@ namespace BodyLanguage {
         if (!activeMesh.tmpl) {
             const std::array<const RE::TESObjectARMO*, 4> skinCandidates = {
                 actor->GetSkin(),
-                actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody),
+                GetWornArmorReadOnly(actor, RE::BGSBipedObjectForm::BipedObjectSlot::kBody),
                 base ? base->skin : nullptr,
                 race ? race->skin : nullptr
             };
@@ -964,24 +1153,59 @@ namespace BodyLanguage {
             }
         }
 
-        // 3. Check actor inventory for unequipped Slot 52 genital addon items (males only)
+        // 3. Check actor inventory for unequipped Slot 52 genital addon items (males only, read-only noInit)
         if (!activeMesh.tmpl && !isFemale) {
-            const auto inv = actor->GetInventory([](RE::TESBoundObject& obj) {
-                return obj.IsArmor();
-            });
-            for (const auto& [item, invData] : inv) {
-                if (invData.first <= 0) {
-                    continue;
-                }
-                const auto* armo = item ? item->As<RE::TESObjectARMO>() : nullptr;
+            auto trySlot52Armor = [&](const RE::TESObjectARMO* armo) -> bool {
                 if (!armo || armo->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kBody) ||
                     !armo->HasPartOf(RE::BGSBipedObjectForm::BipedObjectSlot::kModPelvisSecondary)) {
-                    continue;
+                    return false;
                 }
                 activeMesh = findGenitalMeshInArmor(armo, false);
                 if (activeMesh.tmpl) {
                     activeGenitalArmor = armo;
-                    break;
+                    return true;
+                }
+                return false;
+            };
+
+            const auto* invChanges = actor->GetInventoryChanges(true);
+            if (invChanges && invChanges->entryList) {
+                std::size_t inspected = 0;
+                for (const auto* entry : *invChanges->entryList) {
+                    if (++inspected > kMaxInventoryEntries) {
+                        break;
+                    }
+                    if (!entry || !entry->object || !entry->object->IsArmor()) {
+                        continue;
+                    }
+                    const std::int32_t netCount =
+                        entry->countDelta + GetBaseContainerCount(actor, entry->object);
+                    if (netCount > 0 && trySlot52Armor(entry->object->As<RE::TESObjectARMO>())) {
+                        break;
+                    }
+                }
+            }
+
+            if (!activeMesh.tmpl) {
+                if (const auto* container = actor->GetContainer();
+                    container && container->containerObjects) {
+                    const std::uint32_t count =
+                        std::min(container->numContainerObjects, kMaxContainerObjects);
+                    for (std::uint32_t i = 0; i < count; ++i) {
+                        const auto* co = container->containerObjects[i];
+                        if (!co || co->count <= 0 || !co->obj || !co->obj->IsArmor()) {
+                            continue;
+                        }
+                        bool foundInChanges = false;
+                        const std::int32_t delta =
+                            GetContainerDeltaInChanges(invChanges, co->obj, foundInChanges);
+                        if (foundInChanges || (co->count + delta) <= 0) {
+                            continue;
+                        }
+                        if (trySlot52Armor(co->obj->As<RE::TESObjectARMO>())) {
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -1044,8 +1268,12 @@ namespace BodyLanguage {
 
         std::vector<RE::NiAVObject*> liveChainNodes;
         if (root3D && !genitalTemplate->shaftBoneChain.empty()) {
+            RE::NiAVObject* searchRoot = FindNodeByNameReadOnly(root3D, "NPC Root [Root]");
+            if (!searchRoot) {
+                searchRoot = root3D;
+            }
             for (const auto& bName : genitalTemplate->shaftBoneChain) {
-                if (auto* node = root3D->GetObjectByName(bName)) {
+                if (auto* node = FindNodeByNameReadOnly(searchRoot, bName)) {
                     liveChainNodes.push_back(node);
                 }
             }

@@ -2,6 +2,17 @@
 
 All notable changes to TT BodyLanguage will be documented in this file.
 
+## v2.2.4
+
+### Hotfix: SkyrimNet Background Thread Crash & Performance Fix
+
+### Fixed
+
+- **Fixed Access Violation Crash in SkyrimNet Background Callbacks**
+  - Fixed a multi-threaded Access Violation (`Attempted to write memory at 0x9`) inside `ttlb_get_short_body_description` and other SkyrimNet decorators when multiple background worker threads evaluated nearby NPCs simultaneously after loading a save.
+  - Replaced engine string-pool (`BSFixedString`) allocations, live shader smart-pointer refcount writes, and container-initializing inventory lookups with strictly read-only, thread-safe queries.
+  - Synchronized RaceMenu (`SKEE`) morph queries, uncached actor evaluations, and on-demand normal-map/mesh decoding to eliminate post-load cache stampedes, and added hardware exception (`SEH`) boundary protection across all SkyrimNet callbacks.
+
 ## v2.2.3
 
 ### Hotfix: Startup Hang Fix for Custom Race Mods
