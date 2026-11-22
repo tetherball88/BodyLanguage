@@ -111,11 +111,11 @@
         "genital_size": {
             "include_actor_scale": true,
             "flaccid_length_compensation": 1.0,
-            "xs_max_cm": 10.0,
-            "s_max_cm": 12.5,
-            "m_max_cm": 16.0,
-            "l_max_cm": 19.0,
-            "xl_max_cm": 24.0,
+            "xs_max_cm": 14.2,
+            "s_max_cm": 15.9,
+            "m_max_cm": 18.4,
+            "l_max_cm": 21.7,
+            "xl_max_cm": 26.0,
             "xxl_max_cm": 34.0
         }
     }

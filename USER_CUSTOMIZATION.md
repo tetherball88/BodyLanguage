@@ -182,11 +182,11 @@ The C++ evaluator measures genital shaft dimensions directly from the equipped a
 
 | Size Tier | Default Length Cutoff (cm / in) | Threshold Key in `geometryThresholds.json` |
 | :--- | :--- | :--- |
-| `XS` | `< 10.0 cm` (`< 3.9"`) | `xs_max_cm` |
-| `S` | `10.0 – 12.5 cm` (`3.9" – 4.9"`) | `s_max_cm` |
-| `M` | `12.5 – 16.0 cm` (`4.9" – 6.3"`) | `m_max_cm` (Real-world avg `~13.5 cm` + TNG 1.0x `15.4 cm`) |
-| `L` | `16.0 – 19.0 cm` (`6.3" – 7.5"`) | `l_max_cm` |
-| `XL` | `19.0 – 24.0 cm` (`7.5" – 9.4"`) | `xl_max_cm` |
-| `XXL` | `24.0 – 34.0 cm` (`9.4" – 13.4"`) | `xxl_max_cm` (e.g., Vampire Lord ≈ `32.1 cm` / `12.6"`) |
+| `XS` | `< 14.2 cm` (`< 5.6"`) | `xs_max_cm` (TNG `XS` `0.80x` ≈ `13.4 cm`) |
+| `S` | `14.2 – 15.9 cm` (`5.6" – 6.3"`) | `s_max_cm` (TNG `S` `0.90x` ≈ `15.1 cm`) |
+| `M` | `15.9 – 18.4 cm` (`6.3" – 7.2"`) | `m_max_cm` (TNG `M` `1.00x` ≈ `16.8 cm`) |
+| `L` | `18.4 – 21.7 cm` (`7.2" – 8.5"`) | `l_max_cm` (TNG `L` `1.20x` ≈ `20.2 cm`) |
+| `XL` | `21.7 – 26.0 cm` (`8.5" – 10.2"`) | `xl_max_cm` (TNG `XL` `1.40x` ≈ `23.5 cm`) |
+| `XXL` | `26.0 – 34.0 cm` (`10.2" – 13.4"`) | `xxl_max_cm` (e.g., Vampire Lord ≈ `32.1 cm` / `12.6"`) |
 | `XXXL` | `>= 34.0 cm` (`>= 13.4"`) | `>= xxl_max_cm` (e.g., Werewolf ≈ `38.1 cm`, Werebear ≈ `38.8 cm`) |
 

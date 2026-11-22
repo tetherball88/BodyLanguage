@@ -34,7 +34,7 @@ Instead of relying on static BodySlide preset databases or external archive scan
 
 ## How Descriptions Reach SkyrimNet 🤖
 
-The plugin registers five native C++ decorator functions with SkyrimNet's public API:
+The plugin registers eight native C++ decorator functions with SkyrimNet's public API:
 
 | Decorator | Returns |
 | :--- | :--- |
@@ -42,7 +42,10 @@ The plugin registers five native C++ decorator functions with SkyrimNet's public
 | `ttlb_get_short_body_description(actor)` | Concise single-phrase summary (`clothed`, `naked`, or static beast shape) |
 | `ttlb_is_naked(actor)` | `"true"` or `"false"` based on live equipment slot inspection |
 | `ttlb_get_beast_form(actor)` | `"werewolf"`, `"vampire_lord"`, `"werebear"`, or `""` if not in beast form |
-| `ttlb_get_genitals(actor)` | JSON object (`{"hasGenitals": true, "size": "XS..XL", "addon": "<addonKey>"}`) for TNG or SOS |
+| `ttlb_get_genitals(actor)` | JSON object (`{"hasGenitals": true, "size": "XS..XXXL", "state": "flaccid|hard", "addon": "<addonKey>"}`) for TNG or SOS |
+| `ttlb_get_body_parts(actor)` | JSON object (`{"valid": bool, "isFemale": bool, "breasts": "...", "butt": "...", "thighs": "..."}`) with body-part classification tiers |
+| `ttlb_is_excluded(actor)` | `"true"` or `"false"` based on `[Exclusions]` in `BodyLanguage.ini` |
+| `ttlb_get_height(actor)` | JSON object (`{"height": float}`) with the actor's effective height scale |
 
 SkyrimNet's character bio prompt [`0401_appearance_body_shape.prompt`](./SKSE/Plugins/SkyrimNet/external/tetherball88.bodylanguage/prompts/submodules/character_bio/0401_appearance_body_shape.prompt) renders the modular `body_language` subcomponents:
 1. **[`0001_body.prompt`](./SKSE/Plugins/SkyrimNet/external/tetherball88.bodylanguage/prompts/submodules/body_language/0001_body.prompt)** — Clothed/naked status and 3D physique description.

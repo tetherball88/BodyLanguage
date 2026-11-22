@@ -638,6 +638,49 @@ namespace BodyLanguage {
         }
     }
 
+    std::string GetActorBodyPartsJson(RE::Actor* actor) {
+        if (!actor || actor->IsDeleted() || IsActorExcluded(actor)) {
+            return "{\"valid\":false}";
+        }
+
+        try {
+            const RE::FormID formId = actor->GetFormID();
+            const BeastFormType beastForm = ActorBodyEvaluator::GetInstance().GetActorBeastForm(actor);
+            if (beastForm != BeastFormType::kNone) {
+                return "{\"valid\":false}";
+            }
+
+            const bool isNakedNow = ActorBodyEvaluator::GetInstance().IsActorNaked(actor);
+            const bool has3DNow = (actor->Get3D(false) != nullptr);
+            const auto* base = actor->GetActorBase();
+            const float weightNow = base ? base->GetWeight() : actor->GetWeight();
+            auto now = std::chrono::steady_clock::now();
+
+            ActorDescriptionPair cachedPair{};
+            if (ActorDescriptionCache::GetInstance().TryGet(
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
+                return cachedPair.bodyPartsJson;
+            }
+
+            // Populate the shared per-actor cache via the standard description path.
+            (void)GetBodyDescription(actor, "full");
+
+            now = std::chrono::steady_clock::now();
+            if (ActorDescriptionCache::GetInstance().TryGet(
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
+                return cachedPair.bodyPartsJson;
+            }
+
+            return "{\"valid\":false}";
+        } catch (const std::exception& e) {
+            spdlog::error("[BodyDescription] Exception in GetActorBodyPartsJson: {}", e.what());
+            return "{\"valid\":false}";
+        } catch (...) {
+            spdlog::error("[BodyDescription] Unknown exception in GetActorBodyPartsJson");
+            return "{\"valid\":false}";
+        }
+    }
+
     std::string GetActorHeightJson(RE::Actor* actor) {
         if (!actor || actor->IsDeleted() || IsActorExcluded(actor)) {
             return "{\"height\":1.0}";

@@ -174,6 +174,16 @@ namespace BodyLanguage {
 
         RegisterDecorator(
             fn,
+            "ttlb_get_body_parts",
+            "Returns a JSON object with valid, isFemale, breasts, butt, and thighs classification tiers.",
+            [](RE::Actor* actor) -> std::string {
+                return RunDecoratorSafe("ttlb_get_body_parts", actor, "{\"valid\":false}", [actor]() {
+                    return GetActorBodyPartsJson(actor);
+                });
+            });
+
+        RegisterDecorator(
+            fn,
             "ttlb_is_excluded",
             "Returns whether this actor is excluded from BodyLanguage evaluation and description via BodyLanguage.ini.",
             [](RE::Actor* actor) -> std::string {

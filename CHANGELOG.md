@@ -2,6 +2,21 @@
 
 All notable changes to TT BodyLanguage will be documented in this file.
 
+## v2.3.0
+
+### Body-Part Tiers Decorator & Recalibrated Genital Size Tiers
+
+### Added
+
+- **Structured Body-Part Classification Decorator (`ttlb_get_body_parts`)**
+  - Added a new native SkyrimNet decorator `ttlb_get_body_parts(actor)` returning a JSON object (`{"valid": bool, "isFemale": bool, "breasts": "...", "butt": "...", "thighs": "..."}`) with the actor's cached classification tiers for downstream prompts and mod integrations.
+  - Returns `{"valid":false}` for excluded NPCs and transformed beast forms.
+
+### Changed
+
+- **Recalibrated Genital Size Tier Cutoffs (`geometryThresholds.json`)**
+  - Updated the default `XS`–`XL` length cutoffs (`xs_max_cm`: `14.2`, `s_max_cm`: `15.9`, `m_max_cm`: `18.4`, `l_max_cm`: `21.7`, `xl_max_cm`: `26.0`) to align more closely with standard TNG scale tiers (`0.80x`–`1.40x`), and updated `USER_CUSTOMIZATION.md` accordingly.
+
 ## v2.2.4
 
 ### Hotfix: SkyrimNet Background Thread Crash & Performance Fix

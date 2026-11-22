@@ -29,6 +29,9 @@ namespace BodyLanguage {
     // Returns a JSON string {"hasGenitals": bool, "size": "XS..XL", "addon": "..."} for SkyrimNet.
     std::string GetActorGenitalsJson(RE::Actor* actor);
 
+    // Returns a JSON string {"valid": bool, "isFemale": bool, "breasts": "...", "butt": "...", "thighs": "..."} for SkyrimNet.
+    std::string GetActorBodyPartsJson(RE::Actor* actor);
+
     // Returns a JSON string {"height": float} with the actor's effective height scale for SkyrimNet.
     std::string GetActorHeightJson(RE::Actor* actor);
 

@@ -16,6 +16,7 @@ namespace BodyLanguage {
         std::string full;
         std::string shortDesc;
         std::string genitalsJson{"{\"hasGenitals\":false}"};
+        std::string bodyPartsJson{"{\"valid\":false}"};
     };
 
     class PhysiqueClassifier {

@@ -737,6 +737,13 @@ namespace BodyLanguage {
                 kw.at("physique_condition"));
             pair.full = BuildFemaleSentence(kw, m_femaleParts, ctx, "full");
             pair.shortDesc = BuildFemaleSentence(kw, m_femaleParts, ctx, "short");
+            pair.bodyPartsJson = nlohmann::json{
+                {"valid", true},
+                {"isFemale", true},
+                {"breasts", kw.at("breasts_volume")},
+                {"butt", kw.at("butt_hips")},
+                {"thighs", kw.at("legs")}
+            }.dump();
         } else {
             const nlohmann::json emptyObj = nlohmann::json::object();
             const auto& maleThresh =
@@ -759,6 +766,13 @@ namespace BodyLanguage {
                 kw.at("physique_condition"));
             pair.full = BuildMaleSentence(kw, m_maleParts, ctx, "full");
             pair.shortDesc = BuildMaleSentence(kw, m_maleParts, ctx, "short");
+            pair.bodyPartsJson = nlohmann::json{
+                {"valid", true},
+                {"isFemale", false},
+                {"breasts", ""},
+                {"butt", kw.at("glutes")},
+                {"thighs", kw.at("legs")}
+            }.dump();
         }
 
         return pair;
@@ -794,11 +808,11 @@ namespace BodyLanguage {
         }
 
         const float flaccidComp = GetThreshold(maleThresh, "genital_size", "flaccid_length_compensation", 1.0f);
-        const float xsMaxCm = GetThreshold(maleThresh, "genital_size", "xs_max_cm", 10.0f);
-        const float sMaxCm = GetThreshold(maleThresh, "genital_size", "s_max_cm", 12.5f);
-        const float mMaxCm = GetThreshold(maleThresh, "genital_size", "m_max_cm", 16.0f);
-        const float lMaxCm = GetThreshold(maleThresh, "genital_size", "l_max_cm", 19.0f);
-        const float xlMaxCm = GetThreshold(maleThresh, "genital_size", "xl_max_cm", 24.0f);
+        const float xsMaxCm = GetThreshold(maleThresh, "genital_size", "xs_max_cm", 14.2f);
+        const float sMaxCm = GetThreshold(maleThresh, "genital_size", "s_max_cm", 15.9f);
+        const float mMaxCm = GetThreshold(maleThresh, "genital_size", "m_max_cm", 18.4f);
+        const float lMaxCm = GetThreshold(maleThresh, "genital_size", "l_max_cm", 21.7f);
+        const float xlMaxCm = GetThreshold(maleThresh, "genital_size", "xl_max_cm", 26.0f);
         const float xxlMaxCm = GetThreshold(maleThresh, "genital_size", "xxl_max_cm", 34.0f);
 
         const float scaleFactor = includeActorScale ? genitalMetrics.actorScale : 1.0f;
