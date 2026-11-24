@@ -3,6 +3,7 @@
 #include "SkyrimNetIntegration.h"
 
 #include <Windows.h>
+#include <cstring>
 #include <excpt.h>
 #include <exception>
 #include <functional>
@@ -204,5 +205,51 @@ namespace BodyLanguage {
 
         spdlog::info("[SkyrimNet] Decorator registration complete.");
     }
+
+    namespace {
+
+        size_t CopyJsonToBuffer(const std::string& json, char* outBuf, size_t bufSize) noexcept {
+            if (!outBuf || bufSize == 0 || json.size() >= bufSize) {
+                return 0;
+            }
+            std::memcpy(outBuf, json.data(), json.size() + 1);
+            return json.size();
+        }
+
+    }  // namespace
+
+    extern "C" {
+
+    __declspec(dllexport) size_t BodyLanguage_GetActorGenitalsJson(
+        RE::Actor* actor,
+        char* outBuf,
+        size_t bufSize) noexcept {
+        if (!actor || !outBuf || bufSize == 0) {
+            return 0;
+        }
+        const std::string json = RunDecoratorSafe(
+            "BodyLanguage_GetActorGenitalsJson",
+            actor,
+            "{\"hasGenitals\":false}",
+            [actor]() { return GetActorGenitalsJson(actor); });
+        return CopyJsonToBuffer(json, outBuf, bufSize);
+    }
+
+    __declspec(dllexport) size_t BodyLanguage_GetActorBodyPartsJson(
+        RE::Actor* actor,
+        char* outBuf,
+        size_t bufSize) noexcept {
+        if (!actor || !outBuf || bufSize == 0) {
+            return 0;
+        }
+        const std::string json = RunDecoratorSafe(
+            "BodyLanguage_GetActorBodyPartsJson",
+            actor,
+            "{\"valid\":false}",
+            [actor]() { return GetActorBodyPartsJson(actor); });
+        return CopyJsonToBuffer(json, outBuf, bufSize);
+    }
+
+    }  // extern "C"
 
 }  // namespace BodyLanguage
