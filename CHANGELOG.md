@@ -2,6 +2,28 @@
 
 All notable changes to TT BodyLanguage will be documented in this file.
 
+## v2.4.0
+
+### Standalone Modder Public API (C++ & Papyrus), Optional SkyrimNet & Prompt Caching
+
+### Added
+
+- **Public C/C++ SKSE Plugin API (`SKSE_Source/include/BodyLanguageAPI.h`)**
+  - Added a standalone, single-header C/C++ public API (`API v1`) loaded via `GetProcAddress` with pure C ABI POD structs and caller-owned buffers (safe across `/MT`, `/MD`, and MSVC toolsets, with `noexcept` + SEH boundary protection).
+  - Exposes real-time 3D body measurements (`cm`), dimensionless anthropometric ratios, pregnancy and muscle-tone indices, all classified body-part size tiers, height, clothed/naked/beast-form/exclusion state, TNG/SOS genital metrics, natural-language descriptions, full/compact JSON exports, and cache invalidation.
+
+- **Public Papyrus Native API (`Scripts/Source/BodyLanguage.psc`)**
+  - Added native Papyrus global functions under `BodyLanguage` allowing any Skyrim mod to query body-part size tiers (`GetBreastSize`, `GetButtSize`, `GetThighSize`, `GetWaistSize`, `GetBellySize`, `GetArmSize`, `GetFrameSize`, `GetShoulderBreadth`, `GetChestSize`, `GetPhysiqueCondition`, `GetBodyPartTier`), measurements in centimeters (`GetBodyMeasurementCm`, `GetHeightScale`, `GetEstimatedHeightCm`), anthropometric ratios (`GetBodyRatio`, `GetPregnancyScore`, `GetToneIndex`), TNG/SOS genital info (`HasGenitals`, `GetGenitalSize`, `GetGenitalState`, `GetGenitalAddon`, `GetGenitalLengthCm`, `GetGenitalGirthCm`), full/short descriptions, JSON payloads, and cache invalidation (`InvalidateActorCache`).
+
+### Changed
+
+- **Standalone Mode (SkyrimNet Now Optional)**
+  - `SkyrimNet` is no longer a hard requirement — when `SkyrimNet.dll` is not detected at `kPostPostLoad`, SkyrimNet decorator registration is skipped cleanly with zero overhead while the full C++ and Papyrus body-analysis APIs remain available to other mods.
+  - Decoupled structured 3D geometry/classification caching from natural-language prose rendering so API queries share the thread-safe 15-second per-actor cache and skip prose generation unless a text description is requested.
+
+- **Improved SkyrimNet Prompt Caching (`stable` Render Mode)**
+  - Updated `0401_appearance_body_shape.prompt` and all `body_language` subprompts (`0001_body.prompt`, `0005_skin_features.prompt`, `0010_height.prompt`, `0020_genitals.prompt`) to support SkyrimNet's `stable` render mode and `stable_split` prompt caching, avoiding redundant re-rendering in `full` mode when `stable_split` is active.
+
 ## v2.3.0
 
 ### Body-Part Tiers Decorator & Recalibrated Genital Size Tiers
