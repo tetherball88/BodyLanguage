@@ -1,17 +1,17 @@
 # TT Body Language 🎭
 
-✨ A Skyrim SKSE plugin for **SkyrimNet** that generates rich, context-aware physical descriptions for every NPC using **real-time 3D geometry and normal-map analysis**.
+✨ A standalone Skyrim SKSE plugin and modder framework (with optional **SkyrimNet** integration) that evaluates every NPC's live physical dimensions and generates context-aware body descriptions using **real-time 3D geometry and normal-map analysis**.
 
 Instead of relying on static BodySlide preset databases or external archive scans, **BodyLanguage v2.0** inspects each NPC's actual 3D body mesh (`.nif`), active `.tri` morph sliders via RaceMenu (`skee64.dll`), live XPMSE skeleton bone scales, object-space normal maps (`_msn.dds`), SPID skin keywords, height, and *The New Gentleman* (TNG) anatomy directly through Skyrim's Virtual File System.
 
-> 💡 **Zero Setup Required:** Every body replacer, custom follower body, runtime body morph, dynamic pregnancy/muscle morph, and skin texture overhaul works out of the box—whether loose files or packed inside BSAs.
+> 💡 **Standalone or SkyrimNet:** When **SkyrimNet** is installed, BodyLanguage automatically registers its Jinja decorators. When SkyrimNet is *not* installed, all SkyrimNet integration is skipped with zero overhead, and BodyLanguage serves as a standalone C++ & Papyrus body-analysis library for any Skyrim mod.
 
 ---
 
 ## Requirements 📋
 
 - [SKSE64](https://skse.silverlock.org/)
-- [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin) *(v0.25.0 or later)*
+- [SkyrimNet](https://github.com/MinLL/SkyrimNet-GamePlugin) *(optional — v0.25.0 or later; required only for LLM prompt decorators)*
 - [RaceMenu](https://www.nexusmods.com/skyrimspecialedition/mods/19080) *(optional, required only if you use runtime `.tri` body morphs)*
 - [XP32 Maximum Skeleton Special Extended (XPMSE)](https://www.nexusmods.com/skyrimspecialedition/mods/1988) *(optional, required only if you use bone-scale morphs on Breast/Belly/Butt nodes)*
 - [Racial Skin Variance - SPID (RSV)](https://www.nexusmods.com/skyrimspecialedition/mods/81668) & [BnP - RSV Patch](https://www.nexusmods.com/skyrimspecialedition/mods/102667) *(optional — normal-map muscularity and SPID skin complexion features are detected automatically)*
@@ -29,6 +29,48 @@ Instead of relying on static BodySlide preset databases or external archive scan
 - 🎯 **Context-Aware Prose** — Generates distinct descriptions for **clothed** vs. **naked** states and **full** (character bio / dialogue target) vs. **short** (inline reference) render modes.
 - 📏 **Height Tiers** — Maps each actor's effective height multiplier to configurable height descriptors (`towering`, `tall`, `above_average`, `average`, `short`, `diminutive`).
 - 🔞 **Native C++ TNG & SOS Integration** — Inspects equipped Slot 52 addons, XPMSE `NPC GenitalsBase [GenBase]` bone scales, TNG keywords, and SOS factions directly in C++ (no `.esp` or `StorageUtil` scripts needed).
+
+---
+
+## Modder Public API (Standalone C++ & Papyrus) 🧩
+
+BodyLanguage exposes its full 3D body measurement and classification engine to other Skyrim mods — with **no SkyrimNet dependency**. All queries share a thread-safe 15-second per-actor cache and skip prose generation unless a text description is explicitly requested.
+
+### C++ SKSE Plugin API (`BodyLanguageAPI.h`)
+Drop [`SKSE_Source/include/BodyLanguageAPI.h`](./SKSE_Source/include/BodyLanguageAPI.h) into your SKSE plugin project. All exports use pure C ABI POD structs and caller-owned buffers (safe across `/MT` and `/MD` and different MSVC toolsets):
+
+```cpp
+#include "BodyLanguageAPI.h"
+
+// Call once in kPostPostLoad or kDataLoaded:
+if (BodyLanguage::API::Load()) {
+    // Query full structured data (measurements in cm, ratios, part tiers, genitals, state):
+    if (auto data = BodyLanguage::API::GetActorData(actor); data && data->valid) {
+        float chestCm = data->measurements.chestCm;
+        std::string_view breasts = data->parts.breasts;  // e.g. "large"
+        std::string_view butt = data->parts.butt;        // e.g. "average"
+        float whr = data->ratios.waistToHipRatio;
+    }
+    // Or fetch complete JSON / descriptions:
+    std::string json = BodyLanguage::API::GetActorDataJson(actor);
+}
+```
+
+### Papyrus Native API (`BodyLanguage.psc`)
+Script [`Scripts/Source/BodyLanguage.psc`](./Scripts/Source/BodyLanguage.psc) provides global native functions callable from any Papyrus script:
+
+```papyrus
+If BodyLanguage.GetApiVersion() > 0
+    String breasts = BodyLanguage.GetBreastSize(akActor)            ; "flat".."impossible"
+    String butt    = BodyLanguage.GetButtSize(akActor)              ; "flat".."huge_muscular"
+    String thighs  = BodyLanguage.GetThighSize(akActor)             ; "thin".."colossal_muscular"
+    Float  waistCm = BodyLanguage.GetBodyMeasurementCm(akActor, "waist")
+    Float  whr     = BodyLanguage.GetBodyRatio(akActor, "whr")
+    Float  preg    = BodyLanguage.GetPregnancyScore(akActor)        ; 0.0..1.0
+    String genital = BodyLanguage.GetGenitalSize(akActor)           ; "XS".."XXXL" (when naked)
+    String fullJson = BodyLanguage.GetBodyDataJson(akActor)
+EndIf
+```
 
 ---
 

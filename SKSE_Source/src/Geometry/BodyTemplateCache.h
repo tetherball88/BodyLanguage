@@ -228,6 +228,8 @@ namespace BodyLanguage {
         bool valid{false};
         bool isFemale{true};
         bool isNaked{false};
+        float baseReferenceHeight{120.0f};  // H_0 = Z_neck - Z_ankle in Skyrim units
+        float actorScale{1.0f};             // Effective actor height scale
 
         // Height-normalized ring measurements (divided by baseReferenceHeight H_0)
         std::array<RingMeasurements, kRingCount> rings{};

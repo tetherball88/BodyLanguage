@@ -353,13 +353,15 @@ namespace BodyLanguage {
             std::unordered_set<std::string> m_excludedEditorIds;
         };
 
-        struct CachedActorDescription {
+        constexpr float kBaseStandingHeightCm = 128.0f * kSkyrimUnitToCm;  // 182.88 cm (6 ft)
+
+        struct CachedActorEntry {
             std::chrono::steady_clock::time_point timestamp{};
             BeastFormType beastForm{BeastFormType::kNone};
             bool isNaked{false};
             bool has3D{false};
             float weight{0.0f};
-            ActorDescriptionPair descriptions{};
+            ActorBodySnapshot snapshot{};
         };
 
         class ActorDescriptionCache {
@@ -374,6 +376,11 @@ namespace BodyLanguage {
                 m_entries.clear();
             }
 
+            void Erase(RE::FormID formId) {
+                std::unique_lock lock(m_mutex);
+                m_entries.erase(formId);
+            }
+
             bool TryGet(
                 RE::FormID formId,
                 BeastFormType beastForm,
@@ -381,7 +388,7 @@ namespace BodyLanguage {
                 bool has3D,
                 float weight,
                 std::chrono::steady_clock::time_point now,
-                ActorDescriptionPair& outPair) const {
+                ActorBodySnapshot& outSnapshot) const {
                 std::shared_lock lock(m_mutex);
                 const auto it = m_entries.find(formId);
                 if (it == m_entries.end()) {
@@ -406,7 +413,7 @@ namespace BodyLanguage {
                     return false;
                 }
 
-                outPair = entry.descriptions;
+                outSnapshot = entry.snapshot;
                 return true;
             }
 
@@ -417,25 +424,74 @@ namespace BodyLanguage {
                 bool has3D,
                 float weight,
                 std::chrono::steady_clock::time_point now,
-                const ActorDescriptionPair& pair) {
+                const ActorBodySnapshot& snapshot) {
                 std::unique_lock lock(m_mutex);
-                m_entries[formId] = CachedActorDescription{
+                m_entries[formId] = CachedActorEntry{
                     now,
                     beastForm,
                     isNaked,
                     has3D,
                     weight,
-                    pair};
+                    snapshot};
             }
 
         private:
             mutable std::shared_mutex m_mutex;
-            std::unordered_map<RE::FormID, CachedActorDescription> m_entries;
+            std::unordered_map<RE::FormID, CachedActorEntry> m_entries;
         };
 
-        // Serializes uncached actor evaluations across SkyrimNet worker threads so concurrent
-        // prompt renders coalesce on ActorDescriptionCache instead of stampeding the same Actor*.
+        // Serializes uncached actor evaluations across worker threads so concurrent
+        // requests coalesce on ActorDescriptionCache instead of stampeding the same Actor*.
         std::mutex g_actorEvalMutex;
+
+        void PopulateSnapshotTiers(
+            ActorBodySnapshot& snap,
+            const std::unordered_map<std::string, std::string>& kw) {
+            auto safeAt = [&](const char* key) -> std::string {
+                const auto it = kw.find(key);
+                return it != kw.end() ? it->second : std::string{};
+            };
+
+            if (snap.isFemale) {
+                snap.frame = safeAt("frame");
+                snap.shoulders = snap.frame;
+                snap.breasts = safeAt("breasts_volume");
+                snap.chest = snap.breasts;
+                snap.waist = safeAt("waist");
+                snap.belly = safeAt("belly");
+                snap.butt = safeAt("butt_hips");
+                snap.thighs = safeAt("legs");
+                snap.arms = safeAt("arms");
+                snap.condition = safeAt("physique_condition");
+            } else {
+                snap.frame = safeAt("stature_frame");
+                snap.shoulders = safeAt("shoulder_breadth");
+                snap.chest = safeAt("chest");
+                snap.breasts.clear();
+                snap.waist = safeAt("midsection");
+                snap.belly = snap.waist;
+                snap.butt = safeAt("glutes");
+                snap.thighs = safeAt("legs");
+                snap.arms = safeAt("arms");
+                snap.condition = safeAt("physique_condition");
+            }
+
+            snap.descriptions.bodyPartsJson = nlohmann::json{
+                {"valid", true},
+                {"isFemale", snap.isFemale},
+                {"breasts", snap.breasts},
+                {"butt", snap.butt},
+                {"thighs", snap.thighs}
+            }.dump();
+        }
+
+        float Round1(float v) noexcept {
+            return std::round(v * 10.0f) / 10.0f;
+        }
+
+        float Round3(float v) noexcept {
+            return std::round(v * 1000.0f) / 1000.0f;
+        }
 
     }  // namespace
 
@@ -455,6 +511,14 @@ namespace BodyLanguage {
     void ClearActorDescriptionCache() {
         ActorDescriptionCache::GetInstance().Clear();
         spdlog::info("[BodyDescription] Cleared per-actor description cache.");
+    }
+
+    void InvalidateActorCache(RE::Actor* actor) {
+        if (!actor) {
+            ClearActorDescriptionCache();
+            return;
+        }
+        ActorDescriptionCache::GetInstance().Erase(actor->GetFormID());
     }
 
     bool IsActorExcluded(RE::Actor* actor) {
@@ -481,9 +545,14 @@ namespace BodyLanguage {
         }
     }
 
-    std::string GetBodyDescription(RE::Actor* actor, std::string_view mode) {
-        if (!actor || actor->IsDeleted() || IsActorExcluded(actor)) {
-            return {};
+    ActorBodySnapshot EvaluateActorSnapshot(RE::Actor* actor, bool buildDescriptions) {
+        ActorBodySnapshot empty{};
+        if (!actor || actor->IsDeleted()) {
+            return empty;
+        }
+        if (IsActorExcluded(actor)) {
+            empty.isExcluded = true;
+            return empty;
         }
 
         try {
@@ -495,52 +564,65 @@ namespace BodyLanguage {
             const float weightNow = base ? base->GetWeight() : actor->GetWeight();
             auto now = std::chrono::steady_clock::now();
 
-            ActorDescriptionPair cachedPair{};
+            ActorBodySnapshot cached{};
             if (ActorDescriptionCache::GetInstance().TryGet(
-                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
-                return (mode == "short") ? cachedPair.shortDesc : cachedPair.full;
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cached)) {
+                if (!buildDescriptions || cached.descriptionsBuilt) {
+                    return cached;
+                }
             }
 
             std::lock_guard evalLock(g_actorEvalMutex);
             now = std::chrono::steady_clock::now();
             if (ActorDescriptionCache::GetInstance().TryGet(
-                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
-                return (mode == "short") ? cachedPair.shortDesc : cachedPair.full;
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cached)) {
+                if (!buildDescriptions || cached.descriptionsBuilt) {
+                    return cached;
+                }
+                // Upgrade cached structured snapshot with natural-language descriptions without re-evaluating geometry.
+                if (cached.beastForm != BeastFormType::kNone) {
+                    auto pair = PhysiqueClassifier::GetInstance().BuildBeastBothDescriptions(
+                        cached.beastForm, cached.isFemale);
+                    pair.genitalsJson = cached.descriptions.genitalsJson;
+                    cached.descriptions = std::move(pair);
+                } else if (cached.valid) {
+                    const auto kw = PhysiqueClassifier::GetInstance().ClassifyRegions(
+                        cached.metrics, cached.texToneScore);
+                    auto pair = PhysiqueClassifier::GetInstance().BuildBothDescriptionsFromRegions(
+                        cached.metrics, cached.toneIndex, kw);
+                    pair.genitalsJson = cached.descriptions.genitalsJson;
+                    cached.descriptions = std::move(pair);
+                }
+                cached.descriptionsBuilt = true;
+                ActorDescriptionCache::GetInstance().Store(
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cached);
+                return cached;
             }
+
+            ActorBodySnapshot snap{};
+            snap.beastForm = beastForm;
+            snap.isNaked = isNakedNow;
+            snap.heightScale = ActorBodyEvaluator::GetInstance().GetActorHeightScale(actor);
+            snap.estimatedHeightCm = snap.heightScale * kBaseStandingHeightCm;
 
             // Beast shape takes priority over human body shape regardless of clothed/naked state
             if (beastForm != BeastFormType::kNone) {
-                const bool isFemale = base && (base->GetSex() == RE::SEX::kFemale);
-                auto pair = PhysiqueClassifier::GetInstance().BuildBeastBothDescriptions(
-                    beastForm,
-                    isFemale);
+                snap.isFemale = base && (base->GetSex() == RE::SEX::kFemale);
+                if (buildDescriptions) {
+                    snap.descriptions = PhysiqueClassifier::GetInstance().BuildBeastBothDescriptions(
+                        beastForm, snap.isFemale);
+                    snap.descriptionsBuilt = true;
+                }
 
-                if (isNakedNow && !isFemale) {
+                if (isNakedNow && !snap.isFemale) {
                     const auto genitalMetrics = ActorBodyEvaluator::GetInstance().EvaluateActorGenitals(actor);
-                    pair.genitalsJson = PhysiqueClassifier::GetInstance().BuildGenitalsJson(genitalMetrics);
+                    snap.genitals = PhysiqueClassifier::GetInstance().ClassifyGenitals(genitalMetrics);
+                    snap.descriptions.genitalsJson = PhysiqueClassifier::BuildGenitalsJson(snap.genitals);
                 }
 
                 ActorDescriptionCache::GetInstance().Store(
-                    formId,
-                    beastForm,
-                    isNakedNow,
-                    has3DNow,
-                    weightNow,
-                    now,
-                    pair);
-
-                const std::string& sentence = (mode == "short") ? pair.shortDesc : pair.full;
-                const char* actorName = actor->GetName();
-                spdlog::info(
-                    "[BodyDescription] Beast result for '{}' ({:08X}) [form='{}' mode='{}' naked={}]: \"{}\"",
-                    actorName ? actorName : "<unnamed>",
-                    formId,
-                    ActorBodyEvaluator::BeastFormToKey(beastForm),
-                    mode,
-                    isNakedNow,
-                    sentence);
-
-                return sentence;
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, snap);
+                return snap;
             }
 
             const auto metrics = ActorBodyEvaluator::GetInstance().EvaluateActorBody(actor);
@@ -550,55 +632,79 @@ namespace BodyLanguage {
                     "[BodyDescription] Could not evaluate 3D body metrics for actor '{}' (FormID {:08X})",
                     actorName ? actorName : "<unnamed>",
                     formId);
-                return {};
+                return snap;
             }
 
             const float texToneScore = NormalMapAnalyzer::GetInstance().EvaluateNormalMapTone(
                 metrics.activeMsnPath,
                 metrics.abdomenUV,
                 metrics.deltoidUV);
-
-            auto pair = PhysiqueClassifier::GetInstance().BuildBothDescriptions(
-                metrics,
+            const float toneIndex = PhysiqueClassifier::ComputeToneIndex(
+                metrics.geoToneSignal,
                 texToneScore);
+            const auto kw = PhysiqueClassifier::GetInstance().ClassifyRegions(metrics, texToneScore);
+
+            snap.valid = true;
+            snap.isFemale = metrics.isFemale;
+            snap.isNaked = metrics.isNaked;
+            snap.heightScale = metrics.actorScale;
+            snap.estimatedHeightCm = metrics.actorScale * kBaseStandingHeightCm;
+            snap.metrics = metrics;
+            snap.texToneScore = texToneScore;
+            snap.toneIndex = toneIndex;
+
+            const float toCm = metrics.baseReferenceHeight * metrics.actorScale * kSkyrimUnitToCm;
+            snap.shoulderWidthCm =
+                metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kShoulders)].width * toCm;
+            snap.chestCm =
+                metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kChestBust)].girth * toCm;
+            snap.underbustCm =
+                metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUnderbust)].girth * toCm;
+            snap.waistCm =
+                metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kNaturalWaist)].girth * toCm;
+            snap.bellyCm =
+                metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kMidBelly)].girth * toCm;
+            snap.hipsCm =
+                metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kHipsGlutes)].girth * toCm;
+            snap.thighCm =
+                metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUpperThigh)].girth * toCm;
+            snap.calfCm =
+                metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kCalf)].girth * toCm;
+            snap.armCm =
+                metrics.rings[static_cast<std::size_t>(AnatomicalRingId::kUpperArm)].girth * toCm;
+
+            PopulateSnapshotTiers(snap, kw);
+
+            if (buildDescriptions) {
+                auto pair = PhysiqueClassifier::GetInstance().BuildBothDescriptionsFromRegions(
+                    metrics, toneIndex, kw);
+                snap.descriptions = std::move(pair);
+                snap.descriptionsBuilt = true;
+            }
 
             if (metrics.isNaked) {
                 const auto genitalMetrics = ActorBodyEvaluator::GetInstance().EvaluateActorGenitals(actor);
-                pair.genitalsJson = PhysiqueClassifier::GetInstance().BuildGenitalsJson(genitalMetrics);
+                snap.genitals = PhysiqueClassifier::GetInstance().ClassifyGenitals(genitalMetrics);
+                snap.descriptions.genitalsJson = PhysiqueClassifier::BuildGenitalsJson(snap.genitals);
             }
 
             ActorDescriptionCache::GetInstance().Store(
-                formId,
-                beastForm,
-                metrics.isNaked,
-                has3DNow,
-                weightNow,
-                now,
-                pair);
+                formId, beastForm, metrics.isNaked, has3DNow, weightNow, now, snap);
 
-            const std::string& sentence = (mode == "short") ? pair.shortDesc : pair.full;
-            const char* actorName = actor->GetName();
-            spdlog::info(
-                "[BodyDescription] Result for '{}' ({:08X}) [mode='{}' naked={}]: \"{}\"",
-                actorName ? actorName : "<unnamed>",
-                formId,
-                mode,
-                metrics.isNaked,
-                sentence);
-
-            return sentence;
+            return snap;
         } catch (const std::exception& e) {
-            spdlog::error("[BodyDescription] Exception in GetBodyDescription: {}", e.what());
-            return {};
+            spdlog::error("[BodyDescription] Exception in EvaluateActorSnapshot: {}", e.what());
+            return empty;
         } catch (...) {
-            spdlog::error("[BodyDescription] Unknown exception in GetBodyDescription");
-            return {};
+            spdlog::error("[BodyDescription] Unknown exception in EvaluateActorSnapshot");
+            return empty;
         }
     }
 
-    std::string GetActorGenitalsJson(RE::Actor* actor) {
+    ClassifiedGenitals GetActorGenitals(RE::Actor* actor) {
+        ClassifiedGenitals empty{};
         if (!actor || actor->IsDeleted() || IsActorExcluded(actor)) {
-            return "{\"hasGenitals\":false}";
+            return empty;
         }
 
         try {
@@ -606,7 +712,7 @@ namespace BodyLanguage {
             const BeastFormType beastForm = ActorBodyEvaluator::GetInstance().GetActorBeastForm(actor);
             const bool isNakedNow = ActorBodyEvaluator::GetInstance().IsActorNaked(actor);
             if (!isNakedNow) {
-                return "{\"hasGenitals\":false}";
+                return empty;
             }
 
             const bool has3DNow = (actor->Get3D(false) != nullptr);
@@ -614,71 +720,155 @@ namespace BodyLanguage {
             const float weightNow = base ? base->GetWeight() : actor->GetWeight();
             auto now = std::chrono::steady_clock::now();
 
-            ActorDescriptionPair cachedPair{};
+            ActorBodySnapshot cached{};
             if (ActorDescriptionCache::GetInstance().TryGet(
-                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
-                return cachedPair.genitalsJson;
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cached)) {
+                return cached.genitals;
             }
 
             std::lock_guard evalLock(g_actorEvalMutex);
             now = std::chrono::steady_clock::now();
             if (ActorDescriptionCache::GetInstance().TryGet(
-                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
-                return cachedPair.genitalsJson;
+                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cached)) {
+                return cached.genitals;
             }
 
             const auto genitalMetrics = ActorBodyEvaluator::GetInstance().EvaluateActorGenitals(actor);
-            return PhysiqueClassifier::GetInstance().BuildGenitalsJson(genitalMetrics);
+            return PhysiqueClassifier::GetInstance().ClassifyGenitals(genitalMetrics);
         } catch (const std::exception& e) {
-            spdlog::error("[BodyDescription] Exception in GetActorGenitalsJson: {}", e.what());
-            return "{\"hasGenitals\":false}";
+            spdlog::error("[BodyDescription] Exception in GetActorGenitals: {}", e.what());
+            return empty;
         } catch (...) {
-            spdlog::error("[BodyDescription] Unknown exception in GetActorGenitalsJson");
-            return "{\"hasGenitals\":false}";
+            spdlog::error("[BodyDescription] Unknown exception in GetActorGenitals");
+            return empty;
         }
     }
 
+    std::string GetBodyDescription(RE::Actor* actor, std::string_view mode) {
+        const auto snap = EvaluateActorSnapshot(actor, true);
+        if (snap.isExcluded || (!snap.valid && snap.beastForm == BeastFormType::kNone)) {
+            return {};
+        }
+
+        const std::string& sentence = (mode == "short") ? snap.descriptions.shortDesc : snap.descriptions.full;
+        if (actor) {
+            const char* actorName = actor->GetName();
+            if (snap.beastForm != BeastFormType::kNone) {
+                spdlog::info(
+                    "[BodyDescription] Beast result for '{}' ({:08X}) [form='{}' mode='{}' naked={}]: \"{}\"",
+                    actorName ? actorName : "<unnamed>",
+                    actor->GetFormID(),
+                    ActorBodyEvaluator::BeastFormToKey(snap.beastForm),
+                    mode,
+                    snap.isNaked,
+                    sentence);
+            } else {
+                spdlog::info(
+                    "[BodyDescription] Result for '{}' ({:08X}) [mode='{}' naked={}]: \"{}\"",
+                    actorName ? actorName : "<unnamed>",
+                    actor->GetFormID(),
+                    mode,
+                    snap.isNaked,
+                    sentence);
+            }
+        }
+        return sentence;
+    }
+
+    std::string GetActorDataJson(RE::Actor* actor) {
+        const auto snap = EvaluateActorSnapshot(actor, false);
+        nlohmann::json out = {
+            {"valid", snap.valid},
+            {"isFemale", snap.isFemale},
+            {"isNaked", snap.isNaked},
+            {"isExcluded", snap.isExcluded},
+            {"beastForm", std::string(ActorBodyEvaluator::BeastFormToKey(snap.beastForm))},
+            {"heightScale", Round3(snap.heightScale)},
+            {"estimatedHeightCm", Round1(snap.estimatedHeightCm)}
+        };
+
+        if (snap.valid) {
+            out["measurements_cm"] = {
+                {"shoulders", Round1(snap.shoulderWidthCm)},
+                {"chest", Round1(snap.chestCm)},
+                {"underbust", Round1(snap.underbustCm)},
+                {"waist", Round1(snap.waistCm)},
+                {"belly", Round1(snap.bellyCm)},
+                {"hips", Round1(snap.hipsCm)},
+                {"thigh", Round1(snap.thighCm)},
+                {"calf", Round1(snap.calfCm)},
+                {"arm", Round1(snap.armCm)}
+            };
+            out["measurements_in"] = {
+                {"shoulders", Round1(snap.shoulderWidthCm * kCmToInches)},
+                {"chest", Round1(snap.chestCm * kCmToInches)},
+                {"underbust", Round1(snap.underbustCm * kCmToInches)},
+                {"waist", Round1(snap.waistCm * kCmToInches)},
+                {"belly", Round1(snap.bellyCm * kCmToInches)},
+                {"hips", Round1(snap.hipsCm * kCmToInches)},
+                {"thigh", Round1(snap.thighCm * kCmToInches)},
+                {"calf", Round1(snap.calfCm * kCmToInches)},
+                {"arm", Round1(snap.armCm * kCmToInches)}
+            };
+            out["ratios"] = {
+                {"bmi", Round3(snap.metrics.bodyMassIndex)},
+                {"shoulderToHeight", Round3(snap.metrics.shoulderToHeight)},
+                {"vTaper", Round3(snap.metrics.vTaperRatio)},
+                {"whr", Round3(snap.metrics.waistToHipRatio)},
+                {"bustToUnderbust", Round3(snap.metrics.bustToUnderbust)},
+                {"hipsToHeight", Round3(snap.metrics.hipsToHeight)},
+                {"thighGirth", Round3(snap.metrics.upperThighGirth)},
+                {"calfGirth", Round3(snap.metrics.calfGirth)},
+                {"armGirth", Round3(snap.metrics.upperArmGirth)},
+                {"bellyDrop", Round3(snap.metrics.sagittalBellyDrop)},
+                {"flankFlare", Round3(snap.metrics.flankFlareRatio)},
+                {"geoToneSignal", Round3(snap.metrics.geoToneSignal)},
+                {"texToneScore", Round3(snap.texToneScore)},
+                {"toneIndex", Round3(snap.toneIndex)},
+                {"pregnancyScore", Round3(snap.metrics.pregnancyBellyScore)}
+            };
+            out["parts"] = {
+                {"frame", snap.frame},
+                {"shoulders", snap.shoulders},
+                {"chest", snap.chest},
+                {"breasts", snap.breasts},
+                {"waist", snap.waist},
+                {"belly", snap.belly},
+                {"butt", snap.butt},
+                {"thighs", snap.thighs},
+                {"arms", snap.arms},
+                {"condition", snap.condition}
+            };
+        }
+
+        if (snap.genitals.hasGenitals) {
+            out["genitals"] = {
+                {"hasGenitals", true},
+                {"state", snap.genitals.state},
+                {"size", snap.genitals.sizeTier},
+                {"lengthCm", snap.genitals.lengthCm},
+                {"girthCm", snap.genitals.girthCm},
+                {"addon", snap.genitals.addonKey}
+            };
+        } else {
+            out["genitals"] = {
+                {"hasGenitals", false}
+            };
+        }
+
+        return out.dump();
+    }
+
+    std::string GetActorGenitalsJson(RE::Actor* actor) {
+        return PhysiqueClassifier::BuildGenitalsJson(GetActorGenitals(actor));
+    }
+
     std::string GetActorBodyPartsJson(RE::Actor* actor) {
-        if (!actor || actor->IsDeleted() || IsActorExcluded(actor)) {
+        const auto snap = EvaluateActorSnapshot(actor, false);
+        if (!snap.valid || snap.isExcluded || snap.beastForm != BeastFormType::kNone) {
             return "{\"valid\":false}";
         }
-
-        try {
-            const RE::FormID formId = actor->GetFormID();
-            const BeastFormType beastForm = ActorBodyEvaluator::GetInstance().GetActorBeastForm(actor);
-            if (beastForm != BeastFormType::kNone) {
-                return "{\"valid\":false}";
-            }
-
-            const bool isNakedNow = ActorBodyEvaluator::GetInstance().IsActorNaked(actor);
-            const bool has3DNow = (actor->Get3D(false) != nullptr);
-            const auto* base = actor->GetActorBase();
-            const float weightNow = base ? base->GetWeight() : actor->GetWeight();
-            auto now = std::chrono::steady_clock::now();
-
-            ActorDescriptionPair cachedPair{};
-            if (ActorDescriptionCache::GetInstance().TryGet(
-                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
-                return cachedPair.bodyPartsJson;
-            }
-
-            // Populate the shared per-actor cache via the standard description path.
-            (void)GetBodyDescription(actor, "full");
-
-            now = std::chrono::steady_clock::now();
-            if (ActorDescriptionCache::GetInstance().TryGet(
-                    formId, beastForm, isNakedNow, has3DNow, weightNow, now, cachedPair)) {
-                return cachedPair.bodyPartsJson;
-            }
-
-            return "{\"valid\":false}";
-        } catch (const std::exception& e) {
-            spdlog::error("[BodyDescription] Exception in GetActorBodyPartsJson: {}", e.what());
-            return "{\"valid\":false}";
-        } catch (...) {
-            spdlog::error("[BodyDescription] Unknown exception in GetActorBodyPartsJson");
-            return "{\"valid\":false}";
-        }
+        return snap.descriptions.bodyPartsJson;
     }
 
     std::string GetActorHeightJson(RE::Actor* actor) {

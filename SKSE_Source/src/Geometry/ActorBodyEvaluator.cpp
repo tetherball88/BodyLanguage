@@ -816,6 +816,7 @@ namespace BodyLanguage {
 
         // Convert normalized measurements to real-world cm and inches (scaled by actor height scale)
         const float actorScale = GetActorHeightScale(actor);
+        metrics.actorScale = actorScale;
         const float toCm = h0 * actorScale * kSkyrimUnitToCm;
         const float toIn = toCm * kCmToInches;
 
@@ -879,6 +880,7 @@ namespace BodyLanguage {
         metrics.valid = true;
 
         const float h0 = std::max(10.0f, baseReferenceHeight);
+        metrics.baseReferenceHeight = h0;
         const float invH0 = 1.0f / h0;
 
         // Clamp anterior (+Y) vertices of Ring 6 (Hips/Glutes) to the natural pelvic wall

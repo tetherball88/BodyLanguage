@@ -16,10 +16,12 @@ namespace BodyLanguage {
 
     namespace {
 
-        nlohmann::json LoadJsonFile(const std::filesystem::path& path) {
+        nlohmann::json LoadJsonFile(const std::filesystem::path& path, bool optional = false) {
             std::ifstream file(path);
             if (!file.is_open()) {
-                spdlog::warn("[PhysiqueClassifier] Could not open JSON config: '{}'", path.string());
+                if (!optional) {
+                    spdlog::warn("[PhysiqueClassifier] Could not open JSON config: '{}'", path.string());
+                }
                 return nlohmann::json::object();
             }
             try {
@@ -627,7 +629,12 @@ namespace BodyLanguage {
         auto femaleParts = LoadJsonFile(configsDir / "FemaleParts.json");
         auto maleParts = LoadJsonFile(configsDir / "MaleParts.json");
         auto beastParts = LoadJsonFile(configsDir / "BeastParts.json");
-        auto genitalAddons = LoadJsonFile(skyrimNetJsonDir / "tngAddons.json");
+
+        // Optional tngAddons.json: prefer BodyLanguage folder if present, fall back to SkyrimNet jsonData quietly.
+        nlohmann::json genitalAddons = LoadJsonFile(baseDir / "tngAddons.json", true);
+        if (genitalAddons.empty()) {
+            genitalAddons = LoadJsonFile(skyrimNetJsonDir / "tngAddons.json", true);
+        }
 
         std::unique_lock lock(m_configMutex);
         m_thresholds = std::move(thresholds);
@@ -701,81 +708,84 @@ namespace BodyLanguage {
         return ClassifyMaleRegions(metrics, toneIndex, texToneScore, maleThresh);
     }
 
-    ActorDescriptionPair PhysiqueClassifier::BuildBothDescriptions(
+    ActorDescriptionPair PhysiqueClassifier::BuildBothDescriptionsFromRegions(
         const ActorBodyMetrics& metrics,
-        float texToneScore) const {
+        float toneIndex,
+        const std::unordered_map<std::string, std::string>& kw) const {
         ActorDescriptionPair pair{};
         if (!metrics.valid) {
             return pair;
         }
 
-        const float toneIndex = ComputeToneIndex(
-            metrics.geoToneSignal,
-            texToneScore);
         const std::string_view ctx = metrics.isNaked ? "naked" : "clothed";
+        auto safeAt = [&](const char* key) -> const std::string& {
+            static const std::string kEmpty;
+            const auto it = kw.find(key);
+            return it != kw.end() ? it->second : kEmpty;
+        };
 
         std::shared_lock lock(m_configMutex);
         if (metrics.isFemale) {
-            const nlohmann::json emptyObj = nlohmann::json::object();
-            const auto& femThresh =
-                (m_thresholds.is_object() && m_thresholds.contains("female"))
-                    ? m_thresholds["female"]
-                    : emptyObj;
-            const auto kw = ClassifyFemaleRegions(metrics, toneIndex, femThresh);
             spdlog::info(
                 "[PhysiqueClassifier] Female classification (I_tone={:.3f}, ctx='{}'): "
                 "frame='{}' breasts='{}' waist='{}' belly='{}' butt_hips='{}' legs='{}' arms='{}' condition='{}'",
                 toneIndex,
                 ctx,
-                kw.at("frame"),
-                kw.at("breasts_volume"),
-                kw.at("waist"),
-                kw.at("belly"),
-                kw.at("butt_hips"),
-                kw.at("legs"),
-                kw.at("arms"),
-                kw.at("physique_condition"));
+                safeAt("frame"),
+                safeAt("breasts_volume"),
+                safeAt("waist"),
+                safeAt("belly"),
+                safeAt("butt_hips"),
+                safeAt("legs"),
+                safeAt("arms"),
+                safeAt("physique_condition"));
             pair.full = BuildFemaleSentence(kw, m_femaleParts, ctx, "full");
             pair.shortDesc = BuildFemaleSentence(kw, m_femaleParts, ctx, "short");
             pair.bodyPartsJson = nlohmann::json{
                 {"valid", true},
                 {"isFemale", true},
-                {"breasts", kw.at("breasts_volume")},
-                {"butt", kw.at("butt_hips")},
-                {"thighs", kw.at("legs")}
+                {"breasts", safeAt("breasts_volume")},
+                {"butt", safeAt("butt_hips")},
+                {"thighs", safeAt("legs")}
             }.dump();
         } else {
-            const nlohmann::json emptyObj = nlohmann::json::object();
-            const auto& maleThresh =
-                (m_thresholds.is_object() && m_thresholds.contains("male"))
-                    ? m_thresholds["male"]
-                    : emptyObj;
-            const auto kw = ClassifyMaleRegions(metrics, toneIndex, texToneScore, maleThresh);
             spdlog::info(
                 "[PhysiqueClassifier] Male classification (I_tone={:.3f}, ctx='{}'): "
                 "stature='{}' shoulders='{}' chest='{}' midsection='{}' glutes='{}' legs='{}' arms='{}' condition='{}'",
                 toneIndex,
                 ctx,
-                kw.at("stature_frame"),
-                kw.at("shoulder_breadth"),
-                kw.at("chest"),
-                kw.at("midsection"),
-                kw.at("glutes"),
-                kw.at("legs"),
-                kw.at("arms"),
-                kw.at("physique_condition"));
+                safeAt("stature_frame"),
+                safeAt("shoulder_breadth"),
+                safeAt("chest"),
+                safeAt("midsection"),
+                safeAt("glutes"),
+                safeAt("legs"),
+                safeAt("arms"),
+                safeAt("physique_condition"));
             pair.full = BuildMaleSentence(kw, m_maleParts, ctx, "full");
             pair.shortDesc = BuildMaleSentence(kw, m_maleParts, ctx, "short");
             pair.bodyPartsJson = nlohmann::json{
                 {"valid", true},
                 {"isFemale", false},
                 {"breasts", ""},
-                {"butt", kw.at("glutes")},
-                {"thighs", kw.at("legs")}
+                {"butt", safeAt("glutes")},
+                {"thighs", safeAt("legs")}
             }.dump();
         }
 
         return pair;
+    }
+
+    ActorDescriptionPair PhysiqueClassifier::BuildBothDescriptions(
+        const ActorBodyMetrics& metrics,
+        float texToneScore) const {
+        if (!metrics.valid) {
+            return {};
+        }
+
+        const float toneIndex = ComputeToneIndex(metrics.geoToneSignal, texToneScore);
+        const auto kw = ClassifyRegions(metrics, texToneScore);
+        return BuildBothDescriptionsFromRegions(metrics, toneIndex, kw);
     }
 
     std::string PhysiqueClassifier::BuildDescription(
@@ -786,10 +796,11 @@ namespace BodyLanguage {
         return (mode == "short") ? pair.shortDesc : pair.full;
     }
 
-    std::string PhysiqueClassifier::BuildGenitalsJson(
+    ClassifiedGenitals PhysiqueClassifier::ClassifyGenitals(
         const ActorGenitalMetrics& genitalMetrics) const {
+        ClassifiedGenitals result{};
         if (!genitalMetrics.hasGenitals) {
-            return "{\"hasGenitals\":false}";
+            return result;
         }
 
         std::shared_lock lock(m_configMutex);
@@ -837,34 +848,50 @@ namespace BodyLanguage {
             sizeTier = "XXXL";
         }
 
-        const std::string addonKey = ResolveGenitalAddonKey(
+        result.hasGenitals = true;
+        result.isErect = genitalMetrics.isErect;
+        result.lengthCm = std::round(effectiveLengthCm * 10.0f) / 10.0f;
+        result.girthCm = std::round(effectiveGirthCm * 10.0f) / 10.0f;
+        result.sizeTier = std::string(sizeTier);
+        result.state = genitalMetrics.isErect ? "hard" : "flaccid";
+        result.addonKey = ResolveGenitalAddonKey(
             m_genitalAddons,
             genitalMetrics.addonName,
             genitalMetrics.addonSourceFile);
 
-        const std::string_view stateStr = genitalMetrics.isErect ? "hard" : "flaccid";
-
         spdlog::info(
             "[PhysiqueClassifier] Genital classification: size='{}' state='{}' "
             "length={:.1f}cm({:.1f}\") girth={:.1f}cm({:.1f}\") addon='{}' (raw='{}')",
-            sizeTier,
-            stateStr,
+            result.sizeTier,
+            result.state,
             effectiveLengthCm,
             effectiveLengthCm * kCmToInches,
             effectiveGirthCm,
             effectiveGirthCm * kCmToInches,
-            addonKey,
+            result.addonKey,
             genitalMetrics.addonName);
 
+        return result;
+    }
+
+    std::string PhysiqueClassifier::BuildGenitalsJson(const ClassifiedGenitals& classified) {
+        if (!classified.hasGenitals) {
+            return "{\"hasGenitals\":false}";
+        }
         const nlohmann::json out = {
             {"hasGenitals", true},
-            {"state", stateStr},
-            {"size", sizeTier},
-            {"lengthCm", std::round(effectiveLengthCm * 10.0f) / 10.0f},
-            {"girthCm", std::round(effectiveGirthCm * 10.0f) / 10.0f},
-            {"addon", addonKey}
+            {"state", classified.state},
+            {"size", classified.sizeTier},
+            {"lengthCm", classified.lengthCm},
+            {"girthCm", classified.girthCm},
+            {"addon", classified.addonKey}
         };
         return out.dump();
+    }
+
+    std::string PhysiqueClassifier::BuildGenitalsJson(
+        const ActorGenitalMetrics& genitalMetrics) const {
+        return BuildGenitalsJson(ClassifyGenitals(genitalMetrics));
     }
 
 }  // namespace BodyLanguage

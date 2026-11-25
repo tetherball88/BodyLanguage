@@ -3,7 +3,7 @@
 #include "SkyrimNetIntegration.h"
 
 #include <Windows.h>
-#include <cstring>
+#include <atomic>
 #include <excpt.h>
 #include <exception>
 #include <functional>
@@ -80,11 +80,12 @@ namespace BodyLanguage {
             return std::move(ctx.result);
         }
 
+        std::atomic<bool> g_skyrimNetActive{false};
+
         // Look up the export from SkyrimNet.dll if mapped into the current process.
         PublicRegisterDecorator_t FindRegisterDecorator() {
             HMODULE hMod = GetModuleHandleW(L"SkyrimNet.dll");
             if (!hMod) {
-                spdlog::warn("[SkyrimNet] SkyrimNet.dll not found in process - integration skipped.");
                 return nullptr;
             }
 
@@ -111,15 +112,28 @@ namespace BodyLanguage {
 
     }  // namespace
 
-    void RegisterSkyrimNetDecorators() {
-        spdlog::info("[SkyrimNet] RegisterSkyrimNetDecorators called.");
+    bool IsSkyrimNetInstalled() noexcept {
+        return GetModuleHandleW(L"SkyrimNet.dll") != nullptr;
+    }
 
-        ActorBodyEvaluator::GetInstance().InitSKEE();
+    bool IsSkyrimNetActive() noexcept {
+        return g_skyrimNetActive.load(std::memory_order_acquire);
+    }
+
+    void RegisterSkyrimNetDecorators() {
+        if (!IsSkyrimNetInstalled()) {
+            spdlog::info("[SkyrimNet] SkyrimNet.dll not detected — running in standalone mode (decorators disabled).");
+            g_skyrimNetActive.store(false, std::memory_order_release);
+            return;
+        }
 
         auto* fn = FindRegisterDecorator();
         if (!fn) {
+            g_skyrimNetActive.store(false, std::memory_order_release);
             return;
         }
+
+        spdlog::info("[SkyrimNet] SkyrimNet.dll detected — registering BodyLanguage decorators.");
 
         RegisterDecorator(
             fn,
@@ -203,53 +217,8 @@ namespace BodyLanguage {
                 });
             });
 
+        g_skyrimNetActive.store(true, std::memory_order_release);
         spdlog::info("[SkyrimNet] Decorator registration complete.");
     }
-
-    namespace {
-
-        size_t CopyJsonToBuffer(const std::string& json, char* outBuf, size_t bufSize) noexcept {
-            if (!outBuf || bufSize == 0 || json.size() >= bufSize) {
-                return 0;
-            }
-            std::memcpy(outBuf, json.data(), json.size() + 1);
-            return json.size();
-        }
-
-    }  // namespace
-
-    extern "C" {
-
-    __declspec(dllexport) size_t BodyLanguage_GetActorGenitalsJson(
-        RE::Actor* actor,
-        char* outBuf,
-        size_t bufSize) noexcept {
-        if (!actor || !outBuf || bufSize == 0) {
-            return 0;
-        }
-        const std::string json = RunDecoratorSafe(
-            "BodyLanguage_GetActorGenitalsJson",
-            actor,
-            "{\"hasGenitals\":false}",
-            [actor]() { return GetActorGenitalsJson(actor); });
-        return CopyJsonToBuffer(json, outBuf, bufSize);
-    }
-
-    __declspec(dllexport) size_t BodyLanguage_GetActorBodyPartsJson(
-        RE::Actor* actor,
-        char* outBuf,
-        size_t bufSize) noexcept {
-        if (!actor || !outBuf || bufSize == 0) {
-            return 0;
-        }
-        const std::string json = RunDecoratorSafe(
-            "BodyLanguage_GetActorBodyPartsJson",
-            actor,
-            "{\"valid\":false}",
-            [actor]() { return GetActorBodyPartsJson(actor); });
-        return CopyJsonToBuffer(json, outBuf, bufSize);
-    }
-
-    }  // extern "C"
 
 }  // namespace BodyLanguage

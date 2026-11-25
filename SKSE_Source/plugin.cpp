@@ -14,6 +14,7 @@
 #include "Geometry/ActorBodyEvaluator.h"
 #include "Geometry/NifRingIndexer.h"
 #include "Geometry/NifTriParser.h"
+#include "PapyrusAPI.h"
 #include "SkyrimNetIntegration.h"
 
 using namespace SKSE;
@@ -83,6 +84,14 @@ SKSEPluginLoad(const LoadInterface* skse) {
 
     SKSE::Init(skse, false);
 
+    if (const auto* papyrus = SKSE::GetPapyrusInterface()) {
+        if (!papyrus->Register(BodyLanguage::RegisterPapyrusFunctions)) {
+            SKSE::log::error("Failed to register Papyrus native functions.");
+        }
+    } else {
+        SKSE::log::warn("Papyrus interface unavailable.");
+    }
+
     if (const auto* messaging = SKSE::GetMessagingInterface()) {
         if (!messaging->RegisterListener([](SKSE::MessagingInterface::Message* message) {
                 if (!message) {
@@ -91,7 +100,14 @@ SKSEPluginLoad(const LoadInterface* skse) {
                 try {
                     switch (message->type) {
                         case SKSE::MessagingInterface::kPostPostLoad:
-                            BodyLanguage::RegisterSkyrimNetDecorators();
+                            BodyLanguage::ActorBodyEvaluator::GetInstance().InitSKEE();
+                            if (BodyLanguage::IsSkyrimNetInstalled()) {
+                                BodyLanguage::RegisterSkyrimNetDecorators();
+                            } else {
+                                SKSE::log::info(
+                                    "SkyrimNet.dll not detected — running in standalone mode "
+                                    "(SkyrimNet integration disabled).");
+                            }
                             break;
 
                         case SKSE::MessagingInterface::kPreLoadGame:

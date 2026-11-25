@@ -12,6 +12,16 @@
 
 namespace BodyLanguage {
 
+    struct ClassifiedGenitals {
+        bool hasGenitals{false};
+        bool isErect{false};
+        float lengthCm{0.0f};
+        float girthCm{0.0f};
+        std::string sizeTier;
+        std::string state;
+        std::string addonKey;
+    };
+
     struct ActorDescriptionPair {
         std::string full;
         std::string shortDesc;
@@ -23,7 +33,7 @@ namespace BodyLanguage {
     public:
         static PhysiqueClassifier& GetInstance();
 
-        // Loads geometryThresholds.json, FemaleParts.json, MaleParts.json, BeastParts.json, and tngAddons.json
+        // Loads geometryThresholds.json, FemaleParts.json, MaleParts.json, BeastParts.json, and optional tngAddons.json
         void LoadConfigs(const std::filesystem::path& dataRoot);
 
         // Builds static "full" and "short" descriptions for an actor in beast form (werewolf, vampire_lord, werebear).
@@ -36,12 +46,19 @@ namespace BodyLanguage {
             float geoToneSignal,
             float texToneScore);
 
-        // Classifies regional anatomical categories once and builds both "full" and "short" descriptions
-        // for the actor's current context (clothed vs. naked from metrics.isNaked).
+        // Classifies regional anatomical categories once and returns the region->tier map.
         std::unordered_map<std::string, std::string> ClassifyRegions(
             const ActorBodyMetrics& metrics,
             float texToneScore) const;
 
+        // Builds full and short descriptions from pre-classified regions (avoids re-classifying).
+        ActorDescriptionPair BuildBothDescriptionsFromRegions(
+            const ActorBodyMetrics& metrics,
+            float toneIndex,
+            const std::unordered_map<std::string, std::string>& kw) const;
+
+        // Classifies regional anatomical categories once and builds both "full" and "short" descriptions
+        // for the actor's current context (clothed vs. naked from metrics.isNaked).
         ActorDescriptionPair BuildBothDescriptions(
             const ActorBodyMetrics& metrics,
             float texToneScore) const;
@@ -53,7 +70,11 @@ namespace BodyLanguage {
             float texToneScore,
             std::string_view mode) const;
 
-        // Builds a JSON string {"hasGenitals": bool, "size": "XS..XL", "addon": "..."} for SkyrimNet.
+        // Classifies TNG/SOS genital metrics into size tier, effective cm, state, and addon key.
+        ClassifiedGenitals ClassifyGenitals(const ActorGenitalMetrics& genitalMetrics) const;
+
+        // Builds a JSON string {"hasGenitals": bool, "size": "XS..XXXL", "state": "...", "lengthCm": ..., "girthCm": ..., "addon": "..."}.
+        static std::string BuildGenitalsJson(const ClassifiedGenitals& classified);
         std::string BuildGenitalsJson(const ActorGenitalMetrics& genitalMetrics) const;
 
     private:
